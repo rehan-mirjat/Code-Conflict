@@ -1,8 +1,453 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <body>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Code & Conflict</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+    <style>
+        .cyber-gradient {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
+        }
+
+        .mission-card {
+            border-left: 4px solid #2ecc71;
+            transition: all 0.3s ease;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .team-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(46, 204, 113, 0.2);
+        }
+
+        .team-card:hover {
+            transform: scale(1.03);
+            border-color: #2ecc71;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #2ecc71;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #2ecc71;
+            border: 3px solid #1a1a2e;
+        }
+    </style>
+</head>
+
+<body class="cyber-gradient">
+    <!-- Cyber Alert Bar -->
+    <div class="alert alert-danger alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
+        <strong>ALERT:</strong> New Zero-Day in VMware ESXi (CVE-2023-20867) detected | <a
+            href="news/latest_threats.html" class="alert-link">Patch Now</a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Main Navbar - FULLY MATCHING INDEX.HTML -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="index.html">
+                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                &
+                <span class="text-danger">Conflict</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCyber">
+                <i class="bi bi-shield-lock"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCyber">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
+                        <a class="nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a>
+                    </li>
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
+                        <a class="nav-link active" href="about.html"><i class="bi bi-info-circle"></i> About</a>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-bug"></i> Threats
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="threats/malware.html">Malware</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="threats/phishing.html">Phishing</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="threats/password_attacks.html">Password Attacks</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="threats/ransomware.html">Ransomware</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="threats/social_engineering.html">Social Engineering</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-shield-check"></i> Prevention
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="prevention/data_privacy.html">Data & Privacy</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="prevention/email_security.html">Email Security</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="prevention/mobile_security.html">Mobile Security</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="prevention/network_security.html">Network Security</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="prevention/secure_browsing.html">Secure Browsing</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.5s;" role="search">
+                    <input class="form-control bg-dark border-secondary" type="search" placeholder="Search threats...">
+                    <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- [Rest of your about page content remains exactly the same] -->
+    <!-- Hero Section -->
+    <header class="py-5 bg-dark bg-opacity-50">
+        <div class="container py-5 text-center animate__animated animate__fadeIn">
+            <h1 class="display-4 fw-bold mb-4">
+                About <span class="text-primary">Code & Conflict</span>
+            </h1>
+            <p class="lead col-lg-8 mx-auto">
+                Pioneering cyber warfare education through research, analysis, and community engagement.
+            </p>
+        </div>
+    </header>
+
+    <!-- Mission Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <h2 class="mb-4"><i class="bi bi-stars text-primary"></i> Our Mission</h2>
+                    <p class="lead">
+                        To demystify cyber warfare and empower individuals with knowledge to navigate the digital battlefield.
+                    </p>
+                    <p>
+                        Founded in 2025 at the University of Sindh, Code & Conflict emerged from the growing need for accessible, 
+                        high-quality cybersecurity education. Our platform bridges the gap between academic research and real-world 
+                        cyber threats.
+                    </p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#team" class="btn btn-primary px-4">
+                            <i class="bi bi-people-fill"></i> Meet Our Team
+                        </a>
+                        <a href="#history" class="btn btn-outline-light px-4">
+                            <i class="bi bi-clock-history"></i> Our History
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card h-100 mission-card bg-dark p-4">
+                                <i class="bi bi-shield-lock fs-1 text-primary mb-3"></i>
+                                <h5>Education</h5>
+                                <p>Making complex cybersecurity concepts accessible to all skill levels</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 mission-card bg-dark p-4">
+                                <i class="bi bi-eye fs-1 text-primary mb-3"></i>
+                                <h5>Awareness</h5>
+                                <p>Highlighting emerging threats before they make headlines</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 mission-card bg-dark p-4">
+                                <i class="bi bi-lightbulb fs-1 text-primary mb-3"></i>
+                                <h5>Innovation</h5>
+                                <p>Developing novel approaches to cybersecurity education</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 mission-card bg-dark p-4">
+                                <i class="bi bi-globe fs-1 text-primary mb-3"></i>
+                                <h5>Community</h5>
+                                <p>Building a network of security-conscious individuals</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-5 bg-dark bg-opacity-25">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeIn">
+                <i class="bi bi-people-fill"></i> Our Cybersecurity Team
+            </h2>
             
-        </body>
-    </head>
+            <div class="row g-4">
+                <!-- Team Member 1 -->
+                <div class="col-lg-3 col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="card team-card h-100 bg-dark">
+                        <img src="assets/imgs/team/Me.jpg" class="card-img-top" alt="Prof. Dr. Zeeshan Bhatti">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Prof. Dr. Zeeshan Bhatti</h5>
+                            <p class="text-muted">Founder & Lead Researcher</p>
+                            <p class="card-text small">20+ years in cybersecurity research and education</p>
+                            <div class="d-flex justify-content-center gap-2">
+                                <a href="#" class="text-primary"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="text-primary"><i class="bi bi-twitter"></i></a>
+                                <a href="#" class="text-primary"><i class="bi bi-google"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="col-lg-3 col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="card team-card h-100 bg-dark">
+                        <img src="assets/imgs/team/sarah-ahmed.jpg" class="card-img-top" alt="Dr. Sarah Ahmed">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Dr. Sarah Ahmed</h5>
+                            <p class="text-muted">Threat Intelligence Director</p>
+                            <p class="card-text small">Former cybersecurity analyst at National CERT</p>
+                            <div class="d-flex justify-content-center gap-2">
+                                <a href="#" class="text-primary"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="text-primary"><i class="bi bi-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="col-lg-3 col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="card team-card h-100 bg-dark">
+                        <img src="assets/imgs/team/ali-raza.jpg" class="card-img-top" alt="Ali Raza">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Ali Raza</h5>
+                            <p class="text-muted">Security Architect</p>
+                            <p class="card-text small">Specializes in network defense strategies</p>
+                            <div class="d-flex justify-content-center gap-2">
+                                <a href="#" class="text-primary"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="text-primary"><i class="bi bi-stack-overflow"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 4 -->
+                <div class="col-lg-3 col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                    <div class="card team-card h-100 bg-dark">
+                        <img src="assets/imgs/team/fatima-khan.jpg" class="card-img-top" alt="Fatima Khan">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Fatima Khan</h5>
+                            <p class="text-muted">Digital Forensics Expert</p>
+                            <p class="card-text small">Focus on malware reverse engineering</p>
+                            <div class="d-flex justify-content-center gap-2">
+                                <a href="#" class="text-primary"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="text-primary"><i class="bi bi-medium"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="contact.html" class="btn btn-outline-light px-4">
+                    <i class="bi bi-envelope"></i> Contact Our Team
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeIn">
+                <i class="bi bi-hourglass-split"></i> Our Journey
+            </h2>
+            
+            <div class="timeline animate__animated animate__fadeIn">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item">
+                    <div class="card bg-dark border-primary mb-3">
+                        <div class="card-header border-primary d-flex justify-content-between">
+                            <h5 class="mb-0">Project Inception</h5>
+                            <span class="badge bg-primary">2020</span>
+                        </div>
+                        <div class="card-body">
+                            <p>Initial research began at University of Sindh's Cybersecurity Lab under Prof. Bhatti's guidance, 
+                            focusing on cyber warfare education gaps.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item">
+                    <div class="card bg-dark border-primary mb-3">
+                        <div class="card-header border-primary d-flex justify-content-between">
+                            <h5 class="mb-0">First Prototype</h5>
+                            <span class="badge bg-primary">2022</span>
+                        </div>
+                        <div class="card-body">
+                            <p>Launched beta version with 10 case studies, reaching 500+ students in the Computer Science department.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item">
+                    <div class="card bg-dark border-primary mb-3">
+                        <div class="card-header border-primary d-flex justify-content-between">
+                            <h5 class="mb-0">Official Launch</h5>
+                            <span class="badge bg-primary">2024</span>
+                        </div>
+                        <div class="card-body">
+                            <p>Public release with support from Department of Information Technology, featuring 50+ threat analyses.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item">
+                    <div class="card bg-dark border-primary mb-3">
+                        <div class="card-header border-primary d-flex justify-content-between">
+                            <h5 class="mb-0">Current Platform</h5>
+                            <span class="badge bg-primary">2025</span>
+                        </div>
+                        <div class="card-body">
+                            <p>Expanded to comprehensive resource with 20+ sections, serving 10,000+ monthly visitors from academia and industry.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- University Affiliation -->
+    <section class="py-5 bg-primary bg-opacity-10">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4 animate__animated animate__fadeInLeft">
+                    <img src="assets/imgs/university-of-sindh-logo.png" class="img-fluid" alt="University of Sindh">
+                </div>
+                <div class="col-md-8 animate__animated animate__fadeInRight">
+                    <h3><i class="bi bi-building"></i> Academic Home</h3>
+                    <p>Code & Conflict operates under the Department of Information Technology at the University of Sindh, 
+                    Jamshoro. Our work is supported by faculty researchers and student contributors from the cybersecurity program.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="https://usindh.edu.pk" target="_blank" class="btn btn-outline-light">
+                            <i class="bi bi-globe"></i> University Website
+                        </a>
+                        <a href="resources/academic-papers.html" class="btn btn-primary">
+                            <i class="bi bi-journal-text"></i> Research Papers
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark border-top border-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="img-hover-zoom" style="width: 200px;">
+                        <h5>
+                            <a class="navbar-brand" href="index.html">
+                                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                                &
+                                <span class="text-danger">Conflict</span>
+                            </a>
+                        </h5>
+                    </div>
+                    <p class="text-muted">Educational resource for cyber warfare analysis and defense strategies.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="glossary.html" class="nav-link">Glossary</a></li>
+                        <li class="nav-item"><a href="resources.html" class="nav-link">Resources</a></li>
+                        <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <div class="d-flex gap-3 mb-3">
+                        <a href="#" class="text-muted"><i class="bi bi-twitter fs-4"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-github fs-4"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-linkedin fs-4"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-youtube fs-4"></i></a>
+                    </div>
+                    <div class="mt-4">
+                        <h6>Certified By University Of Sindh</h6>
+                        <img src="assets/imgs/icons/certification.png" width="50" alt="Cyber Security Certified">
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <p class="text-muted small mb-0">&copy; 2025 Code & Conflict. Educational use only.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Animate elements when they come into view
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate__animated');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    const animationClass = element.classList[1];
+                    element.classList.add(animationClass);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+
 </html>

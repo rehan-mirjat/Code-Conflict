@@ -1,0 +1,60 @@
+    .cyber-gradient {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
+        }
+
+        .threat-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+            }
+        }
+
+        /* Cyber terminal animation */
+        .terminal-line {
+            border-right: 2px solid #2ecc71;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #2ecc71; }
+        }
+
+        /* Hover animations */
+        .hover-grow {
+            transition: transform 0.3s ease;
+        }
+        .hover-grow:hover {
+            transform: scale(1.03);
+        }
+
+        /* Cyber grid background */
+        .cyber-grid-bg {
+            background-image: 
+                linear-gradient(rgba(46, 204, 113, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 204, 113, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Image hover effect */
+        .img-hover-zoom {
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .img-hover-zoom img {
+            transition: transform 0.5s ease;
+        }
+        .img-hover-zoom:hover img {
+            transform: scale(1.1);
+        }

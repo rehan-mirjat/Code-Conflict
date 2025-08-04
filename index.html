@@ -1,8 +1,626 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <body>
-            
-        </body>
-    </head>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code & Conflict | Cyber Warfare Education</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        
+        .cyber-gradient {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
+        }
+
+        .threat-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+            }
+        }
+
+        /* Cyber terminal animation */
+        .terminal-line {
+            border-right: 2px solid #2ecc71;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: #2ecc71;
+            }
+        }
+
+        /* Hover animations */
+        .hover-grow {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-grow:hover {
+            transform: scale(1.03);
+        }
+
+        /* Cyber grid background */
+        .cyber-grid-bg {
+            background-image:
+                linear-gradient(rgba(46, 204, 113, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 204, 113, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Image hover effect */
+        .img-hover-zoom {
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .img-hover-zoom img {
+            transition: transform 0.5s ease;
+        }
+
+        .img-hover-zoom:hover img {
+            transform: scale(1.1);
+        }
+    </style>
+
+</head>
+
+<body class="cyber-gradient">
+    <!-- Cyber Alert Bar -->
+    <div
+        class="alert alert-danger alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
+        <strong>ALERT:</strong> New Zero-Day in VMware ESXi (CVE-2023-20867) detected | <a
+            href="news/latest_threats.html" class="alert-link">Patch Now</a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="index.html">
+                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                &
+                <span class="text-danger">Conflict</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCyber">
+                <i class="bi bi-shield-lock"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCyber">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
+                        <a class="nav-link active" href="index.html"><i class="bi bi-house-door"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-bug"></i> Threats
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="threats/malware.html">Malware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="threats/phishing.html">Phishing</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="threats/password_attacks.html">Password Attacks</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="threats/ransomware.html">Ransomware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="threats/social_engineering.html">Social Engineering</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-shield-check"></i> Prevention
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="prevention/data_privacy.html">Data & Privacy</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="prevention/email_security.html">Email Security</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="prevention/mobile_security.html">Mobile Security</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="prevention/network_security.html">Network Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="prevention/secure_browsing.html">Secure Browsing</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.4s;" role="search">
+                    <input class="form-control bg-dark border-secondary" type="search" placeholder="Search threats...">
+                    <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="py-5 bg-dark bg-opacity-50 cyber-grid-bg">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <h1 class="display-4 fw-bold mb-4">
+                        Decoding the <span class="text-primary">Digital</span> Battlefield
+                    </h1>
+                    <p class="lead mb-4">
+                        Explore cyber warfare through historical case studies, threat analysis,
+                        and defensive strategies.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="threats/threats_view.html" class="btn btn-primary btn-lg px-4 hover-grow">
+                            <i class="bi bi-bug-fill"></i> View Threats
+                        </a>
+                        <a href="glossary.html" class="btn btn-outline-light btn-lg px-4 hover-grow">
+                            <i class="bi bi-book"></i> Cyber Glossary
+                        </a>
+                    </div>
+
+                    <!-- Animated terminal effect -->
+                    <div class="mt-4 p-3 bg-black text-success rounded" style="font-family: monospace;">
+                        <div class="terminal-line">
+                            <span class="text-primary">root@code-conflict:~$</span> analyzing_threats --live --update
+                        </div>
+                        <div class="mt-2">
+                            <span class="text-warning">>></span> <span id="typing-effect" class="text-light"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="position-relative img-hover-zoom">
+                        <img src="assets/imgs/Data_security_25.jpg" class="img-fluid rounded-3 shadow-lg"
+                            alt="Cyber Attacks Map">
+                        <span
+                            class="position-absolute top-0 start-100 translate-middle threat-pulse p-2 bg-danger rounded-circle"></span>
+                        <div class="position-absolute bottom-0 start-0 p-3">
+                            <span class="badge bg-primary animate__animated animate__pulse animate__infinite">LIVE
+                                THREAT MAP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Live Threat Feed -->
+    <section class="py-5 bg-dark bg-opacity-25">
+        <div class="container animate__animated animate__fadeInUp">
+            <h2 class="text-center mb-5">
+                <i class="bi bi-activity"></i> Live Threat Activity
+                <small class="text-muted d-block">Updated every 15 minutes</small>
+            </h2>
+
+            <div class="row g-4">
+                <!-- Threat Card 1 -->
+                <div class="col-md-4">
+                    <div class="card h-100 border-danger border-opacity-50 hover-grow">
+                        <div class="card-header bg-danger bg-opacity-10 d-flex justify-content-between">
+                            <span><i class="bi bi-exclamation-triangle-fill text-danger"></i> Critical</span>
+                            <span class="text-muted">2 hours ago</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="img-hover-zoom mb-3">
+                                <img src="assets/imgs/icons/ransomware.png" width="40px" class="img-fluid rounded"
+                                    alt="Ransomware Attack">
+                            </div>
+                            <h5 class="card-title">Ransomware Surge</h5>
+                            <p class="card-text">New LockBit variant targeting healthcare systems in Europe.</p>
+                            <div class="progress mb-3">
+                                <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
+                                    style="width: 85%">85% Increase</div>
+                            </div>
+                            <a href="threats/ransomware.html" class="btn btn-sm btn-outline-danger">Defense Guide</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Threat Card 2 -->
+                <div class="col-md-4">
+                    <div class="card h-100 border-warning border-opacity-50 hover-grow">
+                        <div class="card-header bg-warning bg-opacity-10 d-flex justify-content-between">
+                            <span><i class="bi bi-exclamation-triangle-fill text-warning"></i> High</span>
+                            <span class="text-muted">5 hours ago</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="img-hover-zoom mb-3">
+                                <img src="assets/imgs/icons/internet.png" width="40px" class="img-fluid rounded"
+                                    alt="Phishing Email">
+                            </div>
+                            <h5 class="card-title">Phishing Campaign</h5>
+                            <p class="card-text">Fake Microsoft Teams notifications stealing credentials.</p>
+                            <div class="progress mb-3">
+                                <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
+                                    style="width: 62%">62% Success Rate</div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal"
+                                data-bs-target="#phishModal">
+                                View Sample
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Threat Card 3 -->
+                <div class="col-md-4">
+                    <div class="card h-100 border-primary border-opacity-50 hover-grow">
+                        <div class="card-header bg-primary bg-opacity-10 d-flex justify-content-between">
+                            <span><i class="bi bi-info-circle-fill text-primary"></i> Advisory</span>
+                            <span class="text-muted">1 day ago</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="img-hover-zoom mb-3">
+                                <img src="assets/imgs/icons/anonymous.png" width="40px" class="img-fluid rounded"
+                                    alt="Log4j Vulnerability">
+                            </div>
+                            <h5 class="card-title">Log4j Patch</h5>
+                            <p class="card-text">CISA releases new mitigation guidance for CVE-2023-1234.</p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item bg-transparent d-flex justify-content-between">
+                                    Affected Systems
+                                    <span
+                                        class="badge bg-primary rounded-pill animate__animated animate__pulse animate__infinite">12K+</span>
+                                </li>
+                            </ul>
+                            <a href="news/security-patches.html" class="btn btn-sm btn-outline-primary">Patch
+                                Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Elements -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0 animate__animated animate__fadeInLeft">
+                    <div class="card bg-dark border-secondary h-100 hover-grow">
+                        <div class="card-header border-secondary">
+                            <h3><i class="bi bi-shield-lock"></i> Security Checklist</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="check1" checked>
+                                <label class="form-check-label" for="check1">2FA Enabled</label>
+                            </div>
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="check2">
+                                <label class="form-check-label" for="check2">Backup Verified</label>
+                            </div>
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="check3">
+                                <label class="form-check-label" for="check3">VPN Active</label>
+                            </div>
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="check4">
+                                <label class="form-check-label" for="check4">Firewall On</label>
+                            </div>
+                            <div class="d-grid">
+                                <button class="btn btn-outline-success" id="checklistSubmit">
+                                    <i class="bi bi-shield-check"></i> Validate Protection
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-primary h-100 hover-grow">
+                        <div class="card-header border-primary">
+                            <h3><i class="bi bi-question-circle"></i> Quick Threat Test</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Is this email legitimate?</p>
+                            <div class="email-sample p-3 mb-3 bg-light text-dark rounded">
+                                <div class="d-flex align-items-center mb-2">
+                                    <img src="assets/imgs/icons/internet.png" width="20" class="me-2">
+                                    <strong>Microsoft Support</strong>
+                                    <small class="text-muted ms-auto">support@micr0soft.com</small>
+                                </div>
+                                <hr>
+                                <strong>Subject:</strong> Urgent: Password Reset Required<br><br>
+                                Dear User,<br>
+                                We detected unusual activity. Click <a href="#" class="text-danger">here</a> to reset
+                                your password immediately.
+                            </div>
+                            <div class="btn-group w-100">
+                                <button class="btn btn-outline-danger" id="phishBtn">Phishing</button>
+                                <button class="btn btn-outline-success" id="legitBtn">Legitimate</button>
+                            </div>
+                            <div id="phishResult" class="mt-3 d-none alert"></div>
+
+                            <hr class="my-4">
+
+                            <h5 class="mt-4"><i class="bi bi-graph-up"></i> Recent Threat Stats</h5>
+                            <div class="row text-center mt-3">
+                                <div class="col-4">
+                                    <div class="display-6 text-danger">1,287</div>
+                                    <small class="text-muted">Ransomware Attacks</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="display-6 text-warning">3,452</div>
+                                    <small class="text-muted">Phishing Sites</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="display-6 text-primary">78</div>
+                                    <small class="text-muted">Zero-Days</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cybersecurity Stats -->
+    <section class="py-5 bg-primary bg-opacity-10">
+        <div class="container animate__animated animate__fadeIn">
+            <h2 class="text-center mb-5">
+                <i class="bi bi-shield-lock"></i> Global Cybersecurity Landscape
+            </h2>
+            <div class="row g-4">
+                <div class="col-md-3 text-center">
+                    <img src="assets/imgs/icons/fraud.png" width="80"
+                        class="mb-3 animate__animated animate__pulse animate__infinite">
+                    <div class="display-4 text-danger">$265B</div>
+                    <p class="text-muted">Projected ransomware damage (2025)</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <img src="assets/imgs/icons/ddos.png" width="80"
+                        class="mb-3 animate__animated animate__pulse animate__infinite" style="animation-delay: 0.2s;">
+                    <div class="display-4 text-warning">287</div>
+                    <p class="text-muted">Days to detect a breach</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <img src="assets/imgs/icons/hacker.png" width="80"
+                        class="mb-3 animate__animated animate__pulse animate__infinite" style="animation-delay: 0.4s;">
+                    <div class="display-4 text-info">34%</div>
+                    <p class="text-muted">Attacks from insiders</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <img src="assets/imgs/icons/web-security.png" width="80"
+                        class="mb-3 animate__animated animate__pulse animate__infinite" style="animation-delay: 0.6s;">
+                    <div class="display-4 text-success">93%</div>
+                    <p class="text-muted">Prevented with MFA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark border-top border-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="img-hover-zoom" style="width: 200px;">
+                        <h5>
+                            <a class="navbar-brand animate__animated animate__fadeInLeft" href="index.html">
+                                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                                &
+                                <span class="text-danger">Conflict</span>
+                            </a>
+                        </h5>
+                    </div>
+                    <p class="text-muted">Educational resource for cyber warfare analysis and defense strategies.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="glossary.html" class="nav-link">Glossary</a></li>
+                        <li class="nav-item"><a href="resources.html" class="nav-link">Resources</a></li>
+                        <li class="nav-item"><a href="about_us.html" class="nav-link">About Us</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <div class="d-flex gap-3 mb-3">
+                        <a href="#" class="text-muted hover-grow"><i class="bi bi-twitter fs-4"></i></a>
+                        <a href="#" class="text-muted hover-grow"><i class="bi bi-github fs-4"></i></a>
+                        <a href="#" class="text-muted hover-grow"><i class="bi bi-linkedin fs-4"></i></a>
+                        <a href="#" class="text-muted hover-grow"><i class="bi bi-youtube fs-4"></i></a>
+                    </div>
+                    <div class="mt-4">
+                        <h6>Certified By University Of Sindh</h6>
+                        <img src="assets/imgs/icons/certification.png" width="50" class="hover-grow"
+                            alt="Cyber Security Certified">
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <p class="text-muted small mb-0">&copy; 2025 Code & Conflict. Educational use only.</p>
+        </div>
+    </footer>
+
+    <!-- Phishing Modal -->
+    <div class="modal fade" id="phishModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-danger">
+                    <h5 class="modal-title"><i class="bi bi-exclamation-triangle-fill text-danger"></i> Phishing Sample
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="img-hover-zoom">
+                        <img src="assets/imgs/phishing-sample-full.jpg" class="img-fluid rounded"
+                            alt="Phishing Email Example">
+                    </div>
+                    <div class="mt-3 alert alert-danger">
+                        <h5><i class="bi bi-exclamation-octagon-fill"></i> Red Flags:</h5>
+                        <ul>
+                            <li>Misspelled domain (micr0soft.com)</li>
+                            <li>Urgent language creating panic</li>
+                            <li>Generic greeting ("Dear User")</li>
+                            <li>Suspicious link with IP address</li>
+                            <li>No specific account information</li>
+                        </ul>
+                    </div>
+                    <div class="alert alert-success">
+                        <h5><i class="bi bi-shield-check"></i> How to Verify:</h5>
+                        <ol>
+                            <li>Hover over links to see real destination</li>
+                            <li>Check sender's email address carefully</li>
+                            <li>Contact organization through official channels</li>
+                            <li>Look for poor grammar/spelling</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Custom JS -->
+    <script>
+        // Phishing Test Interaction
+        document.getElementById('phishBtn').addEventListener('click', function () {
+            const result = document.getElementById('phishResult');
+            result.classList.remove('d-none', 'alert-success', 'alert-danger');
+            result.classList.add('alert-success');
+            result.innerHTML = '<i class="bi bi-check-circle-fill"></i> Correct! This is a phishing attempt. <button class="btn btn-sm btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#phishModal">Learn Why</button>';
+        });
+
+        document.getElementById('legitBtn').addEventListener('click', function () {
+            const result = document.getElementById('phishResult');
+            result.classList.remove('d-none', 'alert-success', 'alert-danger');
+            result.classList.add('alert-danger');
+            result.innerHTML = '<i class="bi bi-exclamation-triangle-fill"></i> Incorrect! The misspelled domain (micr0soft) reveals this as phishing. <button class="btn btn-sm btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#phishModal">Learn Why</button>';
+        });
+
+        // Checklist Validation
+        document.getElementById('checklistSubmit').addEventListener('click', function () {
+            const check1 = document.getElementById('check1').checked;
+            const check2 = document.getElementById('check2').checked;
+            const check3 = document.getElementById('check3').checked;
+            const check4 = document.getElementById('check4').checked;
+
+            const score = (check1 ? 25 : 0) + (check2 ? 25 : 0) + (check3 ? 25 : 0) + (check4 ? 25 : 0);
+
+            let message, alertClass;
+            if (score === 100) {
+                message = 'Excellent security posture! You\'re well protected.';
+                alertClass = 'alert-success';
+            } else if (score >= 50) {
+                message = 'Good start, but consider implementing more security measures.';
+                alertClass = 'alert-warning';
+            } else {
+                message = 'Your security posture needs improvement. Review unchecked items.';
+                alertClass = 'alert-danger';
+            }
+
+            // Create and show alert
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert ${alertClass} alert-dismissible fade show mt-3`;
+            alertDiv.innerHTML = `
+                <i class="bi ${score === 100 ? 'bi-shield-check' : 'bi-shield-exclamation'}"></i> 
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.querySelector('#checklistSubmit').parentNode.appendChild(alertDiv);
+        });
+
+        // Typing effect for terminal
+        const phrases = [
+            "scanning_for_threats...",
+            "analyzing_malware_patterns...",
+            "updating_threat_database...",
+            "monitoring_dark_web...",
+            "detecting_anomalies..."
+        ];
+        let currentPhrase = 0;
+        let currentChar = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById('typing-effect');
+
+        function typeWriter() {
+            const currentText = phrases[currentPhrase];
+
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, currentChar - 1);
+                currentChar--;
+            } else {
+                typingElement.textContent = currentText.substring(0, currentChar + 1);
+                currentChar++;
+            }
+
+            if (!isDeleting && currentChar === currentText.length) {
+                isDeleting = true;
+                setTimeout(typeWriter, 2000);
+            } else if (isDeleting && currentChar === 0) {
+                isDeleting = false;
+                currentPhrase = (currentPhrase + 1) % phrases.length;
+                setTimeout(typeWriter, 500);
+            } else {
+                const speed = isDeleting ? 50 : 100;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        // Start the typing effect
+        setTimeout(typeWriter, 1000);
+
+        // Animate elements when they come into view
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate__animated');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementPosition < windowHeight - 100) {
+                    const animationClass = element.classList[1];
+                    element.classList.add(animationClass);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+
 </html>
