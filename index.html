@@ -17,7 +17,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
-        
         .cyber-gradient {
             background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
         }
@@ -113,6 +112,7 @@
                 <i class="bi bi-shield-lock"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarCyber">
+                <!-- Left-aligned menu items -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
                         <a class="nav-link active" href="index.html"><i class="bi bi-house-door"></i> Home</a>
@@ -168,10 +168,34 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.4s;" role="search">
-                    <input class="form-control bg-dark border-secondary" type="search" placeholder="Search threats...">
-                    <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
-                </form>
+
+                <!-- Grouped Search + About/Contact (aligned together) -->
+                <div class="d-flex align-items-center">
+                    <!-- About & Contact Links -->
+                    <ul class="navbar-nav me-3"> <!-- Added margin-right (me-3) -->
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                            <a class="nav-link" href="about_us.html"><i class="bi bi-info-circle"></i> About Us</a>
+                        </li>
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.5s;">
+                            <a class="nav-link" href="contact.html"><i class="bi bi-envelope"></i> Contact Us</a>
+                        </li>
+                    </ul>
+
+                    <!-- Search Bar -->
+                    <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.6s;"
+                        role="search">
+                        <input class="form-control bg-dark border-secondary" type="search"
+                            placeholder="Search threats...">
+                        <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Sign Up / Login Buttons (Right-aligned) -->
+                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
+                    <a href="login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                        Login</a>
+                    <a href="signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -445,15 +469,6 @@
                         </h5>
                     </div>
                     <p class="text-muted">Educational resource for cyber warfare analysis and defense strategies.</p>
-                </div>
-                <div class="col-md-3">
-                    <h5>Quick Links</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item"><a href="glossary.html" class="nav-link">Glossary</a></li>
-                        <li class="nav-item"><a href="resources.html" class="nav-link">Resources</a></li>
-                        <li class="nav-item"><a href="about_us.html" class="nav-link">About Us</a></li>
-                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                    </ul>
                 </div>
                 <div class="col-md-3">
                     <h5>Connect</h5>

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Browsing Guide | Code & Conflict</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <link href="../css/custom.css" rel="stylesheet">
+    <style>
+        .browsing-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('../assets/imgs/secure-browsing-bg.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .security-level {
+            border-left: 3px solid #2ecc71;
+            padding-left: 15px;
+        }
+
+        .extension-card {
+            transition: all 0.3s ease;
+            border: 1px solid #3498db;
+        }
+
+        .extension-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .browser-icon {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+
+        .checklist-item.completed {
+            color: #2ecc71;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body class="cyber-gradient">
+    <!-- Cyber Alert Bar -->
+    <div
+        class="alert alert-warning alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
+        <strong>BROWSING WARNING:</strong> New Chrome zero-day (CVE-2023-4863) in wild |
+        <a href="../news/latest_threats.html" class="alert-link">Update Now</a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="index.html">
+                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                &
+                <span class="text-danger">Conflict</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCyber">
+                <i class="bi bi-shield-lock"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCyber">
+                <!-- Left-aligned menu items -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
+                        <a class="nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-bug"></i> Threats
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../threats/malware.html">Malware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/phishing.html">Phishing</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/password_attacks.html">Password Attacks</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/ransomware.html">Ransomware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/social_engineering.html">Social
+                                    Engineering</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-shield-check"></i> Prevention
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="data_privacy.html">Data & Privacy</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="email_security.html">Email Security</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="mobile_security.html">Mobile Security</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="network_security.html">Network Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="secure_browsing.html">Secure Browsing</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Grouped Search + About/Contact (aligned together) -->
+                <div class="d-flex align-items-center">
+                    <!-- About & Contact Links -->
+                    <ul class="navbar-nav me-3">
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                            <a class="nav-link" href="about_us.html"><i class="bi bi-info-circle"></i> About Us</a>
+                        </li>
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.5s;">
+                            <a class="nav-link" href="contact.html"><i class="bi bi-envelope"></i> Contact Us</a>
+                        </li>
+                    </ul>
+
+                    <!-- Search Bar -->
+                    <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.6s;"
+                        role="search">
+                        <input class="form-control bg-dark border-secondary" type="search"
+                            placeholder="Search threats...">
+                        <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Sign Up / Login Buttons (Right-aligned) -->
+                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
+                    <a href="login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                        Login</a>
+                    <a href="signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Secure Browsing Hero -->
+    <header class="py-5 browsing-hero text-white">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-8 animate__animated animate__fadeInLeft">
+                    <h1 class="display-4 fw-bold mb-4">
+                        <i class="bi bi-shield-lock text-success"></i> Secure Browsing Guide
+                    </h1>
+                    <p class="lead mb-4">
+                        Protect yourself from online threats with these essential browser security practices.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#checklist" class="btn btn-success btn-lg px-4">
+                            <i class="bi bi-list-check"></i> Security Checklist
+                        </a>
+                        <a href="#extensions" class="btn btn-outline-light btn-lg px-4">
+                            <i class="bi bi-puzzle"></i> Recommended Extensions
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Browser Security Basics -->
+    <section class="py-5 bg-dark bg-opacity-50">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <h2 class="mb-4"><i class="bi bi-browser-chrome text-primary"></i> Browser Security Levels</h2>
+
+                    <div class="security-level mb-4">
+                        <h5 class="text-success"><i class="bi bi-shield-check"></i> Maximum Security</h5>
+                        <ul>
+                            <li>HTTPS Everywhere extension</li>
+                            <li>JavaScript disabled by default</li>
+                            <li>All cookies blocked</li>
+                            <li>VPN + Tor browser</li>
+                        </ul>
+                    </div>
+
+                    <div class="security-level mb-4">
+                        <h5 class="text-warning"><i class="bi bi-shield"></i> Balanced Security</h5>
+                        <ul>
+                            <li>Ad/tracker blockers</li>
+                            <li>Script blockers (selective)</li>
+                            <li>First-party cookies only</li>
+                            <li>Regular privacy sweeps</li>
+                        </ul>
+                    </div>
+
+                    <div class="security-level">
+                        <h5 class="text-danger"><i class="bi bi-shield-exclamation"></i> Minimum Security</h5>
+                        <ul>
+                            <li>No ad blocking</li>
+                            <li>All cookies allowed</li>
+                            <li>No script protection</li>
+                            <li>HTTP connections</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-primary h-100">
+                        <div class="card-header border-primary bg-primary bg-opacity-10">
+                            <h4><i class="bi bi-speedometer2"></i> Browser Security Test</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>Check your current browser security:</p>
+                            <div class="mb-3">
+                                <a href="https://browserleaks.com" target="_blank"
+                                    class="btn btn-outline-primary w-100 mb-2">
+                                    <i class="bi bi-fingerprint"></i> Fingerprint Test
+                                </a>
+                                <a href="https://www.deviceinfo.me" target="_blank"
+                                    class="btn btn-outline-info w-100 mb-2">
+                                    <i class="bi bi-phone"></i> Device Leak Test
+                                </a>
+                                <a href="https://webbrowsertools.com/ssl-checker/" target="_blank"
+                                    class="btn btn-outline-success w-100">
+                                    <i class="bi bi-lock"></i> SSL Checker
+                                </a>
+                            </div>
+                            <hr>
+                            <h5 class="mt-3"><i class="bi bi-graph-up"></i> Browser Market Share</h5>
+                            <div class="table-responsive">
+                                <table class="table table-dark table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Browser</th>
+                                            <th>Security Rating</th>
+                                            <th>Market Share</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><img src="../assets/imgs/browser-chrome.png" class="browser-icon">
+                                                Chrome</td>
+                                            <td><span class="badge bg-warning">Medium</span></td>
+                                            <td>64%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="../assets/imgs/browser-firefox.png" class="browser-icon">
+                                                Firefox</td>
+                                            <td><span class="badge bg-success">High</span></td>
+                                            <td>18%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="../assets/imgs/browser-safari.png" class="browser-icon">
+                                                Safari</td>
+                                            <td><span class="badge bg-primary">Good</span></td>
+                                            <td>12%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Checklist -->
+    <section id="checklist" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-list-check text-success"></i> Secure Browsing Checklist
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-6 animate__animated animate__fadeInLeft">
+                    <div class="card bg-dark border-success h-100">
+                        <div class="card-header border-success bg-success bg-opacity-10">
+                            <h4><i class="bi bi-shield-check"></i> Essential Settings</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group list-group-flush">
+                                <label class="list-group-item bg-transparent d-flex align-items-center">
+                                    <input class="form-check-input me-3" type="checkbox">
+                                    <span>Enable automatic browser updates</span>
+                                </label>
+                                <label class="list-group-item bg-transparent d-flex align-items-center">
+                                    <input class="form-check-input me-3" type="checkbox">
+                                    <span>Disable third-party cookies</span>
+                                </label>
+                                <label class="list-group-item bg-transparent d-flex align-items-center">
+                                    <input class="form-check-input me-3" type="checkbox">
+                                    <span>Enable phishing/malware protection</span>
+                                </label>
+                                <label class="list-group-item bg-transparent d-flex align-items-center">
+                                    <input class="form-check-input me-3" type="checkbox">
+                                    <span>Disable password saving in browser</span>
+                                </label>
+                                <label class="list-group-item bg-transparent d-flex align-items-center">
+                                    <input class="form-check-input me-3" type="checkbox">
+                                    <span>Enable DNS-over-HTTPS (DoH)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-warning h-100">
+                        <div class="card-header border-warning bg-warning bg-opacity-10">
+                            <h4><i class="bi bi-gear"></i> Advanced Protections</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group list-group-flush">
+                                <label class="list-group-item bg-transparent d-flex align-items-center">
+                                    <input class="form-check-input me-3" type="checkbox">
+                                    <span>Enable strict site isolation (Chrome)</span>
+                                </label>
+                                <label class="list-group-item bg-transparent d-flex align-items-center">
+                                    <input class="form-check-input me-3" type="checkbox">
+                                    <span>Use container tabs (Firefox)</span>
+                                </label>
+                                <label class="list-group-item bg-transparent d-flex align-items-center">
+                                    <input class="form-check-input me-3" type="checkbox">
+                                    <span>Disable WebRTC (prevents IP leaks)</span>
+                                </label>
+                                <label class="list-group-item bg-transparent d-flex align-items-center">
+                                    <input class="form-check-input me-3" type="checkbox">
+                                    <span>Enable Enhanced Tracking Protection</span>
+                                </label>
+                                <label class="list-group-item bg-transparent d-flex align-items-center">
+                                    <input class="form-check-input me-3" type="checkbox">
+                                    <span>Disable browser fingerprinting</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4 animate__animated animate__fadeInUp">
+                <button id="checklistSubmit" class="btn btn-success btn-lg">
+                    <i class="bi bi-shield-check"></i> Validate My Settings
+                </button>
+                <div id="checklistResult" class="mt-3 alert d-none"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommended Extensions -->
+    <section id="extensions" class="py-5 bg-dark bg-opacity-25">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-puzzle text-primary"></i> Must-Have Security Extensions
+            </h2>
+
+            <div class="row g-4">
+                <!-- uBlock Origin -->
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="card extension-card bg-dark border-success h-100">
+                        <div class="card-header border-success d-flex">
+                            <img src="../assets/imgs/ublock-icon.png" width="40" height="40" class="me-3">
+                            <div>
+                                <h5 class="mb-0">uBlock Origin</h5>
+                                <small class="text-muted">Ad/Tracker Blocker</small>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>Efficient blocker that removes ads, trackers, and malicious domains while being
+                                lightweight.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">Free</span>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.9</span>
+                                    <span><i class="bi bi-people-fill text-info"></i> 10M+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <a href="https://ublockorigin.com" target="_blank" class="btn btn-sm btn-success w-100">
+                                <i class="bi bi-download"></i> Install
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HTTPS Everywhere -->
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="card extension-card bg-dark border-primary h-100">
+                        <div class="card-header border-primary d-flex">
+                            <img src="../assets/imgs/https-everywhere-icon.png" width="40" height="40" class="me-3">
+                            <div>
+                                <h5 class="mb-0">HTTPS Everywhere</h5>
+                                <small class="text-muted">Encryption Enforcer</small>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>Automatically switches thousands of sites from HTTP to secure HTTPS connections.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">Free</span>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.7</span>
+                                    <span><i class="bi bi-people-fill text-info"></i> 5M+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <a href="https://www.eff.org/https-everywhere" target="_blank"
+                                class="btn btn-sm btn-primary w-100">
+                                <i class="bi bi-download"></i> Install
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bitwarden -->
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="card extension-card bg-dark border-info h-100">
+                        <div class="card-header border-info d-flex">
+                            <img src="../assets/imgs/bitwarden-icon.png" width="40" height="40" class="me-3">
+                            <div>
+                                <h5 class="mb-0">Bitwarden</h5>
+                                <small class="text-muted">Password Manager</small>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>Open-source password manager that securely stores and autofills your credentials.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">Free</span>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.8</span>
+                                    <span><i class="bi bi-people-fill text-info"></i> 3M+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <a href="https://bitwarden.com" target="_blank" class="btn btn-sm btn-info w-100">
+                                <i class="bi bi-download"></i> Install
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5 animate__animated animate__fadeInUp">
+                <a href="#extensions" class="btn btn-outline-primary" data-bs-toggle="collapse"
+                    data-bs-target="#moreExtensions">
+                    <i class="bi bi-chevron-down"></i> View More Extensions
+                </a>
+
+                <div id="moreExtensions" class="collapse mt-4">
+                    <div class="row g-4">
+                        <!-- Privacy Badger -->
+                        <div class="col-md-4">
+                            <div class="card extension-card bg-dark border-warning h-100">
+                                <div class="card-header border-warning d-flex">
+                                    <img src="../assets/imgs/privacy-badger-icon.png" width="40" height="40"
+                                        class="me-3">
+                                    <div>
+                                        <h5 class="mb-0">Privacy Badger</h5>
+                                        <small class="text-muted">Tracker Blocker</small>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p>Automatically learns to block invisible trackers as you browse.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-success">Free</span>
+                                        <div>
+                                            <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.5</span>
+                                            <span><i class="bi bi-people-fill text-info"></i> 2M+</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-dark border-top-0">
+                                    <a href="https://privacybadger.org" target="_blank"
+                                        class="btn btn-sm btn-warning w-100">
+                                        <i class="bi bi-download"></i> Install
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NoScript -->
+                        <div class="col-md-4">
+                            <div class="card extension-card bg-dark border-danger h-100">
+                                <div class="card-header border-danger d-flex">
+                                    <img src="../assets/imgs/noscript-icon.png" width="40" height="40" class="me-3">
+                                    <div>
+                                        <h5 class="mb-0">NoScript</h5>
+                                        <small class="text-muted">Script Blocker</small>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p>Advanced protection against XSS and clickjacking attacks (Firefox only).</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-success">Free</span>
+                                        <div>
+                                            <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.6</span>
+                                            <span><i class="bi bi-people-fill text-info"></i> 1M+</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-dark border-top-0">
+                                    <a href="https://noscript.net" target="_blank" class="btn btn-sm btn-danger w-100">
+                                        <i class="bi bi-download"></i> Install
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cookie AutoDelete -->
+                        <div class="col-md-4">
+                            <div class="card extension-card bg-dark border-secondary h-100">
+                                <div class="card-header border-secondary d-flex">
+                                    <img src="../assets/imgs/cookie-icon.png" width="40" height="40" class="me-3">
+                                    <div>
+                                        <h5 class="mb-0">Cookie AutoDelete</h5>
+                                        <small class="text-muted">Privacy Cleaner</small>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p>Automatically removes cookies when tabs close to prevent tracking.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-success">Free</span>
+                                        <div>
+                                            <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.4</span>
+                                            <span><i class="bi bi-people-fill text-info"></i> 500K+</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-dark border-top-0">
+                                    <a href="https://chrome.google.com/webstore/detail/cookie-autodelete/fhcgjolkccmbidfldomjliifgaodjagh"
+                                        target="_blank" class="btn btn-sm btn-secondary w-100">
+                                        <i class="bi bi-download"></i> Install
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark border-top border-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>
+                        <a class="navbar-brand" href="../index.html">
+                            <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                            &
+                            <span class="text-danger">Conflict</span>
+                        </a>
+                    </h5>
+                    <p class="text-muted">Your guide to secure and private web browsing.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Security Resources</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="https://www.eff.org" class="nav-link">EFF</a></li>
+                        <li class="nav-item"><a href="https://privacytools.io" class="nav-link">PrivacyTools</a></li>
+                        <li class="nav-item"><a href="https://haveibeenpwned.com" class="nav-link">Have I Been Pwned</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <div class="d-flex gap-3 mb-3">
+                        <a href="#" class="text-muted"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-github"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-discord"></i></a>
+                    </div>
+                    <div class="mt-3">
+                        <a href="../contact.html" class="btn btn-sm btn-outline-light">
+                            <i class="bi bi-shield-lock"></i> Security Questions?
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <p class="text-muted small mb-0">&copy; 2025 Code & Conflict. Educational use only.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Checklist functionality
+        document.getElementById('checklistSubmit').addEventListener('click', function () {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            let checkedCount = 0;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) checkedCount++;
+            });
+
+            const total = checkboxes.length;
+            const percentage = Math.round((checkedCount / total) * 100);
+
+            const resultDiv = document.getElementById('checklistResult');
+            resultDiv.classList.remove('d-none', 'alert-success', 'alert-warning', 'alert-danger');
+
+            if (percentage >= 80) {
+                resultDiv.classList.add('alert-success');
+                resultDiv.innerHTML = `<i class="bi bi-shield-check"></i> Excellent! You've completed ${percentage}% of security measures.`;
+            } else if (percentage >= 50) {
+                resultDiv.classList.add('alert-warning');
+                resultDiv.innerHTML = `<i class="bi bi-shield-exclamation"></i> Good start! Complete ${total - checkedCount} more items for better protection.`;
+            } else {
+                resultDiv.classList.add('alert-danger');
+                resultDiv.innerHTML = `<i class="bi bi-shield-slash"></i> Critical! Only ${percentage}% completed. Your browsing is at risk.`;
+            }
+        });
+
+        // Toggle checklist items
+        const checklistItems = document.querySelectorAll('.list-group-item');
+        checklistItems.forEach(item => {
+            item.addEventListener('click', function (e) {
+                if (e.target.tagName !== 'INPUT') {
+                    const checkbox = this.querySelector('input');
+                    checkbox.checked = !checkbox.checked;
+                    this.classList.toggle('completed', checkbox.checked);
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate__animated');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementPosition < windowHeight - 100) {
+                    const animationClass = element.classList[1];
+                    element.classList.add(animationClass);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Add active class based on current page
+        document.addEventListener('DOMContentLoaded', function () {
+            const path = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-link, .dropdown-item');
+
+            navLinks.forEach(link => {
+                const linkPath = link.getAttribute('href').split('/').pop();
+                if (path === linkPath ||
+                    (path.startsWith('threats/') && linkPath === path.split('/').pop()) ||
+                    (path.startsWith('prevention/') && linkPath === path.split('/').pop())) {
+
+                    link.classList.add('active');
+
+                    // If it's a dropdown item, also activate its parent
+                    if (link.classList.contains('dropdown-item')) {
+                        const parent = link.closest('.dropdown');
+                        if (parent) {
+                            parent.querySelector('.dropdown-toggle').classList.add('active');
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

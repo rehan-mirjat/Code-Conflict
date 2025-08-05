@@ -25,7 +25,7 @@
 
         .mission-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
         .team-card {
@@ -74,13 +74,14 @@
 
 <body class="cyber-gradient">
     <!-- Cyber Alert Bar -->
-    <div class="alert alert-danger alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
+    <div
+        class="alert alert-danger alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
         <strong>ALERT:</strong> New Zero-Day in VMware ESXi (CVE-2023-20867) detected | <a
             href="news/latest_threats.html" class="alert-link">Patch Now</a>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
     </div>
 
-    <!-- Main Navbar - FULLY MATCHING INDEX.HTML -->
+    <!-- Main Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
         <div class="container">
             <a class="navbar-brand animate__animated animate__fadeInLeft" href="index.html">
@@ -92,50 +93,90 @@
                 <i class="bi bi-shield-lock"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarCyber">
+                <!-- Left-aligned menu items -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
                         <a class="nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a>
                     </li>
-                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
-                        <a class="nav-link active" href="about.html"><i class="bi bi-info-circle"></i> About</a>
-                    </li>
-                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-bug"></i> Threats
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="threats/malware.html">Malware</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="threats/phishing.html">Phishing</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="threats/password_attacks.html">Password Attacks</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="threats/ransomware.html">Ransomware</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="threats/social_engineering.html">Social Engineering</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="threats/social_engineering.html">Social Engineering</a>
+                            </li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-shield-check"></i> Prevention
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="prevention/data_privacy.html">Data & Privacy</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="prevention/email_security.html">Email Security</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="prevention/mobile_security.html">Mobile Security</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="prevention/network_security.html">Network Security</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="prevention/network_security.html">Network Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="prevention/secure_browsing.html">Secure Browsing</a></li>
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.5s;" role="search">
-                    <input class="form-control bg-dark border-secondary" type="search" placeholder="Search threats...">
-                    <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
-                </form>
+
+                <!-- Grouped Search + About/Contact (aligned together) -->
+                <div class="d-flex align-items-center">
+                    <!-- About & Contact Links -->
+                    <ul class="navbar-nav me-3"> <!-- Added margin-right (me-3) -->
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                            <a class="nav-link active" href="about_us.html"><i class="bi bi-info-circle"></i> About Us</a>
+                        </li>
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.5s;">
+                            <a class="nav-link" href="contact.html"><i class="bi bi-envelope"></i> Contact Us</a>
+                        </li>
+                    </ul>
+
+                    <!-- Search Bar -->
+                    <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.6s;"
+                        role="search">
+                        <input class="form-control bg-dark border-secondary" type="search"
+                            placeholder="Search threats...">
+                        <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Sign Up / Login Buttons (Right-aligned) -->
+                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
+                    <a href="login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                        Login</a>
+                    <a href="signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -160,11 +201,14 @@
                 <div class="col-lg-6 animate__animated animate__fadeInLeft">
                     <h2 class="mb-4"><i class="bi bi-stars text-primary"></i> Our Mission</h2>
                     <p class="lead">
-                        To demystify cyber warfare and empower individuals with knowledge to navigate the digital battlefield.
+                        To demystify cyber warfare and empower individuals with knowledge to navigate the digital
+                        battlefield.
                     </p>
                     <p>
-                        Founded in 2025 at the University of Sindh, Code & Conflict emerged from the growing need for accessible, 
-                        high-quality cybersecurity education. Our platform bridges the gap between academic research and real-world 
+                        Founded in 2025 at the University of Sindh, Code & Conflict emerged from the growing need for
+                        accessible,
+                        high-quality cybersecurity education. Our platform bridges the gap between academic research and
+                        real-world
                         cyber threats.
                     </p>
                     <div class="d-flex gap-3 mt-4">
@@ -218,7 +262,7 @@
             <h2 class="text-center mb-5 animate__animated animate__fadeIn">
                 <i class="bi bi-people-fill"></i> Our Cybersecurity Team
             </h2>
-            
+
             <div class="row g-4">
                 <!-- Team Member 1 -->
                 <div class="col-lg-3 col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
@@ -236,7 +280,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Team Member 2 -->
                 <div class="col-lg-3 col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
                     <div class="card team-card h-100 bg-dark">
@@ -252,7 +296,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Team Member 3 -->
                 <div class="col-lg-3 col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
                     <div class="card team-card h-100 bg-dark">
@@ -268,7 +312,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Team Member 4 -->
                 <div class="col-lg-3 col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
                     <div class="card team-card h-100 bg-dark">
@@ -285,7 +329,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="text-center mt-5">
                 <a href="contact.html" class="btn btn-outline-light px-4">
                     <i class="bi bi-envelope"></i> Contact Our Team
@@ -300,7 +344,7 @@
             <h2 class="text-center mb-5 animate__animated animate__fadeIn">
                 <i class="bi bi-hourglass-split"></i> Our Journey
             </h2>
-            
+
             <div class="timeline animate__animated animate__fadeIn">
                 <!-- Timeline Item 1 -->
                 <div class="timeline-item">
@@ -310,12 +354,13 @@
                             <span class="badge bg-primary">2020</span>
                         </div>
                         <div class="card-body">
-                            <p>Initial research began at University of Sindh's Cybersecurity Lab under Prof. Bhatti's guidance, 
-                            focusing on cyber warfare education gaps.</p>
+                            <p>Initial research began at University of Sindh's Cybersecurity Lab under Prof. Bhatti's
+                                guidance,
+                                focusing on cyber warfare education gaps.</p>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Timeline Item 2 -->
                 <div class="timeline-item">
                     <div class="card bg-dark border-primary mb-3">
@@ -324,11 +369,12 @@
                             <span class="badge bg-primary">2022</span>
                         </div>
                         <div class="card-body">
-                            <p>Launched beta version with 10 case studies, reaching 500+ students in the Computer Science department.</p>
+                            <p>Launched beta version with 10 case studies, reaching 500+ students in the Computer
+                                Science department.</p>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Timeline Item 3 -->
                 <div class="timeline-item">
                     <div class="card bg-dark border-primary mb-3">
@@ -337,11 +383,12 @@
                             <span class="badge bg-primary">2024</span>
                         </div>
                         <div class="card-body">
-                            <p>Public release with support from Department of Information Technology, featuring 50+ threat analyses.</p>
+                            <p>Public release with support from Department of Information Technology, featuring 50+
+                                threat analyses.</p>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Timeline Item 4 -->
                 <div class="timeline-item">
                     <div class="card bg-dark border-primary mb-3">
@@ -350,7 +397,8 @@
                             <span class="badge bg-primary">2025</span>
                         </div>
                         <div class="card-body">
-                            <p>Expanded to comprehensive resource with 20+ sections, serving 10,000+ monthly visitors from academia and industry.</p>
+                            <p>Expanded to comprehensive resource with 20+ sections, serving 10,000+ monthly visitors
+                                from academia and industry.</p>
                         </div>
                     </div>
                 </div>
@@ -367,8 +415,10 @@
                 </div>
                 <div class="col-md-8 animate__animated animate__fadeInRight">
                     <h3><i class="bi bi-building"></i> Academic Home</h3>
-                    <p>Code & Conflict operates under the Department of Information Technology at the University of Sindh, 
-                    Jamshoro. Our work is supported by faculty researchers and student contributors from the cybersecurity program.</p>
+                    <p>Code & Conflict operates under the Department of Information Technology at the University of
+                        Sindh,
+                        Jamshoro. Our work is supported by faculty researchers and student contributors from the
+                        cybersecurity program.</p>
                     <div class="d-flex gap-3 mt-4">
                         <a href="https://usindh.edu.pk" target="_blank" class="btn btn-outline-light">
                             <i class="bi bi-globe"></i> University Website
@@ -433,11 +483,11 @@
         // Animate elements when they come into view
         const animateOnScroll = () => {
             const elements = document.querySelectorAll('.animate__animated');
-            
+
             elements.forEach(element => {
                 const elementPosition = element.getBoundingClientRect().top;
                 const windowHeight = window.innerHeight;
-                
+
                 if (elementPosition < windowHeight - 100) {
                     const animationClass = element.classList[1];
                     element.classList.add(animationClass);

@@ -1,11 +1,465 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-  </body>
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Code & Conflict</title>
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- Custom CSS -->
+  <link href="css/custom.css" rel="stylesheet">
+  <style>
+    .cyber-gradient {
+      background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
+    }
+
+    .contact-card {
+      border-left: 3px solid #2ecc71;
+      transition: all 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(46, 204, 113, 0.1);
+    }
+
+    .form-control:focus {
+      border-color: #2ecc71;
+      box-shadow: 0 0 0 0.25rem rgba(46, 204, 113, 0.25);
+    }
+
+    .captcha-box {
+      background: #1a1a2e;
+      font-family: 'Courier New', monospace;
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body class="cyber-gradient">
+  <!-- Cyber Alert Bar -->
+  <div
+    class="alert alert-danger alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
+    <strong>ALERT:</strong> New phishing campaign targeting educational institutions |
+    <a href="threats/phishing.html" class="alert-link">Learn protective measures</a>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+  </div>
+
+  <!-- Main Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
+    <div class="container">
+      <a class="navbar-brand animate__animated animate__fadeInLeft" href="index.html">
+        <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+        &
+        <span class="text-danger">Conflict</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCyber">
+        <i class="bi bi-shield-lock"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCyber">
+        <!-- Left-aligned menu items -->
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
+            <a class="nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a>
+          </li>
+          <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              <i class="bi bi-bug"></i> Threats
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="threats/malware.html">Malware</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="threats/phishing.html">Phishing</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="threats/password_attacks.html">Password Attacks</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="threats/ransomware.html">Ransomware</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="threats/social_engineering.html">Social Engineering</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              <i class="bi bi-shield-check"></i> Prevention
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="prevention/data_privacy.html">Data & Privacy</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="prevention/email_security.html">Email Security</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="prevention/mobile_security.html">Mobile Security</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="prevention/network_security.html">Network Security</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="prevention/secure_browsing.html">Secure Browsing</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Grouped Search + About/Contact (aligned together) -->
+        <div class="d-flex align-items-center">
+          <!-- About & Contact Links -->
+          <ul class="navbar-nav me-3"> <!-- Added margin-right (me-3) -->
+            <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+              <a class="nav-link" href="about_us.html"><i class="bi bi-info-circle"></i> About Us</a>
+            </li>
+            <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.5s;">
+              <a class="nav-link active" href="contact.html"><i class="bi bi-envelope"></i> Contact Us</a>
+            </li>
+          </ul>
+
+          <!-- Search Bar -->
+          <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.6s;" role="search">
+            <input class="form-control bg-dark border-secondary" type="search" placeholder="Search threats...">
+            <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
+          </form>
+        </div>
+
+        <!-- Sign Up / Login Buttons (Right-aligned) -->
+        <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
+          <a href="login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+            Login</a>
+          <a href="signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="py-5 bg-dark bg-opacity-50">
+    <div class="container py-5 text-center animate__animated animate__fadeIn">
+      <h1 class="display-4 fw-bold mb-4">
+        <span class="text-primary">Secure</span> Communication Channel
+      </h1>
+      <p class="lead">
+        All messages are encrypted in transit. For sensitive disclosures, use our PGP key.
+      </p>
+    </div>
+  </header>
+
+  <!-- Contact Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Contact Form -->
+        <div class="col-lg-6 animate__animated animate__fadeInLeft">
+          <div class="card contact-card h-100 bg-dark">
+            <div class="card-header border-primary">
+              <h3><i class="bi bi-lock"></i> Encrypted Contact Form</h3>
+            </div>
+            <div class="card-body">
+              <form id="contactForm" novalidate>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Full Name</label>
+                  <input type="text" class="form-control bg-dark text-light" id="name" required>
+                  <div class="invalid-feedback">Please provide your name.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control bg-dark text-light" id="email" required>
+                  <div class="invalid-feedback">Please provide a valid email.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="subject" class="form-label">Subject</label>
+                  <select class="form-select bg-dark text-light" id="subject" required>
+                    <option value="" selected disabled>Select a topic</option>
+                    <option>Threat Report</option>
+                    <option>Research Collaboration</option>
+                    <option>Media Inquiry</option>
+                    <option>Technical Support</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea class="form-control bg-dark text-light" id="message" rows="5" required></textarea>
+                  <div class="form-text">Max 500 characters</div>
+                </div>
+                <div class="mb-3 captcha-box p-3 rounded text-center">
+                  <div class="mb-2">
+                    <span id="captchaQuestion" class="fw-bold">7 + 3 = ?</span>
+                    <button type="button" class="btn btn-sm btn-outline-primary ms-2" id="refreshCaptcha">
+                      <i class="bi bi-arrow-clockwise"></i>
+                    </button>
+                  </div>
+                  <input type="text" class="form-control bg-dark text-center" id="captchaAnswer"
+                    placeholder="Enter answer" required>
+                  <div class="invalid-feedback">CAPTCHA verification failed</div>
+                </div>
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="checkbox" id="encryptCheck" checked>
+                  <label class="form-check-label" for="encryptCheck">
+                    Request end-to-end encryption (PGP)
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                  <i class="bi bi-shield-lock"></i> Send Securely
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Methods -->
+        <div class="col-lg-6 animate__animated animate__fadeInRight">
+          <div class="card h-100 bg-dark">
+            <div class="card-header border-primary">
+              <h3><i class="bi bi-gear"></i> Alternative Contact Methods</h3>
+            </div>
+            <div class="card-body">
+              <div class="mb-4">
+                <h5><i class="bi bi-building text-primary"></i> Physical Address</h5>
+                <p>
+                  Department of Information Technology<br>
+                  University of Sindh, Jamshoro<br>
+                  Sindh, Pakistan
+                </p>
+                <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#mapModal">
+                  <i class="bi bi-map"></i> View Campus Map
+                </a>
+              </div>
+
+              <div class="mb-4">
+                <h5><i class="bi bi-envelope text-primary"></i> Secure Email</h5>
+                <div class="d-flex align-items-center mb-2">
+                  <span class="font-monospace">contact@code-conflict.edu.pk</span>
+                  <button class="btn btn-sm btn-outline-success ms-3" data-bs-toggle="tooltip"
+                    title="Copy to clipboard">
+                    <i class="bi bi-clipboard"></i>
+                  </button>
+                </div>
+                <a href="assets/pgp-key.txt" class="btn btn-sm btn-outline-secondary">
+                  <i class="bi bi-key"></i> Download PGP Key (0xAB3F9C2D)
+                </a>
+              </div>
+
+              <div class="mb-4">
+                <h5><i class="bi bi-shield-check text-primary"></i> Vulnerability Reporting</h5>
+                <p>For sensitive security disclosures:</p>
+                <ul>
+                  <li>Use our <a href="#" class="text-primary">encrypted web portal</a></li>
+                  <li>Subject line: "[SECURITY] Vulnerability Report"</li>
+                  <li>Include proof-of-concept details</li>
+                </ul>
+              </div>
+
+              <div class="alert alert-warning">
+                <h5><i class="bi bi-exclamation-triangle"></i> Security Notice</h5>
+                <p>We will never request passwords or sensitive data via email. Verify all communications using our PGP
+                  key.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Availability Section -->
+  <section class="py-5 bg-dark bg-opacity-25">
+    <div class="container">
+      <h2 class="text-center mb-5 animate__animated animate__fadeIn">
+        <i class="bi bi-people"></i> Team Availability
+      </h2>
+      <div class="row g-4">
+        <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+          <div class="card h-100 bg-dark">
+            <div class="card-body text-center">
+              <i class="bi bi-headset fs-1 text-primary mb-3"></i>
+              <h5>Support Hours</h5>
+              <p>Mon-Fri: 9AM - 5PM (PST)</p>
+              <p>Emergency: <span class="text-danger">24/7 for critical threats</span></p>
+              <div class="mt-3">
+                <span class="badge bg-success">Currently Online</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+          <div class="card h-100 bg-dark">
+            <div class="card-body text-center">
+              <i class="bi bi-calendar-check fs-1 text-primary mb-3"></i>
+              <h5>Meeting Requests</h5>
+              <p>Schedule a consultation with our security experts</p>
+              <a href="#" class="btn btn-outline-primary mt-2">
+                <i class="bi bi-calendar-plus"></i> Book Appointment
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+          <div class="card h-100 bg-dark">
+            <div class="card-body text-center">
+              <i class="bi bi-chat-dots fs-1 text-primary mb-3"></i>
+              <h5>Live Chat</h5>
+              <p>Encrypted chat with our threat analysts</p>
+              <button class="btn btn-primary mt-2" id="liveChatBtn">
+                <i class="bi bi-chat-square-text"></i> Start Secure Chat
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-4 bg-dark border-top border-secondary">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="img-hover-zoom" style="width: 200px;">
+            <h5>
+              <a class="navbar-brand" href="index.html">
+                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                &
+                <span class="text-danger">Conflict</span>
+              </a>
+            </h5>
+          </div>
+          <p class="text-muted">Educational resource for cyber warfare analysis and defense strategies.</p>
+        </div>
+        <div class="col-md-3">
+          <h5>Quick Links</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a href="glossary.html" class="nav-link">Glossary</a></li>
+            <li class="nav-item"><a href="resources.html" class="nav-link">Resources</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5>Connect</h5>
+          <div class="d-flex gap-3 mb-3">
+            <a href="#" class="text-muted"><i class="bi bi-twitter fs-4"></i></a>
+            <a href="#" class="text-muted"><i class="bi bi-github fs-4"></i></a>
+            <a href="#" class="text-muted"><i class="bi bi-linkedin fs-4"></i></a>
+          </div>
+          <div class="mt-4">
+            <h6>Certified By University Of Sindh</h6>
+            <img src="assets/imgs/icons/certification.png" width="50" alt="Cyber Security Certified">
+          </div>
+        </div>
+      </div>
+      <hr class="my-4 border-secondary">
+      <p class="text-muted small mb-0">&copy; 2025 Code & Conflict. Educational use only.</p>
+    </div>
+  </footer>
+
+  <!-- Map Modal -->
+  <div class="modal fade" id="mapModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content bg-dark">
+        <div class="modal-header border-primary">
+          <h5 class="modal-title"><i class="bi bi-geo-alt"></i> University Campus Map</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <img src="assets/imgs/university-map.jpg" class="img-fluid rounded" alt="Campus Map">
+          <div class="mt-3">
+            <h6>Department of Information Technology</h6>
+            <p>Building #12 (Cyber Security Wing), 2nd Floor</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script>
+    // Form validation
+    (function () {
+      'use strict';
+      const form = document.getElementById('contactForm');
+
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        // Simple CAPTCHA validation
+        const captchaAnswer = document.getElementById('captchaAnswer');
+        if (captchaAnswer.value !== "10") { // Answer to 7+3
+          captchaAnswer.classList.add('is-invalid');
+          event.preventDefault();
+        } else {
+          captchaAnswer.classList.remove('is-invalid');
+        }
+
+        form.classList.add('was-validated');
+      }, false);
+
+      // Refresh CAPTCHA
+      document.getElementById('refreshCaptcha').addEventListener('click', function () {
+        const questions = [
+          { q: "5 + 5 = ?", a: "10" },
+          { q: "3 + 7 = ?", a: "10" },
+          { q: "9 + 1 = ?", a: "10" },
+          { q: "2 × 5 = ?", a: "10" }
+        ];
+        const random = Math.floor(Math.random() * questions.length);
+        document.getElementById('captchaQuestion').textContent = questions[random].q;
+        document.getElementById('captchaAnswer').placeholder = "Answer: " + questions[random].a;
+        document.getElementById('captchaAnswer').value = "";
+      });
+
+      // Clipboard copy
+      const copyBtn = document.querySelector('[data-bs-toggle="tooltip"]');
+      copyBtn.addEventListener('click', function () {
+        navigator.clipboard.writeText('contact@code-conflict.edu.pk');
+        const tooltip = new bootstrap.Tooltip(copyBtn, {
+          title: "Copied!",
+          trigger: "manual"
+        });
+        tooltip.show();
+        setTimeout(() => tooltip.hide(), 1000);
+      });
+
+      // Live chat simulation
+      document.getElementById('liveChatBtn').addEventListener('click', function () {
+        const alertBox = document.createElement('div');
+        alertBox.className = 'alert alert-info alert-dismissible fade show mt-3';
+        alertBox.innerHTML = `
+                    <i class="bi bi-shield-lock"></i> <strong>Secure chat initialized</strong><br>
+                    Connecting you to an available threat analyst... 
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+        this.parentNode.appendChild(alertBox);
+      });
+    })();
+
+    // Initialize tooltips
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+  </script>
+</body>
+
 </html>
