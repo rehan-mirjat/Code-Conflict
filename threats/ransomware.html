@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ransomware Threats | Code & Conflict</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <link href="../css/custom.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
+
+    <style>
+        .ransomware-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('../assets/imgs/ransomware-bg.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .ransomware-timeline {
+            border-left: 3px solid #e74c3c;
+            padding-left: 20px;
+        }
+
+        .ransomware-card {
+            transition: all 0.3s ease;
+            border: 1px solid #2c3e50;
+        }
+
+        .ransomware-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.2);
+        }
+
+        .decryption-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body class="cyber-gradient">
+    <!-- Cyber Alert Bar -->
+    <div
+        class="alert alert-danger alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
+        <strong>RANSOMWARE ALERT:</strong> New LockBit 3.0 variant targeting healthcare systems |
+        <a href="../news/latest_threats.html" class="alert-link">Detection Guide</a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="../index.html">
+                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                &
+                <span class="text-danger">Conflict</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCyber">
+                <i class="bi bi-shield-lock"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCyber">
+                <!-- Left-aligned menu items -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
+                        <a class="nav-link" href="../index.html"><i class="bi bi-house-door"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-bug"></i> Threats
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="malware.html">Malware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="phishing.html">Phishing</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="password_attacks.html">Password Attacks</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="ransomware.html">Ransomware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="social_engineering.html">Social
+                                    Engineering</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-shield-check"></i> Prevention
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../prevention/data_privacy.html">Data & Privacy</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/email_security.html">Email Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/mobile_security.html">Mobile Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/network_security.html">Network Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/secure_browsing.html">Secure Browsing</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Grouped Search + About/Contact (aligned together) -->
+                <div class="d-flex align-items-center">
+                    <!-- About & Contact Links -->
+                    <ul class="navbar-nav me-3">
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                            <a class="nav-link" href="../about_us.html"><i class="bi bi-info-circle"></i> About Us</a>
+                        </li>
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.5s;">
+                            <a class="nav-link" href="../contact.html"><i class="bi bi-envelope"></i> Contact Us</a>
+                        </li>
+                    </ul>
+
+                    <!-- Search Bar -->
+                    <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.6s;"
+                        role="search">
+                        <input class="form-control bg-dark border-secondary" type="search"
+                            placeholder="Search threats...">
+                        <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Sign Up / Login Buttons (Right-aligned) -->
+                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
+                    <a href="login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                        Login</a>
+                    <a href="signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ransomware Hero Section -->
+    <header class="py-5 ransomware-hero text-white">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-8 animate__animated animate__fadeInLeft">
+                    <h1 class="display-4 fw-bold mb-4">
+                        <i class="bi bi-lock-fill text-danger"></i> Ransomware Threats
+                    </h1>
+                    <p class="lead mb-4">
+                        Malicious software that encrypts files and demands payment for their release.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#variants" class="btn btn-danger btn-lg px-4">
+                            <i class="bi bi-bug-fill"></i> View Variants
+                        </a>
+                        <a href="#protection" class="btn btn-outline-light btn-lg px-4">
+                            <i class="bi bi-shield-check"></i> Protection Guide
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Ransomware Overview -->
+    <section class="py-5 bg-dark bg-opacity-50">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <h2 class="mb-4"><i class="bi bi-question-circle text-primary"></i> What is Ransomware?</h2>
+                    <p class="lead">
+                        Ransomware is a type of malware that encrypts files or locks systems, demanding payment for
+                        decryption.
+                    </p>
+                    <div class="ransomware-timeline mt-4">
+                        <h5 class="text-danger"><i class="bi bi-arrow-right-circle"></i> Typical Attack Flow:</h5>
+                        <ol>
+                            <li class="mb-2">Initial infection (phishing, RDP brute force, exploit)</li>
+                            <li class="mb-2">Lateral movement through network</li>
+                            <li class="mb-2">Data exfiltration (in double extortion)</li>
+                            <li class="mb-2">File encryption</li>
+                            <li class="mb-2">Ransom demand</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-danger h-100">
+                        <div class="card-header border-danger bg-danger bg-opacity-10">
+                            <h4><i class="bi bi-exclamation-triangle"></i> Quick Stats</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-6 mb-4">
+                                    <div class="display-5 text-danger">$265B</div>
+                                    <small>Projected global damage (2025)</small>
+                                </div>
+                                <div class="col-6 mb-4">
+                                    <div class="display-5 text-warning">72%</div>
+                                    <small>Of attacks target small businesses</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="display-5 text-info">17 days</div>
+                                    <small>Average downtime after attack</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="display-5 text-success">42%</div>
+                                    <small>Who pay get data back</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ransomware Variants -->
+    <section id="variants" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-list-check text-primary"></i> Common Ransomware Variants
+            </h2>
+
+            <div class="row g-4">
+                <!-- LockBit Card -->
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="card ransomware-card h-100 bg-dark border-danger">
+                        <div class="card-header border-danger d-flex">
+                            <i class="bi bi-lock text-danger fs-3 me-3"></i>
+                            <div>
+                                <h5 class="mb-0">LockBit</h5>
+                                <small class="text-muted">Ransomware-as-a-Service</small>
+                            </div>
+                            <span class="decryption-badge bg-success ms-auto" data-bs-toggle="tooltip"
+                                title="Decryptor available">
+                                <i class="bi bi-key"></i>
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <p>Most active RaaS with automatic propagation and triple extortion tactics.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle text-success"></i> Targets: Enterprises</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Encryption: AES-256 + RSA-2048</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Extortion: Data leak + DDoS</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <button class="btn btn-sm btn-outline-danger w-100" data-bs-toggle="modal"
+                                data-bs-target="#lockbitModal">
+                                View Samples
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REvil Card -->
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="card ransomware-card h-100 bg-dark border-warning">
+                        <div class="card-header border-warning d-flex">
+                            <i class="bi bi-lock text-warning fs-3 me-3"></i>
+                            <div>
+                                <h5 class="mb-0">REvil/Sodinokibi</h5>
+                                <small class="text-muted">Big game hunting</small>
+                            </div>
+                            <span class="decryption-badge bg-secondary ms-auto" data-bs-toggle="tooltip"
+                                title="No public decryptor">
+                                <i class="bi bi-key-fill"></i>
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <p>Affiliate program targeting large corporations with million-dollar ransoms.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle text-success"></i> Targets: Fortune 500</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Encryption: Custom</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Extortion: Auction data</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <button class="btn btn-sm btn-outline-warning w-100" data-bs-toggle="modal"
+                                data-bs-target="#revilModal">
+                                View Samples
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ryuk Card -->
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="card ransomware-card h-100 bg-dark border-info">
+                        <div class="card-header border-info d-flex">
+                            <i class="bi bi-lock text-info fs-3 me-3"></i>
+                            <div>
+                                <h5 class="mb-0">Ryuk</h5>
+                                <small class="text-muted">Targeted attacks</small>
+                            </div>
+                            <span class="decryption-badge bg-success ms-auto" data-bs-toggle="tooltip"
+                                title="Decryptor available">
+                                <i class="bi bi-key"></i>
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <p>Manual ransomware often deployed after TrickBot infection.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle text-success"></i> Targets: Healthcare, Govt</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Encryption: RSA-4096</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Extortion: Data theft</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <button class="btn btn-sm btn-outline-info w-100" data-bs-toggle="modal"
+                                data-bs-target="#ryukModal">
+                                View Samples
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Protection Section -->
+    <section id="protection" class="py-5 bg-dark bg-opacity-25">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-shield-check text-success"></i> Ransomware Protection
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <div class="card bg-dark border-success h-100">
+                        <div class="card-header border-success bg-success bg-opacity-10">
+                            <h4><i class="bi bi-check-circle"></i> Preventive Measures</h4>
+                        </div>
+                        <div class="card-body">
+                            <ol class="list-group list-group-numbered list-group-flush">
+                                <li
+                                    class="list-group-item bg-transparent d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Backup Strategy</div>
+                                        3-2-1 rule (3 copies, 2 media, 1 offline)
+                                    </div>
+                                    <span class="badge bg-success rounded-pill">Essential</span>
+                                </li>
+                                <li
+                                    class="list-group-item bg-transparent d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Email Filtering</div>
+                                        Block executable attachments
+                                    </div>
+                                    <span class="badge bg-success rounded-pill">Critical</span>
+                                </li>
+                                <li
+                                    class="list-group-item bg-transparent d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Patch Management</div>
+                                        Critical updates within 72 hours
+                                    </div>
+                                    <span class="badge bg-warning rounded-pill">High Priority</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-warning h-100">
+                        <div class="card-header border-warning bg-warning bg-opacity-10">
+                            <h4><i class="bi bi-exclamation-triangle"></i> Incident Response</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="accordion" id="responseAccordion">
+                                <div class="accordion-item bg-dark border-secondary">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button bg-dark text-white" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                            <i class="bi bi-1-circle text-danger me-2"></i> Isolate the Infection
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show"
+                                        data-bs-parent="#responseAccordion">
+                                        <div class="accordion-body">
+                                            Disconnect infected systems from all networks immediately.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item bg-dark border-secondary">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed bg-dark text-white" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                            <i class="bi bi-2-circle text-warning me-2"></i> Identify the Strain
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                        data-bs-parent="#responseAccordion">
+                                        <div class="accordion-body">
+                                            Use tools like ID Ransomware to identify the variant.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item bg-dark border-secondary">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed bg-dark text-white" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                            <i class="bi bi-3-circle text-primary me-2"></i> Restore from Backup
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse"
+                                        data-bs-parent="#responseAccordion">
+                                        <div class="accordion-body">
+                                            Wipe systems and restore from clean backups after eradication.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5 animate__animated animate__fadeInUp">
+                <a href="../prevention/network_security.html" class="btn btn-lg btn-success">
+                    <i class="bi bi-shield-lock"></i> Complete Protection Guide
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ransomware Modals -->
+    <div class="modal fade" id="lockbitModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-primary">
+                    <h5 class="modal-title"><i class="bi bi-lock text-danger"></i> LockBit Samples</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item bg-dark text-white border-secondary">
+                            <strong>File Extension:</strong> .lockbit
+                        </li>
+                        <li class="list-group-item bg-dark text-white border-secondary">
+                            <strong>Ransom Note:</strong> Restore-My-Files.txt
+                        </li>
+                        <li class="list-group-item bg-dark text-white border-secondary">
+                            <strong>Contact:</strong> Tor negotiation site
+                        </li>
+                    </ul>
+                    <div class="mt-3 alert alert-info">
+                        <i class="bi bi-key"></i> Decryptor available from:
+                        <a href="https://www.nomoreransom.org" class="alert-link">NoMoreRansom.org</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark border-top border-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>
+                        <a class="navbar-brand" href="../index.html">
+                            <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                            &
+                            <span class="text-danger">Conflict</span>
+                        </a>
+                    </h5>
+                    <p class="text-muted">Comprehensive ransomware threat intelligence and defense strategies.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Resources</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="https://www.nomoreransom.org" class="nav-link">NoMoreRansom</a>
+                        </li>
+                        <li class="nav-item"><a href="https://www.cisa.gov/stopransomware" class="nav-link">CISA
+                                Guide</a></li>
+                        <li class="nav-item"><a href="https://www.id-ransomware.com" class="nav-link">ID Ransomware</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="../threats/malware.html" class="nav-link">Malware Database</a>
+                        </li>
+                        <li class="nav-item"><a href="../prevention/network_security.html" class="nav-link">Network
+                                Protection</a></li>
+                        <li class="nav-item"><a href="../about.html" class="nav-link">About Our Data</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <p class="text-muted small mb-0">&copy; 2025 Code & Conflict. Educational use only.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Initialize tooltips
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate__animated');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementPosition < windowHeight - 100) {
+                    const animationClass = element.classList[1];
+                    element.classList.add(animationClass);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Add active class based on current page
+        document.addEventListener('DOMContentLoaded', function () {
+            const path = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-link, .dropdown-item');
+
+            navLinks.forEach(link => {
+                const linkPath = link.getAttribute('href').split('/').pop();
+                if (path === linkPath ||
+                    (path.startsWith('threats/') && linkPath === path.split('/').pop()) ||
+                    (path.startsWith('prevention/') && linkPath === path.split('/').pop())) {
+
+                    link.classList.add('active');
+
+                    // If it's a dropdown item, also activate its parent
+                    if (link.classList.contains('dropdown-item')) {
+                        const parent = link.closest('.dropdown');
+                        if (parent) {
+                            parent.querySelector('.dropdown-toggle').classList.add('active');
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

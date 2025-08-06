@@ -2,50 +2,58 @@
 <html lang="en" data-bs-theme="dark">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Login | Code & Conflict</title>
-    <!-- Bootstrap 5.3 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <style>
-        .cyber-gradient {
-            background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
-        }
-        .login-card {
-            border-top: 3px solid #2ecc71;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-        .password-strength {
-            height: 3px;
-            transition: width 0.3s ease;
-        }
-        .auth-icon {
-            font-size: 5rem;
-            color: #2ecc71;
-        }
-        .eye-toggle {
-            cursor: pointer;
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Login | Code & Conflict</title>
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
+
+  <style>
+    .cyber-gradient {
+      background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
+    }
+
+    .login-card {
+      border-top: 3px solid #2ecc71;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .password-strength {
+      height: 3px;
+      transition: width 0.3s ease;
+    }
+
+    .auth-icon {
+      font-size: 5rem;
+      color: #2ecc71;
+    }
+
+    .eye-toggle {
+      cursor: pointer;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  </style>
 </head>
 
 <body class="cyber-gradient">
-    <!-- Cyber Alert Bar -->
-    <div class="alert alert-danger alert-dismissible rounded-0 mb-0 text-center py-2">
-        <strong>SECURITY ALERT:</strong> Always verify the domain before entering credentials | 
-        <a href="threats/phishing.html" class="alert-link">Learn to spot fake login pages</a>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
-    </div>
+  <!-- Cyber Alert Bar -->
+  <div class="alert alert-danger alert-dismissible rounded-0 mb-0 text-center py-2">
+    <strong>SECURITY ALERT:</strong> Always verify the domain before entering credentials |
+    <a href="threats/phishing.html" class="alert-link">Learn to spot fake login pages</a>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+  </div>
 
-    <!-- Main Navbar -->
+  <!-- Main Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
     <div class="container">
       <a class="navbar-brand animate__animated animate__fadeInLeft" href="index.html">
@@ -143,168 +151,168 @@
     </div>
   </nav>
 
-    <!-- Main Content -->
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card login-card bg-dark animate__animated animate__fadeIn">
-                    <div class="row g-0">
-                        <!-- Auth Visual -->
-                        <div class="col-md-5 d-flex align-items-center justify-content-center bg-dark bg-opacity-50">
-                            <div class="text-center p-4">
-                                <i class="bi bi-shield-lock auth-icon"></i>
-                                <h3 class="mt-3">Code & Conflict</h3>
-                                <p class="text-muted">Cyber Warfare Education Portal</p>
-                                <div class="mt-4">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                        <span>End-to-end encrypted</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class="bi bi-shield-check text-primary me-2"></i>
-                                        <span>2FA required</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Login Form -->
-                        <div class="col-md-7">
-                            <div class="card-body p-5">
-                                <h2 class="mb-4"><i class="bi bi-key"></i> Secure Login</h2>
-                                
-                                <form id="loginForm">
-                                    <!-- Username -->
-                                    <div class="mb-3">
-                                        <label for="loginEmail" class="form-label">Institutional Email</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text bg-dark border-secondary">
-                                                <i class="bi bi-person-badge"></i>
-                                            </span>
-                                            <input type="email" class="form-control bg-dark border-secondary" 
-                                                   id="loginEmail" placeholder="user@university.edu.pk" required>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Password -->
-                                    <div class="mb-3 position-relative">
-                                        <label for="loginPassword" class="form-label">Passphrase</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text bg-dark border-secondary">
-                                                <i class="bi bi-lock"></i>
-                                            </span>
-                                            <input type="password" class="form-control bg-dark border-secondary" 
-                                                   id="loginPassword" required>
-                                            <i class="bi bi-eye eye-toggle" id="toggleLoginPassword"></i>
-                                        </div>
-                                        <div class="form-text">
-                                            Minimum 12 characters with special symbols
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- 2FA -->
-                                    <div class="mb-3">
-                                        <label for="login2FA" class="form-label">Two-Factor Code</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text bg-dark border-secondary">
-                                                <i class="bi bi-phone"></i>
-                                            </span>
-                                            <input type="text" class="form-control bg-dark border-secondary" 
-                                                   id="login2FA" placeholder="6-digit code" pattern="\d{6}" required>
-                                        </div>
-                                        <div class="form-text">
-                                            <a href="#" class="text-primary">Can't access your 2FA device?</a>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Security Check -->
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="trustDevice">
-                                        <label class="form-check-label" for="trustDevice">
-                                            This is a private device
-                                        </label>
-                                    </div>
-                                    
-                                    <!-- Submit -->
-                                    <button type="submit" class="btn btn-primary w-100 py-2 mb-3">
-                                        <i class="bi bi-shield-lock"></i> Authenticate
-                                    </button>
-                                    
-                                    <!-- Links -->
-                                    <div class="text-center">
-                                        <a href="signup.html" class="text-primary me-3">Create account</a>
-                                        <a href="password-reset.html" class="text-primary">Recover access</a>
-                                    </div>
-                                </form>
-                                
-                                <!-- Alternative Auth -->
-                                <div class="mt-4 pt-3 border-top border-secondary">
-                                    <h6 class="text-center mb-3">Or authenticate with:</h6>
-                                    <div class="d-flex justify-content-center gap-3">
-                                        <button class="btn btn-outline-light">
-                                            <i class="bi bi-microsoft"></i> University ID
-                                        </button>
-                                        <button class="btn btn-outline-light">
-                                            <i class="bi bi-google"></i> GSuite
-                                        </button>
-                                        <button class="btn btn-outline-light">
-                                            <i class="bi bi-yubico"></i> YubiKey
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <!-- Main Content -->
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card login-card bg-dark animate__animated animate__fadeIn">
+          <div class="row g-0">
+            <!-- Auth Visual -->
+            <div class="col-md-5 d-flex align-items-center justify-content-center bg-dark bg-opacity-50">
+              <div class="text-center p-4">
+                <i class="bi bi-shield-lock auth-icon"></i>
+                <h3 class="mt-3">Code & Conflict</h3>
+                <p class="text-muted">Cyber Warfare Education Portal</p>
+                <div class="mt-4">
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                    <span>End-to-end encrypted</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="bi bi-shield-check text-primary me-2"></i>
+                    <span>2FA required</span>
+                  </div>
                 </div>
-                
-                <!-- Security Tips -->
-                <div class="alert alert-info mt-4">
-                    <h5><i class="bi bi-lightbulb"></i> Security Best Practices</h5>
-                    <ul class="mb-0">
-                        <li>Never reuse passwords across sites</li>
-                        <li>Check for HTTPS and certificate validity</li>
-                        <li>Report suspicious login pages to your IT department</li>
-                    </ul>
-                </div>
+              </div>
             </div>
+
+            <!-- Login Form -->
+            <div class="col-md-7">
+              <div class="card-body p-5">
+                <h2 class="mb-4"><i class="bi bi-key"></i> Secure Login</h2>
+
+                <form id="loginForm">
+                  <!-- Username -->
+                  <div class="mb-3">
+                    <label for="loginEmail" class="form-label">Institutional Email</label>
+                    <div class="input-group">
+                      <span class="input-group-text bg-dark border-secondary">
+                        <i class="bi bi-person-badge"></i>
+                      </span>
+                      <input type="email" class="form-control bg-dark border-secondary" id="loginEmail"
+                        placeholder="user@university.edu.pk" required>
+                    </div>
+                  </div>
+
+                  <!-- Password -->
+                  <div class="mb-3 position-relative">
+                    <label for="loginPassword" class="form-label">Passphrase</label>
+                    <div class="input-group">
+                      <span class="input-group-text bg-dark border-secondary">
+                        <i class="bi bi-lock"></i>
+                      </span>
+                      <input type="password" class="form-control bg-dark border-secondary" id="loginPassword" required>
+                      <i class="bi bi-eye eye-toggle" id="toggleLoginPassword"></i>
+                    </div>
+                    <div class="form-text">
+                      Minimum 12 characters with special symbols
+                    </div>
+                  </div>
+
+                  <!-- 2FA -->
+                  <div class="mb-3">
+                    <label for="login2FA" class="form-label">Two-Factor Code</label>
+                    <div class="input-group">
+                      <span class="input-group-text bg-dark border-secondary">
+                        <i class="bi bi-phone"></i>
+                      </span>
+                      <input type="text" class="form-control bg-dark border-secondary" id="login2FA"
+                        placeholder="6-digit code" pattern="\d{6}" required>
+                    </div>
+                    <div class="form-text">
+                      <a href="#" class="text-primary">Can't access your 2FA device?</a>
+                    </div>
+                  </div>
+
+                  <!-- Security Check -->
+                  <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="trustDevice">
+                    <label class="form-check-label" for="trustDevice">
+                      This is a private device
+                    </label>
+                  </div>
+
+                  <!-- Submit -->
+                  <button type="submit" class="btn btn-primary w-100 py-2 mb-3">
+                    <i class="bi bi-shield-lock"></i> Authenticate
+                  </button>
+
+                  <!-- Links -->
+                  <div class="text-center">
+                    <a href="signup.html" class="text-primary me-3">Create account</a>
+                    <a href="password-reset.html" class="text-primary">Recover access</a>
+                  </div>
+                </form>
+
+                <!-- Alternative Auth -->
+                <div class="mt-4 pt-3 border-top border-secondary">
+                  <h6 class="text-center mb-3">Or authenticate with:</h6>
+                  <div class="d-flex justify-content-center gap-3">
+                    <button class="btn btn-outline-light">
+                      <i class="bi bi-microsoft"></i> University ID
+                    </button>
+                    <button class="btn btn-outline-light">
+                      <i class="bi bi-google"></i> GSuite
+                    </button>
+                    <button class="btn btn-outline-light">
+                      <i class="bi bi-yubico"></i> YubiKey
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- Security Tips -->
+        <div class="alert alert-info mt-4">
+          <h5><i class="bi bi-lightbulb"></i> Security Best Practices</h5>
+          <ul class="mb-0">
+            <li>Never reuse passwords across sites</li>
+            <li>Check for HTTPS and certificate validity</li>
+            <li>Report suspicious login pages to your IT department</li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Toggle password visibility
-        document.getElementById('toggleLoginPassword').addEventListener('click', function() {
-            const passwordField = document.getElementById('loginPassword');
-            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordField.setAttribute('type', type);
-            this.classList.toggle('bi-eye');
-            this.classList.toggle('bi-eye-slash');
-        });
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Toggle password visibility
+    document.getElementById('toggleLoginPassword').addEventListener('click', function () {
+      const passwordField = document.getElementById('loginPassword');
+      const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordField.setAttribute('type', type);
+      this.classList.toggle('bi-eye');
+      this.classList.toggle('bi-eye-slash');
+    });
 
-        // Form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Simulate authentication
-            const alertBox = document.createElement('div');
-            alertBox.className = 'alert alert-success mt-3';
-            alertBox.innerHTML = `
+    // Form submission
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      // Simulate authentication
+      const alertBox = document.createElement('div');
+      alertBox.className = 'alert alert-success mt-3';
+      alertBox.innerHTML = `
                 <i class="bi bi-shield-check"></i> <strong>Authentication successful</strong>
                 <p>Redirecting to your dashboard...</p>
             `;
-            this.parentNode.appendChild(alertBox);
-            
-            // In real implementation, validate credentials here
-            // setTimeout(() => window.location.href = "dashboard.html", 2000);
-        });
+      this.parentNode.appendChild(alertBox);
 
-        // Animate on load
-        document.addEventListener('DOMContentLoaded', function() {
-            const elements = document.querySelectorAll('.animate__animated');
-            elements.forEach(el => {
-                el.classList.add(el.classList[1]); // Add animation class
-            });
-        });
-    </script>
+      // In real implementation, validate credentials here
+      // setTimeout(() => window.location.href = "dashboard.html", 2000);
+    });
+
+    // Animate on load
+    document.addEventListener('DOMContentLoaded', function () {
+      const elements = document.querySelectorAll('.animate__animated');
+      elements.forEach(el => {
+        el.classList.add(el.classList[1]); // Add animation class
+      });
+    });
+  </script>
 </body>
+
 </html>

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Patches & Updates | Code & Conflict</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <link href="../css/custom.css" rel="stylesheet">
+    <style>
+        .patches-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('../assets/imgs/security-patches-bg.jpg') no-repeat center center;
+            background-size: cover;
+        }
+        .patch-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid;
+        }
+        .patch-card.critical { border-left-color: #e74c3c; }
+        .patch-card.high { border-left-color: #f39c12; }
+        .patch-card.medium { border-left-color: #f1c40f; }
+        .patch-card.low { border-left-color: #2ecc71; }
+        .patch-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
+        }
+        .vendor-logo {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+        .cve-chip {
+            font-family: monospace;
+            cursor: pointer;
+        }
+        .cve-chip:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body class="cyber-gradient">
+    <!-- Cyber Alert Bar -->
+    <div class="alert alert-warning alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
+        <strong>PATCH ALERT:</strong> Critical Windows Zero-Day (CVE-2023-36884) being actively exploited | 
+        <a href="#critical-patches" class="alert-link">Patch Now</a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="../index.html">
+                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                &
+                <span class="text-danger">Conflict</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCyber">
+                <i class="bi bi-shield-lock"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCyber">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
+                        <a class="nav-link" href="../index.html"><i class="bi bi-house-door"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-newspaper"></i> News
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item active" href="security-patches.html">Security Patches</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="latest_threats.html">Latest Threats</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="cyber_warfare.html">Cyber Warfare</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                        <a class="nav-link" href="../about.html"><i class="bi bi-info-circle"></i> About Us</a>
+                    </li>
+                </ul>
+                
+                <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.5s;" role="search">
+                    <input class="form-control bg-dark border-secondary" type="search" placeholder="Search CVEs...">
+                    <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+                
+                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.6s;">
+                    <a href="../login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                    <a href="../signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Security Patches Hero -->
+    <header class="py-5 patches-hero text-white">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-8 animate__animated animate__fadeInLeft">
+                    <h1 class="display-4 fw-bold mb-4">
+                        <i class="bi bi-patch-check text-primary"></i> Security Patches
+                    </h1>
+                    <p class="lead mb-4">
+                        Critical updates and vulnerability fixes from major vendors.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#critical-patches" class="btn btn-primary btn-lg px-4">
+                            <i class="bi bi-exclamation-triangle"></i> Critical Updates
+                        </a>
+                        <a href="#patch-calendar" class="btn btn-outline-light btn-lg px-4">
+                            <i class="bi bi-calendar-event"></i> Patch Calendar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Critical Patches Section -->
+    <section id="critical-patches" class="py-5 bg-dark bg-opacity-50">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-exclamation-triangle-fill text-danger"></i> Critical Security Updates
+                <small class="text-muted d-block">Patches for vulnerabilities being actively exploited</small>
+            </h2>
+            
+            <div class="row g-4">
+                <!-- Patch 1 -->
+                <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="card patch-card critical h-100 bg-dark">
+                        <div class="card-body">
+                            <div class="d-flex mb-3">
+                                <img src="../assets/imgs/vendor-logos/microsoft.png" class="vendor-logo">
+                                <div>
+                                    <h5 class="mb-0">Windows Zero-Day</h5>
+                                    <span class="badge bg-danger">CVE-2023-36884</span>
+                                    <span class="badge bg-dark ms-2">Active Exploitation</span>
+                                </div>
+                            </div>
+                            <p>Elevation of privilege vulnerability in Windows Error Reporting Service allowing attackers to gain SYSTEM privileges.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-danger me-2">CVSS: 9.8</span>
+                                <span class="badge bg-dark">Windows 10/11</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Patch released: July 11, 2023</small>
+                                <a href="https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-36884" target="_blank" class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-download"></i> Get Patch
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Patch 2 -->
+                <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="card patch-card critical h-100 bg-dark">
+                        <div class="card-body">
+                            <div class="d-flex mb-3">
+                                <img src="../assets/imgs/vendor-logos/apple.png" class="vendor-logo">
+                                <div>
+                                    <h5 class="mb-0">iOS/macOS WebKit</h5>
+                                    <span class="badge bg-danger">CVE-2023-37450</span>
+                                    <span class="badge bg-dark ms-2">Zero-Click</span>
+                                </div>
+                            </div>
+                            <p>Remote code execution vulnerability in WebKit that may be exploited when processing malicious web content.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-danger me-2">CVSS: 8.8</span>
+                                <span class="badge bg-dark">iOS 15.7+/macOS Monterey+</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Patch released: July 10, 2023</small>
+                                <a href="https://support.apple.com/en-us/HT213814" target="_blank" class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-download"></i> Get Patch
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Patch 3 -->
+                <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="card patch-card high h-100 bg-dark">
+                        <div class="card-body">
+                            <div class="d-flex mb-3">
+                                <img src="../assets/imgs/vendor-logos/google.png" class="vendor-logo">
+                                <div>
+                                    <h5 class="mb-0">Chrome Zero-Day</h5>
+                                    <span class="badge bg-warning">CVE-2023-3079</span>
+                                    <span class="badge bg-dark ms-2">Type Confusion</span>
+                                </div>
+                            </div>
+                            <p>Type confusion in V8 JavaScript engine that could lead to remote code execution.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-warning me-2">CVSS: 8.3</span>
+                                <span class="badge bg-dark">Chrome 114.0.5735.110+</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Patch released: June 5, 2023</small>
+                                <a href="https://chromereleases.googleblog.com/2023/06/stable-channel-update-for-desktop.html" target="_blank" class="btn btn-sm btn-outline-warning">
+                                    <i class="bi bi-download"></i> Get Patch
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Patch 4 -->
+                <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                    <div class="card patch-card high h-100 bg-dark">
+                        <div class="card-body">
+                            <div class="d-flex mb-3">
+                                <img src="../assets/imgs/vendor-logos/linux.png" class="vendor-logo">
+                                <div>
+                                    <h5 class="mb-0">Linux Kernel</h5>
+                                    <span class="badge bg-warning">CVE-2023-32233</span>
+                                    <span class="badge bg-dark ms-2">Use-After-Free</span>
+                                </div>
+                            </div>
+                            <p>Netfilter vulnerability allowing local privilege escalation to root.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-warning me-2">CVSS: 7.8</span>
+                                <span class="badge bg-dark">Kernel 5.4-6.3</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Patch released: May 31, 2023</small>
+                                <a href="https://ubuntu.com/security/CVE-2023-32233" target="_blank" class="btn btn-sm btn-outline-warning">
+                                    <i class="bi bi-download"></i> Get Patch
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patch Calendar -->
+    <section id="patch-calendar" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-calendar-event text-primary"></i> Patch Tuesday Calendar
+            </h2>
+            
+            <div class="card bg-dark border-primary animate__animated animate__fadeIn">
+                <div class="card-header border-primary bg-primary bg-opacity-10">
+                    <h4><i class="bi bi-calendar-week"></i> 2023 Patch Schedule</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Vendor</th>
+                                    <th>Schedule</th>
+                                    <th>Next Patch Date</th>
+                                    <th>Last Update</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="../assets/imgs/vendor-logos/microsoft.png" width="20" class="me-2"> Microsoft</td>
+                                    <td>Second Tuesday</td>
+                                    <td>August 8, 2023</td>
+                                    <td>July 11, 2023</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="../assets/imgs/vendor-logos/adobe.png" width="20" class="me-2"> Adobe</td>
+                                    <td>Second Tuesday</td>
+                                    <td>August 8, 2023</td>
+                                    <td>July 11, 2023</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="../assets/imgs/vendor-logos/oracle.png" width="20" class="me-2"> Oracle</td>
+                                    <td>Quarterly (Jan/Apr/Jul/Oct)</td>
+                                    <td>October 17, 2023</td>
+                                    <td>July 18, 2023</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="../assets/imgs/vendor-logos/apple.png" width="20" class="me-2"> Apple</td>
+                                    <td>As needed</td>
+                                    <td>Variable</td>
+                                    <td>July 10, 2023</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="../assets/imgs/vendor-logos/google.png" width="20" class="me-2"> Google</td>
+                                    <td>Every 2-3 weeks</td>
+                                    <td>July 25, 2023</td>
+                                    <td>July 5, 2023</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="alert alert-info mt-3">
+                        <i class="bi bi-bell-fill"></i> <strong>Reminder:</strong> Patch within 72 hours for critical vulnerabilities, 7 days for high severity.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patch Management Tips -->
+    <section class="py-5 bg-dark bg-opacity-25">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-gear text-warning"></i> Patch Management Best Practices
+            </h2>
+            
+            <div class="row g-4">
+                <div class="col-md-6 animate__animated animate__fadeInLeft">
+                    <div class="card bg-dark border-success h-100">
+                        <div class="card-header border-success bg-success bg-opacity-10">
+                            <h4><i class="bi bi-check-circle"></i> Proactive Strategies</h4>
+                        </div>
+                        <div class="card-body">
+                            <ol class="list-group list-group-numbered list-group-flush">
+                                <li class="list-group-item bg-transparent">
+                                    Maintain an asset inventory of all systems and software
+                                </li>
+                                <li class="list-group-item bg-transparent">
+                                    Subscribe to vendor security notifications
+                                </li>
+                                <li class="list-group-item bg-transparent">
+                                    Test patches in staging environment before deployment
+                                </li>
+                                <li class="list-group-item bg-transparent">
+                                    Automate patch deployment where possible
+                                </li>
+                                <li class="list-group-item bg-transparent">
+                                    Prioritize based on severity and exploitability
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-warning h-100">
+                        <div class="card-header border-warning bg-warning bg-opacity-10">
+                            <h4><i class="bi bi-exclamation-triangle"></i> Common Mistakes</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-transparent d-flex">
+                                    <i class="bi bi-x-circle-fill text-danger me-2"></i>
+                                    <span>Not patching legacy/end-of-life systems</span>
+                                </li>
+                                <li class="list-group-item bg-transparent d-flex">
+                                    <i class="bi bi-x-circle-fill text-danger me-2"></i>
+                                    <span>Ignoring third-party software updates</span>
+                                </li>
+                                <li class="list-group-item bg-transparent d-flex">
+                                    <i class="bi bi-x-circle-fill text-danger me-2"></i>
+                                    <span>No rollback plan for failed patches</span>
+                                </li>
+                                <li class="list-group-item bg-transparent d-flex">
+                                    <i class="bi bi-x-circle-fill text-danger me-2"></i>
+                                    <span>Patch fatigue (delaying critical updates)</span>
+                                </li>
+                                <li class="list-group-item bg-transparent d-flex">
+                                    <i class="bi bi-x-circle-fill text-danger me-2"></i>
+                                    <span>Not verifying patch installation</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5 animate__animated animate__fadeInUp">
+                <a href="../prevention/network_security.html" class="btn btn-lg btn-primary">
+                    <i class="bi bi-shield-check"></i> View Complete Security Guide
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CVE Search -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-search text-info"></i> CVE Lookup Tool
+            </h2>
+            
+            <div class="card bg-dark border-info animate__animated animate__fadeIn">
+                <div class="card-header border-info bg-info bg-opacity-10">
+                    <h4><i class="bi bi-bug"></i> Check Vulnerability Details</h4>
+                </div>
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-dark text-light">CVE-</span>
+                        <input type="text" class="form-control bg-dark text-light" placeholder="e.g. 2023-36884" id="cveSearch">
+                        <button class="btn btn-outline-info" type="button" id="cveSearchBtn">
+                            <i class="bi bi-search"></i> Search
+                        </button>
+                    </div>
+                    <div id="cveResults" class="mt-3 d-none">
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle-fill"></i> This is a simulated result. For real CVE data, visit:
+                            <a href="https://nvd.nist.gov" class="alert-link">NVD</a> or 
+                            <a href="https://cve.mitre.org" class="alert-link">CVE Mitre</a>
+                        </div>
+                        <div class="card bg-dark mb-3">
+                            <div class="card-header d-flex justify-content-between">
+                                <span id="cveTitle">CVE-2023-36884</span>
+                                <span class="badge bg-danger" id="cveSeverity">CRITICAL 9.8</span>
+                            </div>
+                            <div class="card-body">
+                                <p id="cveDescription">Windows Error Reporting Service Elevation of Privilege Vulnerability</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6><i class="bi bi-calendar"></i> Dates</h6>
+                                        <ul class="list-unstyled">
+                                            <li>Published: <span id="cvePublished">2023-07-11</span></li>
+                                            <li>Last Modified: <span id="cveModified">2023-07-11</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6><i class="bi bi-tags"></i> References</h6>
+                                        <ul class="list-unstyled">
+                                            <li><a href="#" id="cveRef1" class="text-info">Vendor Advisory</a></li>
+                                            <li><a href="#" id="cveRef2" class="text-info">Technical Analysis</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark border-top border-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>
+                        <a class="navbar-brand" href="../index.html">
+                            <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                            &
+                            <span class="text-danger">Conflict</span>
+                        </a>
+                    </h5>
+                    <p class="text-muted">Your source for critical security updates and patch information.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Patch Resources</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="https://msrc.microsoft.com/update-guide" class="nav-link">Microsoft Security</a></li>
+                        <li class="nav-item"><a href="https://us-cert.cisa.gov/ncas/alerts" class="nav-link">CISA Alerts</a></li>
+                        <li class="nav-item"><a href="https://ubuntu.com/security" class="nav-link">Ubuntu Security</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="../threats/ransomware.html" class="nav-link">Ransomware Threats</a></li>
+                        <li class="nav-item"><a href="../prevention/network_security.html" class="nav-link">Network Protection</a></li>
+                        <li class="nav-item"><a href="../about.html" class="nav-link">About Our Data</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <p class="text-muted small mb-0">&copy; 2025 Code & Conflict. Patch data collected from public sources.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // CVE Search Simulation
+        document.getElementById('cveSearchBtn').addEventListener('click', function() {
+            const cveId = document.getElementById('cveSearch').value.trim();
+            if(cveId) {
+                // Simulate API call
+                document.getElementById('cveTitle').textContent = `CVE-${cveId}`;
+                document.getElementById('cveDescription').textContent = 
+                    `Sample description for vulnerability CVE-${cveId}`;
+                document.getElementById('cvePublished').textContent = '2023-07-11';
+                document.getElementById('cveModified').textContent = '2023-07-11';
+                document.getElementById('cveRef1').href = `https://nvd.nist.gov/vuln/detail/CVE-${cveId}`;
+                document.getElementById('cveRef2').href = `https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-${cveId}`;
+                document.getElementById('cveResults').classList.remove('d-none');
+            }
+        });
+
+        // Make CVE chips clickable
+        document.querySelectorAll('.badge.bg-danger, .badge.bg-warning').forEach(el => {
+            if(el.textContent.includes('CVE')) {
+                el.addEventListener('click', function() {
+                    const cveId = this.textContent.split('-').slice(1).join('-');
+                    document.getElementById('cveSearch').value = cveId;
+                    document.getElementById('cveSearchBtn').click();
+                    window.scrollTo({
+                        top: document.getElementById('cveResults').offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                });
+                el.style.cursor = 'pointer';
+                el.classList.add('cve-chip');
+            }
+        });
+
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate__animated');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if(elementPosition < windowHeight - 100) {
+                    const animationClass = element.classList[1];
+                    element.classList.add(animationClass);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>

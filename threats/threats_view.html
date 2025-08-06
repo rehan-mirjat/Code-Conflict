@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threat Dashboard | Code & Conflict</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <link href="../css/custom.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
+
+    <style>
+        .threat-map {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('../assets/imgs/world-map-dark.png') no-repeat center center;
+            background-size: cover;
+            height: 400px;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .threat-node {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            70% {
+                transform: scale(3);
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .threat-card {
+            transition: all 0.3s ease;
+            border: 1px solid #2c3e50;
+        }
+
+        .threat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.2);
+        }
+
+        .severity-critical {
+            border-left: 4px solid #e74c3c;
+        }
+
+        .severity-high {
+            border-left: 4px solid #f39c12;
+        }
+
+        .severity-medium {
+            border-left: 4px solid #f1c40f;
+        }
+    </style>
+</head>
+
+<body class="cyber-gradient">
+    <!-- Cyber Alert Bar -->
+    <div
+        class="alert alert-danger alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
+        <strong>THREAT ALERT:</strong> Active exploitation of Apache Log4j vulnerability (CVE-2021-44228) |
+        <a href="../news/latest_threats.html" class="alert-link">Mitigation Guide</a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="../index.html">
+                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                &
+                <span class="text-danger">Conflict</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCyber">
+                <i class="bi bi-shield-lock"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCyber">
+                <!-- Left-aligned menu items -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
+                        <a class="nav-link" href="../index.html"><i class="bi bi-house-door"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-bug"></i> Threats
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="malware.html">Malware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="phishing.html">Phishing</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="password_attacks.html">Password Attacks</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="ransomware.html">Ransomware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="social_engineering.html">Social
+                                    Engineering</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-shield-check"></i> Prevention
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../prevention/data_privacy.html">Data & Privacy</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/email_security.html">Email Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/mobile_security.html">Mobile Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/network_security.html">Network Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/secure_browsing.html">Secure Browsing</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Grouped Search + About/Contact (aligned together) -->
+                <div class="d-flex align-items-center">
+                    <!-- About & Contact Links -->
+                    <ul class="navbar-nav me-3">
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                            <a class="nav-link" href="../about_us.html"><i class="bi bi-info-circle"></i> About Us</a>
+                        </li>
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.5s;">
+                            <a class="nav-link" href="../contact.html"><i class="bi bi-envelope"></i> Contact Us</a>
+                        </li>
+                    </ul>
+
+                    <!-- Search Bar -->
+                    <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.6s;"
+                        role="search">
+                        <input class="form-control bg-dark border-secondary" type="search"
+                            placeholder="Search threats...">
+                        <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Sign Up / Login Buttons (Right-aligned) -->
+                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
+                    <a href="login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                        Login</a>
+                    <a href="signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Threat Dashboard Header -->
+    <header class="py-5 bg-dark bg-opacity-50">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <h1 class="display-4 fw-bold mb-3">
+                        <i class="bi bi-activity text-danger"></i> Threat Intelligence
+                    </h1>
+                    <p class="lead mb-4">
+                        Real-time monitoring of global cyber threats and attack patterns.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <button class="btn btn-danger btn-lg px-4" data-bs-toggle="modal" data-bs-target="#reportModal">
+                            <i class="bi bi-flag"></i> Report Threat
+                        </button>
+                        <a href="#trends" class="btn btn-outline-light btn-lg px-4">
+                            <i class="bi bi-graph-up"></i> View Trends
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-danger">
+                        <div class="card-header border-danger bg-danger bg-opacity-10 d-flex justify-content-between">
+                            <span><i class="bi bi-exclamation-triangle-fill"></i> Current Threat Level</span>
+                            <span class="text-muted">Updated: <span id="update-time">Just now</span></span>
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="display-3 text-danger mb-3">HIGH</div>
+                            <div class="progress mb-3" style="height: 20px;">
+                                <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
+                                    style="width: 78%">78%</div>
+                            </div>
+                            <p class="small text-muted mb-0">
+                                <i class="bi bi-info-circle"></i> Increased ransomware activity detected globally
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Live Threat Map -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4 animate__animated animate__fadeInDown">
+                <i class="bi bi-globe2 text-primary"></i> Live Threat Map
+                <small class="text-muted d-block">Simulated attack data - updates every 30 seconds</small>
+            </h2>
+
+            <div class="threat-map animate__animated animate__fadeIn mb-4" id="threatMap">
+                <!-- Threat nodes will be added dynamically -->
+            </div>
+
+            <div class="row text-center animate__animated animate__fadeInUp">
+                <div class="col-md-3">
+                    <div class="display-6 text-danger">1,287</div>
+                    <small class="text-muted">Active Attacks</small>
+                </div>
+                <div class="col-md-3">
+                    <div class="display-6 text-warning">342</div>
+                    <small class="text-muted">New Today</small>
+                </div>
+                <div class="col-md-3">
+                    <div class="display-6 text-info">78%</div>
+                    <small class="text-muted">Malware Related</small>
+                </div>
+                <div class="col-md-3">
+                    <div class="display-6 text-success">24</div>
+                    <small class="text-muted">Countries Targeted</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Threats Section -->
+    <section id="trends" class="py-5 bg-dark bg-opacity-25">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-list-ul text-warning"></i> Recent Threat Activity
+            </h2>
+
+            <div class="row g-4">
+                <!-- Threat Card 1 -->
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="card threat-card h-100 severity-critical">
+                        <div class="card-header bg-danger bg-opacity-10 d-flex justify-content-between">
+                            <span><i class="bi bi-exclamation-triangle-fill text-danger"></i> Critical</span>
+                            <span class="text-muted">2 hours ago</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex mb-3">
+                                <img src="../assets/imgs/icons/ransomware.png" width="40" class="me-3">
+                                <div>
+                                    <h5 class="mb-0">LockBit 3.0</h5>
+                                    <small class="text-muted">Ransomware-as-a-Service</small>
+                                </div>
+                            </div>
+                            <p>New variant targeting healthcare systems with double extortion tactics.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-danger me-2">Encryption</span>
+                                <span class="badge bg-dark">Data Theft</span>
+                            </div>
+                            <div class="progress mb-3" style="height: 6px;">
+                                <div class="progress-bar bg-danger" style="width: 92%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between small text-muted mb-3">
+                                <span>Spread Rate</span>
+                                <span>92%</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-danger w-100" data-bs-toggle="modal"
+                                data-bs-target="#lockbitModal">
+                                <i class="bi bi-file-earmark-text"></i> Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Threat Card 2 -->
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="card threat-card h-100 severity-high">
+                        <div class="card-header bg-warning bg-opacity-10 d-flex justify-content-between">
+                            <span><i class="bi bi-exclamation-triangle-fill text-warning"></i> High</span>
+                            <span class="text-muted">5 hours ago</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex mb-3">
+                                <img src="../assets/imgs/icons/phishing.png" width="40" class="me-3">
+                                <div>
+                                    <h5 class="mb-0">Microsoft 365 Phish</h5>
+                                    <small class="text-muted">Credential Harvesting</small>
+                                </div>
+                            </div>
+                            <p>Sophisticated campaign mimicking Microsoft login pages with OAuth tricks.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-warning me-2">Phishing</span>
+                                <span class="badge bg-dark">MFA Bypass</span>
+                            </div>
+                            <div class="progress mb-3" style="height: 6px;">
+                                <div class="progress-bar bg-warning" style="width: 68%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between small text-muted mb-3">
+                                <span>Success Rate</span>
+                                <span>68%</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-warning w-100" data-bs-toggle="modal"
+                                data-bs-target="#phishModal">
+                                <i class="bi bi-eye"></i> View Sample
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Threat Card 3 -->
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="card threat-card h-100 severity-medium">
+                        <div class="card-header bg-info bg-opacity-10 d-flex justify-content-between">
+                            <span><i class="bi bi-info-circle-fill text-info"></i> Advisory</span>
+                            <span class="text-muted">1 day ago</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex mb-3">
+                                <img src="../assets/imgs/icons/zero-day.png" width="40" class="me-3">
+                                <div>
+                                    <h5 class="mb-0">CVE-2023-32456</h5>
+                                    <small class="text-muted">iOS Zero-Day</small>
+                                </div>
+                            </div>
+                            <p>Kernel privilege escalation vulnerability actively exploited in the wild.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-info me-2">Zero-Day</span>
+                                <span class="badge bg-dark">iOS</span>
+                            </div>
+                            <div class="progress mb-3" style="height: 6px;">
+                                <div class="progress-bar bg-info" style="width: 42%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between small text-muted mb-3">
+                                <span>Patch Adoption</span>
+                                <span>42%</span>
+                            </div>
+                            <a href="../news/security-patches.html" class="btn btn-sm btn-outline-info w-100">
+                                <i class="bi bi-download"></i> Patch Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5 animate__animated animate__fadeInUp">
+                <a href="../threats/malware.html" class="btn btn-outline-primary btn-lg">
+                    <i class="bi bi-bug"></i> View All Threat Reports
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Threat Trends -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-graph-up-arrow text-success"></i> Threat Trends
+            </h2>
+
+            <div class="card bg-dark border-secondary animate__animated animate__fadeIn">
+                <div class="card-header border-secondary">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#ransomware-tab">Ransomware</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#phishing-tab">Phishing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#vulnerabilities-tab">Vulnerabilities</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="ransomware-tab">
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="ransomwareChart"></canvas>
+                            </div>
+                            <div class="mt-3 text-muted small">
+                                <i class="bi bi-info-circle"></i> 47% increase in ransomware attacks Q2 2023
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="phishing-tab">
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="phishingChart"></canvas>
+                            </div>
+                            <div class="mt-3 text-muted small">
+                                <i class="bi bi-info-circle"></i> Microsoft-themed phishing up 62% year-over-year
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="vulnerabilities-tab">
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="vulnerabilitiesChart"></canvas>
+                            </div>
+                            <div class="mt-3 text-muted small">
+                                <i class="bi bi-info-circle"></i> 78% of vulnerabilities exploited are older than 2
+                                years
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark border-top border-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>
+                        <a class="navbar-brand" href="../index.html">
+                            <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                            &
+                            <span class="text-danger">Conflict</span>
+                        </a>
+                    </h5>
+                    <p class="text-muted">Real-time cyber threat intelligence and analysis.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Threat Resources</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="https://www.cisa.gov" class="nav-link">CISA</a></li>
+                        <li class="nav-item"><a href="https://www.malwarebytes.com" class="nav-link">Malwarebytes</a>
+                        </li>
+                        <li class="nav-item"><a href="https://www.virustotal.com" class="nav-link">VirusTotal</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="../threats/malware.html" class="nav-link">Malware Database</a>
+                        </li>
+                        <li class="nav-item"><a href="../prevention/secure_browsing.html" class="nav-link">Protection
+                                Guides</a></li>
+                        <li class="nav-item"><a href="../about.html" class="nav-link">About Our Data</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <p class="text-muted small mb-0">&copy; 2025 Code & Conflict. Threat data simulated for educational
+                purposes.</p>
+        </div>
+    </footer>
+
+    <!-- Threat Modals -->
+    <div class="modal fade" id="lockbitModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-danger">
+                    <h5 class="modal-title"><i class="bi bi-bug-fill text-danger"></i> LockBit 3.0 Threat Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><i class="bi bi-exclamation-triangle-fill text-danger"></i> Overview</h6>
+                            <p>LockBit 3.0 is the latest version of the ransomware that operates as a
+                                Ransomware-as-a-Service (RaaS). It features:</p>
+                            <ul>
+                                <li>Advanced anti-analysis techniques</li>
+                                <li>Windows Defender bypass</li>
+                                <li>Triple extortion tactics (encryption + data theft + DDoS)</li>
+                                <li>Exploits PrintNightmare vulnerability</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><i class="bi bi-shield-check text-success"></i> Protection</h6>
+                            <ol>
+                                <li>Patch CVE-2021-34527 immediately</li>
+                                <li>Restrict RDP access</li>
+                                <li>Implement application whitelisting</li>
+                                <li>Backup air-gapped systems</li>
+                                <li>Train staff on phishing detection</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="alert alert-danger">
+                        <h6><i class="bi bi-activity"></i> Recent Activity</h6>
+                        <p>In the last 72 hours, LockBit 3.0 has:</p>
+                        <ul>
+                            <li>Attacked 47 healthcare providers in North America</li>
+                            <li>Demanded ransoms averaging $850,000</li>
+                            <li>Published data from 12 victims on their leak site</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Generate random threat nodes on map
+        function generateThreatNodes() {
+            const map = document.getElementById('threatMap');
+            map.innerHTML = '';
+
+            const threatTypes = [
+                { class: 'bg-danger', count: 25 },
+                { class: 'bg-warning', count: 40 },
+                { class: 'bg-primary', count: 35 }
+            ];
+
+            threatTypes.forEach(type => {
+                for (let i = 0; i < type.count; i++) {
+                    const node = document.createElement('div');
+                    node.className = `threat-node ${type.class}`;
+                    node.style.left = `${Math.random() * 90 + 5}%`;
+                    node.style.top = `${Math.random() * 90 + 5}%`;
+                    node.style.animationDelay = `${Math.random() * 2}s`;
+                    map.appendChild(node);
+                }
+            });
+        }
+
+        // Initialize charts
+        function initCharts() {
+            // Ransomware chart
+            new Chart(document.getElementById('ransomwareChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Ransomware Attacks',
+                        data: [125, 190, 210, 280, 320, 470],
+                        borderColor: '#e74c3c',
+                        backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // Phishing chart
+            new Chart(document.getElementById('phishingChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Q1 2022', 'Q2 2022', 'Q3 2022', 'Q4 2022', 'Q1 2023', 'Q2 2023'],
+                    datasets: [{
+                        label: 'Phishing Attempts',
+                        data: [1200, 1450, 1600, 1850, 2100, 2950],
+                        backgroundColor: 'rgba(243, 156, 18, 0.7)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // Vulnerabilities chart
+            new Chart(document.getElementById('vulnerabilitiesChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['0-Day', '1-2 Years', '2-5 Years', '5+ Years'],
+                    datasets: [{
+                        data: [12, 24, 38, 26],
+                        backgroundColor: [
+                            'rgba(231, 76, 60, 0.8)',
+                            'rgba(243, 156, 18, 0.8)',
+                            'rgba(52, 152, 219, 0.8)',
+                            'rgba(155, 89, 182, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
+        // Update timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('update-time').textContent =
+                `Today at ${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function () {
+            generateThreatNodes();
+            initCharts();
+            updateTimestamp();
+
+            // Refresh threat nodes every 30 seconds
+            setInterval(generateThreatNodes, 30000);
+
+            // Update timestamp every minute
+            setInterval(updateTimestamp, 60000);
+        });
+    </script>
+</body>
+
+</html>

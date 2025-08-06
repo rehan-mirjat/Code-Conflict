@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Engineering Threats | Code & Conflict</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <link href="../css/custom.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
+
+    <style>
+        .social-engineering-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('../assets/imgs/social-engineering-bg.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .attack-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid;
+        }
+
+        .attack-card.phishing {
+            border-left-color: #e74c3c;
+        }
+
+        .attack-card.pretending {
+            border-left-color: #f39c12;
+        }
+
+        .attack-card.baiting {
+            border-left-color: #3498db;
+        }
+
+        .attack-card.quid-pro-quo {
+            border-left-color: #2ecc71;
+        }
+
+        .attack-card.tailgating {
+            border-left-color: #9b59b6;
+        }
+
+        .attack-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
+        }
+
+        .psych-principle {
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #f1c40f;
+        }
+    </style>
+</head>
+
+<body class="cyber-gradient">
+    <!-- Cyber Alert Bar -->
+    <div
+        class="alert alert-warning alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
+        <strong>SOCIAL ENGINEERING ALERT:</strong> New "CEO Fraud" scam targeting financial departments |
+        <a href="#ceo-fraud" class="alert-link">Protection Guide</a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="../index.html">
+                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                &
+                <span class="text-danger">Conflict</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCyber">
+                <i class="bi bi-shield-lock"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCyber">
+                <!-- Left-aligned menu items -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
+                        <a class="nav-link" href="../index.html"><i class="bi bi-house-door"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-bug"></i> Threats
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="malware.html">Malware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="phishing.html">Phishing</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="password_attacks.html">Password Attacks</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="ransomware.html">Ransomware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="social_engineering.html">Social
+                                    Engineering</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-shield-check"></i> Prevention
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../prevention/data_privacy.html">Data & Privacy</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/email_security.html">Email Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/mobile_security.html">Mobile Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/network_security.html">Network Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/secure_browsing.html">Secure Browsing</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Grouped Search + About/Contact (aligned together) -->
+                <div class="d-flex align-items-center">
+                    <!-- About & Contact Links -->
+                    <ul class="navbar-nav me-3">
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                            <a class="nav-link" href="../about_us.html"><i class="bi bi-info-circle"></i> About Us</a>
+                        </li>
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.5s;">
+                            <a class="nav-link" href="../contact.html"><i class="bi bi-envelope"></i> Contact Us</a>
+                        </li>
+                    </ul>
+
+                    <!-- Search Bar -->
+                    <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.6s;"
+                        role="search">
+                        <input class="form-control bg-dark border-secondary" type="search"
+                            placeholder="Search threats...">
+                        <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Sign Up / Login Buttons (Right-aligned) -->
+                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
+                    <a href="login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                        Login</a>
+                    <a href="signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Social Engineering Hero -->
+    <header class="py-5 social-engineering-hero text-white">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-8 animate__animated animate__fadeInLeft">
+                    <h1 class="display-4 fw-bold mb-4">
+                        <i class="bi bi-people-fill text-warning"></i> Social Engineering
+                    </h1>
+                    <p class="lead mb-4">
+                        Psychological manipulation to trick people into revealing sensitive information or performing
+                        actions.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#techniques" class="btn btn-warning btn-lg px-4">
+                            <i class="bi bi-list-ul"></i> View Techniques
+                        </a>
+                        <a href="#protection" class="btn btn-outline-light btn-lg px-4">
+                            <i class="bi bi-shield-check"></i> Protection Guide
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Social Engineering Overview -->
+    <section class="py-5 bg-dark bg-opacity-50">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <h2 class="mb-4"><i class="bi bi-psychotherapy text-primary"></i> What is Social Engineering?</h2>
+                    <p class="lead">
+                        The art of exploiting human psychology rather than technical hacking techniques to gain access
+                        to systems or data.
+                    </p>
+                    <div class="mt-4">
+                        <h5 class="text-warning"><i class="bi bi-lightbulb"></i> Why it works:</h5>
+                        <ul>
+                            <li class="mb-2">Exploits natural human tendencies to trust and help</li>
+                            <li class="mb-2">Bypasses even the strongest technical security controls</li>
+                            <li class="mb-2">Often more effective than technical attacks</li>
+                            <li class="mb-2">Low cost for attackers with high potential rewards</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-warning h-100">
+                        <div class="card-header border-warning bg-warning bg-opacity-10">
+                            <h4><i class="bi bi-exclamation-triangle"></i> Quick Stats</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-6 mb-4">
+                                    <div class="display-5 text-warning">98%</div>
+                                    <small>Of cyber attacks involve social engineering</small>
+                                </div>
+                                <div class="col-6 mb-4">
+                                    <div class="display-5 text-danger">$1.6M</div>
+                                    <small>Average BEC scam loss</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="display-5 text-info">3x</div>
+                                    <small>More effective than malware</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="display-5 text-success">85%</div>
+                                    <small>Reduction with training</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Psychological Principles -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-brain text-info"></i> Psychological Principles Exploited
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="psych-principle bg-dark">
+                        <h4><i class="bi bi-hand-thumbs-up text-primary"></i> Authority</h4>
+                        <p>People tend to obey authority figures, even when asked to do something questionable.</p>
+                        <div class="badge bg-primary">Example: "This is IT, we need your password"</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="psych-principle bg-dark">
+                        <h4><i class="bi bi-heart-fill text-danger"></i> Likability</h4>
+                        <p>We're more likely to comply with requests from people we like or find attractive.</p>
+                        <div class="badge bg-danger">Example: Flattery before requests</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="psych-principle bg-dark">
+                        <h4><i class="bi bi-clock-history text-warning"></i> Urgency</h4>
+                        <p>Creating time pressure short-circuits rational decision making.</p>
+                        <div class="badge bg-warning">Example: "Your account will be closed in 1 hour!"</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                    <div class="psych-principle bg-dark">
+                        <h4><i class="bi bi-arrow-repeat text-success"></i> Reciprocity</h4>
+                        <p>People feel obligated to return favors, even unsolicited ones.</p>
+                        <div class="badge bg-success">Example: Free gift before asking for info</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">
+                    <div class="psych-principle bg-dark">
+                        <h4><i class="bi bi-people-fill text-info"></i> Social Proof</h4>
+                        <p>We follow the crowd, assuming others' actions are correct.</p>
+                        <div class="badge bg-info">Example: "All your coworkers already did this"</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">
+                    <div class="psych-principle bg-dark">
+                        <h4><i class="bi bi-gem text-purple"></i> Scarcity</h4>
+                        <p>Limited availability increases perceived value and urgency.</p>
+                        <div class="badge bg-purple">Example: "Only 3 spots left for this offer"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Attack Techniques -->
+    <section id="techniques" class="py-5 bg-dark bg-opacity-25">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-tools text-danger"></i> Common Social Engineering Techniques
+            </h2>
+
+            <div class="row g-4">
+                <!-- Phishing -->
+                <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="card attack-card phishing h-100 bg-dark">
+                        <div class="card-header bg-danger bg-opacity-10 d-flex justify-content-between">
+                            <span><i class="bi bi-envelope-fill text-danger"></i> Phishing</span>
+                            <span class="badge bg-danger">Most Common</span>
+                        </div>
+                        <div class="card-body">
+                            <p>Fraudulent attempts to obtain sensitive information by disguising as trustworthy entity.
+                            </p>
+                            <ul>
+                                <li><strong>Channel:</strong> Email, SMS, social media</li>
+                                <li><strong>Goal:</strong> Credentials, financial info</li>
+                                <li><strong>Example:</strong> "Your account has been compromised" email</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <button class="btn btn-sm btn-outline-danger w-100" data-bs-toggle="modal"
+                                data-bs-target="#phishingModal">
+                                View Examples
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pretexting -->
+                <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="card attack-card pretending h-100 bg-dark">
+                        <div class="card-header bg-warning bg-opacity-10 d-flex justify-content-between">
+                            <span><i class="bi bi-person-vcard-fill text-warning"></i> Pretexting</span>
+                            <span class="badge bg-warning">Highly Effective</span>
+                        </div>
+                        <div class="card-body">
+                            <p>Creating a fabricated scenario to engage a target and extract information.</p>
+                            <ul>
+                                <li><strong>Channel:</strong> Phone, in-person</li>
+                                <li><strong>Goal:</strong> Sensitive data, access</li>
+                                <li><strong>Example:</strong> "I'm from HR, need to verify your details"</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <button class="btn btn-sm btn-outline-warning w-100" data-bs-toggle="modal"
+                                data-bs-target="#pretextingModal">
+                                View Examples
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Baiting -->
+                <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="card attack-card baiting h-100 bg-dark">
+                        <div class="card-header bg-primary bg-opacity-10 d-flex justify-content-between">
+                            <span><i class="bi bi-usb-drive-fill text-primary"></i> Baiting</span>
+                            <span class="badge bg-primary">Physical</span>
+                        </div>
+                        <div class="card-body">
+                            <p>Offering something enticing to lure victims into a trap.</p>
+                            <ul>
+                                <li><strong>Channel:</strong> Physical media, downloads</li>
+                                <li><strong>Goal:</strong> Malware installation</li>
+                                <li><strong>Example:</strong> "Free software" on USB drives in parking lot</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <button class="btn btn-sm btn-outline-primary w-100" data-bs-toggle="modal"
+                                data-bs-target="#baitingModal">
+                                View Examples
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quid Pro Quo -->
+                <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                    <div class="card attack-card quid-pro-quo h-100 bg-dark">
+                        <div class="card-header bg-success bg-opacity-10 d-flex justify-content-between">
+                            <span><i class="bi bi-arrow-left-right text-success"></i> Quid Pro Quo</span>
+                            <span class="badge bg-success">Exchange</span>
+                        </div>
+                        <div class="card-body">
+                            <p>Offering a service or benefit in exchange for information or access.</p>
+                            <ul>
+                                <li><strong>Channel:</strong> Phone, email</li>
+                                <li><strong>Goal:</strong> Credentials, access</li>
+                                <li><strong>Example:</strong> "IT support" offering free help for login</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <button class="btn btn-sm btn-outline-success w-100" data-bs-toggle="modal"
+                                data-bs-target="#quidProQuoModal">
+                                View Examples
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CEO Fraud Section -->
+    <section id="ceo-fraud" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-person-badge text-danger"></i> Business Email Compromise (BEC)
+                <small class="text-muted d-block">"CEO Fraud" attacks targeting organizations</small>
+            </h2>
+
+            <div class="card bg-dark border-danger animate__animated animate__fadeIn">
+                <div class="card-header border-danger bg-danger bg-opacity-10">
+                    <h4><i class="bi bi-exclamation-triangle"></i> How BEC Works</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5><i class="bi bi-arrow-right-circle"></i> Attack Flow:</h5>
+                            <ol>
+                                <li class="mb-2">Research targets (LinkedIn, company website)</li>
+                                <li class="mb-2">Spoof executive's email or compromise account</li>
+                                <li class="mb-2">Send urgent request to finance/HR</li>
+                                <li class="mb-2">Request wire transfer or sensitive data</li>
+                                <li class="mb-2">Funds transferred to attacker's account</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><i class="bi bi-shield-check"></i> Red Flags:</h5>
+                            <ul>
+                                <li class="mb-2">Urgent requests bypassing normal procedures</li>
+                                <li class="mb-2">Slight email variations (CEO@company-inc.com)</li>
+                                <li class="mb-2">Requests for secrecy ("Just between us")</li>
+                                <li class="mb-2">Unusual payment instructions</li>
+                                <li class="mb-2">Last-minute changes to payment details</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="alert alert-info">
+                        <h5><i class="bi bi-lightbulb"></i> Protection:</h5>
+                        <p>Implement multi-person approval for financial transactions and verify all requests through a
+                            secondary channel (phone call to known number).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Protection Section -->
+    <section id="protection" class="py-5 bg-dark bg-opacity-25">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-shield-check text-success"></i> Social Engineering Protection
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-6 animate__animated animate__fadeInLeft">
+                    <div class="card bg-dark border-success h-100">
+                        <div class="card-header border-success bg-success bg-opacity-10">
+                            <h4><i class="bi bi-check-circle"></i> Organizational Defenses</h4>
+                        </div>
+                        <div class="card-body">
+                            <ol class="list-group list-group-numbered list-group-flush">
+                                <li class="list-group-item bg-transparent">
+                                    Regular security awareness training
+                                </li>
+                                <li class="list-group-item bg-transparent">
+                                    Clear verification procedures for sensitive requests
+                                </li>
+                                <li class="list-group-item bg-transparent">
+                                    Multi-factor authentication for all accounts
+                                </li>
+                                <li class="list-group-item bg-transparent">
+                                    Simulated phishing exercises
+                                </li>
+                                <li class="list-group-item bg-transparent">
+                                    Reporting system for suspicious contacts
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-warning h-100">
+                        <div class="card-header border-warning bg-warning bg-opacity-10">
+                            <h4><i class="bi bi-person-check"></i> Individual Best Practices</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-transparent d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    <span>Verify unexpected requests through known channels</span>
+                                </li>
+                                <li class="list-group-item bg-transparent d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    <span>Don't trust caller ID or email display names</span>
+                                </li>
+                                <li class="list-group-item bg-transparent d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    <span>Be wary of urgency or secrecy demands</span>
+                                </li>
+                                <li class="list-group-item bg-transparent d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    <span>Never plug in found USB drives</span>
+                                </li>
+                                <li class="list-group-item bg-transparent d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    <span>Question requests that bypass normal procedures</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5 animate__animated animate__fadeInUp">
+                <a href="../prevention/email_security.html" class="btn btn-lg btn-success">
+                    <i class="bi bi-envelope-check"></i> Email Security Guide
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark border-top border-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>
+                        <a class="navbar-brand" href="../index.html">
+                            <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                            &
+                            <span class="text-danger">Conflict</span>
+                        </a>
+                    </h5>
+                    <p class="text-muted">Understanding and defending against human hacking techniques.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Resources</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="https://www.cisa.gov/business-email-compromise"
+                                class="nav-link">CISA BEC Guide</a></li>
+                        <li class="nav-item"><a
+                                href="https://www.ftc.gov/business-guidance/small-businesses/cybersecurity/business-email-compromise"
+                                class="nav-link">FTC Resources</a></li>
+                        <li class="nav-item"><a href="https://www.phishing.org" class="nav-link">Phishing.org</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Related Threats</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="phishing.html" class="nav-link">Phishing</a></li>
+                        <li class="nav-item"><a href="password_attacks.html" class="nav-link">Credential Theft</a></li>
+                        <li class="nav-item"><a href="../prevention/data_privacy.html" class="nav-link">Data Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <p class="text-muted small mb-0">&copy; 2025 Code & Conflict. Educational use only.</p>
+        </div>
+    </footer>
+
+    <!-- Social Engineering Modals -->
+    <div class="modal fade" id="phishingModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-danger">
+                    <h5 class="modal-title"><i class="bi bi-envelope-fill text-danger"></i> Phishing Examples</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="email-sample p-3 mb-3 bg-light text-dark rounded">
+                                <div class="d-flex align-items-center mb-2">
+                                    <img src="../assets/imgs/icons/microsoft.png" width="20" class="me-2">
+                                    <strong>Microsoft Support</strong>
+                                    <small class="text-muted ms-auto">support@micr0soft.com</small>
+                                </div>
+                                <hr>
+                                <strong>Subject:</strong> Urgent: Password Reset Required<br><br>
+                                Dear User,<br>
+                                We detected unusual activity. Click <a href="#" class="text-danger">here</a> to reset
+                                your password immediately.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="email-sample p-3 mb-3 bg-light text-dark rounded">
+                                <div class="d-flex align-items-center mb-2">
+                                    <img src="../assets/imgs/icons/paypal.png" width="20" class="me-2">
+                                    <strong>PayPal Security</strong>
+                                    <small class="text-muted ms-auto">security@paypa1.com</small>
+                                </div>
+                                <hr>
+                                <strong>Subject:</strong> Suspicious Transaction Detected<br><br>
+                                Your account will be limited unless you <a href="#" class="text-danger">verify</a>
+                                your information within 24 hours.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-danger mt-3">
+                        <h5><i class="bi bi-exclamation-octagon-fill"></i> Red Flags:</h5>
+                        <ul>
+                            <li>Misspelled sender domains (micr0soft, paypa1)</li>
+                            <li>Urgent language creating panic</li>
+                            <li>Generic greetings ("Dear User")</li>
+                            <li>Suspicious links</li>
+                            <li>Requests for sensitive information</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate__animated');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementPosition < windowHeight - 100) {
+                    const animationClass = element.classList[1];
+                    element.classList.add(animationClass);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Add active class based on current page
+        document.addEventListener('DOMContentLoaded', function () {
+            const path = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-link, .dropdown-item');
+
+            navLinks.forEach(link => {
+                const linkPath = link.getAttribute('href').split('/').pop();
+                if (path === linkPath ||
+                    (path.startsWith('threats/') && linkPath === path.split('/').pop()) ||
+                    (path.startsWith('prevention/') && linkPath === path.split('/').pop())) {
+
+                    link.classList.add('active');
+
+                    // If it's a dropdown item, also activate its parent
+                    if (link.classList.contains('dropdown-item')) {
+                        const parent = link.closest('.dropdown');
+                        if (parent) {
+                            parent.querySelector('.dropdown-toggle').classList.add('active');
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
