@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Calendar | Code & Conflict</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../css/custom.css" rel="stylesheet">
+    <style>
+        .calendar-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('../assets/imgs/calendar-bg.jpg') no-repeat center center;
+            background-size: cover;
+            padding-top: 100px;
+        }
+
+        .event-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--bs-primary);
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
+        }
+
+        .event-type-badge {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .event-type-conference {
+            background-color: #3498db;
+        }
+
+        .event-type-workshop {
+            background-color: #2ecc71;
+        }
+
+        .event-type-webinar {
+            background-color: #9b59b6;
+        }
+
+        .event-type-training {
+            background-color: #f39c12;
+        }
+
+        .event-type-ctf {
+            background-color: #e74c3c;
+        }
+
+        /* FullCalendar customization */
+        .fc {
+            background-color: #1a1a1a;
+            border-radius: 0.375rem;
+            overflow: hidden;
+        }
+
+        .fc-toolbar {
+            background-color: #2c3e50;
+            padding: 1rem;
+            margin-bottom: 0 !important;
+        }
+
+        .fc-col-header {
+            background-color: #2c3e50;
+        }
+
+        .fc-daygrid-day {
+            background-color: #1a1a1a;
+        }
+
+        .fc-day-today {
+            background-color: rgba(52, 152, 219, 0.1) !important;
+        }
+
+        .fc-event {
+            cursor: pointer;
+            border: none;
+            font-size: 0.85rem;
+        }
+
+        .fc-event:hover {
+            opacity: 0.9;
+        }
+
+        .fc-daygrid-event-dot {
+            display: none;
+        }
+
+        .organizer-logo {
+            height: 30px;
+            max-width: 100px;
+            object-fit: contain;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body class="cyber-gradient">
+    <!-- Cyber Alert Bar -->
+    <div class="alert alert-info alert-dismissible rounded-0 fixed-top text-center py-2 animate__animated animate__fadeInDown"
+        style="margin-top: 56px;">
+        <strong>UPCOMING EVENT:</strong> Black Hat USA 2023 starts August 5 |
+        <a href="#blackhat-event" class="alert-link">View Details</a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="../index.html">
+                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                &
+                <span class="text-danger">Conflict</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCyber">
+                <i class="bi bi-shield-lock"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCyber">
+                <!-- Left-aligned menu items -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
+                        <a class="nav-link" href="../index.html"><i class="bi bi-house-door"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-bug"></i> Threats
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../threats/malware.html">Malware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/phishing.html">Phishing</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/password_attacks.html">Password Attacks</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/ransomware.html">Ransomware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/social_engineering.html">Social
+                                    Engineering</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-newspaper"></i> News
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../news/security_patches.html"><i
+                                        class="bi bi-patch-check"></i> Security Patches</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../news/latest_threats.html"><i
+                                        class="bi bi-exclamation-triangle"></i> Latest Threats</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../news/industry_news.html"><i
+                                        class="bi bi-building"></i> Industry News</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item active" href="../news/event_calendar.html"><i
+                                        class="bi bi-calendar-event"></i> Event Calendar</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-shield-check"></i> Prevention
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../prevention/data_privacy.html">Data & Privacy</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/email_security.html">Email Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/mobile_security.html">Mobile Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/network_security.html">Network Security</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../prevention/secure_browsing.html">Secure Browsing</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Grouped Search + About/Contact -->
+                <div class="d-flex align-items-center">
+                    <!-- About & Contact Links -->
+                    <ul class="navbar-nav me-3">
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.5s;">
+                            <a class="nav-link" href="../about_us.html"><i class="bi bi-info-circle"></i> About Us</a>
+                        </li>
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.6s;">
+                            <a class="nav-link" href="../contact.html"><i class="bi bi-envelope"></i> Contact Us</a>
+                        </li>
+                    </ul>
+
+                    <!-- Search Bar -->
+                    <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.7s;"
+                        role="search">
+                        <input class="form-control bg-dark border-secondary" type="search"
+                            placeholder="Search events...">
+                        <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Sign Up / Login Buttons -->
+                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.8s;">
+                    <a href="../login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                        Login</a>
+                    <a href="../signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Event Calendar Hero -->
+    <header class="py-5 calendar-hero text-white">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-8 animate__animated animate__fadeInLeft">
+                    <h1 class="display-4 fw-bold mb-4">
+                        <i class="bi bi-calendar-event text-primary"></i> Event Calendar
+                    </h1>
+                    <p class="lead mb-4">
+                        Upcoming cybersecurity conferences, workshops, webinars, and training events worldwide.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#featured-events" class="btn btn-primary btn-lg px-4">
+                            <i class="bi bi-star-fill"></i> Featured Events
+                        </a>
+                        <a href="#calendar-view" class="btn btn-outline-light btn-lg px-4">
+                            <i class="bi bi-calendar-week"></i> Calendar View
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <!-- Featured Events Section -->
+        <section id="featured-events" class="mb-5">
+            <h2 class="mb-4 animate__animated animate__fadeInDown">
+                <i class="bi bi-star-fill text-warning"></i> Featured Cybersecurity Events
+            </h2>
+
+            <div class="row g-4">
+                <!-- Black Hat Event -->
+                <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="card event-card bg-dark h-100" id="blackhat-event">
+                        <img src="../assets/imgs/events/blackhat.jpg" class="card-img-top" alt="Black Hat USA">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="../assets/imgs/event-logos/blackhat.png" class="organizer-logo">
+                                <div>
+                                    <span class="badge event-type-badge event-type-conference">Conference</span>
+                                    <span class="badge bg-dark ms-2">In-Person</span>
+                                    <small class="text-muted d-block">August 5-10, 2023</small>
+                                </div>
+                            </div>
+                            <h3>Black Hat USA 2023</h3>
+                            <p>The world's leading information security event, featuring cutting-edge research, hands-on
+                                training, and networking with security professionals.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-dark"><i class="bi bi-geo-alt"></i> Las Vegas, NV</span>
+                                <span class="badge bg-dark ms-2"><i class="bi bi-cash-stack"></i> $2,495+</span>
+                                <span class="badge bg-dark ms-2"><i class="bi bi-people"></i> 20,000+ attendees</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="https://www.blackhat.com" target="_blank" class="btn btn-outline-primary">
+                                    <i class="bi bi-globe"></i> Event Website
+                                </a>
+                                <a href="#" class="text-muted small">
+                                    <i class="bi bi-bookmark"></i> Save Event
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DEF CON Event -->
+                <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="card event-card bg-dark h-100">
+                        <img src="../assets/imgs/events/defcon.jpg" class="card-img-top" alt="DEF CON 31">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="../assets/imgs/event-logos/defcon.png" class="organizer-logo">
+                                <div>
+                                    <span class="badge event-type-badge event-type-conference">Conference</span>
+                                    <span class="badge bg-dark ms-2">In-Person</span>
+                                    <small class="text-muted d-block">August 10-13, 2023</small>
+                                </div>
+                            </div>
+                            <h3>DEF CON 31</h3>
+                            <p>One of the world's largest hacker conventions, featuring workshops, competitions, and
+                                demonstrations of security vulnerabilities.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-dark"><i class="bi bi-geo-alt"></i> Las Vegas, NV</span>
+                                <span class="badge bg-dark ms-2"><i class="bi bi-cash-stack"></i> $440</span>
+                                <span class="badge bg-dark ms-2"><i class="bi bi-people"></i> 30,000+ attendees</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="https://defcon.org" target="_blank" class="btn btn-outline-primary">
+                                    <i class="bi bi-globe"></i> Event Website
+                                </a>
+                                <a href="#" class="text-muted small">
+                                    <i class="bi bi-bookmark"></i> Save Event
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RSA Conference -->
+                <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="card event-card bg-dark h-100">
+                        <img src="../assets/imgs/events/rsa.jpg" class="card-img-top" alt="RSA Conference">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="../assets/imgs/event-logos/rsa.png" class="organizer-logo">
+                                <div>
+                                    <span class="badge event-type-badge event-type-conference">Conference</span>
+                                    <span class="badge bg-dark ms-2">Hybrid</span>
+                                    <small class="text-muted d-block">September 25-28, 2023</small>
+                                </div>
+                            </div>
+                            <h3>RSA Conference 2023</h3>
+                            <p>Premier series of global events and on-demand content where the cybersecurity industry
+                                comes together.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-dark"><i class="bi bi-geo-alt"></i> San Francisco, CA</span>
+                                <span class="badge bg-dark ms-2"><i class="bi bi-cash-stack"></i> $2,495+</span>
+                                <span class="badge bg-dark ms-2"><i class="bi bi-people"></i> 40,000+ attendees</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="https://www.rsaconference.com" target="_blank" class="btn btn-outline-primary">
+                                    <i class="bi bi-globe"></i> Event Website
+                                </a>
+                                <a href="#" class="text-muted small">
+                                    <i class="bi bi-bookmark"></i> Save Event
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Free Webinar -->
+                <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                    <div class="card event-card bg-dark h-100">
+                        <img src="../assets/imgs/events/webinar.jpg" class="card-img-top" alt="Zero Trust Webinar">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="../assets/imgs/event-logos/sans.png" class="organizer-logo">
+                                <div>
+                                    <span class="badge event-type-badge event-type-webinar">Webinar</span>
+                                    <span class="badge bg-dark ms-2">Virtual</span>
+                                    <small class="text-muted d-block">July 27, 2023 | 1:00 PM EST</small>
+                                </div>
+                            </div>
+                            <h3>Implementing Zero Trust Architecture</h3>
+                            <p>Free webinar covering practical steps for implementing Zero Trust security models in
+                                enterprise environments.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-dark"><i class="bi bi-globe"></i> Online Event</span>
+                                <span class="badge bg-dark ms-2"><i class="bi bi-cash-stack"></i> Free</span>
+                                <span class="badge bg-dark ms-2"><i class="bi bi-clock"></i> 90 minutes</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="btn btn-outline-primary">
+                                    <i class="bi bi-ticket-perforated"></i> Register Now
+                                </a>
+                                <a href="#" class="text-muted small">
+                                    <i class="bi bi-bookmark"></i> Save Event
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-light">
+                    <i class="bi bi-arrow-down"></i> View All Featured Events
+                </a>
+            </div>
+        </section>
+
+        <!-- Calendar View Section -->
+        <section id="calendar-view" class="mb-5">
+            <h2 class="mb-4 animate__animated animate__fadeInDown">
+                <i class="bi bi-calendar-week text-primary"></i> Interactive Calendar
+            </h2>
+
+            <div class="card bg-dark border-primary animate__animated animate__fadeIn">
+                <div class="card-header border-primary bg-primary bg-opacity-10">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0"><i class="bi bi-calendar3"></i> Cybersecurity Events Calendar</h4>
+                        <div class="btn-group" role="group">
+                            <button id="month-view" class="btn btn-outline-primary btn-sm active">Month</button>
+                            <button id="week-view" class="btn btn-outline-primary btn-sm">Week</button>
+                            <button id="list-view" class="btn btn-outline-primary btn-sm">List</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Categories -->
+        <section class="mb-5">
+            <h2 class="mb-4 animate__animated animate__fadeInDown">
+                <i class="bi bi-tags text-info"></i> Browse by Event Type
+            </h2>
+
+            <div class="row g-3">
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <a href="#" class="card bg-dark text-decoration-none h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-mic text-primary mb-3" style="font-size: 2rem;"></i>
+                            <h4>Conferences</h4>
+                            <p class="text-muted">Major industry gatherings with keynotes and exhibits</p>
+                            <span class="badge bg-dark">12 upcoming</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <a href="#" class="card bg-dark text-decoration-none h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-laptop text-success mb-3" style="font-size: 2rem;"></i>
+                            <h4>Webinars</h4>
+                            <p class="text-muted">Online presentations and discussions</p>
+                            <span class="badge bg-dark">27 upcoming</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <a href="#" class="card bg-dark text-decoration-none h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-people text-warning mb-3" style="font-size: 2rem;"></i>
+                            <h4>Workshops</h4>
+                            <p class="text-muted">Hands-on training sessions</p>
+                            <span class="badge bg-dark">15 upcoming</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                    <a href="#" class="card bg-dark text-decoration-none h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-award text-danger mb-3" style="font-size: 2rem;"></i>
+                            <h4>CTF Competitions</h4>
+                            <p class="text-muted">Capture The Flag hacking challenges</p>
+                            <span class="badge bg-dark">8 upcoming</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">
+                    <a href="#" class="card bg-dark text-decoration-none h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-mortarboard text-info mb-3" style="font-size: 2rem;"></i>
+                            <h4>Training</h4>
+                            <p class="text-muted">Certification courses and classes</p>
+                            <span class="badge bg-dark">19 upcoming</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">
+                    <a href="#" class="card bg-dark text-decoration-none h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-globe text-purple mb-3" style="font-size: 2rem;"></i>
+                            <h4>Virtual Events</h4>
+                            <p class="text-muted">Online conferences and meetups</p>
+                            <span class="badge bg-dark">34 upcoming</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Submit Event CTA -->
+        <section class="card bg-dark border-success animate__animated animate__fadeIn">
+            <div class="card-body text-center py-4">
+                <h3><i class="bi bi-megaphone text-success"></i> Have an event to share?</h3>
+                <p class="lead">Submit your cybersecurity event to be featured in our calendar</p>
+                <a href="../contact.html" class="btn btn-success btn-lg">
+                    <i class="bi bi-send"></i> Submit Event
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark border-top border-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>
+                        <a class="navbar-brand" href="../index.html">
+                            <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                            &
+                            <span class="text-danger">Conflict</span>
+                        </a>
+                    </h5>
+                    <p class="text-muted">Your guide to cybersecurity events worldwide.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Event Resources</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="https://www.blackhat.com" class="nav-link">Black Hat</a></li>
+                        <li class="nav-item"><a href="https://defcon.org" class="nav-link">DEF CON</a></li>
+                        <li class="nav-item"><a href="https://www.rsaconference.com" class="nav-link">RSA Conference</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="../news/security_patches.html" class="nav-link">Security
+                                Patches</a></li>
+                        <li class="nav-item"><a href="../news/latest_threats.html" class="nav-link">Latest Threats</a>
+                        </li>
+                        <li class="nav-item"><a href="../news/industry_news.html" class="nav-link">Industry News</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <p class="text-muted small mb-0">&copy; 2025 Code & Conflict. Event data from public sources.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+
+    <script>
+        // Initialize calendar
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,listMonth'
+                },
+                events: [
+                    {
+                        title: 'Black Hat USA',
+                        start: '2023-08-05',
+                        end: '2023-08-10',
+                        backgroundColor: '#3498db',
+                        borderColor: '#3498db',
+                        url: 'https://www.blackhat.com'
+                    },
+                    {
+                        title: 'DEF CON 31',
+                        start: '2023-08-10',
+                        end: '2023-08-13',
+                        backgroundColor: '#e74c3c',
+                        borderColor: '#e74c3c',
+                        url: 'https://defcon.org'
+                    },
+                    {
+                        title: 'Zero Trust Webinar',
+                        start: '2023-07-27T13:00:00',
+                        backgroundColor: '#9b59b6',
+                        borderColor: '#9b59b6',
+                        url: '#'
+                    },
+                    {
+                        title: 'RSA Conference',
+                        start: '2023-09-25',
+                        end: '2023-09-28',
+                        backgroundColor: '#3498db',
+                        borderColor: '#3498db',
+                        url: 'https://www.rsaconference.com'
+                    },
+                    {
+                        title: 'SANS Security Training',
+                        start: '2023-10-15',
+                        end: '2023-10-20',
+                        backgroundColor: '#f39c12',
+                        borderColor: '#f39c12',
+                        url: 'https://www.sans.org'
+                    }
+                ],
+                eventClick: function (info) {
+                    info.jsEvent.preventDefault();
+                    if (info.event.url) {
+                        window.open(info.event.url, '_blank');
+                    }
+                }
+            });
+            calendar.render();
+
+            // Calendar view switcher
+            document.getElementById('month-view').addEventListener('click', function () {
+                calendar.changeView('dayGridMonth');
+                this.classList.add('active');
+                document.getElementById('week-view').classList.remove('active');
+                document.getElementById('list-view').classList.remove('active');
+            });
+
+            document.getElementById('week-view').addEventListener('click', function () {
+                calendar.changeView('timeGridWeek');
+                this.classList.add('active');
+                document.getElementById('month-view').classList.remove('active');
+                document.getElementById('list-view').classList.remove('active');
+            });
+
+            document.getElementById('list-view').addEventListener('click', function () {
+                calendar.changeView('listMonth');
+                this.classList.add('active');
+                document.getElementById('month-view').classList.remove('active');
+                document.getElementById('week-view').classList.remove('active');
+            });
+        });
+
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate__animated');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementPosition < windowHeight - 100) {
+                    const animationClass = element.classList[1];
+                    element.classList.add(animationClass);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+
+</html>

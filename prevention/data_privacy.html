@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Privacy Guide | Code & Conflict</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <link href="../css/custom.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
+
+    <style>
+        .privacy-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('../assets/imgs/data-privacy-bg.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .regulation-card {
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            height: 100%;
+        }
+
+        .regulation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .threat-card {
+            border-left: 3px solid var(--bs-danger);
+        }
+
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .privacy-step {
+            counter-increment: step-counter;
+            margin-bottom: 1rem;
+        }
+
+        .privacy-step:before {
+            content: counter(step-counter);
+            background-color: var(--bs-primary);
+            color: white;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 3px;
+            margin-right: 0.5rem;
+        }
+
+        .data-flow {
+            position: relative;
+            height: 300px;
+            margin: 40px 0;
+        }
+
+        .data-node {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body class="cyber-gradient">
+    <!-- Cyber Alert Bar -->
+    <div
+        class="alert alert-warning alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
+        <strong>PRIVACY ALERT:</strong> New data broker selling 300M user profiles |
+        <a href="../news/latest_threats.html" class="alert-link">Opt-out Now</a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Main Navbar (Consistent with other pages) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="../index.html">
+                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                &
+                <span class="text-danger">Conflict</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCyber">
+                <i class="bi bi-shield-lock"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCyber">
+                <!-- Left-aligned menu items -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
+                        <a class="nav-link" href="../index.html"><i class="bi bi-house-door"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-bug"></i> Threats
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../threats/malware.html">Malware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/phishing.html">Phishing</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/password_attacks.html">Password Attacks</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/ransomware.html">Ransomware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/social_engineering.html">Social
+                                    Engineering</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-newspaper"></i> News
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../news/security_patches.html"><i
+                                        class="bi bi-patch-check"></i> Security Patches</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../news/latest_threats.html"><i
+                                        class="bi bi-exclamation-triangle"></i> Latest Threats</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../news/industry_news.html"><i
+                                        class="bi bi-building"></i> Industry News</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../news/event_calendar.html"><i
+                                        class="bi bi-calendar-event"></i> Event Calendar</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-shield-check"></i> Prevention
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item active" href="data_privacy.html">Data & Privacy</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="email_security.html">Email Security</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="mobile_security.html">Mobile Security</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="network_security.html">Network Security</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="secure_browsing.html">Secure Browsing</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Grouped Search + About/Contact -->
+                <div class="d-flex align-items-center">
+                    <!-- About & Contact Links -->
+                    <ul class="navbar-nav me-3">
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                            <a class="nav-link" href="../about_us.html"><i class="bi bi-info-circle"></i> About Us</a>
+                        </li>
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.5s;">
+                            <a class="nav-link" href="../contact.html"><i class="bi bi-envelope"></i> Contact Us</a>
+                        </li>
+                    </ul>
+
+                    <!-- Search Bar -->
+                    <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.6s;"
+                        role="search">
+                        <input class="form-control bg-dark border-secondary" type="search"
+                            placeholder="Search threats...">
+                        <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Sign Up / Login Buttons -->
+                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
+                    <a href="../login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                        Login</a>
+                    <a href="../signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Data Privacy Hero -->
+    <header class="py-5 privacy-hero text-white">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-8 animate__animated animate__fadeInLeft">
+                    <h1 class="display-4 fw-bold mb-4">
+                        <i class="bi bi-database-lock text-primary"></i> Data Privacy Guide
+                    </h1>
+                    <p class="lead mb-4">
+                        Take control of your personal information and protect your digital identity with these essential
+                        privacy practices.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#checklist" class="btn btn-primary btn-lg px-4">
+                            <i class="bi bi-list-check"></i> Privacy Checklist
+                        </a>
+                        <a href="#tools" class="btn btn-outline-light btn-lg px-4">
+                            <i class="bi bi-tools"></i> Privacy Tools
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Data Flow Visualization -->
+    <section class="py-5 bg-dark bg-opacity-50">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-arrow-repeat text-info"></i> How Your Data Flows Online
+            </h2>
+
+            <div class="data-flow animate__animated animate__fadeIn">
+                <div class="data-node bg-primary" style="top: 100px; left: 50px;">
+                    <i class="bi bi-phone"></i> Device
+                </div>
+                <div class="data-node bg-success" style="top: 50px; left: 250px;">
+                    <i class="bi bi-cloud"></i> Cloud
+                </div>
+                <div class="data-node bg-warning" style="top: 150px; left: 450px;">
+                    <i class="bi bi-server"></i> Service
+                </div>
+                <div class="data-node bg-danger" style="top: 100px; left: 650px;">
+                    <i class="bi bi-building"></i> Third Parties
+                </div>
+                <div class="data-node bg-info" style="top: 200px; left: 850px;">
+                    <i class="bi bi-globe"></i> Public Web
+                </div>
+
+                <svg width="100%" height="100%" style="position: absolute; top: 0; left: 0; z-index: 0;">
+                    <path d="M150,150 Q275,50 400,100 T650,150 T850,200" stroke="#3498db" stroke-width="2" fill="none"
+                        stroke-dasharray="5,5" />
+                    <circle cx="150" cy="150" r="3" fill="#3498db" />
+                    <circle cx="400" cy="100" r="3" fill="#3498db" />
+                    <circle cx="650" cy="150" r="3" fill="#3498db" />
+                    <circle cx="850" cy="200" r="3" fill="#3498db" />
+                </svg>
+            </div>
+
+            <div class="row text-center animate__animated animate__fadeInUp">
+                <div class="col-md-4">
+                    <div class="card bg-dark border-primary mb-3">
+                        <div class="card-body">
+                            <i class="bi bi-collection text-primary fs-1 mb-3"></i>
+                            <h5>Data Collection</h5>
+                            <p>Websites and apps collect hundreds of data points about your behavior</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-dark border-warning mb-3">
+                        <div class="card-body">
+                            <i class="bi bi-share text-warning fs-1 mb-3"></i>
+                            <h5>Data Sharing</h5>
+                            <p>Your information is often sold or shared with dozens of third parties</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-dark border-danger mb-3">
+                        <div class="card-body">
+                            <i class="bi bi-bank text-danger fs-1 mb-3"></i>
+                            <h5>Data Storage</h5>
+                            <p>Your personal data remains in databases indefinitely, vulnerable to breaches</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Regulations -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-file-earmark-text text-success"></i> Key Privacy Regulations
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="card regulation-card bg-dark border-primary">
+                        <div class="card-header border-primary bg-primary bg-opacity-10">
+                            <h4><i class="bi bi-flag"></i> GDPR</h4>
+                            <small class="text-muted">General Data Protection Regulation</small>
+                        </div>
+                        <div class="card-body">
+                            <h5>Key Rights:</h5>
+                            <ul>
+                                <li>Right to access</li>
+                                <li>Right to erasure</li>
+                                <li>Data portability</li>
+                                <li>Breach notification</li>
+                            </ul>
+                            <h5>Scope:</h5>
+                            <p>Applies to all EU citizens' data, regardless of company location</p>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <span class="badge bg-primary">Since 2018</span>
+                            <span class="float-end">Fines up to 4% revenue</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="card regulation-card bg-dark border-success">
+                        <div class="card-header border-success bg-success bg-opacity-10">
+                            <h4><i class="bi bi-flag"></i> CCPA</h4>
+                            <small class="text-muted">California Consumer Privacy Act</small>
+                        </div>
+                        <div class="card-body">
+                            <h5>Key Rights:</h5>
+                            <ul>
+                                <li>Right to know</li>
+                                <li>Right to delete</li>
+                                <li>Right to opt-out</li>
+                                <li>Non-discrimination</li>
+                            </ul>
+                            <h5>Scope:</h5>
+                            <p>California residents, businesses with >$25M revenue or 50K+ users</p>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <span class="badge bg-success">Since 2020</span>
+                            <span class="float-end">$7500 per violation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="card regulation-card bg-dark border-warning">
+                        <div class="card-header border-warning bg-warning bg-opacity-10">
+                            <h4><i class="bi bi-flag"></i> PIPEDA</h4>
+                            <small class="text-muted">Personal Information Protection Act</small>
+                        </div>
+                        <div class="card-body">
+                            <h5>Key Rights:</h5>
+                            <ul>
+                                <li>Consent requirements</li>
+                                <li>Limited collection</li>
+                                <li>Individual access</li>
+                                <li>Accountability</li>
+                            </ul>
+                            <h5>Scope:</h5>
+                            <p>Canadian private sector organizations collecting personal data</p>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <span class="badge bg-warning text-dark">Since 2000</span>
+                            <span class="float-end">Up to $100K fines</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Privacy Checklist -->
+    <section id="checklist" class="py-5 bg-dark bg-opacity-25">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <h2 class="mb-4"><i class="bi bi-list-check text-primary"></i> Data Privacy Checklist</h2>
+                    <ol class="list-unstyled">
+                        <li class="privacy-step">Review privacy settings on all accounts</li>
+                        <li class="privacy-step">Enable two-factor authentication</li>
+                        <li class="privacy-step">Use a password manager</li>
+                        <li class="privacy-step">Opt-out of data broker lists</li>
+                        <li class="privacy-step">Regularly delete unused accounts</li>
+                        <li class="privacy-step">Use encrypted messaging apps</li>
+                        <li class="privacy-step">Disable ad personalization</li>
+                        <li class="privacy-step">Request data deletion from services</li>
+                    </ol>
+                    <button class="btn btn-primary mt-3" id="privacyChecklistBtn">
+                        <i class="bi bi-clipboard-check"></i> Generate My Privacy Plan
+                    </button>
+                    <div id="privacyChecklistOutput" class="mt-3 alert d-none"></div>
+                </div>
+
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-primary h-100">
+                        <div class="card-header border-primary bg-primary bg-opacity-10">
+                            <h4><i class="bi bi-shield-lock"></i> Privacy Audit</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>Test your current privacy status:</p>
+                            <div class="mb-3">
+                                <a href="https://www.privacyrights.org/data-brokers" target="_blank"
+                                    class="btn btn-outline-primary w-100 mb-2">
+                                    <i class="bi bi-person-x"></i> Data Broker Opt-Out
+                                </a>
+                                <a href="https://www.donottrack.us" target="_blank"
+                                    class="btn btn-outline-info w-100 mb-2">
+                                    <i class="bi bi-eye-slash"></i> Tracking Test
+                                </a>
+                                <a href="https://haveibeenpwned.com" target="_blank"
+                                    class="btn btn-outline-success w-100">
+                                    <i class="bi bi-shield-lock"></i> Breach Check
+                                </a>
+                            </div>
+                            <hr>
+                            <h5 class="mt-3">Quick Privacy Audit</h5>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="privacyCheck1">
+                                <label class="form-check-label" for="privacyCheck1">
+                                    Privacy settings reviewed
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="privacyCheck2">
+                                <label class="form-check-label" for="privacyCheck2">
+                                    Data broker opt-outs completed
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="privacyCheck3">
+                                <label class="form-check-label" for="privacyCheck3">
+                                    Ad personalization disabled
+                                </label>
+                            </div>
+                            <button class="btn btn-sm btn-primary w-100 mt-2" id="privacyAuditBtn">
+                                <i class="bi bi-graph-up"></i> Check My Privacy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Tools -->
+    <section id="tools" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-tools text-primary"></i> Essential Privacy Tools
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="card bg-dark border-success h-100">
+                        <div class="card-header border-success d-flex">
+                            <img src="../assets/imgs/bitwarden-icon.png" width="40" height="40" class="me-3">
+                            <div>
+                                <h5 class="mb-0">Bitwarden</h5>
+                                <small class="text-muted">Password Manager</small>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="../assets/imgs/bitwarden-logo.png" class="tool-icon">
+                            <p>Open-source password manager that securely stores and generates strong passwords.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">Free/Paid</span>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.8</span>
+                                    <span><i class="bi bi-download text-info"></i> 10M+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <a href="https://bitwarden.com" target="_blank" class="btn btn-sm btn-success w-100">
+                                <i class="bi bi-box-arrow-up-right"></i> Visit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="card bg-dark border-primary h-100">
+                        <div class="card-header border-primary d-flex">
+                            <img src="../assets/imgs/duckduckgo-icon.png" width="40" height="40" class="me-3">
+                            <div>
+                                <h5 class="mb-0">DuckDuckGo</h5>
+                                <small class="text-muted">Privacy Search</small>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="../assets/imgs/duckduckgo-logo.png" class="tool-icon">
+                            <p>Search engine that doesn't track your searches or personalize results.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">Free</span>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.7</span>
+                                    <span><i class="bi bi-download text-info"></i> 50M+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <a href="https://duckduckgo.com" target="_blank" class="btn btn-sm btn-primary w-100">
+                                <i class="bi bi-box-arrow-up-right"></i> Visit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="card bg-dark border-warning h-100">
+                        <div class="card-header border-warning d-flex">
+                            <img src="../assets/imgs/simpleanalytics-icon.png" width="40" height="40" class="me-3">
+                            <div>
+                                <h5 class="mb-0">Simple Analytics</h5>
+                                <small class="text-muted">Website Analytics</small>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="../assets/imgs/simpleanalytics-logo.png" class="tool-icon">
+                            <p>Google Analytics alternative that respects visitor privacy and doesn't use cookies.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-warning text-dark">Paid</span>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.9</span>
+                                    <span><i class="bi bi-people-fill text-info"></i> 5K+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <a href="https://simpleanalytics.com" target="_blank" class="btn btn-sm btn-warning w-100">
+                                <i class="bi bi-box-arrow-up-right"></i> Visit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5 animate__animated animate__fadeInUp">
+                <a href="#more-tools" class="btn btn-outline-primary" data-bs-toggle="collapse">
+                    <i class="bi bi-chevron-down"></i> View More Privacy Tools
+                </a>
+
+                <div id="more-tools" class="collapse mt-4">
+                    <div class="row g-4">
+                        <!-- Additional tools would go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Removal Guides -->
+    <section class="py-5 bg-dark bg-opacity-50">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-trash text-danger"></i> Data Removal Guides
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-6 animate__animated animate__fadeInLeft">
+                    <div class="card bg-dark border-danger h-100">
+                        <div class="card-header border-danger bg-danger bg-opacity-10">
+                            <h4><i class="bi bi-google"></i> Google Data</h4>
+                        </div>
+                        <div class="card-body">
+                            <ol>
+                                <li>Go to <a href="https://myactivity.google.com"
+                                        target="_blank">myactivity.google.com</a></li>
+                                <li>Click "Delete Activity By"</li>
+                                <li>Select date range or "All time"</li>
+                                <li>Choose which products to include</li>
+                                <li>Click "Delete"</li>
+                            </ol>
+                            <div class="alert alert-dark mt-3">
+                                <strong>Pro Tip:</strong> Set up auto-delete for future activity in Activity Controls
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-primary h-100">
+                        <div class="card-header border-primary bg-primary bg-opacity-10">
+                            <h4><i class="bi bi-facebook"></i> Facebook Data</h4>
+                        </div>
+                        <div class="card-body">
+                            <ol>
+                                <li>Go to Settings & Privacy → Settings</li>
+                                <li>Select "Your Facebook Information"</li>
+                                <li>Choose "Download Your Information"</li>
+                                <li>Select date range and data categories</li>
+                                <li>Create file and download when ready</li>
+                            </ol>
+                            <div class="alert alert-dark mt-3">
+                                <strong>Note:</strong> Deleting data doesn't delete your account - consider deactivation
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Consistent with other pages) -->
+    <footer class="py-4 bg-dark border-top border-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>
+                        <a class="navbar-brand" href="../index.html">
+                            <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                            &
+                            <span class="text-danger">Conflict</span>
+                        </a>
+                    </h5>
+                    <p class="text-muted">Your guide to protecting personal data in the digital age.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Privacy Resources</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="https://www.privacyrights.org" class="nav-link">Privacy Rights</a>
+                        </li>
+                        <li class="nav-item"><a href="https://www.eff.org" class="nav-link">Electronic Frontier
+                                Foundation</a></li>
+                        <li class="nav-item"><a href="https://gdpr-info.eu" class="nav-link">GDPR Official Text</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <div class="d-flex gap-3 mb-3">
+                        <a href="#" class="text-muted"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-github"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-discord"></i></a>
+                    </div>
+                    <div class="mt-3">
+                        <a href="../contact.html" class="btn btn-sm btn-outline-light">
+                            <i class="bi bi-shield-lock"></i> Privacy Questions?
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <p class="text-muted small mb-0">&copy; 2025 Code & Conflict. Educational use only.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Privacy checklist functionality
+        document.getElementById('privacyChecklistBtn').addEventListener('click', function () {
+            const checklistOutput = document.getElementById('privacyChecklistOutput');
+            checklistOutput.classList.remove('d-none', 'alert-success', 'alert-danger');
+            checklistOutput.classList.add('alert-success');
+            checklistOutput.innerHTML = `
+                <h5><i class="bi bi-check-circle"></i> Your Personalized Privacy Action Plan</h5>
+                <ol>
+                    <li>Complete data broker opt-outs (links below)</li>
+                    <li>Set up password manager and enable 2FA</li>
+                    <li>Review privacy settings on major platforms</li>
+                    <li>Install privacy-focused browser extensions</li>
+                    <li>Schedule quarterly privacy checkups</li>
+                </ol>
+                <button class="btn btn-sm btn-outline-light mt-2">
+                    <i class="bi bi-download"></i> Download PDF Guide
+                </button>
+            `;
+        });
+
+        // Privacy audit functionality
+        document.getElementById('privacyAuditBtn').addEventListener('click', function () {
+            const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+            let checkedCount = 0;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) checkedCount++;
+            });
+
+            const percentage = Math.round((checkedCount / checkboxes.length) * 100);
+            const resultDiv = document.getElementById('privacyChecklistOutput');
+            resultDiv.classList.remove('d-none', 'alert-success', 'alert-warning', 'alert-danger');
+
+            if (percentage >= 75) {
+                resultDiv.classList.add('alert-success');
+                resultDiv.innerHTML = `<i class="bi bi-shield-check"></i> Excellent! Your privacy score: ${percentage}%`;
+            } else if (percentage >= 50) {
+                resultDiv.classList.add('alert-warning');
+                resultDiv.innerHTML = `<i class="bi bi-shield-exclamation"></i> Good start. Complete ${checkboxes.length - checkedCount} more actions.`;
+            } else {
+                resultDiv.classList.add('alert-danger');
+                resultDiv.innerHTML = `<i class="bi bi-shield-slash"></i> Critical! Your privacy score is only ${percentage}%`;
+            }
+        });
+
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate__animated');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementPosition < windowHeight - 100) {
+                    const animationClass = element.classList[1];
+                    element.classList.add(animationClass);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Animate data flow nodes
+        const dataNodes = document.querySelectorAll('.data-node');
+        dataNodes.forEach((node, index) => {
+            node.style.animationDelay = `${index * 0.3}s`;
+        });
+    </script>
+</body>
+
+</html>

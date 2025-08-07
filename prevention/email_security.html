@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Security Guide | Code & Conflict</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <link href="../css/custom.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
+
+    <style>
+        .email-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('../assets/imgs/email-security-bg.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .protocol-card {
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            height: 100%;
+        }
+
+        .protocol-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .threat-card {
+            border-left: 3px solid var(--bs-danger);
+        }
+
+        .provider-icon {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .security-step {
+            counter-increment: step-counter;
+            margin-bottom: 1rem;
+        }
+
+        .security-step:before {
+            content: counter(step-counter);
+            background-color: var(--bs-primary);
+            color: white;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 3px;
+            margin-right: 0.5rem;
+        }
+
+        .email-header-analysis {
+            font-family: monospace;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body class="cyber-gradient">
+    <!-- Cyber Alert Bar -->
+    <div
+        class="alert alert-warning alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
+        <strong>EMAIL ALERT:</strong> New phishing campaign mimics Microsoft login |
+        <a href="../news/latest_threats.html" class="alert-link">Learn to Spot It</a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Main Navbar (Updated with News menu) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="../index.html">
+                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                &
+                <span class="text-danger">Conflict</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCyber">
+                <i class="bi bi-shield-lock"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCyber">
+                <!-- Left-aligned menu items -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
+                        <a class="nav-link" href="../index.html"><i class="bi bi-house-door"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-bug"></i> Threats
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../threats/malware.html">Malware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/phishing.html">Phishing</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/password_attacks.html">Password Attacks</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/ransomware.html">Ransomware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/social_engineering.html">Social
+                                    Engineering</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-newspaper"></i> News
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../news/security_patches.html"><i
+                                        class="bi bi-patch-check"></i> Security Patches</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../news/latest_threats.html"><i
+                                        class="bi bi-exclamation-triangle"></i> Latest Threats</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../news/industry_news.html"><i
+                                        class="bi bi-building"></i> Industry News</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../news/event_calendar.html"><i
+                                        class="bi bi-calendar-event"></i> Event Calendar</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-shield-check"></i> Prevention
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="data_privacy.html">Data & Privacy</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item active" href="email_security.html">Email Security</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="mobile_security.html">Mobile Security</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="network_security.html">Network Security</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="secure_browsing.html">Secure Browsing</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Grouped Search + About/Contact -->
+                <div class="d-flex align-items-center">
+                    <!-- About & Contact Links -->
+                    <ul class="navbar-nav me-3">
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.5s;">
+                            <a class="nav-link" href="../about_us.html"><i class="bi bi-info-circle"></i> About Us</a>
+                        </li>
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.6s;">
+                            <a class="nav-link" href="../contact.html"><i class="bi bi-envelope"></i> Contact Us</a>
+                        </li>
+                    </ul>
+
+                    <!-- Search Bar -->
+                    <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.7s;"
+                        role="search">
+                        <input class="form-control bg-dark border-secondary" type="search"
+                            placeholder="Search threats...">
+                        <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Sign Up / Login Buttons -->
+                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.8s;">
+                    <a href="../login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                        Login</a>
+                    <a href="../signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Email Security Hero -->
+    <header class="py-5 email-hero text-white">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-8 animate__animated animate__fadeInLeft">
+                    <h1 class="display-4 fw-bold mb-4">
+                        <i class="bi bi-envelope-check text-primary"></i> Email Security Guide
+                    </h1>
+                    <p class="lead mb-4">
+                        Protect your inbox from phishing, malware, and business email compromise with these essential
+                        security measures.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#checklist" class="btn btn-primary btn-lg px-4">
+                            <i class="bi bi-list-check"></i> Security Checklist
+                        </a>
+                        <a href="#phishing-test" class="btn btn-outline-light btn-lg px-4">
+                            <i class="bi bi-eye"></i> Phishing Test
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Email Security Protocols -->
+    <section class="py-5 bg-dark bg-opacity-50">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-lock text-primary"></i> Email Security Protocols
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-3 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="card protocol-card bg-dark border-primary text-center">
+                        <div class="card-body">
+                            <i class="bi bi-shield-lock fs-1 text-primary mb-3"></i>
+                            <h4>SPF</h4>
+                            <p class="small">Sender Policy Framework</p>
+                            <p>Prevents email spoofing by verifying sender IP addresses</p>
+                            <span class="badge bg-primary">DNS TXT Record</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="card protocol-card bg-dark border-success text-center">
+                        <div class="card-body">
+                            <i class="bi bi-key fs-1 text-success mb-3"></i>
+                            <h4>DKIM</h4>
+                            <p class="small">DomainKeys Identified Mail</p>
+                            <p>Uses cryptographic signatures to verify message integrity</p>
+                            <span class="badge bg-success">Asymmetric Crypto</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="card protocol-card bg-dark border-warning text-center">
+                        <div class="card-body">
+                            <i class="bi bi-envelope-x fs-1 text-warning mb-3"></i>
+                            <h4>DMARC</h4>
+                            <p class="small">Domain-based Authentication</p>
+                            <p>Policy framework for handling SPF/DKIM failures</p>
+                            <span class="badge bg-warning text-dark">Policy Enforcement</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                    <div class="card protocol-card bg-dark border-info text-center">
+                        <div class="card-body">
+                            <i class="bi bi-file-lock fs-1 text-info mb-3"></i>
+                            <h4>TLS</h4>
+                            <p class="small">Transport Layer Security</p>
+                            <p>Encrypts email in transit between servers</p>
+                            <span class="badge bg-info text-dark">Port 587/465</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5 animate__animated animate__fadeInUp">
+                <a href="https://mxtoolbox.com/" target="_blank" class="btn btn-outline-primary">
+                    <i class="bi bi-shield-check"></i> Check Your Domain's Email Security
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Threats -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-exclamation-triangle text-danger"></i> Common Email Threats
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-6 animate__animated animate__fadeInLeft">
+                    <div class="card threat-card bg-dark h-100">
+                        <div class="card-body">
+                            <h4><i class="bi bi-fish text-danger"></i> Phishing Attacks</h4>
+                            <p>Fraudulent emails designed to trick recipients into revealing sensitive information.</p>
+                            <div class="alert alert-dark">
+                                <strong>Example:</strong> "Your account will be suspended unless you verify your
+                                credentials"
+                                <button class="btn btn-sm btn-outline-danger mt-2" data-bs-toggle="collapse"
+                                    data-bs-target="#phishExample">
+                                    Show Headers
+                                </button>
+                                <div id="phishExample" class="collapse mt-2 email-header-analysis">
+                                    Received: from suspicious.domain.com (192.168.1.100)<br>
+                                    by mx.google.com with SMTP id 123abc;<br>
+                                    From: "Your Bank" &lt;support@yourbank-fake.com&gt;<br>
+                                    Reply-To: attacker@phishing.com
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 animate__animated animate__fadeInRight">
+                    <div class="card threat-card bg-dark h-100">
+                        <div class="card-body">
+                            <h4><i class="bi bi-file-earmark-zip text-danger"></i> Malware Attachments</h4>
+                            <p>Emails containing malicious files that infect systems when opened.</p>
+                            <div class="alert alert-dark">
+                                <strong>Example:</strong> "Invoice attached" with a .js or .exe file
+                                <button class="btn btn-sm btn-outline-danger mt-2" data-bs-toggle="collapse"
+                                    data-bs-target="#malwareExample">
+                                    Show Indicators
+                                </button>
+                                <div id="malwareExample" class="collapse mt-2">
+                                    <ul class="small">
+                                        <li>Unexpected attachments</li>
+                                        <li>Double extensions (.pdf.exe)</li>
+                                        <li>Password-protected archives</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 animate__animated animate__fadeInLeft">
+                    <div class="card threat-card bg-dark h-100">
+                        <div class="card-body">
+                            <h4><i class="bi bi-person-badge text-danger"></i> Business Email Compromise</h4>
+                            <p>Impersonation of executives to authorize fraudulent transactions.</p>
+                            <div class="alert alert-dark">
+                                <strong>Example:</strong> "Urgent wire transfer needed" from "CEO"
+                                <button class="btn btn-sm btn-outline-danger mt-2" data-bs-toggle="collapse"
+                                    data-bs-target="#becExample">
+                                    Show Analysis
+                                </button>
+                                <div id="becExample" class="collapse mt-2">
+                                    <ul class="small">
+                                        <li>Slight domain variations (ceo@your-company.com)</li>
+                                        <li>Urgent requests bypassing normal procedures</li>
+                                        <li>Requests for secrecy</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 animate__animated animate__fadeInRight">
+                    <div class="card threat-card bg-dark h-100">
+                        <div class="card-body">
+                            <h4><i class="bi bi-link-45deg text-danger"></i> Link Manipulation</h4>
+                            <p>Embedded links that redirect to malicious sites.</p>
+                            <div class="alert alert-dark">
+                                <strong>Example:</strong> "Click here to view document" with hidden URL
+                                <button class="btn btn-sm btn-outline-danger mt-2" data-bs-toggle="collapse"
+                                    data-bs-target="#linkExample">
+                                    Show Technique
+                                </button>
+                                <div id="linkExample" class="collapse mt-2">
+                                    <p class="small">Hover over links to see actual destination. Watch for:
+                                        <code>https://yourbank.com.evil.com</code>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Security Checklist -->
+    <section id="checklist" class="py-5 bg-dark bg-opacity-25">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <h2 class="mb-4"><i class="bi bi-list-check text-primary"></i> Email Security Checklist</h2>
+                    <ol class="list-unstyled">
+                        <li class="security-step">Enable two-factor authentication (2FA)</li>
+                        <li class="security-step">Implement SPF, DKIM, and DMARC</li>
+                        <li class="security-step">Use strong, unique passwords</li>
+                        <li class="security-step">Disable automatic image loading</li>
+                        <li class="security-step">Verify sender addresses carefully</li>
+                        <li class="security-step">Enable email encryption (PGP/SMIME)</li>
+                        <li class="security-step">Regularly review forwarding rules</li>
+                        <li class="security-step">Educate staff on phishing awareness</li>
+                    </ol>
+                    <button class="btn btn-primary mt-3" id="emailChecklistBtn">
+                        <i class="bi bi-clipboard-check"></i> Generate My Action Plan
+                    </button>
+                    <div id="emailChecklistOutput" class="mt-3 alert d-none"></div>
+                </div>
+
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-primary h-100">
+                        <div class="card-header border-primary bg-primary bg-opacity-10">
+                            <h4><i class="bi bi-envelope"></i> Email Security Test</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>Test your email security knowledge:</p>
+                            <div class="mb-3">
+                                <a href="https://phishingquiz.withgoogle.com/" target="_blank"
+                                    class="btn btn-outline-primary w-100 mb-2">
+                                    <i class="bi bi-eye"></i> Phishing Quiz
+                                </a>
+                                <a href="https://www.haveibeenpwned.com" target="_blank"
+                                    class="btn btn-outline-info w-100 mb-2">
+                                    <i class="bi bi-shield-lock"></i> Check Breaches
+                                </a>
+                                <a href="https://www.mail-tester.com" target="_blank"
+                                    class="btn btn-outline-success w-100">
+                                    <i class="bi bi-envelope-check"></i> Test Your Email
+                                </a>
+                            </div>
+                            <hr>
+                            <h5 class="mt-3">Quick Security Audit</h5>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="emailCheck1">
+                                <label class="form-check-label" for="emailCheck1">
+                                    2FA enabled on email
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="emailCheck2">
+                                <label class="form-check-label" for="emailCheck2">
+                                    SPF/DKIM configured
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="emailCheck3">
+                                <label class="form-check-label" for="emailCheck3">
+                                    Suspicious link awareness
+                                </label>
+                            </div>
+                            <button class="btn btn-sm btn-primary w-100 mt-2" id="emailAuditBtn">
+                                <i class="bi bi-graph-up"></i> Check My Security
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phishing Test -->
+    <section id="phishing-test" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-eye text-warning"></i> Phishing Email Test
+            </h2>
+
+            <div class="card bg-dark border-warning animate__animated animate__fadeInUp">
+                <div class="card-header border-warning bg-warning bg-opacity-10">
+                    <h4><i class="bi bi-envelope-exclamation"></i> Is This Email Legitimate?</h4>
+                </div>
+                <div class="card-body">
+                    <div class="email-mockup p-3 bg-dark border border-secondary rounded">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <strong>From:</strong> <span id="phishFrom">support@m1cr0s0ft.com</span>
+                            </div>
+                            <div class="text-muted small">Today, 10:15 AM</div>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Subject:</strong> <span id="phishSubject">Urgent: Your Microsoft Account Requires
+                                Verification</span>
+                        </div>
+                        <div class="email-content bg-black p-3 rounded mb-3">
+                            <p>Dear Valued Customer,</p>
+                            <p>We've detected unusual activity on your Microsoft account. To prevent suspension, please
+                                verify your credentials immediately:</p>
+                            <p><a href="#" class="btn btn-sm btn-outline-warning" id="phishLink">Click here to
+                                    verify</a></p>
+                            <p>If you don't take action within 24 hours, your account will be permanently disabled.</p>
+                            <p>Sincerely,<br>Microsoft Support Team</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <h5>What's wrong with this email?</h5>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-secondary w-100 text-start" data-phish-answer="domain">
+                                    <i class="bi bi-question-circle"></i> Sender domain is suspicious
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-secondary w-100 text-start" data-phish-answer="urgency">
+                                    <i class="bi bi-question-circle"></i> Creates false urgency
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-secondary w-100 text-start" data-phish-answer="link">
+                                    <i class="bi bi-question-circle"></i> Suspicious link
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-secondary w-100 text-start" data-phish-answer="all">
+                                    <i class="bi bi-question-circle"></i> All of the above
+                                </button>
+                            </div>
+                        </div>
+                        <div id="phishResult" class="mt-3 alert d-none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secure Email Providers -->
+    <section class="py-5 bg-dark bg-opacity-50">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-shield-check text-success"></i> Recommended Secure Email Providers
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="card bg-dark border-success h-100">
+                        <div class="card-header border-success d-flex">
+                            <img src="../assets/imgs/protonmail-icon.png" width="40" height="40" class="me-3">
+                            <div>
+                                <h5 class="mb-0">ProtonMail</h5>
+                                <small class="text-muted">Encrypted Email</small>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="../assets/imgs/protonmail-logo.png" class="provider-icon">
+                            <p>Swiss-based encrypted email service with zero-access encryption and open-source code.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">Free/Paid</span>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.8</span>
+                                    <span><i class="bi bi-people-fill text-info"></i> 10M+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <a href="https://protonmail.com" target="_blank" class="btn btn-sm btn-success w-100">
+                                <i class="bi bi-box-arrow-up-right"></i> Visit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="card bg-dark border-primary h-100">
+                        <div class="card-header border-primary d-flex">
+                            <img src="../assets/imgs/tutanota-icon.png" width="40" height="40" class="me-3">
+                            <div>
+                                <h5 class="mb-0">Tutanota</h5>
+                                <small class="text-muted">Private Email</small>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="../assets/imgs/tutanota-logo.png" class="provider-icon">
+                            <p>German secure email service with automatic end-to-end encryption for all emails.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">Free/Paid</span>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.6</span>
+                                    <span><i class="bi bi-people-fill text-info"></i> 5M+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <a href="https://tutanota.com" target="_blank" class="btn btn-sm btn-primary w-100">
+                                <i class="bi bi-box-arrow-up-right"></i> Visit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="card bg-dark border-info h-100">
+                        <div class="card-header border-info d-flex">
+                            <img src="../assets/imgs/startmail-icon.png" width="40" height="40" class="me-3">
+                            <div>
+                                <h5 class="mb-0">StartMail</h5>
+                                <small class="text-muted">Private Email</small>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="../assets/imgs/startmail-logo.png" class="provider-icon">
+                            <p>Dutch email service with PGP encryption and privacy-focused features.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-warning text-dark">Paid</span>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.5</span>
+                                    <span><i class="bi bi-people-fill text-info"></i> 1M+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <a href="https://www.startmail.com" target="_blank" class="btn btn-sm btn-info w-100">
+                                <i class="bi bi-box-arrow-up-right"></i> Visit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Consistent with other pages) -->
+    <footer class="py-4 bg-dark border-top border-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>
+                        <a class="navbar-brand" href="../index.html">
+                            <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                            &
+                            <span class="text-danger">Conflict</span>
+                        </a>
+                    </h5>
+                    <p class="text-muted">Your guide to secure email communication.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Email Resources</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="https://dmarc.org" class="nav-link">DMARC.org</a></li>
+                        <li class="nav-item"><a href="https://www.phishtank.com" class="nav-link">PhishTank</a></li>
+                        <li class="nav-item"><a href="https://www.cisa.gov/stopransomware/phishing"
+                                class="nav-link">CISA Phishing Guide</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <div class="d-flex gap-3 mb-3">
+                        <a href="#" class="text-muted"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-github"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-discord"></i></a>
+                    </div>
+                    <div class="mt-3">
+                        <a href="../contact.html" class="btn btn-sm btn-outline-light">
+                            <i class="bi bi-shield-lock"></i> Security Questions?
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <p class="text-muted small mb-0">&copy; 2025 Code & Conflict. Educational use only.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Email checklist functionality
+        document.getElementById('emailChecklistBtn').addEventListener('click', function () {
+            const checklistOutput = document.getElementById('emailChecklistOutput');
+            checklistOutput.classList.remove('d-none', 'alert-success', 'alert-danger');
+            checklistOutput.classList.add('alert-success');
+            checklistOutput.innerHTML = `
+                <h5><i class="bi bi-check-circle"></i> Your Email Security Action Plan</h5>
+                <ol>
+                    <li>Enable 2FA on all email accounts</li>
+                    <li>Configure SPF, DKIM and DMARC records</li>
+                    <li>Install a password manager</li>
+                    <li>Conduct phishing awareness training</li>
+                    <li>Review email forwarding rules monthly</li>
+                </ol>
+                <button class="btn btn-sm btn-outline-light mt-2">
+                    <i class="bi bi-download"></i> Download PDF Guide
+                </button>
+            `;
+        });
+
+        // Email audit functionality
+        document.getElementById('emailAuditBtn').addEventListener('click', function () {
+            const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+            let checkedCount = 0;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) checkedCount++;
+            });
+
+            const percentage = Math.round((checkedCount / checkboxes.length) * 100);
+            const resultDiv = document.getElementById('emailChecklistOutput');
+            resultDiv.classList.remove('d-none', 'alert-success', 'alert-warning', 'alert-danger');
+
+            if (percentage >= 75) {
+                resultDiv.classList.add('alert-success');
+                resultDiv.innerHTML = `<i class="bi bi-shield-check"></i> Excellent! Your basic email security score: ${percentage}%`;
+            } else if (percentage >= 50) {
+                resultDiv.classList.add('alert-warning');
+                resultDiv.innerHTML = `<i class="bi bi-shield-exclamation"></i> Good start. Complete ${checkboxes.length - checkedCount} more recommendations.`;
+            } else {
+                resultDiv.classList.add('alert-danger');
+                resultDiv.innerHTML = `<i class="bi bi-shield-slash"></i> Critical! Your email security score is only ${percentage}%`;
+            }
+        });
+
+        // Phishing test functionality
+        document.querySelectorAll('[data-phish-answer]').forEach(button => {
+            button.addEventListener('click', function () {
+                const answer = this.getAttribute('data-phish-answer');
+                const resultDiv = document.getElementById('phishResult');
+                resultDiv.classList.remove('d-none', 'alert-success', 'alert-danger');
+
+                if (answer === 'all') {
+                    resultDiv.classList.add('alert-success');
+                    resultDiv.innerHTML = `
+                        <i class="bi bi-check-circle"></i> Correct! This email shows multiple red flags:
+                        <ul class="mt-2">
+                            <li>Suspicious domain (m1cr0s0ft.com instead of microsoft.com)</li>
+                            <li>Creates false urgency ("account will be disabled")</li>
+                            <li>Link goes to unknown destination</li>
+                            <li>Requests sensitive information</li>
+                        </ul>
+                    `;
+                } else {
+                    resultDiv.classList.add('alert-danger');
+                    resultDiv.innerHTML = `
+                        <i class="bi bi-exclamation-triangle"></i> Partially correct, but there are more issues. 
+                        This is a phishing attempt showing multiple red flags.
+                    `;
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate__animated');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementPosition < windowHeight - 100) {
+                    const animationClass = element.classList[1];
+                    element.classList.add(animationClass);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+
+</html>

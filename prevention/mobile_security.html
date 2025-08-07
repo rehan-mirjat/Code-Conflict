@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Security Guide | Code & Conflict</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <link href="../css/custom.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
+
+    <style>
+        .mobile-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('../assets/imgs/mobile-security-bg.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .platform-card {
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            height: 100%;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .threat-card {
+            border-left: 3px solid var(--bs-danger);
+        }
+
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .security-step {
+            counter-increment: step-counter;
+            margin-bottom: 1rem;
+        }
+
+        .security-step:before {
+            content: counter(step-counter);
+            background-color: var(--bs-primary);
+            color: white;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 3px;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+
+<body class="cyber-gradient">
+    <!-- Cyber Alert Bar -->
+    <div
+        class="alert alert-warning alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
+        <strong>MOBILE ALERT:</strong> New Android malware "FakeCalls" bypasses 2FA |
+        <a href="../news/latest_threats.html" class="alert-link">Update Now</a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Main Navbar (Consistent with other pages) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="../index.html">
+                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                &
+                <span class="text-danger">Conflict</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCyber">
+                <i class="bi bi-shield-lock"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCyber">
+                <!-- Left-aligned menu items -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
+                        <a class="nav-link" href="../index.html"><i class="bi bi-house-door"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-bug"></i> Threats
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../threats/malware.html">Malware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/phishing.html">Phishing</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/password_attacks.html">Password Attacks</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/ransomware.html">Ransomware</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../threats/social_engineering.html">Social
+                                    Engineering</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-newspaper"></i> News
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../news/security_patches.html"><i
+                                        class="bi bi-patch-check"></i> Security Patches</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../news/latest_threats.html"><i
+                                        class="bi bi-exclamation-triangle"></i> Latest Threats</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../news/industry_news.html"><i
+                                        class="bi bi-building"></i> Industry News</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../news/event_calendar.html"><i
+                                        class="bi bi-calendar-event"></i> Event Calendar</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-shield-check"></i> Prevention
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="data_privacy.html">Data & Privacy</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="email_security.html">Email Security</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item active" href="mobile_security.html">Mobile Security</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="network_security.html">Network Security</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="secure_browsing.html">Secure Browsing</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Grouped Search + About/Contact -->
+                <div class="d-flex align-items-center">
+                    <!-- About & Contact Links -->
+                    <ul class="navbar-nav me-3">
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                            <a class="nav-link" href="../about_us.html"><i class="bi bi-info-circle"></i> About Us</a>
+                        </li>
+                        <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.5s;">
+                            <a class="nav-link" href="../contact.html"><i class="bi bi-envelope"></i> Contact Us</a>
+                        </li>
+                    </ul>
+
+                    <!-- Search Bar -->
+                    <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.6s;"
+                        role="search">
+                        <input class="form-control bg-dark border-secondary" type="search"
+                            placeholder="Search threats...">
+                        <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Sign Up / Login Buttons -->
+                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
+                    <a href="../login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                        Login</a>
+                    <a href="../signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Security Hero -->
+    <header class="py-5 mobile-hero text-white">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-8 animate__animated animate__fadeInLeft">
+                    <h1 class="display-4 fw-bold mb-4">
+                        <i class="bi bi-phone text-primary"></i> Mobile Security Guide
+                    </h1>
+                    <p class="lead mb-4">
+                        Protect your smartphones and tablets from modern digital threats with these essential security
+                        measures.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#checklist" class="btn btn-primary btn-lg px-4">
+                            <i class="bi bi-list-check"></i> Security Checklist
+                        </a>
+                        <a href="#apps" class="btn btn-outline-light btn-lg px-4">
+                            <i class="bi bi-shield-check"></i> Security Apps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Platform Security -->
+    <section class="py-5 bg-dark bg-opacity-50">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-phone"></i> Platform Security Comparison
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="card platform-card bg-dark border-primary">
+                        <div class="card-header border-primary bg-primary bg-opacity-10 d-flex align-items-center">
+                            <i class="bi bi-apple fs-3 me-3"></i>
+                            <div>
+                                <h4 class="mb-0">iOS</h4>
+                                <small class="text-muted">Apple Ecosystem</small>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5>Security Advantages:</h5>
+                            <ul>
+                                <li>Strict app review process</li>
+                                <li>Regular OS updates</li>
+                                <li>Hardware encryption</li>
+                                <li>Secure Enclave</li>
+                            </ul>
+                            <h5>Vulnerabilities:</h5>
+                            <ul>
+                                <li>Zero-day exploits</li>
+                                <li>Jailbreak risks</li>
+                                <li>iCloud phishing</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <span class="badge bg-primary">Security Score: 8.5/10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="card platform-card bg-dark border-success">
+                        <div class="card-header border-success bg-success bg-opacity-10 d-flex align-items-center">
+                            <i class="bi bi-android2 fs-3 me-3"></i>
+                            <div>
+                                <h4 class="mb-0">Android</h4>
+                                <small class="text-muted">Google Ecosystem</small>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5>Security Advantages:</h5>
+                            <ul>
+                                <li>Open-source transparency</li>
+                                <li>Google Play Protect</li>
+                                <li>Sandboxing</li>
+                                <li>Custom ROM options</li>
+                            </ul>
+                            <h5>Vulnerabilities:</h5>
+                            <ul>
+                                <li>Fragmented updates</li>
+                                <li>Third-party app stores</li>
+                                <li>Rooting risks</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <span class="badge bg-success">Security Score: 7.2/10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="card platform-card bg-dark border-warning">
+                        <div class="card-header border-warning bg-warning bg-opacity-10 d-flex align-items-center">
+                            <i class="bi bi-phone fs-3 me-3"></i>
+                            <div>
+                                <h4 class="mb-0">Other Devices</h4>
+                                <small class="text-muted">Specialized OS</small>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5>Security Advantages:</h5>
+                            <ul>
+                                <li>Less targeted by malware</li>
+                                <li>Minimalist attack surface</li>
+                                <li>Custom security features</li>
+                            </ul>
+                            <h5>Vulnerabilities:</h5>
+                            <ul>
+                                <li>Infrequent updates</li>
+                                <li>Limited app vetting</li>
+                                <li>Unknown vulnerabilities</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0">
+                            <span class="badge bg-warning text-dark">Security Score: 6.0/10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Threats -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-exclamation-triangle text-danger"></i> Common Mobile Threats
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-6 animate__animated animate__fadeInLeft">
+                    <div class="card threat-card bg-dark h-100">
+                        <div class="card-body">
+                            <h4><i class="bi bi-download text-danger"></i> Malicious Apps</h4>
+                            <p>Apps that appear legitimate but contain malware or spyware components.</p>
+                            <div class="alert alert-dark">
+                                <strong>Protection:</strong> Only download from official stores, check reviews and
+                                permissions.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 animate__animated animate__fadeInRight">
+                    <div class="card threat-card bg-dark h-100">
+                        <div class="card-body">
+                            <h4><i class="bi bi-wifi text-danger"></i> Rogue Hotspots</h4>
+                            <p>Fake WiFi networks designed to intercept your mobile communications.</p>
+                            <div class="alert alert-dark">
+                                <strong>Protection:</strong> Avoid public WiFi, use VPN, disable auto-connect.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 animate__animated animate__fadeInLeft">
+                    <div class="card threat-card bg-dark h-100">
+                        <div class="card-body">
+                            <h4><i class="bi bi-link-45deg text-danger"></i> Phishing Attacks</h4>
+                            <p>SMS and app-based phishing targeting mobile users with fake login pages.</p>
+                            <div class="alert alert-dark">
+                                <strong>Protection:</strong> Never click links in messages, enable 2FA.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 animate__animated animate__fadeInRight">
+                    <div class="card threat-card bg-dark h-100">
+                        <div class="card-body">
+                            <h4><i class="bi bi-bug text-danger"></i> Zero-Day Exploits</h4>
+                            <p>Undisclosed vulnerabilities exploited before patches are available.</p>
+                            <div class="alert alert-dark">
+                                <strong>Protection:</strong> Keep devices updated, disable unnecessary features.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Checklist -->
+    <section id="checklist" class="py-5 bg-dark bg-opacity-25">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <h2 class="mb-4"><i class="bi bi-list-check text-primary"></i> Mobile Security Checklist</h2>
+                    <ol class="list-unstyled">
+                        <li class="security-step">Enable device encryption</li>
+                        <li class="security-step">Set up biometric authentication</li>
+                        <li class="security-step">Install security updates immediately</li>
+                        <li class="security-step">Disable unnecessary permissions</li>
+                        <li class="security-step">Use a mobile VPN on public networks</li>
+                        <li class="security-step">Enable remote wipe capability</li>
+                        <li class="security-step">Regularly review app permissions</li>
+                        <li class="security-step">Disable Bluetooth when not in use</li>
+                    </ol>
+                    <button class="btn btn-primary mt-3" id="checklistButton">
+                        <i class="bi bi-clipboard-check"></i> Generate Personalized Checklist
+                    </button>
+                    <div id="checklistOutput" class="mt-3 alert d-none"></div>
+                </div>
+
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-primary h-100">
+                        <div class="card-header border-primary bg-primary bg-opacity-10">
+                            <h4><i class="bi bi-phone"></i> Device Security Test</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>Test your mobile device's security:</p>
+                            <div class="mb-3">
+                                <a href="https://www.drweb.com/mobile_security/" target="_blank"
+                                    class="btn btn-outline-primary w-100 mb-2">
+                                    <i class="bi bi-shield-check"></i> Android Security Check
+                                </a>
+                                <a href="https://support.apple.com/en-us/HT201222" target="_blank"
+                                    class="btn btn-outline-light w-100 mb-2">
+                                    <i class="bi bi-apple"></i> iOS Security Check
+                                </a>
+                                <a href="https://www.zimperium.com/mobile-security-test" target="_blank"
+                                    class="btn btn-outline-success w-100">
+                                    <i class="bi bi-speedometer2"></i> Network Vulnerability Test
+                                </a>
+                            </div>
+                            <hr>
+                            <h5 class="mt-3">Quick Security Audit</h5>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="mobileCheck1">
+                                <label class="form-check-label" for="mobileCheck1">
+                                    Automatic updates enabled
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="mobileCheck2">
+                                <label class="form-check-label" for="mobileCheck2">
+                                    Find My Device activated
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="mobileCheck3">
+                                <label class="form-check-label" for="mobileCheck3">
+                                    Screen lock enabled
+                                </label>
+                            </div>
+                            <button class="btn btn-sm btn-primary w-100 mt-2" id="quickAuditBtn">
+                                <i class="bi bi-graph-up"></i> Check Security Status
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Apps -->
+    <section id="apps" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 animate__animated animate__fadeInDown">
+                <i class="bi bi-shield-check text-success"></i> Recommended Security Apps
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="card bg-dark border-success h-100">
+                        <div class="card-header border-success d-flex">
+                            <img src="../assets/imgs/bitdefender-icon.png" width="40" height="40" class="me-3">
+                            <div>
+                                <h5 class="mb-0">Bitdefender Mobile</h5>
+                                <small class="text-muted">Antivirus & Protection</small>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="../assets/imgs/bitdefender-app.png" class="app-icon">
+                            <p>Comprehensive mobile security suite with web protection, VPN, and anti-theft features.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">Free/Paid</span>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.7</span>
+                                    <span><i class="bi bi-download text-info"></i> 10M+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0 d-flex justify-content-between">
+                            <a href="https://play.google.com/store/apps/details?id=com.bitdefender.antivirus"
+                                target="_blank" class="btn btn-sm btn-success">
+                                <i class="bi bi-google-play"></i> Android
+                            </a>
+                            <a href="https://apps.apple.com/us/app/bitdefender-mobile-security/id500154009"
+                                target="_blank" class="btn btn-sm btn-light">
+                                <i class="bi bi-apple"></i> iOS
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="card bg-dark border-primary h-100">
+                        <div class="card-header border-primary d-flex">
+                            <img src="../assets/imgs/protonvpn-icon.png" width="40" height="40" class="me-3">
+                            <div>
+                                <h5 class="mb-0">ProtonVPN</h5>
+                                <small class="text-muted">Secure VPN Service</small>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="../assets/imgs/protonvpn-app.png" class="app-icon">
+                            <p>High-speed Swiss VPN that protects your privacy on mobile networks with strong
+                                encryption.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">Free/Paid</span>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.6</span>
+                                    <span><i class="bi bi-download text-info"></i> 5M+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0 d-flex justify-content-between">
+                            <a href="https://play.google.com/store/apps/details?id=ch.protonvpn.android" target="_blank"
+                                class="btn btn-sm btn-primary">
+                                <i class="bi bi-google-play"></i> Android
+                            </a>
+                            <a href="https://apps.apple.com/us/app/protonvpn-secure-vpn/id1437005085" target="_blank"
+                                class="btn btn-sm btn-light">
+                                <i class="bi bi-apple"></i> iOS
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="card bg-dark border-warning h-100">
+                        <div class="card-header border-warning d-flex">
+                            <img src="../assets/imgs/authy-icon.png" width="40" height="40" class="me-3">
+                            <div>
+                                <h5 class="mb-0">Authy</h5>
+                                <small class="text-muted">2FA Authenticator</small>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="../assets/imgs/authy-app.png" class="app-icon">
+                            <p>Two-factor authentication app with encrypted cloud backup and multi-device sync.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">Free</span>
+                                <div>
+                                    <span class="me-2"><i class="bi bi-star-fill text-warning"></i> 4.8</span>
+                                    <span><i class="bi bi-download text-info"></i> 10M+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-dark border-top-0 d-flex justify-content-between">
+                            <a href="https://play.google.com/store/apps/details?id=com.authy.authy" target="_blank"
+                                class="btn btn-sm btn-warning">
+                                <i class="bi bi-google-play"></i> Android
+                            </a>
+                            <a href="https://apps.apple.com/us/app/authy/id494168017" target="_blank"
+                                class="btn btn-sm btn-light">
+                                <i class="bi bi-apple"></i> iOS
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5 animate__animated animate__fadeInUp">
+                <a href="#more-apps" class="btn btn-outline-primary" data-bs-toggle="collapse">
+                    <i class="bi bi-chevron-down"></i> View More Security Apps
+                </a>
+
+                <div id="more-apps" class="collapse mt-4">
+                    <div class="row g-4">
+                        <!-- Additional apps would go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Consistent with other pages) -->
+    <footer class="py-4 bg-dark border-top border-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>
+                        <a class="navbar-brand" href="../index.html">
+                            <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                            &
+                            <span class="text-danger">Conflict</span>
+                        </a>
+                    </h5>
+                    <p class="text-muted">Your guide to mobile security in a connected world.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Mobile Resources</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="https://www.android.com/security-center/" class="nav-link">Android
+                                Security</a></li>
+                        <li class="nav-item"><a href="https://support.apple.com/security" class="nav-link">Apple
+                                Security</a></li>
+                        <li class="nav-item"><a href="https://www.kaspersky.com/resource-center" class="nav-link">Mobile
+                                Threat Reports</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <div class="d-flex gap-3 mb-3">
+                        <a href="#" class="text-muted"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-github"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-discord"></i></a>
+                    </div>
+                    <div class="mt-3">
+                        <a href="../contact.html" class="btn btn-sm btn-outline-light">
+                            <i class="bi bi-shield-lock"></i> Security Questions?
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <p class="text-muted small mb-0">&copy; 2025 Code & Conflict. Educational use only.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Checklist functionality
+        document.getElementById('checklistButton').addEventListener('click', function () {
+            const checklistOutput = document.getElementById('checklistOutput');
+            checklistOutput.classList.remove('d-none', 'alert-success', 'alert-danger');
+            checklistOutput.classList.add('alert-success');
+            checklistOutput.innerHTML = `
+                <h5><i class="bi bi-check-circle"></i> Your Personalized Mobile Security Checklist</h5>
+                <ol>
+                    <li>Enable automatic security updates</li>
+                    <li>Install a reputable mobile security app</li>
+                    <li>Set up biometric authentication</li>
+                    <li>Review app permissions monthly</li>
+                    <li>Enable remote wipe capability</li>
+                </ol>
+                <button class="btn btn-sm btn-outline-light mt-2">
+                    <i class="bi bi-download"></i> Download Checklist PDF
+                </button>
+            `;
+        });
+
+        // Quick audit functionality
+        document.getElementById('quickAuditBtn').addEventListener('click', function () {
+            const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+            let checkedCount = 0;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) checkedCount++;
+            });
+
+            const percentage = Math.round((checkedCount / checkboxes.length) * 100);
+            const resultDiv = document.getElementById('checklistOutput');
+            resultDiv.classList.remove('d-none', 'alert-success', 'alert-warning', 'alert-danger');
+
+            if (percentage >= 75) {
+                resultDiv.classList.add('alert-success');
+                resultDiv.innerHTML = `<i class="bi bi-shield-check"></i> Great! Your basic mobile security score: ${percentage}%`;
+            } else if (percentage >= 50) {
+                resultDiv.classList.add('alert-warning');
+                resultDiv.innerHTML = `<i class="bi bi-shield-exclamation"></i> Fair security. Complete ${checkboxes.length - checkedCount} more recommendations.`;
+            } else {
+                resultDiv.classList.add('alert-danger');
+                resultDiv.innerHTML = `<i class="bi bi-shield-slash"></i> Warning! Your basic security score is only ${percentage}%`;
+            }
+        });
+
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate__animated');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementPosition < windowHeight - 100) {
+                    const animationClass = element.classList[1];
+                    element.classList.add(animationClass);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+
+</html>
