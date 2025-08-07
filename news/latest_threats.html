@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom CSS -->
     <link href="../css/custom.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
+
     <style>
         .threats-hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
@@ -103,8 +107,8 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
     </div>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary fixed-top">
+    <!-- Main Navbar (Updated with News menu) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
         <div class="container">
             <a class="navbar-brand animate__animated animate__fadeInLeft" href="../index.html">
                 <span class="text-primary">{</span>Code<span class="text-primary">}</span>
@@ -157,8 +161,8 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../news/latest_threats.html"><i
-                                        class="bi bi-exclamation-triangle active"></i> Latest Threats</a></li>
+                            <li><a class="dropdown-item active" href="../news/latest_threats.html"><i
+                                        class="bi bi-exclamation-triangle"></i> Latest Threats</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -216,7 +220,8 @@
                     <!-- Search Bar -->
                     <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.7s;"
                         role="search">
-                        <input class="form-control bg-dark border-secondary" type="search" placeholder="Search news...">
+                        <input class="form-control bg-dark border-secondary" type="search"
+                            placeholder="Search threats...">
                         <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
                     </form>
                 </div>
@@ -230,6 +235,7 @@
             </div>
         </div>
     </nav>
+
     <!-- Latest Threats Hero -->
     <header class="py-5 threats-hero text-white" style="margin-top: 56px;">
         <div class="container py-5">
@@ -574,28 +580,28 @@
                     <div class="row text-center">
                         <div class="col-md-3 mb-4">
                             <a href="https://www.cisa.gov" target="_blank" class="text-decoration-none">
-                                <img src="../assets/imgs/threat-intel/cisa.png" class="img-fluid mb-2"
+                                <img src="../assets/imgs/icons/CISA.png" class="img-fluid mb-2"
                                     style="max-height: 50px;">
                                 <p>CISA</p>
                             </a>
                         </div>
                         <div class="col-md-3 mb-4">
                             <a href="https://otx.alienvault.com" target="_blank" class="text-decoration-none">
-                                <img src="../assets/imgs/threat-intel/alienvault.png" class="img-fluid mb-2"
+                                <img src="../assets/imgs/icons/AlienVault.png" class="img-fluid mb-2"
                                     style="max-height: 50px;">
                                 <p>AlienVault OTX</p>
                             </a>
                         </div>
                         <div class="col-md-3 mb-4">
                             <a href="https://www.virustotal.com" target="_blank" class="text-decoration-none">
-                                <img src="../assets/imgs/threat-intel/virustotal.png" class="img-fluid mb-2"
+                                <img src="../assets/imgs/icons/totalvirus.png" class="img-fluid mb-2"
                                     style="max-height: 50px;">
                                 <p>VirusTotal</p>
                             </a>
                         </div>
                         <div class="col-md-3 mb-4">
                             <a href="https://www.malwarebytes.com" target="_blank" class="text-decoration-none">
-                                <img src="../assets/imgs/threat-intel/malwarebytes.png" class="img-fluid mb-2"
+                                <img src="../assets/imgs/icons/malwarebytes.png" class="img-fluid mb-2"
                                     style="max-height: 50px;">
                                 <p>Malwarebytes</p>
                             </a>
@@ -634,10 +640,10 @@
                 <div class="col-md-3">
                     <h5>Quick Links</h5>
                     <ul class="nav flex-column">
-                        <li class="nav-item"><a href="security-patches.html" class="nav-link">Security Patches</a></li>
-                        <li class="nav-item"><a href="../prevention/malware_protection.html" class="nav-link">Malware
+                        <li class="nav-item"><a href="../news/security_patches.html" class="nav-link">Security Patches</a></li>
+                        <li class="nav-item"><a href="../threats/malware.html" class="nav-link">Malware
                                 Protection</a></li>
-                        <li class="nav-item"><a href="../about.html" class="nav-link">About Our Data</a></li>
+                        <li class="nav-item"><a href="../about_us.html" class="nav-link">About Our Data</a></li>
                     </ul>
                 </div>
             </div>

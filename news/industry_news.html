@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom CSS -->
     <link href="../css/custom.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
+
     <style>
         .industry-hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
@@ -24,6 +28,10 @@
         .news-card {
             transition: all 0.3s ease;
             border-left: 4px solid var(--bs-primary);
+        }
+
+        .card-img-top{
+            width: 500px;
         }
 
         .news-card:hover {
@@ -41,8 +49,7 @@
         }
 
         .company-logo {
-            height: 40px;
-            max-width: 120px;
+            max-width: 40px;
             object-fit: contain;
             margin-right: 15px;
         }
@@ -65,15 +72,14 @@
 
 <body class="cyber-gradient">
     <!-- Cyber Alert Bar -->
-    <div class="alert alert-info alert-dismissible rounded-0 fixed-top text-center py-2 animate__animated animate__fadeInDown"
-        style="margin-top: 56px;">
+    <div class="alert alert-info alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
         <strong>INDUSTRY UPDATE:</strong> New Cybersecurity Regulations Coming in 2024 |
         <a href="#regulatory-updates" class="alert-link">Details Below</a>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
     </div>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary fixed-top">
+    <!-- Main Navbar (Updated with News menu) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
         <div class="container">
             <a class="navbar-brand animate__animated animate__fadeInLeft" href="../index.html">
                 <span class="text-primary">{</span>Code<span class="text-primary">}</span>
@@ -185,7 +191,8 @@
                     <!-- Search Bar -->
                     <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.7s;"
                         role="search">
-                        <input class="form-control bg-dark border-secondary" type="search" placeholder="Search news...">
+                        <input class="form-control bg-dark border-secondary" type="search"
+                            placeholder="Search threats...">
                         <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
                     </form>
                 </div>
@@ -238,10 +245,10 @@
                     <!-- Featured Article 1 -->
                     <div class="card news-card bg-dark mb-4 animate__animated animate__fadeInUp"
                         style="animation-delay: 0.1s;">
-                        <img src="../assets/imgs/industry/merger.jpg" class="card-img-top" alt="Company merger">
+                        <img src="../assets/imgs/images.jpg" class="card-img-top" alt="Company merger">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="../assets/imgs/company-logos/paloalto.png" class="company-logo">
+                                <img src="../assets/imgs/favicon.png" class="company-logo">
                                 <div>
                                     <span class="badge bg-primary">Merger</span>
                                     <span class="badge bg-dark ms-2">Market Move</span>
@@ -266,7 +273,7 @@
                         style="animation-delay: 0.2s;">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="../assets/imgs/company-logos/cisa.png" class="company-logo">
+                                <img src="../assets/imgs/favicon.png" class="company-logo">
                                 <div>
                                     <span class="badge bg-danger">Regulation</span>
                                     <span class="badge bg-dark ms-2">Policy</span>
@@ -412,7 +419,7 @@
                                 <div
                                     class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
                                     <div>
-                                        <img src="../assets/imgs/company-logos/crowdstrike.png"
+                                        <img src="../assets/imgs/favicon.png"
                                             class="company-logo-sm me-2" style="height: 25px;">
                                         <span>CrowdStrike</span>
                                     </div>
@@ -421,7 +428,7 @@
                                 <div
                                     class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
                                     <div>
-                                        <img src="../assets/imgs/company-logos/zscaler.png" class="company-logo-sm me-2"
+                                        <img src="../assets/imgs/favicon.png" class="company-logo-sm me-2"
                                             style="height: 25px;">
                                         <span>Zscaler</span>
                                     </div>
@@ -430,7 +437,7 @@
                                 <div
                                     class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
                                     <div>
-                                        <img src="../assets/imgs/company-logos/sentinelone.png"
+                                        <img src="../assets/imgs/favicon.png"
                                             class="company-logo-sm me-2" style="height: 25px;">
                                         <span>SentinelOne</span>
                                     </div>
@@ -439,7 +446,7 @@
                                 <div
                                     class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
                                     <div>
-                                        <img src="../assets/imgs/company-logos/okta.png" class="company-logo-sm me-2"
+                                        <img src="../assets/imgs/favicon.png" class="company-logo-sm me-2"
                                             style="height: 25px;">
                                         <span>Okta</span>
                                     </div>

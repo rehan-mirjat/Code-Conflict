@@ -15,12 +15,21 @@
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="../css/custom.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
+
     <style>
         .calendar-hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
                 url('../assets/imgs/calendar-bg.jpg') no-repeat center center;
             background-size: cover;
             padding-top: 100px;
+        }
+
+        .card-img-top{
+            width: 10vw;
+            min-width: 150px;
         }
 
         .event-card {
@@ -98,8 +107,7 @@
         }
 
         .organizer-logo {
-            height: 30px;
-            max-width: 100px;
+            max-width: 40px;
             object-fit: contain;
             margin-right: 10px;
         }
@@ -108,15 +116,14 @@
 
 <body class="cyber-gradient">
     <!-- Cyber Alert Bar -->
-    <div class="alert alert-info alert-dismissible rounded-0 fixed-top text-center py-2 animate__animated animate__fadeInDown"
-        style="margin-top: 56px;">
+    <div class="alert alert-info alert-dismissible rounded-0 mb-0 text-center py-2 animate__animated animate__fadeInDown">
         <strong>UPCOMING EVENT:</strong> Black Hat USA 2023 starts August 5 |
         <a href="#blackhat-event" class="alert-link">View Details</a>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
     </div>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary fixed-top">
+    <!-- Main Navbar (Updated with News menu) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border-bottom border-primary sticky-top">
         <div class="container">
             <a class="navbar-brand animate__animated animate__fadeInLeft" href="../index.html">
                 <span class="text-primary">{</span>Code<span class="text-primary">}</span>
@@ -229,7 +236,7 @@
                     <form class="d-flex animate__animated animate__fadeInDown" style="animation-delay: 0.7s;"
                         role="search">
                         <input class="form-control bg-dark border-secondary" type="search"
-                            placeholder="Search events...">
+                            placeholder="Search threats...">
                         <button class="btn btn-outline-primary ms-2" type="submit"><i class="bi bi-search"></i></button>
                     </form>
                 </div>
@@ -280,7 +287,7 @@
                 <!-- Black Hat Event -->
                 <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
                     <div class="card event-card bg-dark h-100" id="blackhat-event">
-                        <img src="../assets/imgs/events/blackhat.jpg" class="card-img-top" alt="Black Hat USA">
+                        <img src="../assets/imgs/event-logos/blackhat.png" class="card-img-top" alt="Black Hat USA">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <img src="../assets/imgs/event-logos/blackhat.png" class="organizer-logo">
@@ -313,10 +320,10 @@
                 <!-- DEF CON Event -->
                 <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
                     <div class="card event-card bg-dark h-100">
-                        <img src="../assets/imgs/events/defcon.jpg" class="card-img-top" alt="DEF CON 31">
+                        <img src="../assets/imgs/event-logos/defcon-events.png" class="card-img-top" alt="DEF CON 31">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="../assets/imgs/event-logos/defcon.png" class="organizer-logo">
+                                <img src="../assets/imgs/event-logos/defcon-events.png" class="organizer-logo">
                                 <div>
                                     <span class="badge event-type-badge event-type-conference">Conference</span>
                                     <span class="badge bg-dark ms-2">In-Person</span>
@@ -346,10 +353,10 @@
                 <!-- RSA Conference -->
                 <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
                     <div class="card event-card bg-dark h-100">
-                        <img src="../assets/imgs/events/rsa.jpg" class="card-img-top" alt="RSA Conference">
+                        <img src="../assets/imgs/icons/hacker.png" class="card-img-top" alt="RSA Conference">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="../assets/imgs/event-logos/rsa.png" class="organizer-logo">
+                                <img src="../assets/imgs/event-logos/white-hat.png" class="organizer-logo">
                                 <div>
                                     <span class="badge event-type-badge event-type-conference">Conference</span>
                                     <span class="badge bg-dark ms-2">Hybrid</span>
@@ -379,10 +386,10 @@
                 <!-- Free Webinar -->
                 <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
                     <div class="card event-card bg-dark h-100">
-                        <img src="../assets/imgs/events/webinar.jpg" class="card-img-top" alt="Zero Trust Webinar">
+                        <img src="../assets/imgs/icons/ddos.png" class="card-img-top" alt="Zero Trust Webinar">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="../assets/imgs/event-logos/sans.png" class="organizer-logo">
+                                <img src="../assets/imgs/icons/ddos.png" class="organizer-logo">
                                 <div>
                                     <span class="badge event-type-badge event-type-webinar">Webinar</span>
                                     <span class="badge bg-dark ms-2">Virtual</span>
