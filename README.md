@@ -1,59 +1,53 @@
-# Using Bootstrap 5.3.7
+# Using Bootstrap 5.3.0
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<<!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
 # Site Structure Idea is Taking from Deepseek
 # I hope it will not effect my marks sir !
 
-Code & Conflict/
-├── index.html                  # Homepage (BS5 Hero + Threat Feed)
-├── about.html                  # Mission/Team (BS5 Cards)
-├── contact.html                # Secure Form (BS5 + reCAPTCHA)
-├── glossary.html               # Interactive Term Finder
-├── resources.html              # BS5 List Group with Filters
-├── threats/                    # BS5 Card Grids
-│   ├── malware.html            # Accordion Attack Breakdown
-│   ├── phishing.html           # Embedded Phishing Simulator
-│   ├── ransomware.html         # Timeline Component
-│   ├── social-engineering.html # Case Study Carousel
-│   └── password-attacks.html   # Password Strength Meter
-├── prevention/                 # BS5 Steps Components
-│   ├── secure-browsing.html    # Extension Badges
-│   ├── email-security.html     # Header Analyzer Tool
-│   ├── mobile-security.html    # QR Code Scanner Demo
-│   ├── network-security.html   # Wi-Fi Security Checklist
-│   └── data-privacy.html       # GDPR Interactive Guide
-├── news/                       # BS5 Card Layouts
-│   ├── latest-threats.html     # Severity Tagged Cards
-│   ├── security-patches.html   # Version Comparison Tables
-│   ├── industry-news.html      # Media Object Layout
-│   ├── events.html             # Calendar View
-│   └── case-studies.html       # Tabbed Case Studies
-├── css/
-│   ├── custom.scss             # BS5 Overrides
-│   ├── theme-dark.css          # Optional Dark Mode
-│   └── print.css               # Print Optimization
-├── js/
-│   ├── bootstrap.bundle.min.js # BS5 Components
-│   ├── custom.js               # Vanilla JS Enhancements
-│   └── security-tools.js       # Interactive Modules
-└── assets/
-    ├──assets/imgs/
-        ├── cyber-security-hero.jpg       # Main hero image
-        ├── ransomware-attack.jpg         # Ransomware threat card
-        ├── phishing-email.jpg            # Phishing threat card
-        ├── log4j-vulnerability.jpg       # Vulnerability card
-        ├── phishing-sample-full.jpg      # Detailed phishing example
-        ├── microsoft-logo.png            # For email sample
-        ├── ransomware-icon.png           # Stats section
-        ├── clock-icon.png                # Stats section
-        ├── hacker-icon.png               # Stats section
-        ├── shield-icon.png               # Stats section
-        ├── cyber-security-logo.png       # Footer logo
-        └── cyber-security-badge.png      # Certification badge
+#Code & Conflict
+
+📁 ASSIGNMENT/
+├── 📁 assets/              # Static resources
+│   ├── 📁 css/             # Stylesheets
+│   ├── 📁 imgs/            # Images and icons and Team
+│   └── 📁 js/              # JavaScript functionality
+│
+├── 📁 news/                # Threat news section
+│   ├── event_calendar.html
+│   ├── industry_news.html
+│   ├── latest_threats.html
+│   └── security_patches.html
+│
+├── 📁 prevention/          # Security guides
+│   ├── data_privacy.html
+│   ├── email_security.html
+│   ├── mobile_security.html
+│   ├── network_security.html
+│   └── secure_browsing.html
+│
+├── 📁 threats/             # Threat intelligence
+│   ├── malware.html
+│   ├── password_attacks.html
+│   ├── phishing.html
+│   ├── ransomware.html
+│   ├── social_engineering.html
+│   └── threats_view.html
+│
+├── about_us.html           # Organization information
+├── contact.html            # Contact page
+├── index.html              # Homepage
+├── login.html              # User authentication
+├── README.md               # Project documentation
+└── signup.html             # Registration portal
