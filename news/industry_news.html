@@ -18,29 +18,24 @@
     <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
 
     <style>
-        .industry-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
-            background-size: cover;
-            padding-top: 100px;
-        }
-
         .news-card {
             transition: all 0.3s ease;
-            border-left: 4px solid var(--bs-primary);
+            border-left: 4px solid var(--neon-cyan);
         }
 
-        .card-img-top{
-            width: 500px;
+        .news-card .card-img-top {
+            width: 100%;
+            max-height: 280px;
+            object-fit: cover;
         }
 
         .news-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.18);
         }
 
         .news-tag {
-            font-family: monospace;
+            font-family: var(--font-mono);
             cursor: pointer;
         }
 
@@ -56,16 +51,16 @@
 
         .trending-sidebar {
             position: sticky;
-            top: 120px;
+            top: 100px;
         }
 
         .trending-item {
-            border-left: 3px solid;
+            border-left: 3px solid var(--neon-cyan);
             transition: all 0.2s ease;
         }
 
         .trending-item:hover {
-            background: rgba(52, 152, 219, 0.1);
+            background: rgba(0, 240, 255, 0.08) !important;
         }
     </style>
 </head>
@@ -100,6 +95,8 @@
                             <i class="bi bi-bug"></i> Threats
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item fw-semibold text-info" href="../threats/threats_view.html"><i class="bi bi-speedometer2"></i> Threat Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="../threats/malware.html">Malware</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -198,8 +195,8 @@
                 </div>
 
                 <!-- Sign Up / Login Buttons -->
-                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.8s;">
-                    <a href="../login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0 animate__animated animate__fadeInDown" style="animation-delay: 0.8s;">
+                    <a href="../login.html" class="btn btn-outline-light"><i class="bi bi-box-arrow-in-right"></i>
                         Login</a>
                     <a href="../signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
                 </div>
@@ -209,22 +206,73 @@
 
     <!-- Industry News Hero -->
     <header class="py-5 industry-hero text-white">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-8 animate__animated animate__fadeInLeft">
-                    <h1 class="display-4 fw-bold mb-4">
+        <div class="container py-4">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7 animate__animated animate__fadeInLeft">
+                    <nav aria-label="breadcrumb" class="mb-3">
+                        <ol class="breadcrumb mb-2 small">
+                            <li class="breadcrumb-item"><a href="../index.html" class="text-info text-decoration-none">Home</a></li>
+                            <li class="breadcrumb-item text-secondary">News</li>
+                            <li class="breadcrumb-item active text-light" aria-current="page">Industry News</li>
+                        </ol>
+                    </nav>
+                    <span class="badge bg-info mb-3"><i class="bi bi-globe2"></i> MARKET &amp; POLICY INTELLIGENCE</span>
+                    <h1 class="display-4 fw-bold mb-3">
                         <i class="bi bi-building text-primary"></i> Industry News
                     </h1>
-                    <p class="lead mb-4">
-                        The latest developments, mergers, regulations, and trends in cybersecurity.
+                    <p class="lead text-secondary mb-4">
+                        Strategic cybersecurity acquisitions, SEC &amp; CISA CIRCIA incident mandates, EU NIS2 enforcement, and enterprise defense market shifts.
                     </p>
-                    <div class="d-flex gap-3">
+                    <div class="d-flex flex-wrap gap-3">
                         <a href="#featured-news" class="btn btn-primary btn-lg px-4">
                             <i class="bi bi-star-fill"></i> Featured Stories
                         </a>
                         <a href="#regulatory-updates" class="btn btn-outline-light btn-lg px-4">
                             <i class="bi bi-file-earmark-text"></i> Regulations
                         </a>
+                    </div>
+                </div>
+                <div class="col-lg-5 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-info shadow-lg">
+                        <div class="card-header border-info bg-info bg-opacity-10 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-info"><i class="bi bi-graph-up-arrow me-2"></i>Regulatory &amp; Sector Pulse</span>
+                            <span class="badge bg-success">Q4 BRIEFING</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3 text-center mb-3">
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-info mb-0">4d</div>
+                                        <small class="text-muted d-block">SEC 8-K Window</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-warning mb-0">72h</div>
+                                        <small class="text-muted d-block">CIRCIA Rule</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-success mb-0">78%</div>
+                                        <small class="text-muted d-block">Zero Trust</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="text-light">Enterprise CNAPP Consolidation</span>
+                                    <span class="text-info monospace">+45% MTTR Gain</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 78%"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center small text-muted pt-2 border-top border-secondary border-opacity-25">
+                                <span><i class="bi bi-bank text-warning me-1"></i> Focus: SEC &amp; EU NIS2</span>
+                                <a href="#regulatory-updates" class="text-info text-decoration-none">Compliance Table &rarr;</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -588,7 +636,7 @@
                 </div>
             </div>
             <hr class="my-4 border-secondary">
-            <p class="text-muted small mb-0 text-center">&copy; 2025 Code & Conflict || All Right Are Reserved By Rehan
+            <p class="text-muted small mb-0 text-center">&copy; 2025 Code &amp; Conflict || All Rights Reserved By Rehan
                 Raza ITE/107/2K23 </p>
         </div>
     </footer>
@@ -597,15 +645,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Make news tags clickable
+        // Make news tags filter news cards interactively
         document.querySelectorAll('.news-tag').forEach(el => {
             el.addEventListener('click', function () {
-                const tag = this.textContent.substring(1);
-                alert(`Would filter news by tag: ${tag}`);
-                // In a real implementation, this would filter news
+                const tag = this.textContent.trim().toLowerCase();
+                document.querySelectorAll('.news-card').forEach(card => {
+                    const match = card.textContent.toLowerCase().includes(tag);
+                    card.style.opacity = match ? '1' : '0.45';
+                });
             });
         });
-
     </script>
     <script src="../assets/js/main.js"></script>
 </body>

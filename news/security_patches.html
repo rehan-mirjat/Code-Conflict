@@ -18,47 +18,41 @@
     <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
 
     <style>
-        .patches-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
-            background-size: cover;
-        }
-
         .patch-card {
             transition: all 0.3s ease;
             border-left: 4px solid;
         }
 
         .patch-card.critical {
-            border-left-color: #e74c3c;
+            border-left-color: #ff3366;
         }
 
         .patch-card.high {
-            border-left-color: #f39c12;
+            border-left-color: #f59e0b;
         }
 
         .patch-card.medium {
-            border-left-color: #f1c40f;
+            border-left-color: #00f0ff;
         }
 
         .patch-card.low {
-            border-left-color: #2ecc71;
+            border-left-color: #10b981;
         }
 
         .patch-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.18);
         }
 
         .vendor-logo {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             object-fit: contain;
             margin-right: 15px;
         }
 
         .cve-chip {
-            font-family: monospace;
+            font-family: var(--font-mono);
             cursor: pointer;
         }
 
@@ -99,6 +93,8 @@
                             <i class="bi bi-bug"></i> Threats
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item fw-semibold text-info" href="../threats/threats_view.html"><i class="bi bi-speedometer2"></i> Threat Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="../threats/malware.html">Malware</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -197,8 +193,8 @@
                 </div>
 
                 <!-- Sign Up / Login Buttons -->
-                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.8s;">
-                    <a href="../login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0 animate__animated animate__fadeInDown" style="animation-delay: 0.8s;">
+                    <a href="../login.html" class="btn btn-outline-light"><i class="bi bi-box-arrow-in-right"></i>
                         Login</a>
                     <a href="../signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
                 </div>
@@ -208,22 +204,73 @@
 
     <!-- Security Patches Hero -->
     <header class="py-5 patches-hero text-white">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-8 animate__animated animate__fadeInLeft">
-                    <h1 class="display-4 fw-bold mb-4">
+        <div class="container py-4">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7 animate__animated animate__fadeInLeft">
+                    <nav aria-label="breadcrumb" class="mb-3">
+                        <ol class="breadcrumb mb-2 small">
+                            <li class="breadcrumb-item"><a href="../index.html" class="text-info text-decoration-none">Home</a></li>
+                            <li class="breadcrumb-item text-secondary">News</li>
+                            <li class="breadcrumb-item active text-light" aria-current="page">Security Patches</li>
+                        </ol>
+                    </nav>
+                    <span class="badge bg-primary mb-3"><i class="bi bi-shield-fill-check"></i> CISA KEV &amp; VENDOR ADVISORIES</span>
+                    <h1 class="display-4 fw-bold mb-3">
                         <i class="bi bi-patch-check text-primary"></i> Security Patches
                     </h1>
-                    <p class="lead mb-4">
-                        Critical updates and vulnerability fixes from major vendors.
+                    <p class="lead text-secondary mb-4">
+                        Critical out-of-band updates, Patch Tuesday rollups, and emergency vulnerability remediations across enterprise operating systems and cloud stacks.
                     </p>
-                    <div class="d-flex gap-3">
+                    <div class="d-flex flex-wrap gap-3">
                         <a href="#critical-patches" class="btn btn-primary btn-lg px-4">
                             <i class="bi bi-exclamation-triangle"></i> Critical Updates
                         </a>
                         <a href="#patch-calendar" class="btn btn-outline-light btn-lg px-4">
                             <i class="bi bi-calendar-event"></i> Patch Calendar
                         </a>
+                    </div>
+                </div>
+                <div class="col-lg-5 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-primary shadow-lg">
+                        <div class="card-header border-primary bg-primary bg-opacity-10 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-info"><i class="bi bi-cpu-fill me-2"></i>Active KEV Patch Telemetry</span>
+                            <span class="badge bg-danger"><span class="live-dot"></span>LIVE FEED</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3 text-center mb-3">
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-danger mb-0">4</div>
+                                        <small class="text-muted d-block">Zero-Days</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-warning mb-0">72h</div>
+                                        <small class="text-muted d-block">CISA SLA</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-success mb-0">94%</div>
+                                        <small class="text-muted d-block">Mitigated</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="text-light">Critical CVSS &ge; 8.0 Remediation</span>
+                                    <span class="text-info monospace">88% Deployed</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center small text-muted pt-2 border-top border-secondary border-opacity-25">
+                                <span><i class="bi bi-shield-exclamation text-warning me-1"></i> Priority: CVE-2023-36884</span>
+                                <a href="#cveSearch" class="text-info text-decoration-none">CVE Lookup &rarr;</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -596,7 +643,7 @@
                 </div>
             </div>
             <hr class="my-4 border-secondary">
-            <p class="text-muted small mb-0 text-center">&copy; 2025 Code & Conflict || All Right Are Reserved By Rehan
+            <p class="text-muted small mb-0 text-center">&copy; 2025 Code &amp; Conflict || All Rights Reserved By Rehan
                 Raza ITE/107/2K23 </p>
         </div>
     </footer>
@@ -681,42 +728,67 @@
             }
         };
 
-        // CVE Search Handler
+        // CVE Search Handler (Hybrid: Backend REST API + Offline local fallback)
         document.getElementById('cveSearchBtn').addEventListener('click', function () {
             let query = document.getElementById('cveSearch').value.trim();
             if (!query) return;
 
             // Strip "CVE-" prefix if entered
-            query = query.replace(/^CVE-/i, '');
-            const fullCve = `CVE-${query}`;
+            const cleanQuery = query.replace(/^CVE-/i, '');
+            const fullCve = `CVE-${cleanQuery}`;
 
-            const known = cveDatabase[query];
-            if (known) {
-                document.getElementById('cveTitle').textContent = known.title;
-                document.getElementById('cveDescription').textContent = known.description;
-                document.getElementById('cvePublished').textContent = known.published;
-                document.getElementById('cveModified').textContent = known.modified;
-                
-                const sevBadge = document.getElementById('cveSeverity');
-                sevBadge.textContent = known.severity;
-                sevBadge.className = `badge ${known.badgeClass}`;
-            } else {
-                document.getElementById('cveTitle').textContent = `${fullCve}: Verified Security Advisory`;
-                document.getElementById('cveDescription').textContent =
-                    `Querying public threat intelligence records for ${fullCve}. Please consult the National Vulnerability Database (NVD) and MITRE CVE catalog for full CVSS temporal metrics and affected vendor CPE configurations.`;
-                document.getElementById('cvePublished').textContent = 'Catalog Query';
-                document.getElementById('cveModified').textContent = 'Live Feed';
+            function displayCve(data) {
+                document.getElementById('cveTitle').textContent = data.title;
+                document.getElementById('cveDescription').textContent = data.description;
+                document.getElementById('cvePublished').textContent = data.published;
+                document.getElementById('cveModified').textContent = data.modified;
 
                 const sevBadge = document.getElementById('cveSeverity');
-                sevBadge.textContent = 'CHECK NVD METRICS';
-                sevBadge.className = 'badge bg-info';
+                sevBadge.textContent = data.severity;
+                const isCrit = (data.severity || '').includes('CRITICAL');
+                const isHigh = (data.severity || '').includes('HIGH');
+                sevBadge.className = `badge ${isCrit ? 'bg-danger' : (isHigh ? 'bg-warning' : 'bg-info')}`;
+
+                document.getElementById('cveRef1').href = data.nvd_url || `https://nvd.nist.gov/vuln/detail/${fullCve}`;
+                document.getElementById('cveRef1').textContent = `NVD Official Advisory (${fullCve})`;
+                document.getElementById('cveRef2').href = data.mitre_url || `https://cve.mitre.org/cgi-bin/cvename.cgi?name=${fullCve}`;
+                document.getElementById('cveRef2').textContent = `MITRE Record (${fullCve})`;
+                document.getElementById('cveResults').classList.remove('d-none');
             }
 
-            document.getElementById('cveRef1').href = `https://nvd.nist.gov/vuln/detail/${fullCve}`;
-            document.getElementById('cveRef1').textContent = `NVD Official Advisory (${fullCve})`;
-            document.getElementById('cveRef2').href = `https://cve.mitre.org/cgi-bin/cvename.cgi?name=${fullCve}`;
-            document.getElementById('cveRef2').textContent = `MITRE Record (${fullCve})`;
-            document.getElementById('cveResults').classList.remove('d-none');
+            fetch(`../api/cve/${cleanQuery}`)
+                .then(res => {
+                    if (!res.ok) throw new Error('API unavailable');
+                    return res.json();
+                })
+                .then(res => {
+                    if (res && res.ok && res.cve) {
+                        displayCve(res.cve);
+                    } else {
+                        throw new Error('Fallback needed');
+                    }
+                })
+                .catch(() => {
+                    // Resilient client-side fallback
+                    const known = cveDatabase[cleanQuery];
+                    if (known) {
+                        displayCve({
+                            title: known.title,
+                            description: known.description,
+                            published: known.published,
+                            modified: known.modified,
+                            severity: known.severity
+                        });
+                    } else {
+                        displayCve({
+                            title: `${fullCve}: Verified Security Advisory`,
+                            description: `Querying public threat intelligence records for ${fullCve}. Please consult the National Vulnerability Database (NVD) and MITRE CVE catalog for full CVSS temporal metrics and affected vendor CPE configurations.`,
+                            published: 'Catalog Query',
+                            modified: 'Live Feed',
+                            severity: 'CHECK NVD METRICS'
+                        });
+                    }
+                });
         });
 
         // Make CVE chips clickable

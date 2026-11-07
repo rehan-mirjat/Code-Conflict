@@ -19,12 +19,9 @@
 
     <style>
         .threat-map {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
-            background-size: cover;
-            height: 400px;
+            height: 430px;
             position: relative;
-            border-radius: 8px;
+            border-radius: 14px;
             overflow: hidden;
         }
 
@@ -34,6 +31,51 @@
             height: 12px;
             border-radius: 50%;
             animation: pulse 2s infinite;
+            z-index: 3;
+            cursor: crosshair;
+        }
+
+        .soc-hud-overlay {
+            position: absolute;
+            z-index: 4;
+            background: rgba(7, 10, 19, 0.82);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 240, 255, 0.28);
+            border-radius: 8px;
+            padding: 0.55rem 0.85rem;
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            color: #e2e8f0;
+            pointer-events: none;
+        }
+
+        .soc-world-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        .soc-radar-sweep {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, transparent, rgba(0, 240, 255, 0.75), transparent);
+            box-shadow: 0 0 18px rgba(0, 240, 255, 0.6);
+            z-index: 2;
+            animation: radarScan 9s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes radarScan {
+            0% { left: 0%; opacity: 0.2; }
+            50% { opacity: 0.85; }
+            100% { left: 100%; opacity: 0.2; }
         }
 
         @keyframes pulse {
@@ -43,7 +85,7 @@
             }
 
             70% {
-                transform: scale(3);
+                transform: scale(2.8);
                 opacity: 0.3;
             }
 
@@ -55,24 +97,23 @@
 
         .threat-card {
             transition: all 0.3s ease;
-            border: 1px solid #2c3e50;
         }
 
         .threat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.2);
+            box-shadow: 0 10px 25px rgba(255, 51, 102, 0.2);
         }
 
         .severity-critical {
-            border-left: 4px solid #e74c3c;
+            border-left: 4px solid #ff3366;
         }
 
         .severity-high {
-            border-left: 4px solid #f39c12;
+            border-left: 4px solid #f59e0b;
         }
 
         .severity-medium {
-            border-left: 4px solid #f1c40f;
+            border-left: 4px solid #00f0ff;
         }
     </style>
 </head>
@@ -108,6 +149,10 @@
                             <i class="bi bi-bug"></i> Threats
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item fw-semibold text-info active" href="threats_view.html"><i class="bi bi-speedometer2"></i> Threat Dashboard</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="malware.html">Malware</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -206,8 +251,8 @@
                 </div>
 
                 <!-- Sign Up / Login Buttons (Right-aligned) -->
-                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
-                    <a href="../login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
+                    <a href="../login.html" class="btn btn-outline-light"><i class="bi bi-box-arrow-in-right"></i>
                         Login</a>
                     <a href="../signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
                 </div>
@@ -218,15 +263,19 @@
     <!-- Threat Dashboard Header -->
     <header class="py-5 bg-dark bg-opacity-50">
         <div class="container py-4">
-            <div class="row align-items-center">
-                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7 animate__animated animate__fadeInLeft">
+                    <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                        <span class="badge bg-danger"><i class="bi bi-broadcast"></i> SOC TELEMETRY STREAM // LIVE</span>
+                        <span class="badge bg-info"><i class="bi bi-shield-lock"></i> MITRE ATT&amp;CK v15</span>
+                    </div>
                     <h1 class="display-4 fw-bold mb-3">
                         <i class="bi bi-activity text-danger"></i> Threat Intelligence
                     </h1>
-                    <p class="lead mb-4">
-                        Real-time monitoring of global cyber threats and attack patterns.
+                    <p class="lead text-secondary mb-4">
+                        Real-time monitoring of global cyber threats, active C2 infrastructure, zero-day exploitation, and adversary attack patterns across 24+ sovereign sectors.
                     </p>
-                    <div class="d-flex gap-3">
+                    <div class="d-flex flex-wrap gap-3">
                         <button class="btn btn-danger btn-lg px-4" data-bs-toggle="modal" data-bs-target="#reportModal">
                             <i class="bi bi-flag"></i> Report Threat
                         </button>
@@ -235,20 +284,37 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                <div class="col-lg-5 animate__animated animate__fadeInRight">
                     <div class="card bg-dark border-danger">
-                        <div class="card-header border-danger bg-danger bg-opacity-10 d-flex justify-content-between">
-                            <span><i class="bi bi-exclamation-triangle-fill"></i> Current Threat Level</span>
-                            <span class="text-muted">Updated: <span id="update-time">Just now</span></span>
+                        <div class="card-header border-danger bg-danger bg-opacity-10 d-flex justify-content-between align-items-center">
+                            <span class="monospace small text-danger fw-bold"><i class="bi bi-exclamation-triangle-fill me-1"></i> DEFCON THREAT INDEX</span>
+                            <span class="text-muted small monospace">Updated: <span id="update-time">Just now</span></span>
                         </div>
-                        <div class="card-body text-center">
-                            <div class="display-3 text-danger mb-3">HIGH</div>
-                            <div class="progress mb-3" style="height: 20px;">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-baseline mb-2">
+                                <div class="display-4 fw-bold text-danger mb-0">HIGH</div>
+                                <span class="badge bg-danger">78 / 100 SEVERITY</span>
+                            </div>
+                            <div class="progress mb-3" style="height: 16px;">
                                 <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                                     style="width: 78%">78%</div>
                             </div>
+                            <div class="row g-2 text-start small monospace mb-3">
+                                <div class="col-6">
+                                    <div class="p-2 rounded border border-secondary bg-dark bg-opacity-50">
+                                        <span class="text-muted d-block">PRIMARY VECTOR</span>
+                                        <span class="text-warning fw-bold">AiTM &amp; RaaS C2</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-2 rounded border border-secondary bg-dark bg-opacity-50">
+                                        <span class="text-muted d-block">KEV EXPLOITS</span>
+                                        <span class="text-info fw-bold">14 Active CVEs</span>
+                                    </div>
+                                </div>
+                            </div>
                             <p class="small text-muted mb-0">
-                                <i class="bi bi-info-circle"></i> Increased ransomware activity detected globally
+                                <i class="bi bi-info-circle text-danger"></i> Elevated LockBit 3.0 &amp; Evilginx2 proxy activity detected globally
                             </p>
                         </div>
                     </div>
@@ -262,10 +328,74 @@
         <div class="container">
             <h2 class="text-center mb-4 animate__animated animate__fadeInDown">
                 <i class="bi bi-globe2 text-primary"></i> Live Threat Map
-                <small class="text-muted d-block">Simulated attack data - updates every 30 seconds</small>
+                <small class="text-muted d-block fs-6 mt-1">Simulated SOC global sensor telemetry — updates every 30 seconds</small>
             </h2>
 
             <div class="threat-map animate__animated animate__fadeIn mb-4" id="threatMap">
+                <!-- SVG World Continents Wireframe & Tactical Grid Overlay -->
+                <svg class="soc-world-svg" viewBox="0 0 1000 450" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="continentStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.7" />
+                            <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.4" />
+                            <stop offset="100%" stop-color="#10b981" stop-opacity="0.6" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Tactical Latitude / Longitude Reference Lines -->
+                    <line x1="0" y1="112" x2="1000" y2="112" stroke="rgba(0,240,255,0.18)" stroke-dasharray="4 6" />
+                    <line x1="0" y1="225" x2="1000" y2="225" stroke="rgba(0,240,255,0.28)" stroke-dasharray="6 4" />
+                    <line x1="0" y1="337" x2="1000" y2="337" stroke="rgba(0,240,255,0.18)" stroke-dasharray="4 6" />
+                    <line x1="250" y1="0" x2="250" y2="450" stroke="rgba(0,240,255,0.18)" stroke-dasharray="4 6" />
+                    <line x1="500" y1="0" x2="500" y2="450" stroke="rgba(0,240,255,0.28)" stroke-dasharray="6 4" />
+                    <line x1="750" y1="0" x2="750" y2="450" stroke="rgba(0,240,255,0.18)" stroke-dasharray="4 6" />
+                    <!-- Stylized World Continents Wireframe Polygons -->
+                    <!-- North America -->
+                    <path d="M90,70 L185,55 L255,85 L270,135 L230,175 L195,215 L155,200 L125,155 L85,115 Z" fill="rgba(0,240,255,0.06)" stroke="url(#continentStroke)" stroke-width="1.5" />
+                    <!-- South America -->
+                    <path d="M225,235 L285,250 L315,305 L290,385 L250,410 L230,345 L215,275 Z" fill="rgba(0,240,255,0.06)" stroke="url(#continentStroke)" stroke-width="1.5" />
+                    <!-- Europe -->
+                    <path d="M435,65 L525,55 L565,95 L545,145 L485,155 L440,135 L425,100 Z" fill="rgba(0,240,255,0.06)" stroke="url(#continentStroke)" stroke-width="1.5" />
+                    <!-- Africa -->
+                    <path d="M445,175 L535,170 L585,225 L575,315 L525,375 L480,350 L460,265 L435,215 Z" fill="rgba(0,240,255,0.06)" stroke="url(#continentStroke)" stroke-width="1.5" />
+                    <!-- Asia -->
+                    <path d="M570,55 L765,45 L875,85 L895,155 L835,225 L745,245 L665,215 L595,165 L565,105 Z" fill="rgba(0,240,255,0.06)" stroke="url(#continentStroke)" stroke-width="1.5" />
+                    <!-- Australia -->
+                    <path d="M770,295 L865,285 L895,335 L865,380 L785,375 L760,335 Z" fill="rgba(0,240,255,0.06)" stroke="url(#continentStroke)" stroke-width="1.5" />
+                    <!-- Simulated Attack Arcs -->
+                    <path d="M195,135 Q360,35 495,115" fill="none" stroke="rgba(255,51,102,0.45)" stroke-width="1.5" stroke-dasharray="5 5" />
+                    <path d="M510,120 Q660,55 785,145" fill="none" stroke="rgba(245,158,11,0.45)" stroke-width="1.5" stroke-dasharray="4 4" />
+                    <path d="M265,295 Q420,210 515,255" fill="none" stroke="rgba(0,240,255,0.4)" stroke-width="1.5" stroke-dasharray="5 5" />
+                    <path d="M760,150 Q500,260 210,150" fill="none" stroke="rgba(255,51,102,0.35)" stroke-width="1.2" stroke-dasharray="3 5" />
+                </svg>
+
+                <!-- Radar Sweep Line -->
+                <div class="soc-radar-sweep"></div>
+
+                <!-- Top-Left SOC Feed Status -->
+                <div class="soc-hud-overlay" style="top: 14px; left: 14px;">
+                    <span class="live-dot"></span>
+                    <span class="text-info fw-bold">SOC GLOBAL COMMAND</span>
+                    <span class="text-muted ms-2 d-none d-sm-inline">// 4,096 HONEYPOTS ACTIVE</span>
+                </div>
+
+                <!-- Top-Right Live Coordinate Ticker -->
+                <div class="soc-hud-overlay" style="top: 14px; right: 14px;" id="socCoordTicker">
+                    <i class="bi bi-crosshair text-danger me-1"></i>
+                    <span id="coordText">LAT 38.8977° N / LON 77.0365° W | ASN-15169</span>
+                </div>
+
+                <!-- Bottom-Left Floating HUD Legend -->
+                <div class="soc-hud-overlay" style="bottom: 14px; left: 14px;">
+                    <div class="fw-bold text-uppercase text-info mb-1" style="font-size: 0.7rem; letter-spacing: 0.06em;">
+                        <i class="bi bi-layers me-1"></i> Telemetry Classification
+                    </div>
+                    <div class="d-flex flex-wrap gap-3 align-items-center">
+                        <span><span class="d-inline-block rounded-circle bg-danger me-1" style="width:9px;height:9px;"></span> Critical RCE</span>
+                        <span><span class="d-inline-block rounded-circle bg-warning me-1" style="width:9px;height:9px;"></span> Ransomware C2</span>
+                        <span><span class="d-inline-block rounded-circle bg-primary me-1" style="width:9px;height:9px;"></span> Botnet DDoS</span>
+                        <span><span class="d-inline-block rounded-circle bg-info me-1" style="width:9px;height:9px;"></span> Phishing Infra</span>
+                    </div>
+                </div>
                 <!-- Threat nodes will be added dynamically -->
             </div>
 
@@ -500,8 +630,8 @@
                 </div>
             </div>
             <hr class="my-4 border-secondary">
-            <p class="text-muted small mb-0 text-center">&copy; 2025 Code & Conflict || All Right Are Reserved By Rehan
-                Raza ITE/107/2K23 </p>
+            <p class="text-muted small mb-0 text-center">&copy; 2025 Code &amp; Conflict || All Rights Reserved By Rehan
+                Raza ITE/107/2K23</p>
         </div>
     </footer>
 
@@ -643,27 +773,46 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        // Generate random threat nodes on map
+        // Generate random threat nodes on map while preserving SOC HUD overlays
         function generateThreatNodes() {
             const map = document.getElementById('threatMap');
-            map.innerHTML = '';
+            if (!map) return;
+            map.querySelectorAll('.threat-node').forEach(node => node.remove());
 
             const threatTypes = [
-                { class: 'bg-danger', count: 25 },
-                { class: 'bg-warning', count: 40 },
-                { class: 'bg-primary', count: 35 }
+                { class: 'bg-danger', count: 22 },
+                { class: 'bg-warning', count: 32 },
+                { class: 'bg-primary', count: 28 },
+                { class: 'bg-info', count: 20 }
             ];
 
             threatTypes.forEach(type => {
                 for (let i = 0; i < type.count; i++) {
                     const node = document.createElement('div');
                     node.className = `threat-node ${type.class}`;
-                    node.style.left = `${Math.random() * 90 + 5}%`;
-                    node.style.top = `${Math.random() * 90 + 5}%`;
+                    node.style.left = `${Math.random() * 86 + 7}%`;
+                    node.style.top = `${Math.random() * 72 + 12}%`;
                     node.style.animationDelay = `${Math.random() * 2}s`;
                     map.appendChild(node);
                 }
             });
+        }
+
+        // Cycle live coordinate telemetry ticker
+        const socCoords = [
+            'LAT 38.8977° N / LON 77.0365° W | ASN-15169 [CRITICAL RCE]',
+            'LAT 51.5072° N / LON 0.1276° W | ASN-3356 [RANSOMWARE C2]',
+            'LAT 35.6762° N / LON 139.6503° E | ASN-2516 [BOTNET DDOS]',
+            'LAT 50.1109° N / LON 8.6821° E | ASN-24940 [PHISHING INFRA]',
+            'LAT 1.3521° N / LON 103.8198° E | ASN-4657 [AITM PROXY]',
+            'LAT 37.7749° N / LON 122.4194° W | ASN-13335 [ZERO-DAY SCAN]'
+        ];
+        let coordIdx = 0;
+        function updateCoordTicker() {
+            const el = document.getElementById('coordText');
+            if (!el) return;
+            coordIdx = (coordIdx + 1) % socCoords.length;
+            el.textContent = socCoords[coordIdx];
         }
 
         // Initialize charts
@@ -748,6 +897,9 @@
 
             // Refresh threat nodes every 30 seconds
             setInterval(generateThreatNodes, 30000);
+
+            // Cycle coordinate telemetry every 3.5 seconds
+            setInterval(updateCoordTicker, 3500);
 
             // Update timestamp every minute
             setInterval(updateTimestamp, 60000);

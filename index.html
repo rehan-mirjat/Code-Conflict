@@ -18,80 +18,6 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/imgs/favicon.png">
-
-    <style>
-        .cyber-gradient {
-            background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
-        }
-
-        .threat-pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
-            }
-
-            70% {
-                box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
-            }
-        }
-
-        /* Cyber terminal animation */
-        .terminal-line {
-            border-right: 2px solid #2ecc71;
-            animation: blink 0.75s step-end infinite;
-        }
-
-        @keyframes blink {
-
-            from,
-            to {
-                border-color: transparent
-            }
-
-            50% {
-                border-color: #2ecc71;
-            }
-        }
-
-        /* Hover animations */
-        .hover-grow {
-            transition: transform 0.3s ease;
-        }
-
-        .hover-grow:hover {
-            transform: scale(1.03);
-        }
-
-        /* Cyber grid background */
-        .cyber-grid-bg {
-            background-image:
-                linear-gradient(rgba(46, 204, 113, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(46, 204, 113, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-
-        /* Image hover effect */
-        .img-hover-zoom {
-            overflow: hidden;
-            border-radius: 8px;
-        }
-
-        .img-hover-zoom img {
-            transition: transform 0.5s ease;
-        }
-
-        .img-hover-zoom:hover img {
-            transform: scale(1.1);
-        }
-    </style>
-
 </head>
 
 <body class="cyber-gradient">
@@ -125,6 +51,10 @@
                             <i class="bi bi-bug"></i> Threats
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item fw-semibold text-info" href="threats/threats_view.html"><i class="bi bi-speedometer2"></i> Threat Dashboard</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="threats/malware.html">Malware</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -232,6 +162,9 @@
         <div class="container py-5">
             <div class="row align-items-center">
                 <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <div class="cc-hero-badge">
+                        <span class="live-dot me-1"></span> Cyber Warfare &amp; Defense Intelligence
+                    </div>
                     <h1 class="display-4 fw-bold mb-4">
                         Decoding the <span class="text-primary">Digital</span> Battlefield
                     </h1>
@@ -264,15 +197,49 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 animate__animated animate__fadeInRight">
-                    <div class="position-relative img-hover-zoom">
-                        <img src="assets/imgs/Data_security_25.jpg" class="img-fluid rounded-3 shadow-lg"
-                            alt="Cyber Attacks Map">
-                        <span
-                            class="position-absolute top-0 start-100 translate-middle threat-pulse p-2 bg-danger rounded-circle"></span>
-                        <div class="position-absolute bottom-0 start-0 p-3">
-                            <span class="badge bg-primary animate__animated animate__pulse animate__infinite">LIVE
-                                THREAT MAP</span>
+                <div class="col-lg-6 mt-4 mt-lg-0 animate__animated animate__fadeInRight">
+                    <div class="cc-hud-card p-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom border-info border-opacity-25 font-monospace small">
+                            <span class="text-info fw-semibold"><i class="bi bi-radar me-1"></i> GLOBAL THREAT TELEMETRY HUD</span>
+                            <span class="d-flex align-items-center gap-2 text-danger fw-bold">
+                                <span class="threat-pulse d-inline-block bg-danger rounded-circle" style="width: 10px; height: 10px;"></span>
+                                DEFCON 3 // ACTIVE
+                            </span>
+                        </div>
+                        <div class="position-relative img-hover-zoom rounded-3 overflow-hidden" style="border: 1px solid rgba(0, 240, 255, 0.25);">
+                            <img src="assets/imgs/Data_security_25.jpg" class="img-fluid w-100 d-block"
+                                style="filter: invert(0.92) hue-rotate(175deg) saturate(1.8) brightness(0.75) contrast(1.3); max-height: 360px; object-fit: cover; object-position: center top;"
+                                alt="Cyber Attacks Map">
+                            <div class="position-absolute top-0 start-0 m-3">
+                                <span class="badge bg-primary"><i class="bi bi-broadcast me-1"></i> LIVE THREAT MAP</span>
+                            </div>
+                            <div class="position-absolute bottom-0 start-0 end-0 p-3"
+                                style="background: linear-gradient(180deg, rgba(7, 10, 19, 0.55) 0%, rgba(7, 10, 19, 0.96) 35%, rgba(7, 10, 19, 0.99) 100%); backdrop-filter: blur(12px); border-top: 1px solid rgba(0, 240, 255, 0.3);">
+                                <div class="d-flex justify-content-between align-items-center mb-1 font-monospace small">
+                                    <span class="text-info fw-bold">LIVE THREAT TELEMETRY</span>
+                                    <span class="text-emerald" style="color: #10b981;">DEFCON 3 // ACTIVE MONITORING</span>
+                                </div>
+                                <div class="row g-2 text-center font-monospace small mt-1">
+                                    <div class="col-4">
+                                        <div class="p-1 rounded bg-dark bg-opacity-75 border border-secondary border-opacity-25">
+                                            <div class="text-muted" style="font-size: 0.7rem;">NODE // EU-WEST</div>
+                                            <div class="text-danger fw-bold">LOCKBIT-V3</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="p-1 rounded bg-dark bg-opacity-75 border border-secondary border-opacity-25">
+                                            <div class="text-muted" style="font-size: 0.7rem;">NODE // AP-SOUTH</div>
+                                            <div class="text-warning fw-bold">CVE-2023-20867</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="p-1 rounded bg-dark bg-opacity-75 border border-secondary border-opacity-25">
+                                            <div class="text-muted" style="font-size: 0.7rem;">SOC STATUS</div>
+                                            <div class="text-info fw-bold">99.98% SYNC</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -393,27 +360,61 @@
                         <div class="card-header border-secondary">
                             <h3><i class="bi bi-shield-lock"></i> Security Checklist</h3>
                         </div>
-                        <div class="card-body">
-                            <div class="form-check form-switch mb-3">
-                                <input class="form-check-input" type="checkbox" id="check1" checked>
-                                <label class="form-check-label" for="check1">2FA Enabled</label>
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <p class="text-muted mb-3">Toggle active defensive controls to evaluate your endpoint resilience:</p>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="check1" checked>
+                                    <label class="form-check-label" for="check1">2FA Enabled <small class="text-muted ms-1">(Hardware / TOTP)</small></label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="check2">
+                                    <label class="form-check-label" for="check2">Backup Verified <small class="text-muted ms-1">(Offline 3-2-1 Rule)</small></label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="check3">
+                                    <label class="form-check-label" for="check3">VPN Active <small class="text-muted ms-1">(Encrypted Tunnel)</small></label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="check4">
+                                    <label class="form-check-label" for="check4">Firewall On <small class="text-muted ms-1">(Zero-Trust Inbound)</small></label>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-outline-success" id="checklistSubmit">
+                                        <i class="bi bi-shield-check"></i> Validate Protection
+                                    </button>
+                                </div>
                             </div>
-                            <div class="form-check form-switch mb-3">
-                                <input class="form-check-input" type="checkbox" id="check2">
-                                <label class="form-check-label" for="check2">Backup Verified</label>
-                            </div>
-                            <div class="form-check form-switch mb-3">
-                                <input class="form-check-input" type="checkbox" id="check3">
-                                <label class="form-check-label" for="check3">VPN Active</label>
-                            </div>
-                            <div class="form-check form-switch mb-3">
-                                <input class="form-check-input" type="checkbox" id="check4">
-                                <label class="form-check-label" for="check4">Firewall On</label>
-                            </div>
-                            <div class="d-grid">
-                                <button class="btn btn-outline-success" id="checklistSubmit">
-                                    <i class="bi bi-shield-check"></i> Validate Protection
-                                </button>
+
+                            <div class="mt-4 pt-3 border-top border-secondary border-opacity-50">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="mb-0 h6"><i class="bi bi-speedometer2 text-info me-1"></i> Security Posture Meter</h5>
+                                    <span id="postureScoreBadge" class="badge bg-danger">25% // VULNERABLE</span>
+                                </div>
+                                <div class="progress mb-3" style="height: 12px;">
+                                    <div id="postureProgressBar" class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
+                                        role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="row g-2 text-center font-monospace small">
+                                    <div class="col-4">
+                                        <div class="cc-stat-pill py-2">
+                                            <div class="text-muted" style="font-size: 0.72rem;">ACTIVE LAYERS</div>
+                                            <div id="postureLayers" class="fw-bold text-info">1 / 4</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="cc-stat-pill py-2">
+                                            <div class="text-muted" style="font-size: 0.72rem;">RISK EXPOSURE</div>
+                                            <div id="postureRisk" class="fw-bold text-danger">HIGH</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="cc-stat-pill py-2">
+                                            <div class="text-muted" style="font-size: 0.72rem;">COMPLIANCE</div>
+                                            <div id="postureCompliance" class="fw-bold text-warning">PARTIAL</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -426,7 +427,7 @@
                         </div>
                         <div class="card-body">
                             <p>Is this email legitimate?</p>
-                            <div class="email-sample p-3 mb-3 bg-light text-dark rounded">
+                            <div class="email-sample p-3 mb-3 rounded">
                                 <div class="d-flex align-items-center mb-2">
                                     <img src="assets/imgs/icons/internet.png" width="20" class="me-2" alt="">
                                     <strong>Microsoft Support</strong>
@@ -504,38 +505,63 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-4 bg-dark border-top border-secondary">
+    <footer class="py-5 bg-dark border-top border-secondary">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="img-hover-zoom" style="width: 200px;">
-                        <h5>
-                            <a class="navbar-brand animate__animated animate__fadeInLeft" href="index.html">
-                                <span class="text-primary">{</span>Code<span class="text-primary">}</span>
-                                &
-                                <span class="text-danger">Conflict</span>
-                            </a>
-                        </h5>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="mb-3">
+                        <a class="navbar-brand" href="index.html">
+                            <span class="text-primary">{</span>Code<span class="text-primary">}</span>
+                            &amp;
+                            <span class="text-danger">Conflict</span>
+                        </a>
                     </div>
-                    <p class="text-muted">Educational resource for cyber warfare analysis and defense strategies.</p>
-                </div>
-                <div class="col-md-3">
-                    <h5>Connect</h5>
-                    <div class="d-flex gap-3 mb-3">
-                        <a href="#" class="text-muted hover-grow"><i class="bi bi-twitter fs-4"></i></a>
-                        <a href="#" class="text-muted hover-grow"><i class="bi bi-github fs-4"></i></a>
-                        <a href="#" class="text-muted hover-grow"><i class="bi bi-linkedin fs-4"></i></a>
-                        <a href="#" class="text-muted hover-grow"><i class="bi bi-youtube fs-4"></i></a>
-                    </div>
-                    <div class="mt-4">
-                        <h6>Certified By University Of Sindh</h6>
-                        <img src="assets/imgs/icons/certification.png" width="50" class="hover-grow"
+                    <p class="text-muted mb-3">Educational resource for cyber warfare analysis, real-time threat intelligence, and proactive defense strategies.</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="assets/imgs/icons/certification.png" width="44" class="hover-grow"
                             alt="Cyber Security Certified">
+                        <div class="small">
+                            <div class="text-light fw-semibold">Certified Academic Initiative</div>
+                            <div class="text-muted">University of Sindh, Jamshoro</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="text-uppercase text-info font-monospace mb-3">Quick Links</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="index.html" class="text-muted text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="threats/threats_view.html" class="text-muted text-decoration-none">Threat Dashboard</a></li>
+                        <li class="mb-2"><a href="news/latest_threats.html" class="text-muted text-decoration-none">Latest Threats</a></li>
+                        <li class="mb-2"><a href="about_us.html" class="text-muted text-decoration-none">About Us</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-muted text-decoration-none">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="text-uppercase text-info font-monospace mb-3">Defense Guides</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="prevention/network_security.html" class="text-muted text-decoration-none">Network Security</a></li>
+                        <li class="mb-2"><a href="prevention/email_security.html" class="text-muted text-decoration-none">Email Security</a></li>
+                        <li class="mb-2"><a href="prevention/data_privacy.html" class="text-muted text-decoration-none">Data &amp; Privacy</a></li>
+                        <li class="mb-2"><a href="prevention/mobile_security.html" class="text-muted text-decoration-none">Mobile Security</a></li>
+                        <li class="mb-2"><a href="prevention/secure_browsing.html" class="text-muted text-decoration-none">Secure Browsing</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="text-uppercase text-info font-monospace mb-3">Connect &amp; Verify</h6>
+                    <p class="text-muted small mb-3">Follow our research Advisories &amp; CERT briefings.</p>
+                    <div class="d-flex gap-3 mb-3">
+                        <a href="#" class="text-muted hover-grow" aria-label="Twitter"><i class="bi bi-twitter fs-5"></i></a>
+                        <a href="#" class="text-muted hover-grow" aria-label="GitHub"><i class="bi bi-github fs-5"></i></a>
+                        <a href="#" class="text-muted hover-grow" aria-label="LinkedIn"><i class="bi bi-linkedin fs-5"></i></a>
+                        <a href="#" class="text-muted hover-grow" aria-label="YouTube"><i class="bi bi-youtube fs-5"></i></a>
+                    </div>
+                    <div class="small font-monospace text-muted">
+                        <i class="bi bi-shield-lock text-success me-1"></i> PGP: 0xAB3F9C2D
                     </div>
                 </div>
             </div>
             <hr class="my-4 border-secondary">
-            <p class="text-muted small mb-0 text-center">&copy; 2025 Code & Conflict ||  All Right Are Reserved By Rehan Raza ITE/107/2K23 </p>
+            <p class="text-muted small mb-0 text-center">&copy; 2025 Code &amp; Conflict || All Rights Reserved By Rehan Raza ITE/107/2K23</p>
         </div>
     </footer>
 
@@ -594,6 +620,70 @@
             result.classList.add('alert-danger');
             result.innerHTML = '<i class="bi bi-exclamation-triangle-fill"></i> Incorrect! The misspelled domain (micr0soft) reveals this as phishing. <button class="btn btn-sm btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#phishModal">Learn Why</button>';
         });
+
+        // Live Security Posture Meter
+        function updatePostureMeter() {
+            const c1 = document.getElementById('check1').checked;
+            const c2 = document.getElementById('check2').checked;
+            const c3 = document.getElementById('check3').checked;
+            const c4 = document.getElementById('check4').checked;
+            const activeCount = [c1, c2, c3, c4].filter(Boolean).length;
+            const pct = activeCount * 25;
+
+            const bar = document.getElementById('postureProgressBar');
+            const badge = document.getElementById('postureScoreBadge');
+            const layers = document.getElementById('postureLayers');
+            const risk = document.getElementById('postureRisk');
+            const compliance = document.getElementById('postureCompliance');
+
+            if (!bar || !badge) return;
+            bar.style.width = pct + '%';
+            bar.setAttribute('aria-valuenow', String(pct));
+            layers.textContent = activeCount + ' / 4';
+
+            bar.classList.remove('bg-danger', 'bg-warning', 'bg-info', 'bg-success');
+            badge.classList.remove('bg-danger', 'bg-warning', 'bg-info', 'bg-success');
+
+            if (pct === 100) {
+                bar.classList.add('bg-success');
+                badge.classList.add('bg-success');
+                badge.textContent = '100% // HARDENED';
+                risk.textContent = 'LOW';
+                risk.className = 'fw-bold text-success';
+                compliance.textContent = 'OPTIMAL';
+                compliance.className = 'fw-bold text-success';
+            } else if (pct >= 75) {
+                bar.classList.add('bg-info');
+                badge.classList.add('bg-info');
+                badge.textContent = pct + '% // RESILIENT';
+                risk.textContent = 'MODERATE';
+                risk.className = 'fw-bold text-info';
+                compliance.textContent = 'GOOD';
+                compliance.className = 'fw-bold text-info';
+            } else if (pct >= 50) {
+                bar.classList.add('bg-warning');
+                badge.classList.add('bg-warning');
+                badge.textContent = pct + '% // GUARDED';
+                risk.textContent = 'ELEVATED';
+                risk.className = 'fw-bold text-warning';
+                compliance.textContent = 'PARTIAL';
+                compliance.className = 'fw-bold text-warning';
+            } else {
+                bar.classList.add('bg-danger');
+                badge.classList.add('bg-danger');
+                badge.textContent = pct + '% // VULNERABLE';
+                risk.textContent = 'HIGH';
+                risk.className = 'fw-bold text-danger';
+                compliance.textContent = 'AT RISK';
+                compliance.className = 'fw-bold text-danger';
+            }
+        }
+
+        ['check1', 'check2', 'check3', 'check4'].forEach(function (id) {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('change', updatePostureMeter);
+        });
+        updatePostureMeter();
 
         // Checklist Validation
         document.getElementById('checklistSubmit').addEventListener('click', function () {

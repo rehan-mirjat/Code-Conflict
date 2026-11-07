@@ -309,6 +309,11 @@
         $all('form[role="search"]').forEach(function (form) {
             var input = $('input[type="search"]', form);
             if (input) input.setAttribute('list', list.id);
+            var btn = $('button[type="submit"]', form);
+            if (btn && !btn.querySelector('svg')) {
+                btn.setAttribute('aria-label', 'Search');
+                btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>';
+            }
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 var q = input ? input.value.trim().toLowerCase() : '';
@@ -512,6 +517,9 @@
 
     function initPasswordToggles() {
         $all('.eye-toggle, [data-toggle-password]').forEach(function (btn) {
+            if (btn.id === 'toggleLoginPassword' || btn.id === 'toggleRegisterPassword') return;
+            if (btn.hasAttribute('data-cc-pw-bound')) return;
+            btn.setAttribute('data-cc-pw-bound', '1');
             btn.addEventListener('click', function () {
                 var container = btn.closest('.input-group') || btn.parentNode;
                 var input = container ? container.querySelector('input[type="password"], input[type="text"]') : null;
@@ -526,6 +534,24 @@
         });
     }
 
+    function initCopyButtons() {
+        $all('.cc-copy-btn, [data-copy]').forEach(function (btn) {
+            if (btn.hasAttribute('data-cc-copy-bound')) return;
+            btn.setAttribute('data-cc-copy-bound', '1');
+            btn.addEventListener('click', function () {
+                var val = btn.getAttribute('data-copy') || '';
+                if (!val) {
+                    var prev = btn.previousElementSibling;
+                    if (prev) val = prev.textContent.trim();
+                }
+                if (val && navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(val).catch(function () {});
+                }
+                CC.toast(btn.getAttribute('data-copy-msg') || 'Copied to clipboard!', 'success');
+            });
+        });
+    }
+
     /* ------------------------------------------------------------ Init */
     function init() {
         renderAuthState();
@@ -535,6 +561,7 @@
         initFeed();
         initTooltips();
         initPasswordToggles();
+        initCopyButtons();
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();

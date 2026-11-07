@@ -18,12 +18,6 @@
     <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
 
     <style>
-        .email-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
-            background-size: cover;
-        }
-
         .protocol-card {
             transition: all 0.3s ease;
             border: 1px solid transparent;
@@ -32,11 +26,11 @@
 
         .protocol-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.18);
         }
 
         .threat-card {
-            border-left: 3px solid var(--bs-danger);
+            border-left: 3px solid var(--neon-crimson);
         }
 
         .provider-icon {
@@ -62,10 +56,10 @@
         }
 
         .email-header-analysis {
-            font-family: monospace;
-            background-color: rgba(0, 0, 0, 0.3);
+            font-family: var(--font-mono);
+            background-color: rgba(0, 0, 0, 0.35);
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 8px;
             overflow-x: auto;
         }
     </style>
@@ -102,6 +96,8 @@
                             <i class="bi bi-bug"></i> Threats
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item fw-semibold text-info" href="../threats/threats_view.html"><i class="bi bi-speedometer2"></i> Threat Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="../threats/malware.html">Malware</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -195,8 +191,8 @@
                 </div>
 
                 <!-- Sign Up / Login Buttons -->
-                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.8s;">
-                    <a href="../login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0 animate__animated animate__fadeInDown" style="animation-delay: 0.8s;">
+                    <a href="../login.html" class="btn btn-outline-light"><i class="bi bi-box-arrow-in-right"></i>
                         Login</a>
                     <a href="../signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
                 </div>
@@ -206,23 +202,73 @@
 
     <!-- Email Security Hero -->
     <header class="py-5 email-hero text-white">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-8 animate__animated animate__fadeInLeft">
-                    <h1 class="display-4 fw-bold mb-4">
+        <div class="container py-4">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7 animate__animated animate__fadeInLeft">
+                    <nav aria-label="breadcrumb" class="mb-3">
+                        <ol class="breadcrumb mb-2 small">
+                            <li class="breadcrumb-item"><a href="../index.html" class="text-info text-decoration-none">Home</a></li>
+                            <li class="breadcrumb-item text-secondary">Prevention</li>
+                            <li class="breadcrumb-item active text-light" aria-current="page">Email Security</li>
+                        </ol>
+                    </nav>
+                    <span class="badge bg-primary mb-3"><i class="bi bi-envelope-paper-fill"></i> DMARC &amp; ANTI-PHISHING DEFENSE</span>
+                    <h1 class="display-4 fw-bold mb-3">
                         <i class="bi bi-envelope-check text-primary"></i> Email Security Guide
                     </h1>
-                    <p class="lead mb-4">
-                        Protect your inbox from phishing, malware, and business email compromise with these essential
-                        security measures.
+                    <p class="lead text-secondary mb-4">
+                        Harden your inbox and domain against Adversary-in-the-Middle (AiTM) phishing, Business Email Compromise (BEC), and weaponized payloads with cryptographic email authentication.
                     </p>
-                    <div class="d-flex gap-3">
+                    <div class="d-flex flex-wrap gap-3">
                         <a href="#checklist" class="btn btn-primary btn-lg px-4">
                             <i class="bi bi-list-check"></i> Security Checklist
                         </a>
                         <a href="#phishing-test" class="btn btn-outline-light btn-lg px-4">
                             <i class="bi bi-eye"></i> Phishing Test
                         </a>
+                    </div>
+                </div>
+                <div class="col-lg-5 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-primary shadow-lg">
+                        <div class="card-header border-primary bg-primary bg-opacity-10 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-info"><i class="bi bi-shield-shaded me-2"></i>NIST Email Defense Posture</span>
+                            <span class="badge bg-success">p=reject ACTIVE</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3 text-center mb-3">
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h5 fw-bold text-info mb-0">SPF+DKIM</div>
+                                        <small class="text-muted d-block">Aligned</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h5 fw-bold text-warning mb-0">DMARC</div>
+                                        <small class="text-muted d-block">Enforced</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h5 fw-bold text-success mb-0">99.4%</div>
+                                        <small class="text-muted d-block">Spoof Block</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="text-light">Phishing-Resistant MFA (FIDO2) Adoption</span>
+                                    <span class="text-info monospace">91% Protected</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 91%"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center small text-muted pt-2 border-top border-secondary border-opacity-25">
+                                <span><i class="bi bi-lock-fill text-success me-1"></i> DANE / MTA-STS TLS 1.3</span>
+                                <a href="#phishing-test" class="text-info text-decoration-none">Spot Red Flags &rarr;</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -666,7 +712,7 @@
                 </div>
             </div>
             <hr class="my-4 border-secondary">
-            <p class="text-muted small mb-0 text-center">&copy; 2025 Code & Conflict || All Right Are Reserved By Rehan
+            <p class="text-muted small mb-0 text-center">&copy; 2025 Code &amp; Conflict || All Rights Reserved By Rehan
                 Raza ITE/107/2K23 </p>
         </div>
     </footer>
@@ -678,19 +724,19 @@
         // Email checklist functionality
         document.getElementById('emailChecklistBtn').addEventListener('click', function () {
             const checklistOutput = document.getElementById('emailChecklistOutput');
-            checklistOutput.classList.remove('d-none', 'alert-success', 'alert-danger');
+            checklistOutput.classList.remove('d-none', 'alert-success', 'alert-danger', 'alert-warning');
             checklistOutput.classList.add('alert-success');
             checklistOutput.innerHTML = `
                 <h5><i class="bi bi-check-circle"></i> Your Email Security Action Plan</h5>
                 <ol>
-                    <li>Enable 2FA on all email accounts</li>
-                    <li>Configure SPF, DKIM and DMARC records</li>
-                    <li>Install a password manager</li>
-                    <li>Conduct phishing awareness training</li>
-                    <li>Review email forwarding rules monthly</li>
+                    <li>Enable FIDO2 / Hardware 2FA on all email accounts</li>
+                    <li>Configure SPF, DKIM and DMARC (p=reject) records</li>
+                    <li>Use a dedicated password manager with origin binding</li>
+                    <li>Conduct quarterly phishing simulation exercises</li>
+                    <li>Audit inbox forwarding &amp; OAuth app rules monthly</li>
                 </ol>
-                <button class="btn btn-sm btn-outline-light mt-2">
-                    <i class="bi bi-download"></i> Download PDF Guide
+                <button type="button" class="btn btn-sm btn-outline-light mt-2" onclick="window.print()">
+                    <i class="bi bi-download"></i> Print / Save Action Plan PDF
                 </button>
             `;
         });
@@ -720,34 +766,71 @@
             }
         });
 
-        // Phishing test functionality
-        document.querySelectorAll('[data-phish-answer]').forEach(button => {
+        // Phishing Spot-the-Red-Flag interactive quiz
+        const phishExplanations = {
+            domain: {
+                cls: 'alert-warning',
+                html: `
+                    <h6><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Spot On — Homograph / Typosquatted Domain Detected!</h6>
+                    <p class="mb-1 small">The sender address <code>support@m1cr0s0ft.com</code> substitutes the digits <code>1</code> and <code>0</code> for <code>i</code> and <code>o</code> to deceive hurried readers. However, look closely — there are additional red flags in this email too! Try selecting <strong>All of the above</strong>.</p>
+                `
+            },
+            urgency: {
+                cls: 'alert-warning',
+                html: `
+                    <h6><i class="bi bi-clock-history text-warning me-2"></i>Spot On — Psychological Coercion &amp; False Urgency!</h6>
+                    <p class="mb-1 small">Threatening permanent account deletion within 24 hours is a classic social engineering tactic designed to induce panic and bypass critical thinking. Yet this email exhibits several other indicators as well — check <strong>All of the above</strong>.</p>
+                `
+            },
+            link: {
+                cls: 'alert-warning',
+                html: `
+                    <h6><i class="bi bi-link-45deg text-warning me-2"></i>Spot On — Masked Credential Harvesting Link!</h6>
+                    <p class="mb-1 small">Generic "Click here to verify" buttons mask Adversary-in-the-Middle (AiTM) reverse-proxy login pages designed to steal session cookies. Combine this with the spoofed sender and urgency by choosing <strong>All of the above</strong>.</p>
+                `
+            },
+            all: {
+                cls: 'alert-success',
+                html: `
+                    <h6><i class="bi bi-check-circle-fill text-success me-2"></i>Correct! All Red Flags Identified (100% Detection):</h6>
+                    <ul class="mt-2 mb-0 small">
+                        <li><strong>Typosquatted Domain:</strong> Uses <code>m1cr0s0ft.com</code> instead of the official <code>microsoft.com</code> domain.</li>
+                        <li><strong>Manufactured Urgency:</strong> Threatens immediate account suspension within 24 hours to force impulsive action.</li>
+                        <li><strong>Opaque Verification Link:</strong> Masks the destination URL behind a generic button leading to a credential-harvesting proxy.</li>
+                        <li><strong>Generic Greeting:</strong> Uses "Dear Valued Customer" rather than your verified account profile name.</li>
+                    </ul>
+                `
+            }
+        };
+
+        const phishButtons = document.querySelectorAll('[data-phish-answer]');
+        phishButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const answer = this.getAttribute('data-phish-answer');
                 const resultDiv = document.getElementById('phishResult');
-                resultDiv.classList.remove('d-none', 'alert-success', 'alert-danger');
+                const info = phishExplanations[answer] || phishExplanations.all;
 
-                if (answer === 'all') {
-                    resultDiv.classList.add('alert-success');
-                    resultDiv.innerHTML = `
-                        <i class="bi bi-check-circle"></i> Correct! This email shows multiple red flags:
-                        <ul class="mt-2">
-                            <li>Suspicious domain (m1cr0s0ft.com instead of microsoft.com)</li>
-                            <li>Creates false urgency ("account will be disabled")</li>
-                            <li>Link goes to unknown destination</li>
-                            <li>Requests sensitive information</li>
-                        </ul>
-                    `;
-                } else {
-                    resultDiv.classList.add('alert-danger');
-                    resultDiv.innerHTML = `
-                        <i class="bi bi-exclamation-triangle"></i> Partially correct, but there are more issues. 
-                        This is a phishing attempt showing multiple red flags.
-                    `;
-                }
+                phishButtons.forEach(btn => {
+                    btn.classList.remove('active', 'btn-success', 'btn-warning', 'border-success', 'border-warning');
+                    btn.classList.add('btn-outline-secondary');
+                });
+                this.classList.remove('btn-outline-secondary');
+                this.classList.add('active', answer === 'all' ? 'btn-success' : 'btn-warning');
+
+                resultDiv.classList.remove('d-none', 'alert-success', 'alert-warning', 'alert-danger');
+                resultDiv.classList.add(info.cls);
+                resultDiv.innerHTML = info.html;
             });
         });
 
+        const phishMockLink = document.getElementById('phishLink');
+        if (phishMockLink) {
+            phishMockLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                const allBtn = document.querySelector('[data-phish-answer="link"]');
+                if (allBtn) allBtn.click();
+            });
+        }
     </script>
     <script src="../assets/js/main.js"></script>
 </body>

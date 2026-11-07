@@ -18,12 +18,6 @@
     <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
 
     <style>
-        .privacy-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
-            background-size: cover;
-        }
-
         .regulation-card {
             transition: all 0.3s ease;
             border: 1px solid transparent;
@@ -32,11 +26,11 @@
 
         .regulation-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.18);
         }
 
         .threat-card {
-            border-left: 3px solid var(--bs-danger);
+            border-left: 3px solid var(--neon-crimson);
         }
 
         .tool-icon {
@@ -65,6 +59,7 @@
             position: relative;
             height: 300px;
             margin: 40px 0;
+            overflow-x: auto;
         }
 
         .data-node {
@@ -77,20 +72,7 @@
             justify-content: center;
             font-weight: bold;
             animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+            z-index: 1;
         }
     </style>
 </head>
@@ -126,6 +108,8 @@
                             <i class="bi bi-bug"></i> Threats
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item fw-semibold text-info" href="../threats/threats_view.html"><i class="bi bi-speedometer2"></i> Threat Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="../threats/malware.html">Malware</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -219,8 +203,8 @@
                 </div>
 
                 <!-- Sign Up / Login Buttons -->
-                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
-                    <a href="../login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
+                    <a href="../login.html" class="btn btn-outline-light"><i class="bi bi-box-arrow-in-right"></i>
                         Login</a>
                     <a href="../signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
                 </div>
@@ -230,23 +214,73 @@
 
     <!-- Data Privacy Hero -->
     <header class="py-5 privacy-hero text-white">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-8 animate__animated animate__fadeInLeft">
-                    <h1 class="display-4 fw-bold mb-4">
+        <div class="container py-4">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7 animate__animated animate__fadeInLeft">
+                    <nav aria-label="breadcrumb" class="mb-3">
+                        <ol class="breadcrumb mb-2 small">
+                            <li class="breadcrumb-item"><a href="../index.html" class="text-info text-decoration-none">Home</a></li>
+                            <li class="breadcrumb-item text-secondary">Prevention</li>
+                            <li class="breadcrumb-item active text-light" aria-current="page">Data &amp; Privacy</li>
+                        </ol>
+                    </nav>
+                    <span class="badge bg-primary mb-3"><i class="bi bi-shield-lock-fill"></i> NIST PRIVACY FRAMEWORK &amp; GDPR</span>
+                    <h1 class="display-4 fw-bold mb-3">
                         <i class="bi bi-database-lock text-primary"></i> Data Privacy Guide
                     </h1>
-                    <p class="lead mb-4">
-                        Take control of your personal information and protect your digital identity with these essential
-                        privacy practices.
+                    <p class="lead text-secondary mb-4">
+                        Reclaim sovereignty over your personal telemetry, eliminate third-party data broker profiles, and enforce zero-knowledge encryption across cloud storage.
                     </p>
-                    <div class="d-flex gap-3">
+                    <div class="d-flex flex-wrap gap-3">
                         <a href="#checklist" class="btn btn-primary btn-lg px-4">
                             <i class="bi bi-list-check"></i> Privacy Checklist
                         </a>
                         <a href="#tools" class="btn btn-outline-light btn-lg px-4">
                             <i class="bi bi-tools"></i> Privacy Tools
                         </a>
+                    </div>
+                </div>
+                <div class="col-lg-5 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-primary shadow-lg">
+                        <div class="card-header border-primary bg-primary bg-opacity-10 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-info"><i class="bi bi-incognito me-2"></i>NIST Defense Posture Metrics</span>
+                            <span class="badge bg-success">ZERO-KNOWLEDGE</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3 text-center mb-3">
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-info mb-0">256-bit</div>
+                                        <small class="text-muted d-block">AES Vault</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-warning mb-0">300+</div>
+                                        <small class="text-muted d-block">Data Brokers</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-success mb-0">96%</div>
+                                        <small class="text-muted d-block">Tracker Block</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="text-light">PII Exposure Surface Reduction</span>
+                                    <span class="text-success monospace">92% Hardened</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center small text-muted pt-2 border-top border-secondary border-opacity-25">
+                                <span><i class="bi bi-check2-circle text-success me-1"></i> GDPR Art. 17 Right to Erasure</span>
+                                <a href="#checklist" class="text-info text-decoration-none">Run Audit &rarr;</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -755,7 +789,7 @@
                 </div>
             </div>
             <hr class="my-4 border-secondary">
-            <p class="text-muted small mb-0 text-center">&copy; 2025 Code & Conflict || All Right Are Reserved By Rehan
+            <p class="text-muted small mb-0 text-center">&copy; 2025 Code &amp; Conflict || All Rights Reserved By Rehan
                 Raza ITE/107/2K23 </p>
         </div>
     </footer>

@@ -18,25 +18,19 @@
     <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
 
     <style>
-        .browsing-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
-            background-size: cover;
-        }
-
         .security-level {
-            border-left: 3px solid #2ecc71;
+            border-left: 3px solid var(--neon-emerald);
             padding-left: 15px;
         }
 
         .extension-card {
             transition: all 0.3s ease;
-            border: 1px solid #3498db;
+            border: 1px solid rgba(56, 189, 248, 0.3);
         }
 
         .extension-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.18);
         }
 
         .browser-icon {
@@ -47,7 +41,7 @@
         }
 
         .checklist-item.completed {
-            color: #2ecc71;
+            color: var(--neon-emerald);
             text-decoration: line-through;
         }
     </style>
@@ -84,6 +78,8 @@
                             <i class="bi bi-bug"></i> Threats
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item fw-semibold text-info" href="../threats/threats_view.html"><i class="bi bi-speedometer2"></i> Threat Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="../threats/malware.html">Malware</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -133,7 +129,7 @@
                     </li>
 
                     <li class="nav-item dropdown animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-shield-check"></i> Prevention
                         </a>
                         <ul class="dropdown-menu">
@@ -154,7 +150,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="secure_browsing.html">Secure Browsing</a></li>
+                            <li><a class="dropdown-item active" href="secure_browsing.html">Secure Browsing</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -181,8 +177,8 @@
                 </div>
 
                 <!-- Sign Up / Login Buttons (Right-aligned) -->
-                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
-                    <a href="../login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0 animate__animated animate__fadeInDown" style="animation-delay: 0.7s;">
+                    <a href="../login.html" class="btn btn-outline-light"><i class="bi bi-box-arrow-in-right"></i>
                         Login</a>
                     <a href="../signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
                 </div>
@@ -192,22 +188,73 @@
 
     <!-- Secure Browsing Hero -->
     <header class="py-5 browsing-hero text-white">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-8 animate__animated animate__fadeInLeft">
-                    <h1 class="display-4 fw-bold mb-4">
+        <div class="container py-4">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7 animate__animated animate__fadeInLeft">
+                    <nav aria-label="breadcrumb" class="mb-3">
+                        <ol class="breadcrumb mb-2 small">
+                            <li class="breadcrumb-item"><a href="../index.html" class="text-info text-decoration-none">Home</a></li>
+                            <li class="breadcrumb-item text-secondary">Prevention</li>
+                            <li class="breadcrumb-item active text-light" aria-current="page">Secure Browsing</li>
+                        </ol>
+                    </nav>
+                    <span class="badge bg-success mb-3"><i class="bi bi-globe-americas"></i> BROWSER ISOLATION &amp; ANTI-TRACKING</span>
+                    <h1 class="display-4 fw-bold mb-3">
                         <i class="bi bi-shield-lock text-success"></i> Secure Browsing Guide
                     </h1>
-                    <p class="lead mb-4">
-                        Protect yourself from online threats with these essential browser security practices.
+                    <p class="lead text-secondary mb-4">
+                        Neutralize drive-by V8/WebKit zero-days, browser canvas fingerprinting, third-party tracking beacons, and credential-stealing extensions with hardened browser configurations.
                     </p>
-                    <div class="d-flex gap-3">
+                    <div class="d-flex flex-wrap gap-3">
                         <a href="#checklist" class="btn btn-success btn-lg px-4">
                             <i class="bi bi-list-check"></i> Security Checklist
                         </a>
                         <a href="#extensions" class="btn btn-outline-light btn-lg px-4">
                             <i class="bi bi-puzzle"></i> Recommended Extensions
                         </a>
+                    </div>
+                </div>
+                <div class="col-lg-5 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-success shadow-lg">
+                        <div class="card-header border-success bg-success bg-opacity-10 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-success"><i class="bi bi-Window-stack me-2"></i>NIST Browser Defense Posture</span>
+                            <span class="badge bg-success">SANDBOXED</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3 text-center mb-3">
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h5 fw-bold text-success mb-0">DoH/DoT</div>
+                                        <small class="text-muted d-block">Encrypted DNS</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h5 fw-bold text-info mb-0">HSTS</div>
+                                        <small class="text-muted d-block">HTTPS-Only</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h5 fw-bold text-warning mb-0">Blocked</div>
+                                        <small class="text-muted d-block">3P Cookies</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="text-light">Site Isolation &amp; Fingerprint Resistance</span>
+                                    <span class="text-success monospace">96% Hardened</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 96%"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center small text-muted pt-2 border-top border-secondary border-opacity-25">
+                                <span><i class="bi bi-check-circle-fill text-success me-1"></i> WebRTC IP Leak Disabled</span>
+                                <a href="#checklist" class="text-info text-decoration-none">Validate Settings &rarr;</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -628,7 +675,7 @@
                 </div>
             </div>
             <hr class="my-4 border-secondary">
-            <p class="text-muted small mb-0 text-center">&copy; 2025 Code & Conflict || All Right Are Reserved By Rehan
+            <p class="text-muted small mb-0 text-center">&copy; 2025 Code &amp; Conflict || All Rights Reserved By Rehan
                 Raza ITE/107/2K23 </p>
         </div>
     </footer>

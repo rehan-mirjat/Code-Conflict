@@ -59,6 +59,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
+  overflow-x: clip;
 }
 
 ::selection {
@@ -186,6 +187,15 @@ code, pre, kbd, samp,
 }
 
 /* Cyber Header Alert Ribbon */
+.alert.rounded-0,
+.alert-danger.alert-dismissible.rounded-0 {
+  border-radius: 0 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  margin-bottom: 0 !important;
+}
+
 .alert-danger.alert-dismissible {
   background: linear-gradient(90deg, rgba(239, 68, 68, 0.22) 0%, rgba(185, 28, 28, 0.15) 50%, rgba(239, 68, 68, 0.22) 100%) !important;
   border-bottom: 1px solid rgba(255, 51, 102, 0.45) !important;
@@ -215,6 +225,8 @@ code, pre, kbd, samp,
   display: inline-flex;
   align-items: center;
   gap: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .navbar-brand .text-primary {
@@ -228,15 +240,31 @@ code, pre, kbd, samp,
 }
 
 .navbar-nav .nav-link {
-  font-size: 0.94rem;
+  white-space: nowrap !important;
+  font-size: 0.9rem;
   font-weight: 500;
   color: #cbd5e1 !important;
-  padding: 0.5rem 0.85rem !important;
+  padding: 0.45rem 0.7rem !important;
   border-radius: 6px;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
   gap: 6px;
+}
+
+.navbar .collapse > div:last-child,
+.navbar .ms-3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.navbar .btn {
+  white-space: nowrap;
+  padding: 0.42rem 0.9rem;
+  font-size: 0.86rem;
 }
 
 .navbar-nav .nav-link:hover,
@@ -286,13 +314,30 @@ code, pre, kbd, samp,
 }
 
 /* Navbar Search Input */
+.navbar form[role="search"] {
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.navbar form[role="search"] button[type="submit"] {
+  width: 36px;
+  height: 36px;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .navbar form[role="search"] .form-control {
   background: rgba(14, 21, 38, 0.75) !important;
   border: 1px solid rgba(56, 189, 248, 0.3) !important;
   color: #f1f5f9 !important;
   border-radius: 20px;
-  padding: 0.38rem 1rem;
-  font-size: 0.88rem;
+  width: 175px;
+  padding: 0.38rem 0.85rem;
+  font-size: 0.85rem;
   transition: all 0.25s ease;
 }
 
@@ -300,7 +345,7 @@ code, pre, kbd, samp,
   background: rgba(14, 21, 38, 0.95) !important;
   border-color: var(--neon-cyan) !important;
   box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.25), 0 0 15px rgba(0, 240, 255, 0.2) !important;
-  width: 220px;
+  width: 215px;
 }
 
 /* Navbar Toggler (Mobile cyber trigger) */
@@ -656,6 +701,14 @@ code, pre, kbd, samp,
   color: #ffffff !important;
   border-color: #ffffff !important;
   transform: translateY(-2px);
+}
+
+.btn-outline-light.active,
+.btn-outline-light:active {
+  background: rgba(0, 240, 255, 0.18) !important;
+  border-color: var(--neon-cyan) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
 }
 
 /* ---- Form Controls, Inputs & Validation ---- */
@@ -1139,10 +1192,62 @@ header.py-5 {
 
 /* Team Card Images Uniformity */
 .team-card .card-img-top {
-  height: 220px !important;
+  height: 240px !important;
   object-fit: cover !important;
-  object-position: top center !important;
+  object-position: center 15% !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Dark-on-Dark Icon Visibility Fix */
+img[src*="fraud.png"],
+img[src*="blackhat.png"],
+img[src*="anonymous.png"],
+img[src*="white-hat.png"] {
+  filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(0, 240, 255, 0.5));
+}
+
+/* Sub-page Hero & HUD Styling */
+.cc-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.38rem 0.95rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.18);
+  margin-bottom: 1rem;
+}
+
+.cc-hud-card {
+  background: rgba(10, 16, 30, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55), inset 0 0 24px rgba(0, 240, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.cc-stat-pill {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.cc-stat-pill:hover {
+  border-color: rgba(0, 240, 255, 0.35);
+  transform: translateY(-2px);
 }
 
 /* Timeline & Cyber Audit Trails */
@@ -1246,6 +1351,110 @@ header.py-5 {
 /* Text Muted Clarity on Dark Glass */
 .text-muted {
   color: #94a3b8 !important;
+}
+
+/* ---- Cyber Tables & Data Grids ---- */
+.table-dark {
+  background-color: transparent !important;
+  color: #e2e8f0 !important;
+}
+
+.table-dark th {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-bottom: 2px solid rgba(56, 189, 248, 0.25) !important;
+  color: var(--neon-cyan) !important;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.9rem 1rem !important;
+}
+
+.table-dark td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  padding: 0.85rem 1rem !important;
+  vertical-align: middle;
+}
+
+.table-hover tbody tr:hover td {
+  background-color: rgba(56, 189, 248, 0.08) !important;
+  color: #ffffff !important;
+}
+
+/* ---- Cyber Modals ---- */
+.modal-content.bg-dark {
+  background: rgba(11, 17, 32, 0.96) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 240, 255, 0.15);
+}
+
+.modal-header,
+.modal-footer {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ---- Vendor, Tool, & Provider Badges & Logos ---- */
+.vendor-logo,
+.tool-icon,
+.provider-icon,
+.browser-icon {
+  object-fit: contain;
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.card:hover .vendor-logo,
+.card:hover .tool-icon,
+.card:hover .provider-icon,
+.card:hover .browser-icon {
+  transform: scale(1.08);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.3);
+}
+
+/* ---- News Cards & Tags ---- */
+.news-card .card-img-top {
+  max-height: 280px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.news-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  background: rgba(56, 189, 248, 0.1) !important;
+  color: var(--neon-cyan) !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+  margin-right: 4px;
+}
+
+/* ---- Patch Card Severity Glowing Halos ---- */
+.patch-card.critical:hover {
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(239, 68, 68, 0.3) !important;
+  border-left-color: var(--neon-crimson) !important;
+}
+
+.patch-card.high:hover {
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 158, 11, 0.3) !important;
+  border-left-color: var(--neon-amber) !important;
+}
+
+.patch-card.medium:hover {
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 240, 255, 0.3) !important;
+  border-left-color: var(--neon-cyan) !important;
+}
+
+.patch-card.low:hover {
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.3) !important;
+  border-left-color: var(--neon-emerald) !important;
 }
 
 /* ---- Accessibility: Reduced Motion ---- */

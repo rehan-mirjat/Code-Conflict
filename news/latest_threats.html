@@ -18,36 +18,30 @@
     <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
 
     <style>
-        .threats-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
-            background-size: cover;
-        }
-
         .threat-card {
             transition: all 0.3s ease;
             border-left: 4px solid;
         }
 
         .threat-card.critical {
-            border-left-color: #e74c3c;
+            border-left-color: #ff3366;
         }
 
         .threat-card.high {
-            border-left-color: #f39c12;
+            border-left-color: #f59e0b;
         }
 
         .threat-card.medium {
-            border-left-color: #f1c40f;
+            border-left-color: #00f0ff;
         }
 
         .threat-card.low {
-            border-left-color: #2ecc71;
+            border-left-color: #10b981;
         }
 
         .threat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.18);
         }
 
         .threat-icon {
@@ -56,7 +50,7 @@
         }
 
         .threat-tag {
-            font-family: monospace;
+            font-family: var(--font-mono);
             cursor: pointer;
         }
 
@@ -76,7 +70,7 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: #3498db;
+            background: var(--neon-cyan);
         }
 
         .timeline-item {
@@ -92,8 +86,8 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #3498db;
-            border: 3px solid #2c3e50;
+            background: var(--neon-emerald);
+            border: 3px solid #070a13;
         }
     </style>
 </head>
@@ -129,6 +123,8 @@
                             <i class="bi bi-bug"></i> Threats
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item fw-semibold text-info" href="../threats/threats_view.html"><i class="bi bi-speedometer2"></i> Threat Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="../threats/malware.html">Malware</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -227,8 +223,8 @@
                 </div>
 
                 <!-- Sign Up / Login Buttons -->
-                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.8s;">
-                    <a href="../login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0 animate__animated animate__fadeInDown" style="animation-delay: 0.8s;">
+                    <a href="../login.html" class="btn btn-outline-light"><i class="bi bi-box-arrow-in-right"></i>
                         Login</a>
                     <a href="../signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
                 </div>
@@ -237,23 +233,74 @@
     </nav>
 
     <!-- Latest Threats Hero -->
-    <header class="py-5 threats-hero text-white" style="margin-top: 56px;">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-8 animate__animated animate__fadeInLeft">
-                    <h1 class="display-4 fw-bold mb-4">
+    <header class="py-5 threats-hero text-white">
+        <div class="container py-4">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7 animate__animated animate__fadeInLeft">
+                    <nav aria-label="breadcrumb" class="mb-3">
+                        <ol class="breadcrumb mb-2 small">
+                            <li class="breadcrumb-item"><a href="../index.html" class="text-info text-decoration-none">Home</a></li>
+                            <li class="breadcrumb-item text-secondary">News</li>
+                            <li class="breadcrumb-item active text-light" aria-current="page">Latest Threats</li>
+                        </ol>
+                    </nav>
+                    <span class="badge bg-danger mb-3"><i class="bi bi-broadcast"></i> GLOBAL THREAT TELEMETRY</span>
+                    <h1 class="display-4 fw-bold mb-3">
                         <i class="bi bi-bug-fill text-danger"></i> Latest Cyber Threats
                     </h1>
-                    <p class="lead mb-4">
-                        Real-time tracking of active malware, phishing campaigns, and emerging vulnerabilities.
+                    <p class="lead text-secondary mb-4">
+                        Real-time tracking of active ransomware syndicates, adversary-in-the-middle phishing kits, botnet DDoS waves, and zero-day exploitation.
                     </p>
-                    <div class="d-flex gap-3">
+                    <div class="d-flex flex-wrap gap-3">
                         <a href="#current-threats" class="btn btn-danger btn-lg px-4">
                             <i class="bi bi-exclamation-triangle"></i> Active Threats
                         </a>
                         <a href="#threat-timeline" class="btn btn-outline-light btn-lg px-4">
                             <i class="bi bi-clock-history"></i> Threat Timeline
                         </a>
+                    </div>
+                </div>
+                <div class="col-lg-5 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-danger shadow-lg">
+                        <div class="card-header border-danger bg-danger bg-opacity-10 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-danger"><i class="bi bi-radar me-2"></i>Global Zero-Day &amp; IOC Tracker</span>
+                            <span class="badge bg-danger"><span class="live-dot"></span>DEFCON 2</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3 text-center mb-3">
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-danger mb-0">14</div>
+                                        <small class="text-muted d-block">APT Campaigns</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-warning mb-0">2.4M</div>
+                                        <small class="text-muted d-block">IOCs / 24h</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-info mb-0">2 Tbps</div>
+                                        <small class="text-muted d-block">Peak DDoS</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="text-light">Global Threat Severity Index</span>
+                                    <span class="text-danger monospace">CRITICAL (89/100)</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 89%"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center small text-muted pt-2 border-top border-secondary border-opacity-25">
+                                <span><i class="bi bi-shield-fill-exclamation text-danger me-1"></i> Top Vector: AiTM M365</span>
+                                <a href="../threats/threats_view.html" class="text-info text-decoration-none">Open SOC View &rarr;</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -730,7 +777,7 @@
                 </div>
             </div>
             <hr class="my-4 border-secondary">
-            <p class="text-muted small mb-0 text-center">&copy; 2025 Code & Conflict || All Right Are Reserved By Rehan
+            <p class="text-muted small mb-0 text-center">&copy; 2025 Code &amp; Conflict || All Rights Reserved By Rehan
                 Raza ITE/107/2K23 </p>
         </div>
     </footer>
@@ -739,15 +786,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Make threat tags clickable
+        // Make threat tags filter timeline items interactively
         document.querySelectorAll('.threat-tag').forEach(el => {
             el.addEventListener('click', function () {
-                const tag = this.textContent.substring(1);
-                alert(`Would search for all threats tagged with: ${tag}`);
-                // In a real implementation, this would filter threats
+                const tag = this.textContent.trim().toLowerCase();
+                document.querySelectorAll('.timeline-item').forEach(item => {
+                    const match = item.textContent.toLowerCase().includes(tag);
+                    item.style.opacity = match ? '1' : '0.35';
+                });
             });
         });
-
     </script>
     <script src="../assets/js/main.js"></script>
 </body>

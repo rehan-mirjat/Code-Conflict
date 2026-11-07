@@ -20,26 +20,23 @@
     <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
 
     <style>
-        .calendar-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
-            background-size: cover;
-            padding-top: 100px;
-        }
-
-        .card-img-top{
-            width: 10vw;
-            min-width: 150px;
-        }
-
         .event-card {
             transition: all 0.3s ease;
-            border-left: 4px solid var(--bs-primary);
+            border-left: 4px solid var(--neon-cyan);
+        }
+
+        .event-card .card-img-top {
+            height: 160px;
+            width: 100%;
+            object-fit: contain;
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.6);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.15);
         }
 
         .event-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.18);
         }
 
         .event-type-badge {
@@ -48,48 +45,49 @@
         }
 
         .event-type-conference {
-            background-color: #3498db;
+            background-color: #0284c7;
         }
 
         .event-type-workshop {
-            background-color: #2ecc71;
+            background-color: #10b981;
         }
 
         .event-type-webinar {
-            background-color: #9b59b6;
+            background-color: #8b5cf6;
         }
 
         .event-type-training {
-            background-color: #f39c12;
+            background-color: #f59e0b;
         }
 
         .event-type-ctf {
-            background-color: #e74c3c;
+            background-color: #ff3366;
         }
 
-        /* FullCalendar customization */
+        /* FullCalendar & Native Fallback Schedule Customization */
         .fc {
-            background-color: #1a1a1a;
-            border-radius: 0.375rem;
+            background-color: rgba(10, 16, 30, 0.85);
+            border-radius: 0.5rem;
             overflow: hidden;
         }
 
         .fc-toolbar {
-            background-color: #2c3e50;
+            background-color: rgba(14, 21, 38, 0.95);
             padding: 1rem;
             margin-bottom: 0 !important;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
         }
 
         .fc-col-header {
-            background-color: #2c3e50;
+            background-color: rgba(14, 21, 38, 0.9);
         }
 
         .fc-daygrid-day {
-            background-color: #1a1a1a;
+            background-color: rgba(10, 16, 30, 0.6);
         }
 
         .fc-day-today {
-            background-color: rgba(52, 152, 219, 0.1) !important;
+            background-color: rgba(0, 240, 255, 0.08) !important;
         }
 
         .fc-event {
@@ -107,9 +105,34 @@
         }
 
         .organizer-logo {
-            max-width: 40px;
+            width: 38px;
+            height: 38px;
             object-fit: contain;
-            margin-right: 10px;
+            margin-right: 12px;
+            padding: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .cc-schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .cc-schedule-card {
+            background: rgba(14, 22, 42, 0.78);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-left: 4px solid var(--neon-cyan);
+            border-radius: 10px;
+            padding: 1.1rem;
+            transition: all 0.25s ease;
+        }
+
+        .cc-schedule-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 8px 20px rgba(0, 240, 255, 0.12);
         }
     </style>
 </head>
@@ -144,6 +167,8 @@
                             <i class="bi bi-bug"></i> Threats
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item fw-semibold text-info" href="../threats/threats_view.html"><i class="bi bi-speedometer2"></i> Threat Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="../threats/malware.html">Malware</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -242,8 +267,8 @@
                 </div>
 
                 <!-- Sign Up / Login Buttons -->
-                <div class="ms-3 animate__animated animate__fadeInDown" style="animation-delay: 0.8s;">
-                    <a href="../login.html" class="btn btn-outline-light me-2"><i class="bi bi-box-arrow-in-right"></i>
+                <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0 animate__animated animate__fadeInDown" style="animation-delay: 0.8s;">
+                    <a href="../login.html" class="btn btn-outline-light"><i class="bi bi-box-arrow-in-right"></i>
                         Login</a>
                     <a href="../signup.html" class="btn btn-primary"><i class="bi bi-person-plus"></i> Sign Up</a>
                 </div>
@@ -253,22 +278,73 @@
 
     <!-- Event Calendar Hero -->
     <header class="py-5 calendar-hero text-white">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-8 animate__animated animate__fadeInLeft">
-                    <h1 class="display-4 fw-bold mb-4">
+        <div class="container py-4">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7 animate__animated animate__fadeInLeft">
+                    <nav aria-label="breadcrumb" class="mb-3">
+                        <ol class="breadcrumb mb-2 small">
+                            <li class="breadcrumb-item"><a href="../index.html" class="text-info text-decoration-none">Home</a></li>
+                            <li class="breadcrumb-item text-secondary">News</li>
+                            <li class="breadcrumb-item active text-light" aria-current="page">Event Calendar</li>
+                        </ol>
+                    </nav>
+                    <span class="badge bg-primary mb-3"><i class="bi bi-calendar2-check"></i> GLOBAL CYBER SUMMITS &amp; CTFs</span>
+                    <h1 class="display-4 fw-bold mb-3">
                         <i class="bi bi-calendar-event text-primary"></i> Event Calendar
                     </h1>
-                    <p class="lead mb-4">
-                        Upcoming cybersecurity conferences, workshops, webinars, and training events worldwide.
+                    <p class="lead text-secondary mb-4">
+                        Track upcoming cybersecurity conferences, Black Hat &amp; DEF CON briefings, live Zero Trust masterclasses, and Capture-The-Flag competitions worldwide.
                     </p>
-                    <div class="d-flex gap-3">
+                    <div class="d-flex flex-wrap gap-3">
                         <a href="#featured-events" class="btn btn-primary btn-lg px-4">
                             <i class="bi bi-star-fill"></i> Featured Events
                         </a>
                         <a href="#calendar-view" class="btn btn-outline-light btn-lg px-4">
                             <i class="bi bi-calendar-week"></i> Calendar View
                         </a>
+                    </div>
+                </div>
+                <div class="col-lg-5 animate__animated animate__fadeInRight">
+                    <div class="card bg-dark border-primary shadow-lg">
+                        <div class="card-header border-primary bg-primary bg-opacity-10 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-info"><i class="bi bi-broadcast-pin me-2"></i>Upcoming Conferences Counter</span>
+                            <span class="badge bg-info">2025/2026 SEASON</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3 text-center mb-3">
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-info mb-0">12</div>
+                                        <small class="text-muted d-block">Conferences</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-danger mb-0">8</div>
+                                        <small class="text-muted d-block">Live CTFs</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25">
+                                        <div class="h4 fw-bold text-success mb-0">27</div>
+                                        <small class="text-muted d-block">Webinars</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="text-light">Next Tier-1 Summit Capacity (Black Hat USA)</span>
+                                    <span class="text-warning monospace">92% Booked</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center small text-muted pt-2 border-top border-secondary border-opacity-25">
+                                <span><i class="bi bi-geo-alt-fill text-info me-1"></i> Las Vegas &bull; San Francisco &bull; Virtual</span>
+                                <a href="#calendar-view" class="text-info text-decoration-none">Full Schedule &rarr;</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -562,7 +638,7 @@
                 </div>
             </div>
             <hr class="my-4 border-secondary">
-            <p class="text-muted small mb-0 text-center">&copy; 2025 Code & Conflict || All Right Are Reserved By Rehan
+            <p class="text-muted small mb-0 text-center">&copy; 2025 Code &amp; Conflict || All Rights Reserved By Rehan
                 Raza ITE/107/2K23 </p>
         </div>
     </footer>
@@ -573,7 +649,7 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 
     <script>
-        // Initialize dynamic cybersecurity event calendar
+        // Initialize dynamic cybersecurity event calendar with offline-resilient interactive schedule grid
         document.addEventListener('DOMContentLoaded', function () {
             const now = new Date();
             const y = now.getFullYear();
@@ -589,99 +665,223 @@
                     title: 'Black Hat Briefings & Arsenal',
                     start: fmt(y, 7, 5),
                     end: fmt(y, 7, 10),
-                    backgroundColor: '#3498db',
-                    borderColor: '#3498db',
-                    url: 'https://www.blackhat.com'
+                    category: 'Conference',
+                    location: 'Las Vegas, NV (Hybrid)',
+                    badgeClass: 'bg-primary',
+                    borderColor: '#38bdf8',
+                    backgroundColor: '#0284c7',
+                    url: 'https://www.blackhat.com',
+                    summary: 'Zero-day vulnerability research, hands-on Arsenal tools, and CISO enterprise defense tracks.'
                 },
                 {
                     title: 'DEF CON Hacker Convention',
                     start: fmt(y, 7, 10),
                     end: fmt(y, 7, 13),
+                    category: 'Conference & CTF',
+                    location: 'Las Vegas, NV',
+                    badgeClass: 'bg-danger',
+                    borderColor: '#ff3366',
                     backgroundColor: '#e74c3c',
-                    borderColor: '#e74c3c',
-                    url: 'https://defcon.org'
+                    url: 'https://defcon.org',
+                    summary: 'World-renowned underground hacking villages, Red Team CTFs, and hardware exploitation labs.'
                 },
                 {
                     title: 'RSA Conference Global',
                     start: fmt(y, 4, 18),
                     end: fmt(y, 4, 22),
-                    backgroundColor: '#2ecc71',
-                    borderColor: '#2ecc71',
-                    url: 'https://www.rsaconference.com'
+                    category: 'Conference',
+                    location: 'San Francisco, CA',
+                    badgeClass: 'bg-success',
+                    borderColor: '#10b981',
+                    backgroundColor: '#10b981',
+                    url: 'https://www.rsaconference.com',
+                    summary: 'Global cybersecurity policy, cryptography keynotes, and enterprise security architecture.'
                 },
                 {
                     title: 'Zero Trust Architecture Masterclass',
                     start: fmt(y, m, 12) + 'T13:00:00',
-                    backgroundColor: '#9b59b6',
-                    borderColor: '#9b59b6',
-                    url: 'https://www.nist.gov'
+                    end: fmt(y, m, 12) + 'T14:30:00',
+                    category: 'Webinar',
+                    location: 'Live Online Broadcast',
+                    badgeClass: 'bg-info',
+                    borderColor: '#8b5cf6',
+                    backgroundColor: '#8b59b6',
+                    url: 'https://www.nist.gov',
+                    summary: 'Hands-on NIST SP 800-207 microsegmentation and identity-aware proxy deployment workshop.'
                 },
                 {
                     title: 'SANS Cyber Defense & Forensics Summit',
                     start: fmt(y, m, 20),
                     end: fmt(y, m, 24),
+                    category: 'Training & Workshop',
+                    location: 'Austin, TX & Virtual',
+                    badgeClass: 'bg-warning',
+                    borderColor: '#f59e0b',
                     backgroundColor: '#f39c12',
-                    borderColor: '#f39c12',
-                    url: 'https://www.sans.org'
+                    url: 'https://www.sans.org',
+                    summary: 'Intensive DFIR incident response, memory forensics, and threat hunting certification tracks.'
                 },
                 {
-                    title: 'BSides Security Conference',
+                    title: 'BSides Security Community Summit',
                     start: fmt(y, (m + 1) % 12, 8),
                     end: fmt(y, (m + 1) % 12, 10),
+                    category: 'Workshop',
+                    location: 'Global Chapters',
+                    badgeClass: 'bg-info',
+                    borderColor: '#00f0ff',
                     backgroundColor: '#1abc9c',
-                    borderColor: '#1abc9c',
-                    url: 'https://www.securitybsides.com'
+                    url: 'https://www.securitybsides.com',
+                    summary: 'Community-driven offensive and defensive security research talks and purple-team labs.'
                 },
                 {
                     title: 'Global Cloud Security Alliance (CSA) Forum',
                     start: fmt(y, (m + 1) % 12, 18) + 'T14:00:00',
+                    end: fmt(y, (m + 1) % 12, 18) + 'T17:00:00',
+                    category: 'Webinar',
+                    location: 'Virtual Summit',
+                    badgeClass: 'bg-secondary',
+                    borderColor: '#64748b',
                     backgroundColor: '#34495e',
-                    borderColor: '#34495e',
-                    url: 'https://cloudsecurityalliance.org'
+                    url: 'https://cloudsecurityalliance.org',
+                    summary: 'CNAPP posture management, Kubernetes runtime security, and AI cloud governance.'
                 }
             ];
 
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,listMonth'
-                },
-                events: events,
-                eventClick: function (info) {
-                    info.jsEvent.preventDefault();
-                    if (info.event.url && info.event.url !== '#') {
-                        window.open(info.event.url, '_blank');
-                    }
+            const calendarEl = document.getElementById('calendar');
+            const monthBtn = document.getElementById('month-view');
+            const weekBtn = document.getElementById('week-view');
+            const listBtn = document.getElementById('list-view');
+
+            function setActiveViewBtn(activeBtn) {
+                [monthBtn, weekBtn, listBtn].forEach(btn => {
+                    if (btn) btn.classList.toggle('active', btn === activeBtn);
+                });
+            }
+
+            // Native interactive schedule renderer (used when FullCalendar CDN is offline or as rich interactive view)
+            function renderFallbackSchedule(mode) {
+                let filtered = events.slice();
+                let modeLabel = 'Monthly Global Schedule Grid';
+                if (mode === 'week') {
+                    modeLabel = 'This Month & Upcoming Sprint Schedule';
+                    filtered = events.filter(ev => ev.start.startsWith(`${y}-${pad(m + 1)}`) || ev.category.includes('Webinar') || ev.category.includes('Training'));
+                } else if (mode === 'list') {
+                    modeLabel = 'Chronological Master Event Directory';
+                    filtered.sort((a, b) => a.start.localeCompare(b.start));
                 }
-            });
-            calendar.render();
 
-            // Calendar view switcher
-            document.getElementById('month-view').addEventListener('click', function () {
-                calendar.changeView('dayGridMonth');
-                this.classList.add('active');
-                document.getElementById('week-view').classList.remove('active');
-                document.getElementById('list-view').classList.remove('active');
-            });
+                if (mode === 'list') {
+                    const rows = filtered.map(ev => `
+                        <tr>
+                            <td class="monospace text-info">${ev.start.split('T')[0]}${ev.end ? ' &rarr; ' + ev.end.split('T')[0] : ''}</td>
+                            <td class="fw-semibold text-white">${ev.title}</td>
+                            <td><span class="badge ${ev.badgeClass}">${ev.category}</span></td>
+                            <td class="text-muted small"><i class="bi bi-geo-alt me-1"></i>${ev.location}</td>
+                            <td class="text-end">
+                                <a href="${ev.url}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-info">
+                                    <i class="bi bi-box-arrow-up-right"></i> Details
+                                </a>
+                            </td>
+                        </tr>
+                    `).join('');
 
-            document.getElementById('week-view').addEventListener('click', function () {
-                calendar.changeView('timeGridWeek');
-                this.classList.add('active');
-                document.getElementById('month-view').classList.remove('active');
-                document.getElementById('list-view').classList.remove('active');
-            });
+                    calendarEl.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+                            <span class="text-info fw-semibold"><i class="bi bi-list-ul me-2"></i>${modeLabel}</span>
+                            <span class="badge bg-dark border border-secondary">${filtered.length} Scheduled Events</span>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Dates</th>
+                                        <th>Event Name</th>
+                                        <th>Track</th>
+                                        <th>Location</th>
+                                        <th class="text-end">Registration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>${rows}</tbody>
+                            </table>
+                        </div>
+                    `;
+                    return;
+                }
 
-            document.getElementById('list-view').addEventListener('click', function () {
-                calendar.changeView('listMonth');
-                this.classList.add('active');
-                document.getElementById('month-view').classList.remove('active');
-                document.getElementById('week-view').classList.remove('active');
-            });
+                const cards = filtered.map(ev => `
+                    <div class="cc-schedule-card" style="border-left-color: ${ev.borderColor};">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="badge ${ev.badgeClass}">${ev.category}</span>
+                            <span class="small monospace text-info"><i class="bi bi-calendar-check me-1"></i>${ev.start.split('T')[0]}</span>
+                        </div>
+                        <h5 class="mb-2 text-white">${ev.title}</h5>
+                        <p class="small text-muted mb-3">${ev.summary}</p>
+                        <div class="d-flex justify-content-between align-items-center pt-2 border-top border-secondary border-opacity-25">
+                            <span class="small text-secondary"><i class="bi bi-geo-alt text-primary me-1"></i>${ev.location}</span>
+                            <a href="${ev.url}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary">
+                                Event Portal <i class="bi bi-arrow-up-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                `).join('');
+
+                calendarEl.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+                        <span class="text-info fw-semibold"><i class="bi bi-grid-3x3-gap me-2"></i>${modeLabel}</span>
+                        <span class="badge bg-dark border border-secondary">${filtered.length} Active Briefings</span>
+                    </div>
+                    <div class="cc-schedule-grid">${cards}</div>
+                `;
+            }
+
+            if (typeof FullCalendar !== 'undefined') {
+                const calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,listMonth'
+                    },
+                    events: events,
+                    eventClick: function (info) {
+                        info.jsEvent.preventDefault();
+                        if (info.event.url && info.event.url !== '#') {
+                            window.open(info.event.url, '_blank');
+                        }
+                    }
+                });
+                calendar.render();
+
+                monthBtn.addEventListener('click', function () {
+                    calendar.changeView('dayGridMonth');
+                    setActiveViewBtn(this);
+                });
+                weekBtn.addEventListener('click', function () {
+                    calendar.changeView('timeGridWeek');
+                    setActiveViewBtn(this);
+                });
+                listBtn.addEventListener('click', function () {
+                    calendar.changeView('listMonth');
+                    setActiveViewBtn(this);
+                });
+            } else {
+                // Offline-resilient interactive schedule grid
+                renderFallbackSchedule('month');
+
+                monthBtn.addEventListener('click', function () {
+                    setActiveViewBtn(this);
+                    renderFallbackSchedule('month');
+                });
+                weekBtn.addEventListener('click', function () {
+                    setActiveViewBtn(this);
+                    renderFallbackSchedule('week');
+                });
+                listBtn.addEventListener('click', function () {
+                    setActiveViewBtn(this);
+                    renderFallbackSchedule('list');
+                });
+            }
         });
-
     </script>
     <script src="../assets/js/main.js"></script>
 </body>
