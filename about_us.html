@@ -12,10 +12,10 @@
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom CSS -->
-    <link href="css/custom.css" rel="stylesheet">
+    <link href="assets/css/customized.css" rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
+    <link rel="icon" type="image/png" href="assets/imgs/favicon.png">
 
     <style>
         .cyber-gradient {
@@ -132,22 +132,22 @@
                             <i class="bi bi-newspaper"></i> News
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="../news/security_patches.html"><i
+                            <li><a class="dropdown-item" href="news/security_patches.html"><i
                                         class="bi bi-patch-check"></i> Security Patches</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../news/latest_threats.html"><i
+                            <li><a class="dropdown-item" href="news/latest_threats.html"><i
                                         class="bi bi-exclamation-triangle"></i> Latest Threats</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../news/industry_news.html"><i
+                            <li><a class="dropdown-item" href="news/industry_news.html"><i
                                         class="bi bi-building"></i> Industry News</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../news/event_calendar.html"><i
+                            <li><a class="dropdown-item" href="news/event_calendar.html"><i
                                         class="bi bi-calendar-event"></i> Event Calendar</a></li>
                         </ul>
                     </li>
@@ -301,7 +301,7 @@
                             <p class="text-muted">Founder & Lead Researcher & Owner</p>
                             <p class="card-text small">Former cybersecurity analyst at National CERT</p>
                             <div class="d-flex justify-content-center gap-2">
-                                <a href="www.linkedin.com/in/rehan-mirjat" class="text-primary"><i class="bi bi-linkedin"></i></a>
+                                <a href="https://www.linkedin.com/in/rehan-mirjat" class="text-primary"><i class="bi bi-linkedin"></i></a>
                                 <a href="https://github.com/rehan-mirjat" class="text-primary"><i class="bi bi-github"></i></a>
                             </div>
                         </div>
@@ -497,24 +497,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script>
-        // Animate elements when they come into view
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animate__animated');
-
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-
-                if (elementPosition < windowHeight - 100) {
-                    const animationClass = element.classList[1];
-                    element.classList.add(animationClass);
-                }
-            });
-        };
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
     </script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>

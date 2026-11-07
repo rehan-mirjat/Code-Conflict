@@ -12,7 +12,7 @@
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom CSS -->
-    <link href="../css/custom.css" rel="stylesheet">
+    <link href="../assets/css/customized.css" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
@@ -20,7 +20,7 @@
     <style>
         .industry-hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('../assets/imgs/industry-news-bg.jpg') no-repeat center center;
+                linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
             background-size: cover;
             padding-top: 100px;
         }
@@ -248,7 +248,7 @@
                         <img src="../assets/imgs/images.jpg" class="card-img-top" alt="Company merger">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="../assets/imgs/favicon.png" class="company-logo">
+                                <img src="../assets/imgs/favicon.png" class="company-logo" alt="">
                                 <div>
                                     <span class="badge bg-primary">Merger</span>
                                     <span class="badge bg-dark ms-2">Market Move</span>
@@ -273,7 +273,7 @@
                         style="animation-delay: 0.2s;">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="../assets/imgs/favicon.png" class="company-logo">
+                                <img src="../assets/imgs/favicon.png" class="company-logo" alt="">
                                 <div>
                                     <span class="badge bg-danger">Regulation</span>
                                     <span class="badge bg-dark ms-2">Policy</span>
@@ -343,7 +343,7 @@
                         style="animation-delay: 0.4s;">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="../assets/imgs/company-logos/eu.png" class="company-logo">
+                                <img src="../assets/imgs/icons/internet.png" class="company-logo" alt="">
                                 <div>
                                     <span class="badge bg-info">EU Policy</span>
                                     <span class="badge bg-dark ms-2">GDPR Update</span>
@@ -420,7 +420,7 @@
                                     class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
                                     <div>
                                         <img src="../assets/imgs/favicon.png"
-                                            class="company-logo-sm me-2" style="height: 25px;">
+                                            class="company-logo-sm me-2" style="height: 25px;" alt="">
                                         <span>CrowdStrike</span>
                                     </div>
                                     <span class="text-success">+18.2%</span>
@@ -429,7 +429,7 @@
                                     class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
                                     <div>
                                         <img src="../assets/imgs/favicon.png" class="company-logo-sm me-2"
-                                            style="height: 25px;">
+                                            style="height: 25px;" alt="">
                                         <span>Zscaler</span>
                                     </div>
                                     <span class="text-success">+7.5%</span>
@@ -438,7 +438,7 @@
                                     class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
                                     <div>
                                         <img src="../assets/imgs/favicon.png"
-                                            class="company-logo-sm me-2" style="height: 25px;">
+                                            class="company-logo-sm me-2" style="height: 25px;" alt="">
                                         <span>SentinelOne</span>
                                     </div>
                                     <span class="text-danger">-3.2%</span>
@@ -447,7 +447,7 @@
                                     class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
                                     <div>
                                         <img src="../assets/imgs/favicon.png" class="company-logo-sm me-2"
-                                            style="height: 25px;">
+                                            style="height: 25px;" alt="">
                                         <span>Okta</span>
                                     </div>
                                     <span class="text-success">+2.8%</span>
@@ -549,24 +549,8 @@
             });
         });
 
-        // Animate elements on scroll
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animate__animated');
-
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-
-                if (elementPosition < windowHeight - 100) {
-                    const animationClass = element.classList[1];
-                    element.classList.add(animationClass);
-                }
-            });
-        };
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
     </script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

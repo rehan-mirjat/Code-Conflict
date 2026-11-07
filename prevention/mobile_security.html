@@ -12,7 +12,7 @@
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom CSS -->
-    <link href="../css/custom.css" rel="stylesheet">
+    <link href="../assets/css/customized.css" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
@@ -20,7 +20,7 @@
     <style>
         .mobile-hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('../assets/imgs/mobile-security-bg.jpg') no-repeat center center;
+                linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
             background-size: cover;
         }
 
@@ -465,14 +465,14 @@
                 <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
                     <div class="card bg-dark border-success h-100">
                         <div class="card-header border-success d-flex">
-                            <img src="../assets/imgs/icons/bitdefender.png" width="40" height="40" class="me-3">
+                            <img src="../assets/imgs/icons/bitdefender.png" width="40" height="40" class="me-3" alt="">
                             <div>
                                 <h5 class="mb-0">Bitdefender Mobile</h5>
                                 <small class="text-muted">Antivirus & Protection</small>
                             </div>
                         </div>
                         <div class="card-body text-center">
-                            <img src="../assets/imgs/icons/bitdefender.png" class="app-icon">
+                            <img src="../assets/imgs/icons/bitdefender.png" class="app-icon" alt="">
                             <p>Comprehensive mobile security suite with web protection, VPN, and anti-theft features.
                             </p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -499,14 +499,14 @@
                 <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
                     <div class="card bg-dark border-primary h-100">
                         <div class="card-header border-primary d-flex">
-                            <img src="../assets/imgs/icons/provpn.png" width="40" height="40" class="me-3">
+                            <img src="../assets/imgs/icons/provpn.png" width="40" height="40" class="me-3" alt="">
                             <div>
                                 <h5 class="mb-0">ProtonVPN</h5>
                                 <small class="text-muted">Secure VPN Service</small>
                             </div>
                         </div>
                         <div class="card-body text-center">
-                            <img src="../assets/imgs/icons/provpn.png" class="app-icon">
+                            <img src="../assets/imgs/icons/provpn.png" class="app-icon" alt="">
                             <p>High-speed Swiss VPN that protects your privacy on mobile networks with strong
                                 encryption.</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -533,14 +533,14 @@
                 <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
                     <div class="card bg-dark border-warning h-100">
                         <div class="card-header border-warning d-flex">
-                            <img src="../assets/imgs/icons/authy.png" width="40" height="40" class="me-3">
+                            <img src="../assets/imgs/icons/authy.png" width="40" height="40" class="me-3" alt="">
                             <div>
                                 <h5 class="mb-0">Authy</h5>
                                 <small class="text-muted">2FA Authenticator</small>
                             </div>
                         </div>
                         <div class="card-body text-center">
-                            <img src="../assets/imgs/icons/authy.png" class="app-icon">
+                            <img src="../assets/imgs/icons/authy.png" class="app-icon" alt="">
                             <p>Two-factor authentication app with encrypted cloud backup and multi-device sync.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="badge bg-success">Free</span>
@@ -672,24 +672,8 @@
             }
         });
 
-        // Animate elements on scroll
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animate__animated');
-
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-
-                if (elementPosition < windowHeight - 100) {
-                    const animationClass = element.classList[1];
-                    element.classList.add(animationClass);
-                }
-            });
-        };
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
     </script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

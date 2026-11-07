@@ -14,7 +14,7 @@
     <!-- FullCalendar CSS -->
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="../css/custom.css" rel="stylesheet">
+    <link href="../assets/css/customized.css" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
@@ -22,7 +22,7 @@
     <style>
         .calendar-hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('../assets/imgs/calendar-bg.jpg') no-repeat center center;
+                linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
             background-size: cover;
             padding-top: 100px;
         }
@@ -290,7 +290,7 @@
                         <img src="../assets/imgs/event-logos/blackhat.png" class="card-img-top" alt="Black Hat USA">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="../assets/imgs/event-logos/blackhat.png" class="organizer-logo">
+                                <img src="../assets/imgs/event-logos/blackhat.png" class="organizer-logo" alt="">
                                 <div>
                                     <span class="badge event-type-badge event-type-conference">Conference</span>
                                     <span class="badge bg-dark ms-2">In-Person</span>
@@ -323,7 +323,7 @@
                         <img src="../assets/imgs/event-logos/defcon-events.png" class="card-img-top" alt="DEF CON 31">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="../assets/imgs/event-logos/defcon-events.png" class="organizer-logo">
+                                <img src="../assets/imgs/event-logos/defcon-events.png" class="organizer-logo" alt="">
                                 <div>
                                     <span class="badge event-type-badge event-type-conference">Conference</span>
                                     <span class="badge bg-dark ms-2">In-Person</span>
@@ -356,7 +356,7 @@
                         <img src="../assets/imgs/icons/hacker.png" class="card-img-top" alt="RSA Conference">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="../assets/imgs/event-logos/white-hat.png" class="organizer-logo">
+                                <img src="../assets/imgs/event-logos/white-hat.png" class="organizer-logo" alt="">
                                 <div>
                                     <span class="badge event-type-badge event-type-conference">Conference</span>
                                     <span class="badge bg-dark ms-2">Hybrid</span>
@@ -389,7 +389,7 @@
                         <img src="../assets/imgs/icons/ddos.png" class="card-img-top" alt="Zero Trust Webinar">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="../assets/imgs/icons/ddos.png" class="organizer-logo">
+                                <img src="../assets/imgs/icons/ddos.png" class="organizer-logo" alt="">
                                 <div>
                                     <span class="badge event-type-badge event-type-webinar">Webinar</span>
                                     <span class="badge bg-dark ms-2">Virtual</span>
@@ -659,24 +659,8 @@
             });
         });
 
-        // Animate elements on scroll
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animate__animated');
-
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-
-                if (elementPosition < windowHeight - 100) {
-                    const animationClass = element.classList[1];
-                    element.classList.add(animationClass);
-                }
-            });
-        };
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
     </script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

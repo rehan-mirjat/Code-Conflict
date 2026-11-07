@@ -58,3 +58,40 @@
         .img-hover-zoom:hover img {
             transform: scale(1.1);
         }
+/* ---- Modern UI enhancements (added) ---- */
+html { scroll-behavior: smooth; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #1a1a2e; }
+::-webkit-scrollbar-thumb { background: #2ecc71; border-radius: 6px; }
+
+.card { backdrop-filter: blur(6px); }
+.cc-reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.cc-reveal.cc-visible { opacity: 1; transform: none; }
+
+#cc-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 2000;
+  background: linear-gradient(90deg, #2ecc71, #0d6efd, #e74c3c); transition: width .1s linear; }
+#cc-top { position: fixed; right: 20px; bottom: 20px; width: 44px; height: 44px; border-radius: 50%;
+  border: 0; background: #2ecc71; color: #111; font-size: 1.2rem; z-index: 1999;
+  opacity: 0; pointer-events: none; transform: translateY(10px); transition: all .3s ease; }
+#cc-top.show { opacity: 1; pointer-events: auto; transform: none; }
+#cc-top:hover { background: #27ae60; }
+
+#cc-toasts { position: fixed; top: 70px; right: 20px; z-index: 2100; display: flex; flex-direction: column; gap: 8px; }
+.cc-toast { min-width: 240px; max-width: 340px; padding: 12px 16px; border-radius: 8px; color: #fff;
+  background: #2c3e50; border-left: 4px solid #0d6efd; box-shadow: 0 6px 18px rgba(0,0,0,.4);
+  opacity: 0; transform: translateX(30px); transition: all .3s ease; }
+.cc-toast.show { opacity: 1; transform: none; }
+.cc-toast-success { border-left-color: #2ecc71; }
+.cc-toast-danger { border-left-color: #e74c3c; }
+
+.cc-feed-item { opacity: 0; transform: translateY(-10px); transition: all .4s ease; }
+.cc-feed-item.in { opacity: 1; transform: none; }
+.cc-feed-item[data-sev=critical] { border-left: 3px solid #e74c3c; }
+.cc-feed-item[data-sev=high] { border-left: 3px solid #f39c12; }
+.cc-feed-item[data-sev=medium] { border-left: 3px solid #0dcaf0; }
+.cc-feed-item[data-sev=low] { border-left: 3px solid #2ecc71; }
+.live-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #e74c3c; animation: pulse 2s infinite; margin-right: 6px; }
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .cc-reveal { opacity: 1; transform: none; }
+}

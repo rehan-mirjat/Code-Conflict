@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
+  <link rel="icon" type="image/png" href="assets/imgs/favicon.png">
 
   <style>
     .cyber-gradient {
@@ -100,22 +100,22 @@
               <i class="bi bi-newspaper"></i> News
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../news/security_patches.html"><i class="bi bi-patch-check"></i>
+              <li><a class="dropdown-item" href="news/security_patches.html"><i class="bi bi-patch-check"></i>
                   Security Patches</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="../news/latest_threats.html"><i class="bi bi-exclamation-triangle"></i>
+              <li><a class="dropdown-item" href="news/latest_threats.html"><i class="bi bi-exclamation-triangle"></i>
                   Latest Threats</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="../news/industry_news.html"><i class="bi bi-building"></i> Industry
+              <li><a class="dropdown-item" href="news/industry_news.html"><i class="bi bi-building"></i> Industry
                   News</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="../news/event_calendar.html"><i class="bi bi-calendar-event"></i> Event
+              <li><a class="dropdown-item" href="news/event_calendar.html"><i class="bi bi-calendar-event"></i> Event
                   Calendar</a></li>
             </ul>
           </li>
@@ -352,17 +352,18 @@
     // Form submission
     document.getElementById('loginForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      // Simulate authentication
-      const alertBox = document.createElement('div');
-      alertBox.className = 'alert alert-success mt-3';
-      alertBox.innerHTML = `
-                <i class="bi bi-shield-check"></i> <strong>Authentication successful</strong>
-                <p>Redirecting to your dashboard...</p>
-            `;
-      this.parentNode.appendChild(alertBox);
-
-      // In real implementation, validate credentials here
-      // setTimeout(() => window.location.href = "dashboard.html", 2000);
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const form = this;
+      CC.auth.login(email, password).then(function (res) {
+        form.parentNode.querySelectorAll('.alert-success, .alert-danger').forEach(function (a) { a.remove(); });
+        const alertBox = document.createElement('div');
+        alertBox.className = 'alert ' + (res.ok ? 'alert-success' : 'alert-danger') + ' mt-3';
+        alertBox.setAttribute('role', 'alert');
+        alertBox.textContent = res.ok ? 'Authentication successful. Redirecting...' : res.error;
+        form.parentNode.appendChild(alertBox);
+        if (res.ok) setTimeout(function () { window.location.href = 'index.html'; }, 1200);
+      });
     });
 
     // Animate on load
@@ -373,6 +374,7 @@
       });
     });
   </script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>

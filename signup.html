@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
+    <link rel="icon" type="image/png" href="assets/imgs/favicon.png">
     <style>
         .cyber-gradient {
             background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
@@ -48,7 +48,7 @@
     <!-- Cyber Alert Bar -->
     <div class="alert alert-warning alert-dismissible rounded-0 mb-0 text-center py-2">
         <strong>NOTICE:</strong> Registration requires university-affiliated email |
-        <a href="about.html" class="alert-link">Verify eligibility</a>
+        <a href="about_us.html" class="alert-link">Verify eligibility</a>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
     </div>
 
@@ -99,22 +99,22 @@
                             <i class="bi bi-newspaper"></i> News
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="../news/security_patches.html"><i
+                            <li><a class="dropdown-item" href="news/security_patches.html"><i
                                         class="bi bi-patch-check"></i> Security Patches</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../news/latest_threats.html"><i
+                            <li><a class="dropdown-item" href="news/latest_threats.html"><i
                                         class="bi bi-exclamation-triangle"></i> Latest Threats</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../news/industry_news.html"><i
+                            <li><a class="dropdown-item" href="news/industry_news.html"><i
                                         class="bi bi-building"></i> Industry News</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../news/event_calendar.html"><i
+                            <li><a class="dropdown-item" href="news/event_calendar.html"><i
                                         class="bi bi-calendar-event"></i> Event Calendar</a></li>
                         </ul>
                     </li>
@@ -448,18 +448,25 @@
                 return;
             }
 
-            // Simulate registration
-            const alertBox = document.createElement('div');
-            alertBox.className = 'alert alert-success mt-3';
-            alertBox.innerHTML = `
-                <i class="bi bi-envelope-check"></i> <strong>Verification email sent</strong>
-                <p>Check your university email to complete registration (allow 5-10 minutes)</p>
-            `;
-            this.parentNode.appendChild(alertBox);
-
-            // In real implementation, submit to backend here
-            // this.reset();
-            // generateCaptcha();
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const pgp = document.getElementById('pgpKey').value;
+            const form = this;
+            CC.auth.register(email, password, pgp).then(function (res) {
+                form.parentNode.querySelectorAll('.alert-success, .alert-danger').forEach(function (a) { a.remove(); });
+                const alertBox = document.createElement('div');
+                alertBox.className = 'alert ' + (res.ok ? 'alert-success' : 'alert-danger') + ' mt-3';
+                alertBox.setAttribute('role', 'alert');
+                alertBox.textContent = res.ok
+                    ? 'Account created! Redirecting to login...'
+                    : res.error;
+                form.parentNode.appendChild(alertBox);
+                if (res.ok) {
+                    setTimeout(function () { window.location.href = 'login.html'; }, 1500);
+                } else {
+                    generateCaptcha();
+                }
+            });
         });
 
         // Animate on load
@@ -470,6 +477,7 @@
             });
         });
     </script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>

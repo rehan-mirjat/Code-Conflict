@@ -12,12 +12,12 @@
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom CSS -->
-    <link href="css/custom.css" rel="stylesheet">
+    <link href="assets/css/customized.css" rel="stylesheet">
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
+    <link rel="icon" type="image/png" href="assets/imgs/favicon.png">
 
     <style>
         .cyber-gradient {
@@ -150,22 +150,22 @@
                             <i class="bi bi-newspaper"></i> News
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="../news/security_patches.html"><i
+                            <li><a class="dropdown-item" href="news/security_patches.html"><i
                                         class="bi bi-patch-check"></i> Security Patches</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../news/latest_threats.html"><i
+                            <li><a class="dropdown-item" href="news/latest_threats.html"><i
                                         class="bi bi-exclamation-triangle"></i> Latest Threats</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../news/industry_news.html"><i
+                            <li><a class="dropdown-item" href="news/industry_news.html"><i
                                         class="bi bi-building"></i> Industry News</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../news/event_calendar.html"><i
+                            <li><a class="dropdown-item" href="news/event_calendar.html"><i
                                         class="bi bi-calendar-event"></i> Event Calendar</a></li>
                         </ul>
                     </li>
@@ -362,6 +362,22 @@
         </div>
     </section>
 
+    <!-- Real-time Threat Feed (simulated, generated in assets/js/main.js) -->
+    <section class="py-5">
+        <div class="container">
+            <div class="card bg-dark border-danger border-opacity-50">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0 h5"><span class="live-dot"></span> Live Threat Feed
+                        <small class="text-muted ms-2">(<span id="feedCount">0</span> new)</small></h3>
+                    <button type="button" id="feedToggle" class="btn btn-sm btn-outline-light" aria-pressed="false">
+                        <i class="bi bi-pause-fill"></i> Pause
+                    </button>
+                </div>
+                <ul id="liveFeed" class="list-group list-group-flush" aria-live="polite"></ul>
+            </div>
+        </div>
+    </section>
+
     <!-- Interactive Elements -->
     <section class="py-5">
         <div class="container">
@@ -406,7 +422,7 @@
                             <p>Is this email legitimate?</p>
                             <div class="email-sample p-3 mb-3 bg-light text-dark rounded">
                                 <div class="d-flex align-items-center mb-2">
-                                    <img src="assets/imgs/icons/internet.png" width="20" class="me-2">
+                                    <img src="assets/imgs/icons/internet.png" width="20" class="me-2" alt="">
                                     <strong>Microsoft Support</strong>
                                     <small class="text-muted ms-auto">support@micr0soft.com</small>
                                 </div>
@@ -427,15 +443,15 @@
                             <h5 class="mt-4"><i class="bi bi-graph-up"></i> Recent Threat Stats</h5>
                             <div class="row text-center mt-3">
                                 <div class="col-4">
-                                    <div class="display-6 text-danger">1,287</div>
+                                    <div class="display-6 text-danger" id="statRansom" data-count="1287">1,287</div>
                                     <small class="text-muted">Ransomware Attacks</small>
                                 </div>
                                 <div class="col-4">
-                                    <div class="display-6 text-warning">3,452</div>
+                                    <div class="display-6 text-warning" id="statPhish" data-count="3452">3,452</div>
                                     <small class="text-muted">Phishing Sites</small>
                                 </div>
                                 <div class="col-4">
-                                    <div class="display-6 text-primary">78</div>
+                                    <div class="display-6 text-primary" id="statZero" data-count="78">78</div>
                                     <small class="text-muted">Zero-Days</small>
                                 </div>
                             </div>
@@ -455,25 +471,25 @@
             <div class="row g-4">
                 <div class="col-md-3 text-center">
                     <img src="assets/imgs/icons/fraud.png" width="80"
-                        class="mb-3 animate__animated animate__pulse animate__infinite">
+                        class="mb-3 animate__animated animate__pulse animate__infinite" alt="">
                     <div class="display-4 text-danger">$265B</div>
                     <p class="text-muted">Projected ransomware damage (2025)</p>
                 </div>
                 <div class="col-md-3 text-center">
                     <img src="assets/imgs/icons/ddos.png" width="80"
-                        class="mb-3 animate__animated animate__pulse animate__infinite" style="animation-delay: 0.2s;">
+                        class="mb-3 animate__animated animate__pulse animate__infinite" style="animation-delay: 0.2s;" alt="">
                     <div class="display-4 text-warning">287</div>
                     <p class="text-muted">Days to detect a breach</p>
                 </div>
                 <div class="col-md-3 text-center">
                     <img src="assets/imgs/icons/hacker.png" width="80"
-                        class="mb-3 animate__animated animate__pulse animate__infinite" style="animation-delay: 0.4s;">
+                        class="mb-3 animate__animated animate__pulse animate__infinite" style="animation-delay: 0.4s;" alt="">
                     <div class="display-4 text-info">34%</div>
                     <p class="text-muted">Attacks from insiders</p>
                 </div>
                 <div class="col-md-3 text-center">
                     <img src="assets/imgs/icons/web-security.png" width="80"
-                        class="mb-3 animate__animated animate__pulse animate__infinite" style="animation-delay: 0.6s;">
+                        class="mb-3 animate__animated animate__pulse animate__infinite" style="animation-delay: 0.6s;" alt="">
                     <div class="display-4 text-success">93%</div>
                     <p class="text-muted">Prevented with MFA</p>
                 </div>
@@ -645,24 +661,8 @@
         // Start the typing effect
         setTimeout(typeWriter, 1000);
 
-        // Animate elements when they come into view
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animate__animated');
-
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-
-                if (elementPosition < windowHeight - 100) {
-                    const animationClass = element.classList[1];
-                    element.classList.add(animationClass);
-                }
-            });
-        };
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
     </script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>

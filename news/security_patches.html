@@ -12,7 +12,7 @@
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom CSS -->
-    <link href="../css/custom.css" rel="stylesheet">
+    <link href="../assets/css/customized.css" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
@@ -20,7 +20,7 @@
     <style>
         .patches-hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('../assets/imgs/security-patches-bg.jpg') no-repeat center center;
+                linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
             background-size: cover;
         }
 
@@ -244,7 +244,7 @@
                     <div class="card patch-card critical h-100 bg-dark">
                         <div class="card-body">
                             <div class="d-flex mb-3">
-                                <img src="../assets/imgs/icons/threat.png" class="vendor-logo">
+                                <img src="../assets/imgs/icons/threat.png" class="vendor-logo" alt="">
                                 <div>
                                     <h5 class="mb-0">Windows Zero-Day</h5>
                                     <span class="badge bg-danger">CVE-2023-36884</span>
@@ -273,7 +273,7 @@
                     <div class="card patch-card critical h-100 bg-dark">
                         <div class="card-body">
                             <div class="d-flex mb-3">
-                                <img src="../assets/imgs/icons/apple.png" class="vendor-logo">
+                                <img src="../assets/imgs/icons/apple.png" class="vendor-logo" alt="">
                                 <div>
                                     <h5 class="mb-0">iOS/macOS WebKit</h5>
                                     <span class="badge bg-danger">CVE-2023-37450</span>
@@ -302,7 +302,7 @@
                     <div class="card patch-card high h-100 bg-dark">
                         <div class="card-body">
                             <div class="d-flex mb-3">
-                                <img src="../assets/imgs/icons/chrome.png" class="vendor-logo">
+                                <img src="../assets/imgs/icons/chrome.png" class="vendor-logo" alt="">
                                 <div>
                                     <h5 class="mb-0">Chrome Zero-Day</h5>
                                     <span class="badge bg-warning">CVE-2023-3079</span>
@@ -330,7 +330,7 @@
                     <div class="card patch-card high h-100 bg-dark">
                         <div class="card-body">
                             <div class="d-flex mb-3">
-                                <img src="../assets/imgs/icons/linux.png" class="vendor-logo">
+                                <img src="../assets/imgs/icons/linux.png" class="vendor-logo" alt="">
                                 <div>
                                     <h5 class="mb-0">Linux Kernel</h5>
                                     <span class="badge bg-warning">CVE-2023-32233</span>
@@ -380,35 +380,35 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><img src="../assets/imgs/icons/microsoft.png" width="20" class="me-2">
+                                    <td><img src="../assets/imgs/icons/microsoft.png" width="20" class="me-2" alt="">
                                         Microsoft</td>
                                     <td>Second Tuesday</td>
                                     <td>August 8, 2023</td>
                                     <td>July 11, 2023</td>
                                 </tr>
                                 <tr>
-                                    <td><img src="../assets/imgs/icons/adobe.png" width="20" class="me-2"> Adobe
+                                    <td><img src="../assets/imgs/icons/adobe.png" width="20" class="me-2" alt=""> Adobe
                                     </td>
                                     <td>Second Tuesday</td>
                                     <td>August 8, 2023</td>
                                     <td>July 11, 2023</td>
                                 </tr>
                                 <tr>
-                                    <td><img src="../assets/imgs/icons/oracle.png" width="20" class="me-2">
+                                    <td><img src="../assets/imgs/icons/oracle.png" width="20" class="me-2" alt="">
                                         Oracle</td>
                                     <td>Quarterly (Jan/Apr/Jul/Oct)</td>
                                     <td>October 17, 2023</td>
                                     <td>July 18, 2023</td>
                                 </tr>
                                 <tr>
-                                    <td><img src="../assets/imgs/icons/apple.png" width="20" class="me-2"> Apple
+                                    <td><img src="../assets/imgs/icons/apple.png" width="20" class="me-2" alt=""> Apple
                                     </td>
                                     <td>As needed</td>
                                     <td>Variable</td>
                                     <td>July 10, 2023</td>
                                 </tr>
                                 <tr>
-                                    <td><img src="../assets/imgs/icons/google.png" width="20" class="me-2">
+                                    <td><img src="../assets/imgs/icons/google.png" width="20" class="me-2" alt="">
                                         Google</td>
                                     <td>Every 2-3 weeks</td>
                                     <td>July 25, 2023</td>
@@ -639,24 +639,8 @@
             }
         });
 
-        // Animate elements on scroll
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animate__animated');
-
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-
-                if (elementPosition < windowHeight - 100) {
-                    const animationClass = element.classList[1];
-                    element.classList.add(animationClass);
-                }
-            });
-        };
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
     </script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

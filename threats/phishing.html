@@ -12,7 +12,7 @@
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom CSS -->
-    <link href="../css/custom.css" rel="stylesheet">
+    <link href="../assets/css/customized.css" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
@@ -20,7 +20,7 @@
     <style>
         .phishing-hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('../assets/imgs/phishing-bg.jpg') no-repeat center center;
+                linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
             background-size: cover;
         }
 
@@ -302,7 +302,7 @@
                                 distribute malware.</p>
                             <div class="email-sample">
                                 <div class="d-flex align-items-center mb-2">
-                                    <img src="../assets/imgs/icons/mail.png" width="20" class="me-2">
+                                    <img src="../assets/imgs/icons/mail.png" width="20" class="me-2" alt="">
                                     <strong>Microsoft Account Team</strong>
                                     <small class="text-muted ms-auto">account@micr0soft.com</small>
                                 </div>
@@ -373,7 +373,7 @@
                                 friends.</p>
                             <div class="email-sample">
                                 <div class="d-flex align-items-center mb-2">
-                                    <img src="../assets/imgs/icons/netflix.png" width="20" class="me-2">
+                                    <img src="../assets/imgs/icons/netflix.png" width="20" class="me-2" alt="">
                                     <strong>Netflix Support</strong>
                                     <small class="text-muted ms-auto">@NetflixHelpDesk</small>
                                 </div>
@@ -571,7 +571,7 @@
                 <div class="card-body">
                     <div class="email-sample p-3 mb-3 bg-light text-dark rounded">
                         <div class="d-flex align-items-center mb-2">
-                            <img src="../assets/imgs/icons/paypal.png" width="20" class="me-2">
+                            <img src="../assets/imgs/icons/paypal.png" width="20" class="me-2" alt="">
                             <strong>PayPal Security</strong>
                             <small class="text-muted ms-auto">security@paypal-confirm.com</small>
                         </div>
@@ -648,7 +648,7 @@
                         <div class="col-md-6 mb-3">
                             <div class="email-sample">
                                 <div class="d-flex align-items-center mb-2">
-                                    <img src="../assets/imgs/icons/mail.png" width="20" class="me-2">
+                                    <img src="../assets/imgs/icons/mail.png" width="20" class="me-2" alt="">
                                     <strong>DHL Customer Service</strong>
                                     <small class="text-muted ms-auto">support@dhl-package.com</small>
                                 </div>
@@ -665,7 +665,7 @@
                         <div class="col-md-6 mb-3">
                             <div class="email-sample">
                                 <div class="d-flex align-items-center mb-2">
-                                    <img src="../assets/imgs/icons/mail.png" width="20" class="me-2">
+                                    <img src="../assets/imgs/icons/mail.png" width="20" class="me-2" alt="">
                                     <strong>Dropbox Security</strong>
                                     <small class="text-muted ms-auto">noreply@dropbox.secure.com</small>
                                 </div>
@@ -704,23 +704,6 @@
             result.innerHTML = '<i class="bi bi-exclamation-triangle-fill"></i> Incorrect! PayPal would use "@paypal.com" and address you by name, not "Customer".';
         });
 
-        // Animate elements on scroll
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animate__animated');
-
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-
-                if (elementPosition < windowHeight - 100) {
-                    const animationClass = element.classList[1];
-                    element.classList.add(animationClass);
-                }
-            });
-        };
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
 
         // Add active class based on current page
         document.addEventListener('DOMContentLoaded', function () {
@@ -746,6 +729,7 @@
             });
         });
     </script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

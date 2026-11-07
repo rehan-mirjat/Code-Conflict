@@ -12,7 +12,7 @@
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom CSS -->
-    <link href="../css/custom.css" rel="stylesheet">
+    <link href="../assets/css/customized.css" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../assets/imgs/favicon.png">
@@ -20,7 +20,7 @@
     <style>
         .network-hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('../assets/imgs/network-security-bg.jpg') no-repeat center center;
+                linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
             background-size: cover;
         }
 
@@ -317,7 +317,7 @@
                 <div class="col-md-3 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
                     <div class="card protocol-card bg-dark border-primary h-100 text-center">
                         <div class="card-body">
-                            <img src="../assets/imgs/icons/ssl.png" class="protocol-icon">
+                            <img src="../assets/imgs/icons/ssl.png" class="protocol-icon" alt="">
                             <h5>SSL/TLS</h5>
                             <p>Encrypts data in transit between clients and servers</p>
                             <span class="badge bg-primary">Port 443</span>
@@ -328,7 +328,7 @@
                 <div class="col-md-3 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
                     <div class="card protocol-card bg-dark border-success h-100 text-center">
                         <div class="card-body">
-                            <img src="../assets/imgs/icons/vpn.png" class="protocol-icon">
+                            <img src="../assets/imgs/icons/vpn.png" class="protocol-icon" alt="">
                             <h5>IPSec</h5>
                             <p>Secure network layer communications</p>
                             <span class="badge bg-success">Port 500</span>
@@ -339,7 +339,7 @@
                 <div class="col-md-3 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
                     <div class="card protocol-card bg-dark border-warning h-100 text-center">
                         <div class="card-body">
-                            <img src="../assets/imgs/icons/ssh.png" class="protocol-icon">
+                            <img src="../assets/imgs/icons/ssh.png" class="protocol-icon" alt="">
                             <h5>SSH</h5>
                             <p>Secure remote administration</p>
                             <span class="badge bg-warning text-dark">Port 22</span>
@@ -350,7 +350,7 @@
                 <div class="col-md-3 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
                     <div class="card protocol-card bg-dark border-info h-100 text-center">
                         <div class="card-body">
-                            <img src="../assets/imgs/icons/wirekey.png" class="protocol-icon">
+                            <img src="../assets/imgs/icons/wirekey.png" class="protocol-icon" alt="">
                             <h5>WireGuard</h5>
                             <p>Modern VPN protocol</p>
                             <span class="badge bg-info text-dark">Port 51820</span>
@@ -461,7 +461,7 @@
                 <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
                     <div class="card bg-dark border-success h-100">
                         <div class="card-header border-success d-flex">
-                            <img src="../assets/imgs/icons/shark.png" width="40" height="40" class="me-3">
+                            <img src="../assets/imgs/icons/shark.png" width="40" height="40" class="me-3" alt="">
                             <div>
                                 <h5 class="mb-0">Wireshark</h5>
                                 <small class="text-muted">Network Protocol Analyzer</small>
@@ -488,7 +488,7 @@
                 <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
                     <div class="card bg-dark border-primary h-100">
                         <div class="card-header border-primary d-flex">
-                            <img src="../assets/imgs/icons/nmap.png" width="40" height="40" class="me-3">
+                            <img src="../assets/imgs/icons/nmap.png" width="40" height="40" class="me-3" alt="">
                             <div>
                                 <h5 class="mb-0">Nmap</h5>
                                 <small class="text-muted">Network Mapper</small>
@@ -515,7 +515,7 @@
                 <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
                     <div class="card bg-dark border-warning h-100">
                         <div class="card-header border-warning d-flex">
-                            <img src="../assets/imgs/icons/firewall.png" width="40" height="40" class="me-3">
+                            <img src="../assets/imgs/icons/firewall.png" width="40" height="40" class="me-3" alt="">
                             <div>
                                 <h5 class="mb-0">pfSense</h5>
                                 <small class="text-muted">Firewall/Router</small>
@@ -627,24 +627,8 @@
             }
         });
 
-        // Animate elements on scroll
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animate__animated');
-
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-
-                if (elementPosition < windowHeight - 100) {
-                    const animationClass = element.classList[1];
-                    element.classList.add(animationClass);
-                }
-            });
-        };
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
     </script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>
