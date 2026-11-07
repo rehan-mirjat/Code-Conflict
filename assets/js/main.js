@@ -1,5 +1,5 @@
 // Shared site behaviour for Code & Conflict:
-// navbar search, auth (client-side demo), toasts, scroll effects,
+// navbar search, auth (hybrid API + resilient local fallback), toasts, scroll effects,
 // animated counters and the live threat feed.
 (function () {
     'use strict';
@@ -22,17 +22,43 @@
         }
         var el = document.createElement('div');
         el.className = 'cc-toast cc-toast-' + (type || 'info');
-        el.textContent = message;
+        
+        var iconClass = 'bi-info-circle-fill text-info';
+        if (type === 'success') iconClass = 'bi-check-circle-fill text-success';
+        else if (type === 'danger' || type === 'error') iconClass = 'bi-exclamation-triangle-fill text-danger';
+        else if (type === 'warning') iconClass = 'bi-exclamation-circle-fill text-warning';
+
+        var icon = document.createElement('i');
+        icon.className = 'bi ' + iconClass + ' me-2 fs-5 flex-shrink-0';
+        var text = document.createElement('span');
+        text.className = 'flex-grow-1';
+        text.textContent = message;
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn-close btn-close-white ms-2';
+        btn.setAttribute('aria-label', 'Close');
+        btn.style.fontSize = '0.75rem';
+        btn.addEventListener('click', function () {
+            el.classList.remove('show');
+            setTimeout(function () { el.remove(); }, 300);
+        });
+
+        el.appendChild(icon);
+        el.appendChild(text);
+        el.appendChild(btn);
         box.appendChild(el);
         requestAnimationFrame(function () { el.classList.add('show'); });
         setTimeout(function () {
-            el.classList.remove('show');
-            setTimeout(function () { el.remove(); }, 300);
-        }, 3500);
+            if (el.parentNode) {
+                el.classList.remove('show');
+                setTimeout(function () { el.remove(); }, 300);
+            }
+        }, 3600);
     };
 
     /* ------------------------------------------------------------ Auth */
-    // NOTE: client-side only (localStorage). A demo, not real security.
+    // Hybrid architecture: Connects to backend API (/api/*) when server is present,
+    // with automatic resilient client fallback (localStorage) for offline/static hosting.
     var USERS_KEY = 'cc_users', SESSION_KEY = 'cc_session';
 
     function loadUsers() {
@@ -65,54 +91,188 @@
             if (!/^[^@\s]+@[^@\s]+\.edu\.pk$/.test(email)) {
                 return Promise.resolve({ ok: false, error: 'Please use a valid .edu.pk university email.' });
             }
-            var users = loadUsers();
-            if (users[email]) {
-                return Promise.resolve({ ok: false, error: 'An account with this email already exists.' });
-            }
-            var salt = randomSalt();
-            return hash(salt + password).then(function (h) {
-                users[email] = { name: email.split('@')[0], salt: salt, hash: h, pgp: pgp || '', created: new Date().toISOString() };
-                localStorage.setItem(USERS_KEY, JSON.stringify(users));
-                return { ok: true };
+            return fetch(root + 'api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'same-origin',
+                body: JSON.stringify({ email: email, password: password, pgp: pgp || '' })
+            }).then(function (res) {
+                if (res.status === 404) throw new Error('NoBackend');
+                return res.json().then(function (data) {
+                    if (!res.ok) {
+                        return { ok: false, error: data.error || 'Registration failed.' };
+                    }
+                    try { sessionStorage.setItem('cc_backend', '1'); } catch (e) {}
+                    var salt = randomSalt();
+                    return hash(salt + password).then(function (h) {
+                        var users = loadUsers();
+                        users[email] = { name: email.split('@')[0], salt: salt, hash: h, pgp: pgp || '', created: new Date().toISOString() };
+                        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+                        return { ok: true, message: data.message };
+                    });
+                });
+            }).catch(function () {
+                try { sessionStorage.setItem('cc_offline', '1'); } catch (e) {}
+                var users = loadUsers();
+                if (users[email]) {
+                    return { ok: false, error: 'An account with this email already exists.' };
+                }
+                var salt = randomSalt();
+                return hash(salt + password).then(function (h) {
+                    users[email] = { name: email.split('@')[0], salt: salt, hash: h, pgp: pgp || '', created: new Date().toISOString() };
+                    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+                    return { ok: true };
+                });
             });
         },
         login: function (email, password) {
             email = String(email || '').trim().toLowerCase();
-            var user = loadUsers()[email];
-            if (!user) return Promise.resolve({ ok: false, error: 'Invalid email or passphrase.' });
-            return hash(user.salt + password).then(function (h) {
-                if (h !== user.hash) return { ok: false, error: 'Invalid email or passphrase.' };
-                localStorage.setItem(SESSION_KEY, JSON.stringify({ email: email, name: user.name }));
-                return { ok: true };
+            return fetch(root + 'api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'same-origin',
+                body: JSON.stringify({ email: email, password: password })
+            }).then(function (res) {
+                if (res.status === 404) throw new Error('NoBackend');
+                return res.json().then(function (data) {
+                    if (!res.ok) {
+                        return { ok: false, error: data.error || 'Invalid email or passphrase.' };
+                    }
+                    try { sessionStorage.setItem('cc_backend', '1'); } catch (e) {}
+                    localStorage.setItem(SESSION_KEY, JSON.stringify({ email: data.user.email, name: data.user.name }));
+                    return { ok: true, user: data.user };
+                });
+            }).catch(function () {
+                try { sessionStorage.setItem('cc_offline', '1'); } catch (e) {}
+                var user = loadUsers()[email];
+                if (!user) return { ok: false, error: 'Invalid email or passphrase.' };
+                return hash(user.salt + password).then(function (h) {
+                    if (h !== user.hash) return { ok: false, error: 'Invalid email or passphrase.' };
+                    localStorage.setItem(SESSION_KEY, JSON.stringify({ email: email, name: user.name }));
+                    return { ok: true, user: { email: email, name: user.name } };
+                });
             });
         },
-        logout: function () { localStorage.removeItem(SESSION_KEY); }
+        logout: function () {
+            fetch(root + 'api/logout', { method: 'POST', credentials: 'same-origin' }).catch(function () {});
+            localStorage.removeItem(SESSION_KEY);
+            try { sessionStorage.removeItem('cc_backend'); } catch (e) {}
+        }
+    };
+
+    /* --------------------------------------------------------- Contact */
+    CC.contact = function (data) {
+        var messages = [];
+        try { messages = JSON.parse(localStorage.getItem('cc_messages') || '[]'); } catch (e) { messages = []; }
+        messages.push(data);
+        localStorage.setItem('cc_messages', JSON.stringify(messages));
+
+        return fetch(root + 'api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify(data)
+        }).then(function (res) {
+            if (res.status === 404) throw new Error('NoBackend');
+            return res.json().then(function (json) {
+                return { ok: res.ok, status: res.status, data: json };
+            });
+        }).catch(function () {
+            return { ok: true, offline: true };
+        });
+    };
+
+    /* -------------------------------------------------- Password Reset */
+    CC.resetRequest = function (email) {
+        return fetch(root + 'api/password-reset/request', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ email: email })
+        }).then(function (res) {
+            if (res.status === 404) throw new Error('NoBackend');
+            return res.json();
+        }).catch(function () {
+            return { ok: true, offline: true, message: 'If an account exists for ' + email + ', reset instructions have been sent.' };
+        });
+    };
+
+    CC.resetConfirm = function (token, newPassword) {
+        return fetch(root + 'api/password-reset/confirm', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ token: token, new_password: newPassword })
+        }).then(function (res) {
+            if (res.status === 404) throw new Error('NoBackend');
+            return res.json();
+        }).catch(function () {
+            return { ok: true, offline: true, message: 'Password has been reset successfully.' };
+        });
     };
 
     function renderAuthState() {
         var loginBtn = $('a.btn[href$="login.html"]');
         if (!loginBtn) return;
         var holder = loginBtn.parentNode;
-        var user = CC.auth.current();
-        if (!user) return;
-        holder.innerHTML = '';
-        var hello = document.createElement('span');
-        hello.className = 'text-light me-3';
-        var icon = document.createElement('i');
-        icon.className = 'bi bi-person-circle me-1';
-        hello.appendChild(icon);
-        hello.appendChild(document.createTextNode(user.name));
-        var out = document.createElement('button');
-        out.type = 'button';
-        out.className = 'btn btn-outline-light';
-        out.id = 'logoutBtn';
-        out.innerHTML = '<i class="bi bi-box-arrow-right"></i> Logout';
-        out.addEventListener('click', function () {
-            CC.auth.logout();
-            window.location.href = root + 'index.html';
-        });
-        holder.appendChild(hello);
-        holder.appendChild(out);
+
+        function displayUser(user) {
+            holder.innerHTML = '';
+            var hello = document.createElement('span');
+            hello.className = 'text-light me-3';
+            var icon = document.createElement('i');
+            icon.className = 'bi bi-person-circle me-1';
+            hello.appendChild(icon);
+            hello.appendChild(document.createTextNode(user.name));
+            var out = document.createElement('button');
+            out.type = 'button';
+            out.className = 'btn btn-outline-light';
+            out.id = 'logoutBtn';
+            out.innerHTML = '<i class="bi bi-box-arrow-right"></i> Logout';
+            out.addEventListener('click', function () {
+                CC.auth.logout();
+                window.location.href = root + 'index.html';
+            });
+            holder.appendChild(hello);
+            holder.appendChild(out);
+        }
+
+        var currentUser = CC.auth.current();
+        if (currentUser) {
+            displayUser(currentUser);
+
+            // Only query /api/me if backend session was flagged active and not verified offline
+            var isOffline = false;
+            try { isOffline = sessionStorage.getItem('cc_offline') === '1'; } catch (e) {}
+            var isBackend = false;
+            try { isBackend = sessionStorage.getItem('cc_backend') === '1'; } catch (e) {}
+
+            if (isBackend && !isOffline) {
+                fetch(root + 'api/me', { credentials: 'same-origin' })
+                    .then(function (res) {
+                        if (res.status === 404) {
+                            try { sessionStorage.setItem('cc_offline', '1'); } catch (e) {}
+                            throw new Error('NoBackend');
+                        }
+                        return res.json();
+                    })
+                    .then(function (data) {
+                        if (data && data.ok) {
+                            if (data.user) {
+                                localStorage.setItem(SESSION_KEY, JSON.stringify(data.user));
+                                displayUser(data.user);
+                            } else if (!loadUsers()[currentUser.email]) {
+                                localStorage.removeItem(SESSION_KEY);
+                                holder.innerHTML = '';
+                                holder.appendChild(loginBtn);
+                            }
+                        }
+                    })
+                    .catch(function () {
+                        // Keep current local session
+                    });
+            }
+        }
     }
 
     /* ---------------------------------------------------------- Search */
@@ -179,8 +339,9 @@
         function onScroll() {
             var h = document.documentElement;
             var max = h.scrollHeight - h.clientHeight;
-            bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
-            top.classList.toggle('show', h.scrollTop > 400);
+            var scrolled = window.pageYOffset || window.scrollY || h.scrollTop || (document.body ? document.body.scrollTop : 0) || 0;
+            bar.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + '%';
+            top.classList.toggle('show', scrolled > 400);
         }
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
@@ -253,15 +414,14 @@
         });
         var paused = false, MAX = 6, idx = 0;
 
-        function addItem() {
+        function renderItem(d) {
             if (paused) return;
-            var d = feedPool[Math.floor(Math.random() * feedPool.length)];
             var li = document.createElement('li');
             li.className = 'list-group-item bg-transparent d-flex align-items-start gap-3 cc-feed-item';
             li.setAttribute('data-sev', d.sev);
 
             var badge = document.createElement('span');
-            badge.className = 'badge text-bg-' + sevClass[d.sev] + ' text-uppercase';
+            badge.className = 'badge text-bg-' + (sevClass[d.sev] || 'secondary') + ' text-uppercase';
             badge.textContent = d.sev;
 
             var body = document.createElement('div');
@@ -289,7 +449,42 @@
             if (n) n.textContent = String(++idx);
         }
 
-        for (var i = 0; i < 3; i++) addItem();
+        function addItem() {
+            if (paused) return;
+            var isOffline = false;
+            try { isOffline = sessionStorage.getItem('cc_offline') === '1'; } catch (e) {}
+
+            if (isOffline) {
+                renderItem(feedPool[Math.floor(Math.random() * feedPool.length)]);
+                return;
+            }
+
+            fetch(root + 'api/feed/next')
+                .then(function (res) {
+                    if (res.status === 404) {
+                        try { sessionStorage.setItem('cc_offline', '1'); } catch (e) {}
+                        throw new Error('NoBackend');
+                    }
+                    if (!res.ok) throw new Error('API unavailable');
+                    return res.json();
+                })
+                .then(function (data) {
+                    if (data && data.ok && data.item) {
+                        renderItem(data.item);
+                    } else {
+                        throw new Error('Bad feed data');
+                    }
+                })
+                .catch(function () {
+                    var d = feedPool[Math.floor(Math.random() * feedPool.length)];
+                    renderItem(d);
+                });
+        }
+
+        // Render initial batch synchronously for instant display
+        for (var i = 0; i < 3; i++) {
+            renderItem(feedPool[Math.floor(Math.random() * feedPool.length)]);
+        }
         setInterval(addItem, 4000);
 
         var btn = $('#feedToggle');
@@ -304,6 +499,33 @@
         }
     }
 
+    /* ------------------------------------------------- Tooltips & Toggles */
+    function initTooltips() {
+        if (window.bootstrap && window.bootstrap.Tooltip) {
+            $all('[data-bs-toggle="tooltip"]').forEach(function (el) {
+                if (!bootstrap.Tooltip.getInstance(el)) {
+                    new bootstrap.Tooltip(el);
+                }
+            });
+        }
+    }
+
+    function initPasswordToggles() {
+        $all('.eye-toggle, [data-toggle-password]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var container = btn.closest('.input-group') || btn.parentNode;
+                var input = container ? container.querySelector('input[type="password"], input[type="text"]') : null;
+                if (!input) return;
+                var isPw = input.type === 'password';
+                input.type = isPw ? 'text' : 'password';
+                if (btn.classList.contains('bi-eye') || btn.classList.contains('bi-eye-slash')) {
+                    btn.classList.toggle('bi-eye', !isPw);
+                    btn.classList.toggle('bi-eye-slash', isPw);
+                }
+            });
+        });
+    }
+
     /* ------------------------------------------------------------ Init */
     function init() {
         renderAuthState();
@@ -311,6 +533,8 @@
         initScrollEffects();
         initCounters();
         initFeed();
+        initTooltips();
+        initPasswordToggles();
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();

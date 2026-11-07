@@ -289,10 +289,10 @@
                                 <span class="badge bg-dark ms-2">First Seen: 2023-07-15</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">Last detected: Today</small>
-                                <a href="#" class="btn btn-sm btn-outline-danger">
+                                <small class="text-muted">Last detected: Active Campaign</small>
+                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#threatModal1">
                                     <i class="bi bi-shield-exclamation"></i> Defenses
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -310,18 +310,17 @@
                                     <span class="badge bg-dark ms-2">Double Extortion</span>
                                 </div>
                             </div>
-                            <p>New variant with improved encryption and targeting vulnerable RDP connections. Now
-                                includes DDoS capabilities against victims who refuse to pay.</p>
+                            <p>Active RaaS variant with fast multi-threaded file encryption, defense evasion, and double/triple extortion leak threats.</p>
                             <div class="mb-3">
                                 <span class="badge bg-danger me-2">Critical Impact</span>
-                                <span class="badge bg-dark">Healthcare Sector</span>
-                                <span class="badge bg-dark ms-2">First Seen: 2023-07-10</span>
+                                <span class="badge bg-dark">Healthcare & Enterprise</span>
+                                <span class="badge bg-dark ms-2">Severity: Critical</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">Last detected: Today</small>
-                                <a href="#" class="btn btn-sm btn-outline-warning">
+                                <small class="text-muted">Last detected: Active Campaign</small>
+                                <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#threatModal2">
                                     <i class="bi bi-shield-exclamation"></i> Defenses
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -340,17 +339,17 @@
                                 </div>
                             </div>
                             <p>Evolved Mirai variant targeting new IoT vulnerabilities in cameras and routers. Capable
-                                of 2Tbps attacks.</p>
+                                of 2Tbps volumetric DDoS attacks.</p>
                             <div class="mb-3">
                                 <span class="badge bg-warning me-2">High Impact</span>
-                                <span class="badge bg-dark">Network Devices</span>
-                                <span class="badge bg-dark ms-2">First Seen: 2023-07-05</span>
+                                <span class="badge bg-dark">Network & Smart Devices</span>
+                                <span class="badge bg-dark ms-2">Severity: High</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">Last detected: Today</small>
-                                <a href="#" class="btn btn-sm btn-outline-info">
+                                <small class="text-muted">Last detected: Active Campaign</small>
+                                <button class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#threatModal3">
                                     <i class="bi bi-shield-exclamation"></i> Defenses
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -363,23 +362,22 @@
                             <div class="d-flex mb-3">
                                 <i class="bi bi-currency-bitcoin text-success threat-icon"></i>
                                 <div>
-                                    <h5 class="mb-0">Crypto Drainer Malware</h5>
+                                    <h5 class="mb-0">Infostealers & Crypto Drainers</h5>
                                     <span class="badge bg-warning">Malware</span>
-                                    <span class="badge bg-dark ms-2">Crypto Theft</span>
+                                    <span class="badge bg-dark ms-2">Credential & Asset Theft</span>
                                 </div>
                             </div>
-                            <p>New JavaScript malware injected into compromised WordPress sites that replaces wallet
-                                addresses in clipboard.</p>
+                            <p>Malware suites (LummaC2, RedLine) and malicious Web3 drainer scripts harvesting browser vaults, Discord tokens, and wallet session keys.</p>
                             <div class="mb-3">
                                 <span class="badge bg-warning me-2">High Impact</span>
-                                <span class="badge bg-dark">Crypto Users</span>
-                                <span class="badge bg-dark ms-2">First Seen: 2023-07-12</span>
+                                <span class="badge bg-dark">Web3 & Corporate Users</span>
+                                <span class="badge bg-dark ms-2">Severity: High</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">Last detected: Today</small>
-                                <a href="#" class="btn btn-sm btn-outline-success">
+                                <small class="text-muted">Last detected: Active Campaign</small>
+                                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#threatModal4">
                                     <i class="bi bi-shield-exclamation"></i> Defenses
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -611,6 +609,90 @@
             </div>
         </div>
     </section>
+
+    <!-- Defense Modals -->
+    <div class="modal fade" id="threatModal1" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-danger">
+                    <h5 class="modal-title"><i class="bi bi-shield-check text-danger me-2"></i> M365 AiTM Phishing Defense Blueprint</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6><i class="bi bi-key-fill text-warning"></i> Primary Defense: Phishing-Resistant MFA</h6>
+                    <p class="small text-light">Adversary-in-the-Middle reverse proxies (Evilginx2) transparently relay SMS and push MFA. Mandate <strong>FIDO2 WebAuthn Passkeys</strong> or Windows Hello for Business; the browser origin binding prevents credentials or session cookies from ever reaching fake proxy domains.</p>
+                    <h6><i class="bi bi-gear-fill text-info"></i> Entra ID Tenant Hardening:</h6>
+                    <ul class="small text-light mb-0">
+                        <li>Require Managed, Compliant Devices (Intune) for cloud resource access.</li>
+                        <li>Enable Continuous Access Evaluation (CAE) to revoke stolen tokens on IP change.</li>
+                        <li>Block user consent for unverified third-party OAuth multi-tenant applications.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="threatModal2" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-warning">
+                    <h5 class="modal-title"><i class="bi bi-shield-lock text-warning me-2"></i> Enterprise Ransomware Mitigation</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6><i class="bi bi-hdd-network text-warning"></i> 3-2-1-1-0 Immutable Backups</h6>
+                    <p class="small text-light">Ensure at least one backup tier is completely offline or write-once-read-many (WORM / S3 Object Lock) to prevent threat actors from wiping backups during lateral movement.</p>
+                    <h6><i class="bi bi-shield-slash text-danger"></i> Perimeter & Identity Hardening:</h6>
+                    <ul class="small text-light mb-0">
+                        <li>Disable external RDP (port 3389) and enforce Zero Trust Network Access (ZTNA).</li>
+                        <li>Patch edge appliances (Citrix ADC, Fortinet, Ivanti Connect Secure) immediately.</li>
+                        <li>Block PsExec and unauthorized remote PowerShell between workstation VLANs.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="threatModal3" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-info">
+                    <h5 class="modal-title"><i class="bi bi-hdd-stack text-info me-2"></i> IoT Botnet Defense & DDoS Mitigation</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6><i class="bi bi-router text-info"></i> Network Segmentation & Device Isolation</h6>
+                    <p class="small text-light">Place all smart cameras, DVRs, smart TVs, and IoT endpoints on an isolated, firewalled VLAN with no route to corporate subnets and blocked inter-device communication.</p>
+                    <h6><i class="bi bi-check-circle text-success"></i> Device Hardening:</h6>
+                    <ul class="small text-light mb-0">
+                        <li>Disable Universal Plug and Play (UPnP) and Telnet (port 23) at the gateway router.</li>
+                        <li>Replace all default administrative passwords (e.g. admin/admin) with 16+ character passphrases.</li>
+                        <li>Enforce automated firmware updates and subscribe to vendor CSAF/VEX vulnerability feeds.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="threatModal4" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-success">
+                    <h5 class="modal-title"><i class="bi bi-currency-bitcoin text-success me-2"></i> Infostealer & Drainer Countermeasures</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6><i class="bi bi-browser-chrome text-warning"></i> Eliminate Browser Password Storage</h6>
+                    <p class="small text-light">Infostealers like Lumma and RedLine carve plaintext SQLite databases and decrypt Master Keys from <code>%LOCALAPPDATA%\Google\Chrome\User Data\Local State</code> via DPAPI. Migrate all credentials to dedicated, encrypted password managers (Bitwarden, 1Password) with hardware token master locks.</p>
+                    <h6><i class="bi bi-shield-shaded text-success"></i> Web3 Security Best Practices:</h6>
+                    <ul class="small text-light mb-0">
+                        <li>Use hardware signing devices (Ledger, Trezor) that show destination addresses on a physical screen.</li>
+                        <li>Utilize transaction simulation browser extensions (Wallet Guard, PocketUniverse) to detect malicious Drainer approval contracts.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="py-4 bg-dark border-top border-secondary">

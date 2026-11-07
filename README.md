@@ -8,8 +8,9 @@
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)
-![Tests](https://img.shields.io/badge/e2e%20checks-54%20passing-2ecc71)
-![Backend](https://img.shields.io/badge/backend-none%20(static)-lightgrey)
+![Backend](https://img.shields.io/badge/backend-Flask%20%2B%20SQLite-brightgreen)
+![Unit%20Tests](https://img.shields.io/badge/unit%20tests-11%20passing-2ecc71)
+![E2E%20Tests](https://img.shields.io/badge/e2e%20checks-54%20passing-2ecc71)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 </div>
@@ -68,77 +69,78 @@ All libraries load from CDNs, so an internet connection is needed for the full e
 
 ## Getting Started
 
+### 1. Running the Full Stack (Flask Backend + Static Frontend)
+
 ```bash
-# 1. Get the project
+# Clone the repository
 git clone <your-repository-url>
 cd Code-Conflict
 
-# 2. Serve it locally (any static server works)
+# Install dependencies
+pip install -r backend/requirements.txt
+
+# Run the Flask backend server
+python3 backend/app.py
+```
+Open **http://127.0.0.1:5000** in your browser. The server serves all frontend pages and handles authentication, password reset, rate-limited contact forms, and security feeds via SQLite.
+
+### 2. Running Frontend Only (Static Mode)
+
+The frontend features progressive enhancement and automatic fallback. If served purely statically, it operates using client-side storage:
+
+```bash
 python3 -m http.server 8000
-
-# 3. Open it in your browser
-#    http://localhost:8000
 ```
+Open **http://localhost:8000** or open `index.html` directly in any web browser.
 
-You can also open `index.html` directly in a browser.
+---
 
-## Project Structure
+## Backend API Specification
 
-```text
-Code-Conflict/
-├── assets/
-│   ├── css/customized.css   # Shared styles, animations and UI enhancements
-│   ├── js/main.js           # Search, auth, toasts, scroll effects, live feed
-│   └── imgs/                # Icons, team photos, event logos, banners
-├── news/                    # latest_threats, security_patches, industry_news, event_calendar
-├── prevention/              # data_privacy, email_security, mobile_security,
-│                            # network_security, secure_browsing
-├── threats/                 # malware, phishing, password_attacks, ransomware,
-│                            # social_engineering, threats_view
-├── tests/e2e_test.py        # End-to-end browser tests
-├── index.html
-├── about_us.html
-├── contact.html
-├── login.html
-├── signup.html
-├── password-reset.html
-└── README.md
-```
+| Method | Endpoint | Description | Payload / Notes |
+|---|---|---|---|
+| `GET` | `/api/health` | Health & database status check | `{ ok: true, status: "healthy", timestamp: ... }` |
+| `POST` | `/api/register` | Register new university account | `{ email, password, pgp? }` (`.edu.pk` enforced) |
+| `POST` | `/api/login` | Authenticate user & start session | `{ email, password }` (Rate limited: 5/min) |
+| `POST` | `/api/logout` | Terminate session | Clears session cookie |
+| `GET` | `/api/me` | Fetch active authenticated user | Current user or `null` |
+| `POST` | `/api/password-reset/request` | Request time-limited reset token | `{ email }` (15-min TTL, rate limited) |
+| `POST` | `/api/password-reset/confirm` | Reset password using secret token | `{ token, new_password }` |
+| `POST` | `/api/contact` | Store validated contact message | `{ name, email, subject, message }` (Rate limited) |
+| `GET` | `/api/feed/next` | Live threat feed stream simulation | Returns random threat item |
+
+---
 
 ## Testing
 
-The end-to-end suite drives a headless Chromium browser against a local server. It runs 54 checks:
+### Backend Unit Test Suite (11 Tests)
+Covers registration validation, login authentication, password reset cryptographic flow, contact forms, rate limiting, and HTTP security headers:
+```bash
+python3 -m unittest discover -s tests -p "*test.py"
+```
 
-- every page loads without JavaScript errors or failed local requests
-- the live feed, counters, pause/resume and back-to-top button
-- search routing
-- the signup, login and logout flow, including bad passwords, duplicate emails and wrong captchas
-- the contact form and the password-reset page
-
-Requirements: Python 3, `selenium`, Chromium and `chromedriver`.
-
+### End-to-End Browser Test Suite (54 Checks)
+Headless Chromium & Selenium automated browser testing for all 21 pages, interactive widgets, quiz, search routing, signup/login flows, and contact forms:
 ```bash
 python3 tests/e2e_test.py
 ```
 
-When run offline, the CDN libraries cannot load. The suite ignores the resulting "not defined" errors for Bootstrap, FullCalendar and Chart.js.
+## Security & Architecture Features
 
-## Limitations
-
-This is a front-end project, so some things are demos:
-
-- **Authentication is not secure.** Accounts live in the browser's `localStorage`. Passwords are salted and SHA-256 hashed, but there is no server. Do not use real credentials.
-- **Contact messages are stored locally** in `localStorage` and are never sent anywhere.
-- **Threat feed, statistics and news items are sample data**, not live intelligence.
-- The navbar and footer are repeated in each HTML file.
+- **Hardened SQLite Engine**: Configured with Write-Ahead Logging (`PRAGMA journal_mode=WAL`), `synchronous=NORMAL`, foreign keys enforcement, and `busy_timeout=5000` to prevent database locks under concurrent access.
+- **Defensive Rate Limiting**: In-memory sliding-window throttlers with automatic stale-key eviction protect `/api/login`, `/api/register`, `/api/password-reset/*`, and `/api/contact` from credential stuffing, spamming, and memory exhaustion DoS.
+- **Cryptographic Security**: Passwords hashed with pbkdf2/sha256 through Werkzeug; time-limited password reset tokens generated via `secrets.token_urlsafe(32)` and hashed in storage.
+- **Production HTTP Headers**: Automatic injection of `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: same-origin`, `Permissions-Policy`, and anti-caching headers on all API routes.
+- **Resilient Progressive Enhancement**: Full hybrid support: works seamlessly with the backend API or completely offline/static.
 
 ## Roadmap
 
-- [ ] Backend for real authentication and a contact inbox (Node/Express or Firebase)
-- [ ] Load threat and news data from a real feed or JSON API
-- [ ] Share the navbar and footer through a template or include
-- [ ] Add a light theme
-- [ ] Add screenshots and a live demo link to this README
+- [x] Backend for real authentication, password reset, and contact inbox (Flask + SQLite)
+- [x] Rate limiting, cryptographic reset tokens, and security headers
+- [x] Automated test suites (Unit tests + Selenium E2E tests)
+- [ ] Live external threat intelligence API integration
+- [ ] Share the navbar and footer through server-side includes or templates
+- [ ] Light / Dark theme toggle
 
 ## License
 

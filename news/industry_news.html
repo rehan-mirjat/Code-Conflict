@@ -264,7 +264,7 @@
                                 <span class="badge bg-dark news-tag">#acquisition</span>
                                 <span class="badge bg-dark news-tag">#paloaltonetworks</span>
                             </div>
-                            <a href="#" class="btn btn-outline-primary">Read Full Story</a>
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newsModal1">Read Full Story</button>
                         </div>
                     </div>
 
@@ -277,20 +277,17 @@
                                 <div>
                                     <span class="badge bg-danger">Regulation</span>
                                     <span class="badge bg-dark ms-2">Policy</span>
-                                    <small class="text-muted d-block">July 15, 2023</small>
+                                    <small class="text-muted d-block">Regulatory Briefing</small>
                                 </div>
                             </div>
-                            <h3>New CISA Rules Require 24-Hour Breach Reporting for Critical Infrastructure</h3>
-                            <p>The Cybersecurity and Infrastructure Security Agency (CISA) has issued new binding
-                                operational directives requiring critical infrastructure entities to report
-                                cybersecurity incidents within 24 hours of detection, with strict penalties for
-                                non-compliance.</p>
+                            <h3>CISA CIRCIA & SEC Rules Mandate Strict Cyber Incident Reporting</h3>
+                            <p>Critical infrastructure sectors face mandatory 72-hour reporting for substantial cyber incidents and 24-hour disclosures for ransom payments, while the SEC enforces 4-business-day Form 8-K disclosures for material breaches.</p>
                             <div class="mb-3">
                                 <span class="badge bg-dark news-tag">#regulation</span>
                                 <span class="badge bg-dark news-tag">#compliance</span>
-                                <span class="badge bg-dark news-tag">#criticalinfrastructure</span>
+                                <span class="badge bg-dark news-tag">#circia</span>
                             </div>
-                            <a href="#" class="btn btn-outline-primary">Read Full Story</a>
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newsModal2">Read Full Story</button>
                         </div>
                     </div>
                 </section>
@@ -318,19 +315,24 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>EU NIS2 Directive</td>
-                                            <td>Oct 17, 2024</td>
-                                            <td>All EU member states</td>
+                                            <td><strong class="text-info">US SEC Cyber Rules (Form 8-K)</strong></td>
+                                            <td>Active Mandate</td>
+                                            <td>Public Companies (Mandatory 4-Day Material Incident Disclosure)</td>
                                         </tr>
                                         <tr>
-                                            <td>US SEC Cybersecurity Rules</td>
-                                            <td>Dec 15, 2023</td>
-                                            <td>Public companies</td>
+                                            <td><strong class="text-warning">CISA CIRCIA Reporting</strong></td>
+                                            <td>Enacted Framework</td>
+                                            <td>16 Critical Infrastructure Sectors (72h incident / 24h ransom reporting)</td>
                                         </tr>
                                         <tr>
-                                            <td>UK Product Security Act</td>
-                                            <td>Apr 29, 2024</td>
-                                            <td>IoT manufacturers</td>
+                                            <td><strong class="text-primary">EU NIS2 Directive</strong></td>
+                                            <td>Full Enforcement</td>
+                                            <td>Essential & Important entities across all 27 EU member states</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong class="text-success">EU Cyber Resilience Act (CRA)</strong></td>
+                                            <td>Phased 2024-2027</td>
+                                            <td>Hardware & software manufacturers (Mandatory CE mark vulnerability disclosure)</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -359,7 +361,7 @@
                                 <span class="badge bg-dark news-tag">#dataprotection</span>
                                 <span class="badge bg-dark news-tag">#euregulation</span>
                             </div>
-                            <a href="#" class="btn btn-outline-info">Read Compliance Guide</a>
+                            <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#newsModal3">Read Compliance Guide</button>
                         </div>
                     </div>
                 </section>
@@ -488,6 +490,61 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- News Article Modals -->
+    <div class="modal fade" id="newsModal1" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-primary">
+                    <h5 class="modal-title"><i class="bi bi-newspaper text-primary me-2"></i> Cloud Security Platform Consolidation Analysis</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">The cybersecurity industry continues its aggressive consolidation towards comprehensive Cloud-Native Application Protection Platforms (CNAPP).</p>
+                    <p>Enterprises are actively discarding disconnected point solutions in favor of unified platforms providing Cloud Security Posture Management (CSPM), Cloud Workload Protection (CWPP), and Infrastructure-as-Code (IaC) security scanning in a single agentless dashboard. Security analysts note that platformization reduces mean-time-to-remediate (MTTR) by 45% compared to multi-vendor silos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="newsModal2" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-danger">
+                    <h5 class="modal-title"><i class="bi bi-shield-check text-danger me-2"></i> CIRCIA & SEC Cybersecurity Mandates Breakdown</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6><i class="bi bi-clock-history text-danger"></i> CISA CIRCIA Requirements:</h6>
+                    <ul>
+                        <li><strong>72-Hour Breach Reporting:</strong> Covered entities across 16 critical infrastructure sectors must report substantial cyber incidents to CISA within 72 hours of reasonable belief.</li>
+                        <li><strong>24-Hour Ransom Disclosures:</strong> Any organization making a ransom payment must report the transaction within 24 hours, regardless of whether the initial incident was covered.</li>
+                    </ul>
+                    <hr>
+                    <h6><i class="bi bi-file-earmark-ruled text-warning"></i> SEC Form 8-K (Item 1.05):</h6>
+                    <p class="small">Public companies must file a Form 8-K disclosure within <strong>4 business days</strong> once an incident is determined to have material impact on financial condition or operations, with strictly limited national security delay exemptions granted by the US Attorney General.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="newsModal3" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-info">
+                    <h5 class="modal-title"><i class="bi bi-file-earmark-lock text-info me-2"></i> EU NIS2 & Cyber Resilience Act Compliance Roadmap</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6><i class="bi bi-globe-europe-africa text-info"></i> NIS2 Directive Enforcement:</h6>
+                    <p class="small">Replaces NIS1 with expanded scope across energy, transport, banking, digital infrastructure, and managed service providers. Executives face personal liability for non-compliance, with fines reaching up to €10M or 2% of total worldwide annual turnover.</p>
+                    <hr>
+                    <h6><i class="bi bi-check-all text-success"></i> EU Cyber Resilience Act (CRA):</h6>
+                    <p class="small">Introduces mandatory cybersecurity baseline standards for all digital products sold in the EU market (both hardware and software), requiring software bills of materials (SBOM), mandatory 24-hour vulnerability reporting to ENISA, and free security patches for up to 5 years.</p>
                 </div>
             </div>
         </div>

@@ -506,6 +506,91 @@
     </footer>
 
     <!-- Threat Modals -->
+    <!-- Report Threat Modal -->
+    <div class="modal fade" id="reportModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-danger">
+                    <h5 class="modal-title"><i class="bi bi-flag-fill text-danger me-2"></i> Submit Cyber Threat Intelligence Report</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="threatReportForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label text-light">Threat Classification</label>
+                                <select class="form-select bg-dark text-white border-secondary" required>
+                                    <option value="">Select threat type...</option>
+                                    <option value="ransomware">Ransomware Campaign</option>
+                                    <option value="phishing">Phishing / AiTM Attack</option>
+                                    <option value="zero-day">Zero-Day Vulnerability</option>
+                                    <option value="infostealer">Infostealer / C2 Callback</option>
+                                    <option value="ddos">DDoS / Botnet Activity</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-light">Observed Severity</label>
+                                <select class="form-select bg-dark text-white border-secondary" required>
+                                    <option value="critical">Critical (Immediate Exploit in Wild)</option>
+                                    <option value="high">High (Active Campaign)</option>
+                                    <option value="medium">Medium (PoC Published)</option>
+                                    <option value="low">Low (Reconnaissance / Scan)</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label text-light">Indicator of Compromise (IoC) or Malicious URL / SHA-256</label>
+                                <input type="text" class="form-control bg-dark text-white border-secondary" placeholder="e.g. evil-login[.]com or hash a3f7e1b9..." required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label text-light">Incident Details & Observed Behavior</label>
+                                <textarea class="form-control bg-dark text-white border-secondary" rows="3" placeholder="Provide telemetry observations, targeted sector, CVE references, or delivery vectors..." required></textarea>
+                            </div>
+                        </div>
+                        <div id="reportAlert" class="alert alert-success mt-3 d-none">
+                            <i class="bi bi-check-circle-fill"></i> Threat report submitted successfully to Code & Conflict intelligence feed.
+                        </div>
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-danger"><i class="bi bi-send"></i> Submit Threat Telemetry</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- M365 Phish Sample Modal -->
+    <div class="modal fade" id="phishModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-warning">
+                    <h5 class="modal-title"><i class="bi bi-envelope-exclamation text-warning me-2"></i> Microsoft 365 OAuth & AiTM Phishing Telemetry</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="p-3 mb-3 bg-secondary bg-opacity-25 rounded border border-warning">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-danger">Adversary-in-the-Middle (AiTM)</span>
+                            <small class="text-muted">MITRE ATT&CK T1566.002, T1528</small>
+                        </div>
+                        <h6 class="text-warning fw-bold">Attack Telemetry Analysis</h6>
+                        <p class="small text-light mb-2">Adversaries deploy Evilginx2 reverse proxies behind Cloudflare tunnels. The victim visits a lookalike link (e.g. <code>login.microsoftonline.corp-auth[.]net</code>). The proxy passes legitimate login credentials and MFA push prompts to Microsoft servers, then intercepts and steals the resulting HTTP <code>ESTSAUTH</code> session cookie.</p>
+                        <p class="small text-light mb-0"><strong>Consequence:</strong> The attacker injects the session cookie into their own browser, completely bypassing SMS and Authenticator app MFA without triggering a new login alert.</p>
+                    </div>
+                    <div class="alert alert-info small mb-0">
+                        <h6 class="fw-bold"><i class="bi bi-shield-check"></i> Defense-in-Depth Solutions:</h6>
+                        <ul class="mb-0">
+                            <li>Enforce <strong>FIDO2 WebAuthn Passkeys</strong> or Certificate-Based Authentication (CBA), which are cryptographically bound to the domain and cannot be proxied.</li>
+                            <li>Configure Microsoft Entra ID Conditional Access with compliant device requirements and IP-location anomalous session token revocation.</li>
+                            <li>Monitor Entra ID Audit logs for suspicious application consent grants (OAuth app permissions like <code>Mail.ReadWrite</code> or <code>Files.ReadWrite.All</code>).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LockBit Modal -->
     <div class="modal fade" id="lockbitModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content bg-dark">
@@ -666,6 +751,23 @@
 
             // Update timestamp every minute
             setInterval(updateTimestamp, 60000);
+
+            // Report form handler
+            const reportForm = document.getElementById('threatReportForm');
+            if (reportForm) {
+                reportForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const alertBox = document.getElementById('reportAlert');
+                    alertBox.classList.remove('d-none');
+                    setTimeout(() => {
+                        alertBox.classList.add('d-none');
+                        reportForm.reset();
+                        const modalEl = document.getElementById('reportModal');
+                        const modal = bootstrap.Modal.getInstance(modalEl);
+                        if (modal) modal.hide();
+                    }, 2000);
+                });
+            }
         });
     </script>
     <script src="../assets/js/main.js"></script>

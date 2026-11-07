@@ -293,13 +293,13 @@
                                 <img src="../assets/imgs/event-logos/blackhat.png" class="organizer-logo" alt="">
                                 <div>
                                     <span class="badge event-type-badge event-type-conference">Conference</span>
-                                    <span class="badge bg-dark ms-2">In-Person</span>
-                                    <small class="text-muted d-block">August 5-10, 2023</small>
+                                    <span class="badge bg-dark ms-2">In-Person & Virtual</span>
+                                    <small class="text-muted d-block">August Annual Series</small>
                                 </div>
                             </div>
-                            <h3>Black Hat USA 2023</h3>
-                            <p>The world's leading information security event, featuring cutting-edge research, hands-on
-                                training, and networking with security professionals.</p>
+                            <h3>Black Hat USA</h3>
+                            <p>The world's leading information security event, featuring cutting-edge zero-day research, hands-on
+                                Arsenal demonstrations, and briefings by elite security researchers.</p>
                             <div class="mb-3">
                                 <span class="badge bg-dark"><i class="bi bi-geo-alt"></i> Las Vegas, NV</span>
                                 <span class="badge bg-dark ms-2"><i class="bi bi-cash-stack"></i> $2,495+</span>
@@ -327,15 +327,14 @@
                                 <div>
                                     <span class="badge event-type-badge event-type-conference">Conference</span>
                                     <span class="badge bg-dark ms-2">In-Person</span>
-                                    <small class="text-muted d-block">August 10-13, 2023</small>
+                                    <small class="text-muted d-block">August Annual Series</small>
                                 </div>
                             </div>
-                            <h3>DEF CON 31</h3>
-                            <p>One of the world's largest hacker conventions, featuring workshops, competitions, and
-                                demonstrations of security vulnerabilities.</p>
+                            <h3>DEF CON Hacker Convention</h3>
+                            <p>One of the world's largest underground hacker conventions, featuring CTFs, hardware hacking villages, social engineering contests, and packet wars.</p>
                             <div class="mb-3">
                                 <span class="badge bg-dark"><i class="bi bi-geo-alt"></i> Las Vegas, NV</span>
-                                <span class="badge bg-dark ms-2"><i class="bi bi-cash-stack"></i> $440</span>
+                                <span class="badge bg-dark ms-2"><i class="bi bi-cash-stack"></i> $460 (Cash Only)</span>
                                 <span class="badge bg-dark ms-2"><i class="bi bi-people"></i> 30,000+ attendees</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
@@ -360,12 +359,11 @@
                                 <div>
                                     <span class="badge event-type-badge event-type-conference">Conference</span>
                                     <span class="badge bg-dark ms-2">Hybrid</span>
-                                    <small class="text-muted d-block">September 25-28, 2023</small>
+                                    <small class="text-muted d-block">Spring Annual Series</small>
                                 </div>
                             </div>
-                            <h3>RSA Conference 2023</h3>
-                            <p>Premier series of global events and on-demand content where the cybersecurity industry
-                                comes together.</p>
+                            <h3>RSA Conference</h3>
+                            <p>The premier global cybersecurity forum where industry leaders, policy architects, and C-suite CISOs converge on enterprise defense paradigms.</p>
                             <div class="mb-3">
                                 <span class="badge bg-dark"><i class="bi bi-geo-alt"></i> San Francisco, CA</span>
                                 <span class="badge bg-dark ms-2"><i class="bi bi-cash-stack"></i> $2,495+</span>
@@ -393,15 +391,14 @@
                                 <div>
                                     <span class="badge event-type-badge event-type-webinar">Webinar</span>
                                     <span class="badge bg-dark ms-2">Virtual</span>
-                                    <small class="text-muted d-block">July 27, 2023 | 1:00 PM EST</small>
+                                    <small class="text-muted d-block">Monthly Live Masterclass | 1:00 PM EST</small>
                                 </div>
                             </div>
-                            <h3>Implementing Zero Trust Architecture</h3>
-                            <p>Free webinar covering practical steps for implementing Zero Trust security models in
-                                enterprise environments.</p>
+                            <h3>Zero Trust Architecture & Microsegmentation</h3>
+                            <p>Hands-on architectural masterclass covering NIST SP 800-207 Zero Trust implementation, software-defined perimeters, and identity-first access.</p>
                             <div class="mb-3">
-                                <span class="badge bg-dark"><i class="bi bi-globe"></i> Online Event</span>
-                                <span class="badge bg-dark ms-2"><i class="bi bi-cash-stack"></i> Free</span>
+                                <span class="badge bg-dark"><i class="bi bi-globe"></i> Online Broadcast</span>
+                                <span class="badge bg-dark ms-2"><i class="bi bi-cash-stack"></i> Free Registration</span>
                                 <span class="badge bg-dark ms-2"><i class="bi bi-clock"></i> 90 minutes</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
@@ -576,8 +573,74 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 
     <script>
-        // Initialize calendar
+        // Initialize dynamic cybersecurity event calendar
         document.addEventListener('DOMContentLoaded', function () {
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = now.getMonth(); // 0-indexed
+
+            function pad(n) { return n < 10 ? '0' + n : n; }
+            function fmt(year, month, day) {
+                return `${year}-${pad(month + 1)}-${pad(day)}`;
+            }
+
+            const events = [
+                {
+                    title: 'Black Hat Briefings & Arsenal',
+                    start: fmt(y, 7, 5),
+                    end: fmt(y, 7, 10),
+                    backgroundColor: '#3498db',
+                    borderColor: '#3498db',
+                    url: 'https://www.blackhat.com'
+                },
+                {
+                    title: 'DEF CON Hacker Convention',
+                    start: fmt(y, 7, 10),
+                    end: fmt(y, 7, 13),
+                    backgroundColor: '#e74c3c',
+                    borderColor: '#e74c3c',
+                    url: 'https://defcon.org'
+                },
+                {
+                    title: 'RSA Conference Global',
+                    start: fmt(y, 4, 18),
+                    end: fmt(y, 4, 22),
+                    backgroundColor: '#2ecc71',
+                    borderColor: '#2ecc71',
+                    url: 'https://www.rsaconference.com'
+                },
+                {
+                    title: 'Zero Trust Architecture Masterclass',
+                    start: fmt(y, m, 12) + 'T13:00:00',
+                    backgroundColor: '#9b59b6',
+                    borderColor: '#9b59b6',
+                    url: 'https://www.nist.gov'
+                },
+                {
+                    title: 'SANS Cyber Defense & Forensics Summit',
+                    start: fmt(y, m, 20),
+                    end: fmt(y, m, 24),
+                    backgroundColor: '#f39c12',
+                    borderColor: '#f39c12',
+                    url: 'https://www.sans.org'
+                },
+                {
+                    title: 'BSides Security Conference',
+                    start: fmt(y, (m + 1) % 12, 8),
+                    end: fmt(y, (m + 1) % 12, 10),
+                    backgroundColor: '#1abc9c',
+                    borderColor: '#1abc9c',
+                    url: 'https://www.securitybsides.com'
+                },
+                {
+                    title: 'Global Cloud Security Alliance (CSA) Forum',
+                    start: fmt(y, (m + 1) % 12, 18) + 'T14:00:00',
+                    backgroundColor: '#34495e',
+                    borderColor: '#34495e',
+                    url: 'https://cloudsecurityalliance.org'
+                }
+            ];
+
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
@@ -586,50 +649,10 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,listMonth'
                 },
-                events: [
-                    {
-                        title: 'Black Hat USA',
-                        start: '2023-08-05',
-                        end: '2023-08-10',
-                        backgroundColor: '#3498db',
-                        borderColor: '#3498db',
-                        url: 'https://www.blackhat.com'
-                    },
-                    {
-                        title: 'DEF CON 31',
-                        start: '2023-08-10',
-                        end: '2023-08-13',
-                        backgroundColor: '#e74c3c',
-                        borderColor: '#e74c3c',
-                        url: 'https://defcon.org'
-                    },
-                    {
-                        title: 'Zero Trust Webinar',
-                        start: '2023-07-27T13:00:00',
-                        backgroundColor: '#9b59b6',
-                        borderColor: '#9b59b6',
-                        url: '#'
-                    },
-                    {
-                        title: 'RSA Conference',
-                        start: '2023-09-25',
-                        end: '2023-09-28',
-                        backgroundColor: '#3498db',
-                        borderColor: '#3498db',
-                        url: 'https://www.rsaconference.com'
-                    },
-                    {
-                        title: 'SANS Security Training',
-                        start: '2023-10-15',
-                        end: '2023-10-20',
-                        backgroundColor: '#f39c12',
-                        borderColor: '#f39c12',
-                        url: 'https://www.sans.org'
-                    }
-                ],
+                events: events,
                 eventClick: function (info) {
                     info.jsEvent.preventDefault();
-                    if (info.event.url) {
+                    if (info.event.url && info.event.url !== '#') {
                         window.open(info.event.url, '_blank');
                     }
                 }

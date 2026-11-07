@@ -472,9 +472,9 @@
                     </div>
                     <hr>
                     <div class="alert alert-danger">
-                        <h5><i class="bi bi-lightbulb"></i> Protection:</h5>
-                        <p>Always check the sender's email address and hover over links before clicking. Enable MFA on
-                            all accounts.</p>
+                        <h5><i class="bi bi-lightbulb"></i> Protection & Modern Countermeasures:</h5>
+                        <p class="mb-2">Always check sender headers and inspect full URLs before authenticating. Note that standard SMS or push-based MFA can be intercepted by modern adversary-in-the-middle (AiTM) reverse proxy frameworks like <strong>Evilginx2</strong>.</p>
+                        <p class="small mb-0"><strong>Mitigation:</strong> Deploy <strong>FIDO2 WebAuthn / Passkeys</strong> or Certificate-Based Authentication (CBA), which bind the cryptographic handshake to the exact legitimate browser URL (<code>login.microsoftonline.com</code>), rendering fake relay domains completely impotent.</p>
                     </div>
                 </div>
             </div>
@@ -679,6 +679,104 @@
                                     @dropbox.com domain</small>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Smishing Modal -->
+    <div class="modal fade" id="smishingModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-primary">
+                    <h5 class="modal-title"><i class="bi bi-chat-left-text-fill text-primary me-2"></i> SMS Phishing (Smishing) Examples & Forensics</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light text-dark rounded mb-2">
+                                <div class="d-flex align-items-center mb-1">
+                                    <i class="bi bi-shield-exclamation text-danger me-2"></i>
+                                    <strong>USPS Post Logistics:</strong>
+                                    <small class="text-muted ms-auto">+1 (800) 555-0199</small>
+                                </div>
+                                <hr class="my-1">
+                                <p class="small mb-0">"USPS: Package delivery failure due to address mismatch. Please update your details within 12 hours to avoid return: <span class="text-danger">usps-redelivery-notice.info/pay</span>"</p>
+                            </div>
+                            <small class="text-danger"><i class="bi bi-x-circle"></i> Red Flag: USPS will never send text messages from random 10-digit mobile numbers or use unofficial TLDs (.info, .top, .live).</small>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light text-dark rounded mb-2">
+                                <div class="d-flex align-items-center mb-1">
+                                    <i class="bi bi-bank text-danger me-2"></i>
+                                    <strong>Chase Bank Alert:</strong>
+                                    <small class="text-muted ms-auto">Shortcode: 72194</small>
+                                </div>
+                                <hr class="my-1">
+                                <p class="small mb-0">"CHASE: Did you attempt a $1,420.00 Zelle transfer to MARK D.? Reply YES to confirm, or NO to cancel immediately."</p>
+                            </div>
+                            <small class="text-danger"><i class="bi bi-x-circle"></i> Red Flag: Replying 'NO' immediately triggers an incoming vishing call from an attacker posing as the fraud department.</small>
+                        </div>
+                    </div>
+                    <div class="alert alert-info mt-3 small mb-0">
+                        <i class="bi bi-shield-check"></i> <strong>Defensive Action:</strong> Forward suspicious SMS texts to <code>7726</code> (SPAM) to notify telecom carriers, and navigate directly to official bank apps rather than clicking embedded links.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Media Phishing Modal -->
+    <div class="modal fade" id="socialPhishingModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-success">
+                    <h5 class="modal-title"><i class="bi bi-share text-success me-2"></i> Social Media Phishing & Watering Hole Scams</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="p-3 mb-3 bg-secondary bg-opacity-25 rounded border border-success">
+                        <h6 class="text-success fw-bold"><i class="bi bi-linkedin"></i> Case Study: Lazarus Group Developer Recruitment Campaign</h6>
+                        <p class="small text-light mb-0">State-sponsored actors create hyper-realistic LinkedIn profiles posing as tech recruiters from Meta or OpenAI. They reach out to software engineers with lucrative job offers and ask them to complete a "coding test" by cloning a GitHub repository. The repository contains a malicious Node.js dependency or npm postinstall script that drops an infostealer onto the developer's workstation.</p>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <h6 class="text-warning fw-bold">Brand Support Impersonation</h6>
+                            <p class="small text-muted">Bots monitor public complaints on X/Twitter and Instagram, instantly tweeting back from handles like <code>@MetaSupportHelp247</code> asking the victim to send login tokens via direct message.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-info fw-bold">Social Engineering Defenses</h6>
+                            <p class="small text-muted">Verify official verification badges, audit OAuth permissions in third-party connected apps, and run untrusted code samples in isolated virtual machines or containers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Phishing (Vishing) Modal -->
+    <div class="modal fade" id="vishingModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-warning">
+                    <h5 class="modal-title"><i class="bi bi-telephone-fill text-warning me-2"></i> Voice Phishing (Vishing) & Voice Cloning</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="p-3 mb-3 bg-secondary bg-opacity-25 rounded border border-warning">
+                        <h6 class="text-warning fw-bold"><i class="bi bi-mic"></i> Technical Vishing Anatomy</h6>
+                        <p class="small text-light mb-2">Vishing attacks combine caller ID spoofing with psychological urgency. The attacker claims to be from your credit card's anti-fraud department or an IT service desk, warning of an immediate security emergency.</p>
+                        <p class="small text-light mb-0"><strong>AI Voice Synthesis:</strong> Attackers ingest short video/podcast clips of family members or corporate executives, training a neural text-to-speech model in minutes to simulate real voices on phone calls.</p>
+                    </div>
+                    <div class="alert alert-warning small mb-0">
+                        <h6><i class="bi bi-shield-check"></i> Defensive Rules of Engagement:</h6>
+                        <ul class="mb-0">
+                            <li>Caller ID is trivial to spoof—never trust an incoming call based solely on the displayed caller name or phone number.</li>
+                            <li>Hang up immediately and call the organization back using the verified customer service number printed on the back of your card.</li>
+                            <li>Never read back one-time passwords (OTP) or authentication codes received via SMS to a caller.</li>
+                        </ul>
                     </div>
                 </div>
             </div>

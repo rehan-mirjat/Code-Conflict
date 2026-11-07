@@ -438,15 +438,23 @@
         form.classList.add('was-validated');
         if (!form.checkValidity() || !captchaOk) return;
 
-        // Store the message locally (no backend available)
-        const messages = JSON.parse(localStorage.getItem('cc_messages') || '[]');
-        messages.push({
+        // Attempt backend submission
+        const payload = {
           name: document.getElementById('name').value.trim(),
           email: document.getElementById('email').value.trim(),
           subject: document.getElementById('subject').value,
-          message: document.getElementById('message').value.trim(),
-          date: new Date().toISOString()
-        });
+          message: document.getElementById('message').value.trim()
+        };
+        fetch('api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(function () {});
+
+        // Always sync with localStorage for offline / client demo persistence
+        const messages = JSON.parse(localStorage.getItem('cc_messages') || '[]');
+        payload.date = new Date().toISOString();
+        messages.push(payload);
         localStorage.setItem('cc_messages', JSON.stringify(messages));
         if (window.CC) CC.toast('Message sent! We will get back to you soon.', 'success');
         form.reset();

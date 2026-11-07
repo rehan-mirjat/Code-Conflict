@@ -481,9 +481,11 @@
                     </div>
                     <hr>
                     <div class="alert alert-info">
-                        <h5><i class="bi bi-lightbulb"></i> Protection:</h5>
-                        <p>Implement multi-person approval for financial transactions and verify all requests through a
-                            secondary channel (phone call to known number).</p>
+                        <h5><i class="bi bi-lightbulb"></i> Protection & Defense-in-Depth:</h5>
+                        <p class="mb-2">Implement mandatory multi-party authorization for financial wire transfers and establish out-of-band callback verification using known, verified numbers.</p>
+                        <hr>
+                        <h6 class="text-danger fw-bold"><i class="bi bi-robot"></i> Emerging Threat: AI Voice Cloning & Deepfake BEC</h6>
+                        <p class="small mb-0">Adversaries now synthesize executive voices from podcast and earnings call audio to call finance teams with urgent verbal transfer orders (demonstrated in major enterprise fraud cases). Defend against synthetic media via predetermined verbal duress challenge phrases and strict cryptographic transaction signing.</p>
                     </div>
                 </div>
             </div>
@@ -653,6 +655,91 @@
                             <li>Generic greetings ("Dear User")</li>
                             <li>Suspicious links</li>
                             <li>Requests for sensitive information</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pretexting Modal -->
+    <div class="modal fade" id="pretextingModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-warning">
+                    <h5 class="modal-title"><i class="bi bi-person-vcard-fill text-warning me-2"></i> Pretexting Attack Simulation & Case Study</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="p-3 mb-3 bg-secondary bg-opacity-25 rounded border border-warning">
+                        <h6 class="text-warning fw-bold"><i class="bi bi-telephone-inbound-fill"></i> Case Study: Scattered Spider IT Help Desk Pretext (MGM Resorts)</h6>
+                        <p class="small text-light">Adversaries gathered employee names and job titles from LinkedIn. The attacker phoned the internal corporate IT helpdesk, posing as that employee claiming they were locked out of their smartphone, and requested an MFA reset/new Okta token. The helpdesk technician complied without biometric or in-person manager validation, giving the cartel direct SSO access that shut down casino operations.</p>
+                    </div>
+                    <div class="alert alert-warning small mb-0">
+                        <h6><i class="bi bi-shield-check"></i> Defensive Mitigations:</h6>
+                        <ul class="mb-0">
+                            <li>Enforce out-of-band manager video verification before resetting authenticator tokens or issuing new temporary access passes.</li>
+                            <li>Deploy FIDO2/WebAuthn hardware tokens (YubiKeys) which are technically resilient against MFA helpdesk resets and reverse proxy relays.</li>
+                            <li>Flag helpdesk calls originating from spoofed or non-corporate registered phone lines using caller ID verification (STIR/SHAKEN).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Baiting Modal -->
+    <div class="modal fade" id="baitingModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-primary">
+                    <h5 class="modal-title"><i class="bi bi-usb-drive-fill text-primary me-2"></i> Baiting Attack Vectors & Physical Security</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="p-3 border border-secondary rounded bg-dark bg-opacity-50 h-100">
+                                <h6 class="text-primary fw-bold"><i class="bi bi-usb-symbol"></i> Physical "Rubber Ducky" Drop</h6>
+                                <p class="small text-light mb-2">Attackers drop USB drives labeled <em>"Q4 Executive Salaries.xlsx"</em> or <em>"Company Layoffs Masterlist"</em> in parking lots or lobbies. Curtailed users plug the drive in out of curiosity.</p>
+                                <span class="badge bg-danger">HID Keystroke Injection</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 border border-secondary rounded bg-dark bg-opacity-50 h-100">
+                                <h6 class="text-primary fw-bold"><i class="bi bi-cloud-arrow-down"></i> Digital Watering Hole Bait</h6>
+                                <p class="small text-light mb-2">Hosting malicious torrents, cracked CAD software, or fake game cheat installers embedded with RedLine/Lumma stealer payloads that disable AV software during extraction.</p>
+                                <span class="badge bg-warning text-dark">Trojanized Payload</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-info mt-3 small mb-0">
+                        <i class="bi bi-shield-check"></i> <strong>Defensive Controls:</strong> Implement Endpoint DLP policies blocking unauthorized USB mass storage devices, disable USB autorun, and mandate physical USB condom/data blocker testing stations.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quid Pro Quo Modal -->
+    <div class="modal fade" id="quidProQuoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-success">
+                    <h5 class="modal-title"><i class="bi bi-arrow-left-right text-success me-2"></i> Quid Pro Quo Scenarios & Social Engineering Defenses</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="p-3 mb-3 bg-secondary bg-opacity-25 rounded border border-success">
+                        <h6 class="text-success fw-bold"><i class="bi bi-headset"></i> Scenario: The "Helpful" Vendor Support Call</h6>
+                        <p class="small text-light">An attacker calls random internal extensions pretending to be from internal network support: <em>"We are pushing a mandatory VPN security patch that fixes connectivity hiccups. If you let me connect via AnyDesk/Quick Assist and enter your domain credentials, I will finish your update in 2 minutes so your workstation won't freeze."</em> Victims perceive the offer as a helpful time-saver and willingly bypass access protocols.</p>
+                    </div>
+                    <div class="alert alert-success small mb-0">
+                        <h6><i class="bi bi-check2-circle"></i> Verification Protocol:</h6>
+                        <p class="mb-1">Legitimate IT departments never ask users for passwords, nor do they request unannounced remote desktop sessions without an existing support ticket number.</p>
+                        <ul class="mb-0">
+                            <li>Check the IT service management (ITSM) ticketing portal for an open ticket before consenting to any remote support session.</li>
+                            <li>Block unauthorized remote management tools (AnyDesk, TeamViewer, RustDesk) at network perimeter firewalls and endpoint AppLocker rules.</li>
                         </ul>
                     </div>
                 </div>

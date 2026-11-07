@@ -285,8 +285,8 @@
                                 <h5 class="mb-0">LockBit</h5>
                                 <small class="text-muted">Ransomware-as-a-Service</small>
                             </div>
-                            <span class="decryption-badge bg-success ms-auto" data-bs-toggle="tooltip"
-                                title="Decryptor available">
+                            <span class="decryption-badge bg-warning ms-auto" data-bs-toggle="tooltip"
+                                title="Partial decryptor available for select builds via Operation Cronos">
                                 <i class="bi bi-key"></i>
                             </span>
                         </div>
@@ -316,23 +316,23 @@
                                 <h5 class="mb-0">REvil/Sodinokibi</h5>
                                 <small class="text-muted">Big game hunting</small>
                             </div>
-                            <span class="decryption-badge bg-secondary ms-auto" data-bs-toggle="tooltip"
-                                title="No public decryptor">
-                                <i class="bi bi-key-fill"></i>
+                            <span class="decryption-badge bg-success ms-auto" data-bs-toggle="tooltip"
+                                title="Master decryptor released by Bitdefender/law enforcement post-arrests">
+                                <i class="bi bi-key"></i>
                             </span>
                         </div>
                         <div class="card-body">
-                            <p>Affiliate program targeting large corporations with million-dollar ransoms.</p>
+                            <p>Affiliate program targeting large corporations with multi-million-dollar ransoms.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> Targets: Fortune 500</li>
-                                <li><i class="bi bi-check-circle text-success"></i> Encryption: Custom</li>
-                                <li><i class="bi bi-check-circle text-success"></i> Extortion: Auction data</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Targets: MSPs & Enterprise</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Encryption: Salsa20 + ECDH (Curve25519)</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Extortion: Auction dark web leak sites</li>
                             </ul>
                         </div>
                         <div class="card-footer bg-dark border-top-0">
                             <button class="btn btn-sm btn-outline-warning w-100" data-bs-toggle="modal"
                                 data-bs-target="#revilModal">
-                                View Samples
+                                View Technical Profile
                             </button>
                         </div>
                     </div>
@@ -344,26 +344,26 @@
                         <div class="card-header border-info d-flex">
                             <i class="bi bi-lock text-info fs-3 me-3"></i>
                             <div>
-                                <h5 class="mb-0">Ryuk</h5>
-                                <small class="text-muted">Targeted attacks</small>
+                                <h5 class="mb-0">Ryuk / Conti</h5>
+                                <small class="text-muted">Targeted enterprise hunt</small>
                             </div>
-                            <span class="decryption-badge bg-success ms-auto" data-bs-toggle="tooltip"
-                                title="Decryptor available">
-                                <i class="bi bi-key"></i>
+                            <span class="decryption-badge bg-secondary ms-auto" data-bs-toggle="tooltip"
+                                title="No public universal decryptor (Restoration required)">
+                                <i class="bi bi-key-fill"></i>
                             </span>
                         </div>
                         <div class="card-body">
-                            <p>Manual ransomware often deployed after TrickBot infection.</p>
+                            <p>Human-operated targeted ransomware deployed following Emotet/TrickBot lateral movement.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> Targets: Healthcare, Govt</li>
-                                <li><i class="bi bi-check-circle text-success"></i> Encryption: RSA-4096</li>
-                                <li><i class="bi bi-check-circle text-success"></i> Extortion: Data theft</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Targets: Healthcare, Govt, Education</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Encryption: AES-256-CBC + RSA-4096</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Extortion: Network paralysis & exfiltration</li>
                             </ul>
                         </div>
                         <div class="card-footer bg-dark border-top-0">
                             <button class="btn btn-sm btn-outline-info w-100" data-bs-toggle="modal"
                                 data-bs-target="#ryukModal">
-                                View Samples
+                                View Technical Profile
                             </button>
                         </div>
                     </div>
@@ -419,7 +419,7 @@
                 <div class="col-lg-6 animate__animated animate__fadeInRight">
                     <div class="card bg-dark border-warning h-100">
                         <div class="card-header border-warning bg-warning bg-opacity-10">
-                            <h4><i class="bi bi-exclamation-triangle"></i> Incident Response</h4>
+                            <h4><i class="bi bi-shield-shaded"></i> Ransomware Emergency Response Playbook</h4>
                         </div>
                         <div class="card-body">
                             <div class="accordion" id="responseAccordion">
@@ -427,13 +427,13 @@
                                     <h2 class="accordion-header">
                                         <button class="accordion-button bg-dark text-white" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                                            <i class="bi bi-1-circle text-danger me-2"></i> Isolate the Infection
+                                            <i class="bi bi-1-circle text-danger me-2"></i> 1. Immediate Network Isolation & Out-of-Band Comms
                                         </button>
                                     </h2>
                                     <div id="collapseOne" class="accordion-collapse collapse show"
                                         data-bs-parent="#responseAccordion">
-                                        <div class="accordion-body">
-                                            Disconnect infected systems from all networks immediately.
+                                        <div class="accordion-body small text-light">
+                                            Sever physical network cables, disconnect Wi-Fi interfaces, and disable switch ports. Segment hypervisors, NAS shares, and Active Directory domain controllers. <strong>Switch all response team communications immediately to an out-of-band channel</strong> (e.g. Signal, dedicated clean cellular phones) as corporate email and Slack/Teams are often monitored by the adversary.
                                         </div>
                                     </div>
                                 </div>
@@ -441,13 +441,13 @@
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed bg-dark text-white" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                                            <i class="bi bi-2-circle text-warning me-2"></i> Identify the Strain
+                                            <i class="bi bi-2-circle text-warning me-2"></i> 2. Volatile Memory & Artifact Preservation
                                         </button>
                                     </h2>
                                     <div id="collapseTwo" class="accordion-collapse collapse"
                                         data-bs-parent="#responseAccordion">
-                                        <div class="accordion-body">
-                                            Use tools like ID Ransomware to identify the variant.
+                                        <div class="accordion-body small text-light">
+                                            Do not hastily power off systems where encryption is ongoing or recently completed. Capture live memory triage images (using FTK Imager or LiME) on critical endpoints; cryptographic keys can sometimes be carved from memory processes before termination. Preserve firewall logs, NetFlow captures, and AD event logs before logs are rolled over or wiped.
                                         </div>
                                     </div>
                                 </div>
@@ -455,13 +455,41 @@
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed bg-dark text-white" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapseThree">
-                                            <i class="bi bi-3-circle text-primary me-2"></i> Restore from Backup
+                                            <i class="bi bi-3-circle text-info me-2"></i> 3. Strain Identification & Decryption Feasibility
                                         </button>
                                     </h2>
                                     <div id="collapseThree" class="accordion-collapse collapse"
                                         data-bs-parent="#responseAccordion">
-                                        <div class="accordion-body">
-                                            Wipe systems and restore from clean backups after eradication.
+                                        <div class="accordion-body small text-light">
+                                            Extract ransom notes, file extensions, and encrypted headers. Upload non-sensitive samples to ID Ransomware (id-ransomware.malwarehunterteam.com) and check the No More Ransom Project (nomoreransom.org) for official law-enforcement decryption tools (e.g., Operation Cronos LockBit 3.0 decryptors, REvil master keys).
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item bg-dark border-secondary">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed bg-dark text-white" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                            <i class="bi bi-4-circle text-primary me-2"></i> 4. Regulatory, Legal & Law Enforcement Notification
+                                        </button>
+                                    </h2>
+                                    <div id="collapseFour" class="accordion-collapse collapse"
+                                        data-bs-parent="#responseAccordion">
+                                        <div class="accordion-body small text-light">
+                                            Notify external legal counsel, cyber insurance carriers, and law enforcement (FBI IC3, CISA, Europol). For public companies, initiate SEC Item 1.05 Form 8-K disclosure assessments within mandatory 4 business day timelines, and evaluate GDPR/CCPA notification windows (72 hours) regarding exfiltrated PII.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item bg-dark border-secondary">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed bg-dark text-white" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseFive">
+                                            <i class="bi bi-5-circle text-success me-2"></i> 5. Clean-Slate Restoration (3-2-1-1-0 Rule)
+                                        </button>
+                                    </h2>
+                                    <div id="collapseFive" class="accordion-collapse collapse"
+                                        data-bs-parent="#responseAccordion">
+                                        <div class="accordion-body small text-light">
+                                            Never restore directly onto compromised operating systems. Rebuild domain infrastructure from known-good baseline images. Verify backup integrity against the 3-2-1-1-0 rule (3 copies, 2 media types, 1 offsite, 1 immutable/air-gapped, 0 recovery errors) to ensure backups have not been poisoned by time-delayed malware sleeper logic.
                                         </div>
                                     </div>
                                 </div>
@@ -480,28 +508,123 @@
     </section>
 
     <!-- Ransomware Modals -->
+    <!-- LockBit Modal -->
     <div class="modal fade" id="lockbitModal" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content bg-dark">
-                <div class="modal-header border-primary">
-                    <h5 class="modal-title"><i class="bi bi-lock text-danger"></i> LockBit Samples</h5>
+                <div class="modal-header border-danger">
+                    <h5 class="modal-title"><i class="bi bi-lock text-danger me-2"></i> LockBit 3.0 ("LockBit Black") Threat Profile</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <ul class="list-group">
-                        <li class="list-group-item bg-dark text-white border-secondary">
-                            <strong>File Extension:</strong> .lockbit
-                        </li>
-                        <li class="list-group-item bg-dark text-white border-secondary">
-                            <strong>Ransom Note:</strong> Restore-My-Files.txt
-                        </li>
-                        <li class="list-group-item bg-dark text-white border-secondary">
-                            <strong>Contact:</strong> Tor negotiation site
-                        </li>
-                    </ul>
-                    <div class="mt-3 alert alert-info">
-                        <i class="bi bi-key"></i> Decryptor available from:
-                        <a href="https://www.nomoreransom.org" class="alert-link">NoMoreRansom.org</a>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <h6 class="text-danger fw-bold"><i class="bi bi-terminal"></i> Attack Characteristics</h6>
+                            <ul class="list-group list-group-flush bg-transparent">
+                                <li class="list-group-item bg-transparent text-white border-secondary small">
+                                    <strong>Extensions:</strong> .lockbit / custom random 9-character hex (e.g., .HLJkNsk1P)
+                                </li>
+                                <li class="list-group-item bg-transparent text-white border-secondary small">
+                                    <strong>Ransom Note:</strong> README.txt / Restore-My-Files.txt
+                                </li>
+                                <li class="list-group-item bg-transparent text-white border-secondary small">
+                                    <strong>Encryption:</strong> Multi-threaded ChaCha20 + RSA session key wrapping
+                                </li>
+                                <li class="list-group-item bg-transparent text-white border-secondary small">
+                                    <strong>Initial Access:</strong> Stolen RDP/VPN credentials, CVE-2023-4966 (Citrix Bleed)
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-warning fw-bold"><i class="bi bi-shield-slash"></i> TTPs & Evasion</h6>
+                            <p class="small text-muted mb-2">Re-uses code from BlackMatter/DarkSide. Employs reflection and anti-debugging tricks, disables Windows Defender via Group Policy tampering, and clears shadow copies with <code>vssadmin.exe Delete Shadows /All /Quiet</code>.</p>
+                            <div class="p-2 border border-secondary rounded bg-dark bg-opacity-50 small">
+                                <strong class="text-info">Decryption Status:</strong>
+                                <p class="mb-0">Operation Cronos (FBI, NCA, Europol, Feb 2024) seized leak sites and generated keys for specific LockBit 3.0 victims. Available via CISA and NoMoreRansom.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REvil Modal -->
+    <div class="modal fade" id="revilModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-warning">
+                    <h5 class="modal-title"><i class="bi bi-lock text-warning me-2"></i> REvil / Sodinokibi Threat Profile</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <h6 class="text-warning fw-bold"><i class="bi bi-terminal"></i> Attack Characteristics</h6>
+                            <ul class="list-group list-group-flush bg-transparent">
+                                <li class="list-group-item bg-transparent text-white border-secondary small">
+                                    <strong>Extensions:</strong> Random alphanumeric (e.g., .527xg2, .b019k)
+                                </li>
+                                <li class="list-group-item bg-transparent text-white border-secondary small">
+                                    <strong>Ransom Note:</strong> [random_ext]-readme.txt
+                                </li>
+                                <li class="list-group-item bg-transparent text-white border-secondary small">
+                                    <strong>Pioneer of:</strong> Double Extortion & Dark Web Data Auctions ("Happy Blog")
+                                </li>
+                                <li class="list-group-item bg-transparent text-white border-secondary small">
+                                    <strong>Famous Hits:</strong> JBS Foods ($11M paid), Kaseya VSA ($70M demand)
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-info fw-bold"><i class="bi bi-cpu"></i> Exploit Methodology</h6>
+                            <p class="small text-muted mb-2">Weaponized zero-days including CVE-2021-30116 in Kaseya VSA to bypass authentication and execute fake <code>agent.exe</code> updates deploying ransomware payloads simultaneously to downstream MSP customers.</p>
+                            <div class="p-2 border border-secondary rounded bg-dark bg-opacity-50 small">
+                                <strong class="text-success">Decryption Status:</strong>
+                                <p class="mb-0">Universal master decryption key was obtained by law enforcement and Bitdefender released an official decryptor for historical REvil victims prior to group disruption.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ryuk Modal -->
+    <div class="modal fade" id="ryukModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-info">
+                    <h5 class="modal-title"><i class="bi bi-lock text-info me-2"></i> Ryuk / Wizard Spider Threat Profile</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <h6 class="text-info fw-bold"><i class="bi bi-terminal"></i> Attack Characteristics</h6>
+                            <ul class="list-group list-group-flush bg-transparent">
+                                <li class="list-group-item bg-transparent text-white border-secondary small">
+                                    <strong>Extensions:</strong> .RYK
+                                </li>
+                                <li class="list-group-item bg-transparent text-white border-secondary small">
+                                    <strong>Ransom Note:</strong> RyukReadMe.txt
+                                </li>
+                                <li class="list-group-item bg-transparent text-white border-secondary small">
+                                    <strong>Encryption:</strong> AES-256 (CBC mode) + RSA-4096 asymmetric key wrapper
+                                </li>
+                                <li class="list-group-item bg-transparent text-white border-secondary small">
+                                    <strong>Cartel:</strong> Wizard Spider (later evolved into Conti and BlackBasta)
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-warning fw-bold"><i class="bi bi-activity"></i> Kill Chain Progression</h6>
+                            <p class="small text-muted mb-2">Famous for the multi-stage "Triple Threat" attack chain: Phishing email -> Emotet payload delivery -> TrickBot/BazarLoader reconnaissance -> Cobalt Strike Beaconing -> Domain Admin escalation -> Mass Ryuk deployment.</p>
+                            <div class="p-2 border border-secondary rounded bg-dark bg-opacity-50 small">
+                                <strong class="text-warning">Decryption Status:</strong>
+                                <p class="mb-0">No universal decryptor. Early variants had a key truncation bug fixable by Emsisoft, but standard Ryuk infections require immutable offline backup recovery.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

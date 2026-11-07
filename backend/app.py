@@ -1,17 +1,21 @@
 """Code & Conflict backend (Flask + SQLite).
 
-Serves the static site and a small JSON API:
+Serves the static site and a robust JSON API:
 
-    GET  /api/health      -> {"ok": true}
-    POST /api/register    -> create account   {email, password, pgp?}
-    POST /api/login       -> start session    {email, password}
-    POST /api/logout      -> end session
-    GET  /api/me          -> current user or null
-    POST /api/contact     -> store a message  {name, email, subject, message}
-    GET  /api/feed/next   -> one simulated threat item for the live feed
+    GET  /api/health                  -> {"ok": true, "timestamp": ...}
+    POST /api/register                -> create account   {email, password, pgp?}
+    POST /api/login                   -> start session    {email, password}
+    POST /api/logout                  -> end session
+    GET  /api/me                      -> current user or null
+    GET  /api/csrf-token              -> get CSRF token
+    POST /api/password-reset/request  -> request token    {email}
+    POST /api/password-reset/confirm  -> reset password   {token, new_password}
+    POST /api/contact                 -> store a message  {name, email, subject, message}
+    GET  /api/feed/next               -> simulated threat item for live feed
 
 Run:  python3 backend/app.py      (http://127.0.0.1:5000)
 """
+import hashlib
 import os
 import random
 import re
@@ -19,6 +23,7 @@ import secrets
 import sqlite3
 import time
 from datetime import datetime, timedelta, timezone
+from urllib.parse import urlparse
 
 from flask import Flask, abort, g, jsonify, request, send_from_directory, session
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -29,7 +34,12 @@ STATIC_DIRS = {'assets', 'news', 'prevention', 'threats'}  # only these are serv
 
 EMAIL_RE = re.compile(r'^[^@\s]+@[^@\s]+\.edu\.pk$', re.I)
 CONTACT_EMAIL_RE = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
-LOGIN_LIMIT, LOGIN_WINDOW = 5, 60  # attempts per window (seconds)
+
+LOGIN_LIMIT, LOGIN_WINDOW = 5, 60          # 5 attempts per IP+account per 60s
+LOGIN_IP_LIMIT, LOGIN_IP_WINDOW = 30, 60   # 30 attempts per IP per 60s (prevents spraying)
+REGISTER_LIMIT, REGISTER_WINDOW = 5, 60
+CONTACT_LIMIT, CONTACT_WINDOW = 10, 60
+RESET_LIMIT, RESET_WINDOW = 5, 60
 
 FEED_POOL = [
     ('critical', 'ransom', 'LockBit variant encrypting hospital file servers', 'Europe'),
@@ -60,7 +70,60 @@ CREATE TABLE IF NOT EXISTS messages (
     message  TEXT NOT NULL,
     created  TEXT NOT NULL
 );
+CREATE TABLE IF NOT EXISTS password_resets (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    email      TEXT NOT NULL,
+    token_hash TEXT NOT NULL UNIQUE,
+    expires_at TEXT NOT NULL,
+    used       INTEGER NOT NULL DEFAULT 0,
+    created    TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_messages_created ON messages(created);
+CREATE INDEX IF NOT EXISTS idx_messages_email ON messages(email);
+CREATE INDEX IF NOT EXISTS idx_password_resets_token ON password_resets(token_hash);
+CREATE INDEX IF NOT EXISTS idx_password_resets_email ON password_resets(email);
 """
+
+_DUMMY_HASH = generate_password_hash('not-a-real-password')
+
+
+class RateLimiter:
+    """Sliding-window in-memory rate limiter with automatic stale key eviction and DoS bounds."""
+    def __init__(self, limit, window_sec, max_entries=5000):
+        self.limit = limit
+        self.window = window_sec
+        self.max_entries = max_entries
+        self.store = {}
+        self._last_prune = time.time()
+
+    def _prune(self, now):
+        cutoff = now - self.window
+        keys_to_del = [k for k, v in self.store.items() if not v or v[-1] < cutoff]
+        for k in keys_to_del:
+            self.store.pop(k, None)
+        # If still over capacity under flood, drop oldest keys
+        if len(self.store) > self.max_entries:
+            sorted_keys = sorted(self.store.keys(), key=lambda k: self.store[k][-1] if self.store[k] else 0)
+            excess = len(self.store) - self.max_entries
+            for k in sorted_keys[:excess]:
+                self.store.pop(k, None)
+        self._last_prune = now
+
+    def is_allowed(self, key):
+        now = time.time()
+        if now - self._last_prune > 30 or len(self.store) > self.max_entries:
+            self._prune(now)
+        timestamps = [t for t in self.store.get(key, []) if now - t < self.window]
+        if len(timestamps) >= self.limit:
+            self.store[key] = timestamps
+            return False
+        timestamps.append(now)
+        self.store[key] = timestamps
+        return True
+
+    def reset(self, key):
+        self.store.pop(key, None)
 
 
 def _load_secret():
@@ -80,6 +143,24 @@ def _now():
     return datetime.now(timezone.utc).isoformat()
 
 
+def _now_plus(seconds=0, minutes=0):
+    return (datetime.now(timezone.utc) + timedelta(seconds=seconds, minutes=minutes)).isoformat()
+
+
+def _hash_token(token_str):
+    return hashlib.sha256(token_str.encode('utf-8')).hexdigest()
+
+
+def clean_str(val, max_len=1000, allow_newlines=True):
+    """Sanitize string values: enforce bounds, strip null bytes, optionally forbid newlines."""
+    if not isinstance(val, str):
+        val = str(val or '')
+    val = val.replace('\x00', '')
+    if not allow_newlines:
+        val = val.replace('\r', '').replace('\n', '')
+    return val.strip()[:max_len]
+
+
 def password_problem(pw):
     if len(pw) < 12:
         return 'Passphrase must be at least 12 characters.'
@@ -91,28 +172,72 @@ def password_problem(pw):
         return 'Passphrase needs at least one special character.'
     if len(pw) > 256:
         return 'Passphrase is too long.'
+    if '\x00' in pw:
+        return 'Passphrase contains invalid characters.'
     return None
 
 
-def create_app(db_path=None):
+def init_db(db_path):
+    """Initializes SQLite schema and applies performance & concurrency pragmas."""
+    con = sqlite3.connect(db_path)
+    try:
+        con.execute('PRAGMA journal_mode=WAL;')
+        con.execute('PRAGMA synchronous=NORMAL;')
+        con.execute('PRAGMA foreign_keys=ON;')
+        con.execute('PRAGMA busy_timeout=5000;')
+        con.executescript(SCHEMA)
+        con.commit()
+    finally:
+        con.close()
+
+
+def create_app(db_path=None, testing=False):
     app = Flask(__name__, static_folder=None)
+    chosen_db = db_path or os.environ.get('CC_DB') or os.path.join(HERE, 'data.db')
+    cookie_secure = os.environ.get('COOKIE_SECURE', 'false').lower() == 'true'
+
     app.config.update(
-        DB_PATH=db_path or os.environ.get('CC_DB') or os.path.join(HERE, 'data.db'),
+        TESTING=testing,
+        DB_PATH=chosen_db,
         SECRET_KEY=_load_secret(),
         SESSION_COOKIE_HTTPONLY=True,
         SESSION_COOKIE_SAMESITE='Lax',
+        SESSION_COOKIE_SECURE=cookie_secure,
         PERMANENT_SESSION_LIFETIME=timedelta(days=7),
         MAX_CONTENT_LENGTH=64 * 1024,
     )
-    attempts = {}  # (ip, email) -> [timestamps]; in-memory login rate limit
 
-    with sqlite3.connect(app.config['DB_PATH']) as con:
-        con.executescript(SCHEMA)
+    init_db(app.config['DB_PATH'])
+
+    is_testing = app.config.get('TESTING') and not app.config.get('ENFORCE_RATE_LIMIT')
+    login_limit = 1000 if is_testing else LOGIN_LIMIT
+    login_ip_limit = 1000 if is_testing else LOGIN_IP_WINDOW
+    register_limit = 1000 if is_testing else REGISTER_LIMIT
+    contact_limit = 1000 if is_testing else CONTACT_LIMIT
+    reset_limit = 1000 if is_testing else RESET_LIMIT
+
+    login_limiter = RateLimiter(login_limit, LOGIN_WINDOW)
+    login_ip_limiter = RateLimiter(login_ip_limit, LOGIN_IP_WINDOW)
+    register_limiter = RateLimiter(register_limit, REGISTER_WINDOW)
+    contact_limiter = RateLimiter(contact_limit, CONTACT_WINDOW)
+    reset_limiter = RateLimiter(reset_limit, RESET_WINDOW)
+
+    def get_client_ip():
+        if os.environ.get('TRUST_PROXY', 'false').lower() == 'true':
+            forwarded = request.headers.get('X-Forwarded-For')
+            if forwarded:
+                return forwarded.split(',')[0].strip()
+            real_ip = request.headers.get('X-Real-IP')
+            if real_ip:
+                return real_ip.strip()
+        return request.remote_addr or '127.0.0.1'
 
     def db():
         if 'db' not in g:
             g.db = sqlite3.connect(app.config['DB_PATH'])
             g.db.row_factory = sqlite3.Row
+            g.db.execute('PRAGMA foreign_keys=ON;')
+            g.db.execute('PRAGMA busy_timeout=5000;')
         return g.db
 
     @app.teardown_appcontext
@@ -121,12 +246,49 @@ def create_app(db_path=None):
         if con is not None:
             con.close()
 
+    @app.before_request
+    def csrf_origin_check():
+        """Validates Origin header on state-changing API endpoints to mitigate cross-origin attacks."""
+        if request.path.startswith('/api/') and request.method in ('POST', 'PUT', 'DELETE', 'PATCH'):
+            origin = request.headers.get('Origin')
+            if origin:
+                try:
+                    origin_host = urlparse(origin).netloc.split(':')[0].lower()
+                    req_host = request.host.split(':')[0].lower()
+                    allowed = {req_host, '127.0.0.1', 'localhost', 'testserver'}
+                    if origin_host not in allowed:
+                        return jsonify(ok=False, error='Cross-origin request rejected.'), 403
+                except Exception:
+                    return jsonify(ok=False, error='Invalid origin header.'), 403
+
     @app.after_request
     def headers(resp):
         resp.headers['X-Content-Type-Options'] = 'nosniff'
-        resp.headers['Referrer-Policy'] = 'same-origin'
+        resp.headers['X-Frame-Options'] = 'DENY'
+        resp.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+        resp.headers['Permissions-Policy'] = 'camera=(), microphone=(), geolocation=(), payment=()'
+        resp.headers['Cross-Origin-Opener-Policy'] = 'same-origin'
+        resp.headers['Cross-Origin-Resource-Policy'] = 'same-origin'
+
+        csp = (
+            "default-src 'self'; "
+            "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; "
+            "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; "
+            "font-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; "
+            "img-src 'self' data: https:; "
+            "connect-src 'self'; "
+            "frame-ancestors 'none'; "
+            "base-uri 'self'; "
+            "form-action 'self';"
+        )
+        resp.headers['Content-Security-Policy'] = csp
+
+        if app.config.get('SESSION_COOKIE_SECURE'):
+            resp.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+
         if request.path.startswith('/api/'):
-            resp.headers['Cache-Control'] = 'no-store'
+            resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+            resp.headers['Pragma'] = 'no-cache'
         return resp
 
     def err(msg, code=400):
@@ -139,57 +301,131 @@ def create_app(db_path=None):
         data = request.get_json(silent=True)
         return data if isinstance(data, dict) else None
 
-    # ------------------------------------------------------------- API
+    # ------------------------------------------------------------- Error Handlers
+    @app.errorhandler(400)
+    def handle_400(e):
+        if request.path.startswith('/api/'):
+            return err(getattr(e, 'description', 'Bad Request'), 400)
+        return e
+
+    @app.errorhandler(403)
+    def handle_403(e):
+        if request.path.startswith('/api/'):
+            return err('Access forbidden.', 403)
+        return e
+
+    @app.errorhandler(404)
+    def handle_404(e):
+        if request.path.startswith('/api/'):
+            return err('Resource not found.', 404)
+        return e
+
+    @app.errorhandler(405)
+    def handle_405(e):
+        if request.path.startswith('/api/'):
+            return err('Method not allowed.', 405)
+        return e
+
+    @app.errorhandler(413)
+    def handle_413(e):
+        if request.path.startswith('/api/'):
+            return err('Payload too large (maximum allowed size: 64KB).', 413)
+        return e
+
+    @app.errorhandler(415)
+    def handle_415(e):
+        if request.path.startswith('/api/'):
+            return err('Unsupported Media Type. Expected JSON body.', 415)
+        return e
+
+    @app.errorhandler(429)
+    def handle_429(e):
+        if request.path.startswith('/api/'):
+            return err('Too many requests. Please try again later.', 429)
+        return e
+
+    @app.errorhandler(500)
+    def handle_500(e):
+        if request.path.startswith('/api/'):
+            return err('Internal server error.', 500)
+        return e
+
+    # ------------------------------------------------------------- API Endpoints
     @app.get('/api/health')
     def health():
-        return jsonify(ok=True)
+        return jsonify(ok=True, status='healthy', timestamp=_now())
+
+    @app.get('/api/csrf-token')
+    def csrf_token():
+        if 'csrf_token' not in session:
+            session['csrf_token'] = secrets.token_hex(24)
+        return jsonify(ok=True, csrf_token=session['csrf_token'])
 
     @app.post('/api/register')
     def register():
+        remote_ip = get_client_ip()
+        if not register_limiter.is_allowed(remote_ip):
+            return err('Too many registration requests. Please wait a minute and try again.', 429)
+
         data = body()
         if data is None:
             return err('Expected a JSON body.', 415)
-        email = str(data.get('email', '')).strip().lower()
+
+        email = clean_str(data.get('email', ''), max_len=254, allow_newlines=False).lower()
         password = str(data.get('password', ''))
-        pgp = str(data.get('pgp', ''))[:4000]
+        pgp = clean_str(data.get('pgp', ''), max_len=4000, allow_newlines=True)
+
         if not EMAIL_RE.match(email) or len(email) > 254:
             return err('Please use a valid .edu.pk university email.')
         problem = password_problem(password)
         if problem:
             return err(problem)
+
         try:
             db().execute(
                 'INSERT INTO users (email, name, pw_hash, pgp, created) VALUES (?,?,?,?,?)',
-                (email, email.split('@')[0], generate_password_hash(password), pgp, _now()))
+                (email, email.split('@')[0], generate_password_hash(password), pgp, _now())
+            )
             db().commit()
         except sqlite3.IntegrityError:
+            db().rollback()
             return err('An account with this email already exists.', 409)
-        return jsonify(ok=True), 201
+        except sqlite3.OperationalError:
+            db().rollback()
+            return err('Service temporarily unavailable, please retry.', 503)
+        except sqlite3.Error:
+            db().rollback()
+            return err('An unexpected database error occurred.', 500)
+
+        return jsonify(ok=True, message='Account registered successfully.'), 201
 
     @app.post('/api/login')
     def login():
         data = body()
         if data is None:
             return err('Expected a JSON body.', 415)
-        email = str(data.get('email', '')).strip().lower()
-        password = str(data.get('password', ''))
 
-        key = (request.remote_addr, email)
-        now = time.time()
-        recent = [t for t in attempts.get(key, []) if now - t < LOGIN_WINDOW]
-        if len(recent) >= LOGIN_LIMIT:
-            attempts[key] = recent
+        email = clean_str(data.get('email', ''), max_len=254, allow_newlines=False).lower()
+        password = str(data.get('password', ''))
+        remote_ip = get_client_ip()
+        rate_key = f"{remote_ip}:{email}"
+
+        if not login_ip_limiter.is_allowed(remote_ip):
+            return err('Too many login attempts from this network. Please wait a minute and try again.', 429)
+
+        if not login_limiter.is_allowed(rate_key):
             return err('Too many attempts. Please wait a minute and try again.', 429)
 
-        row = db().execute('SELECT * FROM users WHERE email = ?', (email,)).fetchone()
-        # Always run a hash check so unknown emails and wrong passwords look alike.
+        try:
+            row = db().execute('SELECT * FROM users WHERE email = ?', (email,)).fetchone()
+        except sqlite3.Error:
+            return err('Database error occurred.', 500)
+
         good = check_password_hash(row['pw_hash'] if row else _DUMMY_HASH, password)
         if not row or not good:
-            recent.append(now)
-            attempts[key] = recent
             return err('Invalid email or passphrase.', 401)
 
-        attempts.pop(key, None)
+        login_limiter.reset(rate_key)
         session.clear()
         session.permanent = True
         session['email'] = row['email']
@@ -205,21 +441,124 @@ def create_app(db_path=None):
         email = session.get('email')
         if not email:
             return jsonify(ok=True, user=None)
-        row = db().execute('SELECT email, name FROM users WHERE email = ?', (email,)).fetchone()
+        try:
+            row = db().execute('SELECT email, name FROM users WHERE email = ?', (email,)).fetchone()
+        except sqlite3.Error:
+            return jsonify(ok=True, user=None)
         if not row:
             session.clear()
             return jsonify(ok=True, user=None)
         return jsonify(ok=True, user={'email': row['email'], 'name': row['name']})
 
-    @app.post('/api/contact')
-    def contact():
+    @app.post('/api/password-reset/request')
+    def password_reset_request():
+        remote_ip = get_client_ip()
+        if not reset_limiter.is_allowed(remote_ip):
+            return err('Too many password reset requests. Please wait a minute.', 429)
+
         data = body()
         if data is None:
             return err('Expected a JSON body.', 415)
-        name = str(data.get('name', '')).strip()
-        email = str(data.get('email', '')).strip()
-        subject = str(data.get('subject', '')).strip()
-        message = str(data.get('message', '')).strip()
+
+        email = clean_str(data.get('email', ''), max_len=254, allow_newlines=False).lower()
+        if not CONTACT_EMAIL_RE.match(email) or len(email) > 254:
+            return err('Please enter a valid email address.')
+
+        token = None
+        try:
+            row = db().execute('SELECT email FROM users WHERE email = ?', (email,)).fetchone()
+            if row:
+                token = secrets.token_urlsafe(32)
+                token_h = _hash_token(token)
+                expires = _now_plus(minutes=15)
+                # Invalidate prior unused tokens for this email
+                db().execute('UPDATE password_resets SET used = 1 WHERE email = ? AND used = 0', (email,))
+                db().execute(
+                    'INSERT INTO password_resets (email, token_hash, expires_at, created) VALUES (?,?,?,?)',
+                    (email, token_h, expires, _now())
+                )
+                db().commit()
+        except sqlite3.Error:
+            db().rollback()
+            return err('An error occurred processing your request.', 500)
+
+        resp_payload = {
+            'ok': True,
+            'message': f'If an account exists for {email}, reset instructions have been sent.'
+        }
+        # In test / debug mode, surface the generated token to facilitate automation & verification
+        if token and (app.config.get('TESTING') or app.debug):
+            resp_payload['dev_reset_token'] = token
+
+        return jsonify(resp_payload), 200
+
+    @app.post('/api/password-reset/confirm')
+    def password_reset_confirm():
+        remote_ip = get_client_ip()
+        if not reset_limiter.is_allowed(remote_ip):
+            return err('Too many attempts. Please try again later.', 429)
+
+        data = body()
+        if data is None:
+            return err('Expected a JSON body.', 415)
+
+        token = clean_str(data.get('token', ''), max_len=128, allow_newlines=False)
+        new_password = str(data.get('new_password', ''))
+
+        if not token:
+            return err('Reset token is required.')
+
+        problem = password_problem(new_password)
+        if problem:
+            return err(problem)
+
+        token_h = _hash_token(token)
+        now_iso = _now()
+        try:
+            row = db().execute(
+                'SELECT * FROM password_resets WHERE token_hash = ? AND used = 0 AND expires_at > ?',
+                (token_h, now_iso)
+            ).fetchone()
+
+            if not row:
+                return err('Invalid or expired password reset token.', 400)
+
+            email = row['email']
+            db().execute('UPDATE users SET pw_hash = ? WHERE email = ?', (generate_password_hash(new_password), email))
+            db().execute('UPDATE password_resets SET used = 1 WHERE id = ?', (row['id'],))
+            db().commit()
+        except sqlite3.Error:
+            db().rollback()
+            return err('Failed to update password.', 500)
+
+        # Invalidate any currently active session
+        session.clear()
+        return jsonify(ok=True, message='Password has been reset successfully.'), 200
+
+    @app.post('/api/contact')
+    def contact():
+        remote_ip = get_client_ip()
+        if not contact_limiter.is_allowed(remote_ip):
+            return err('Too many messages sent. Please wait a minute and try again.', 429)
+
+        data = body()
+        if data is None:
+            return err('Expected a JSON body.', 415)
+
+        name_raw = str(data.get('name', ''))
+        subject_raw = str(data.get('subject', ''))
+
+        # Strictly block carriage returns / newlines in name & subject to prevent header injection
+        if '\n' in name_raw or '\r' in name_raw:
+            return err('Name cannot contain newlines.')
+        if '\n' in subject_raw or '\r' in subject_raw:
+            return err('Subject cannot contain newlines.')
+
+        name = clean_str(name_raw, max_len=100, allow_newlines=False)
+        email = clean_str(data.get('email', ''), max_len=254, allow_newlines=False).lower()
+        subject = clean_str(subject_raw, max_len=100, allow_newlines=False)
+        message = clean_str(data.get('message', ''), max_len=5000, allow_newlines=True)
+
         if not (1 <= len(name) <= 100):
             return err('Please enter your name (max 100 characters).')
         if not CONTACT_EMAIL_RE.match(email) or len(email) > 254:
@@ -228,19 +567,65 @@ def create_app(db_path=None):
             return err('Please choose a subject.')
         if not (1 <= len(message) <= 5000):
             return err('Please enter a message (max 5000 characters).')
-        db().execute(
-            'INSERT INTO messages (name, email, subject, message, created) VALUES (?,?,?,?,?)',
-            (name, email, subject, message, _now()))
-        db().commit()
-        return jsonify(ok=True), 201
+
+        try:
+            db().execute(
+                'INSERT INTO messages (name, email, subject, message, created) VALUES (?,?,?,?,?)',
+                (name, email, subject, message, _now())
+            )
+            db().commit()
+        except sqlite3.Error:
+            db().rollback()
+            return err('Failed to save message.', 500)
+
+        return jsonify(ok=True, message='Message sent successfully.'), 201
 
     @app.get('/api/feed/next')
     def feed_next():
-        sev, kind, title, region = random.choice(FEED_POOL)
+        sev_filter = request.args.get('sev', '').strip().lower()
+        pool = FEED_POOL
+        if sev_filter:
+            pool = [item for item in FEED_POOL if item[0] == sev_filter] or FEED_POOL
+        sev, kind, title, region = random.choice(pool)
         return jsonify(ok=True, item={'sev': sev, 'type': kind, 'title': title,
                                       'region': region, 'ts': _now()})
 
-    # ---------------------------------------------------------- static
+    # ---------------------------------------------------------- API Method Guards & Routing
+    @app.route('/api/<path:endpoint>', methods=['GET'])
+    def api_get_guard(endpoint):
+        post_only_endpoints = {
+            'register', 'login', 'logout', 'contact',
+            'password-reset/request', 'password-reset/confirm'
+        }
+        if endpoint in post_only_endpoints:
+            abort(405)
+        abort(404)
+
+    # ---------------------------------------------------------- Security & Policy Helpers
+    @app.get('/favicon.ico')
+    def favicon():
+        fav_dir = os.path.join(ROOT, 'assets', 'imgs')
+        if os.path.exists(os.path.join(fav_dir, 'favicon.png')):
+            return send_from_directory(fav_dir, 'favicon.png', mimetype='image/png')
+        abort(404)
+
+    @app.get('/robots.txt')
+    def robots():
+        content = "User-agent: *\nDisallow: /api/\nAllow: /\n"
+        return content, 200, {'Content-Type': 'text/plain'}
+
+    @app.get('/.well-known/security.txt')
+    @app.get('/security.txt')
+    def security_txt():
+        content = (
+            "Contact: mailto:security@code-conflict.edu.pk\n"
+            "Expires: 2027-12-31T23:59:59.000Z\n"
+            "Preferred-Languages: en\n"
+            "Policy: https://code-conflict.edu.pk/contact.html\n"
+        )
+        return content, 200, {'Content-Type': 'text/plain'}
+
+    # ---------------------------------------------------------- Static Files
     @app.get('/')
     def home():
         return send_from_directory(ROOT, 'index.html')
@@ -256,8 +641,5 @@ def create_app(db_path=None):
     return app
 
 
-_DUMMY_HASH = generate_password_hash('not-a-real-password')
-
 if __name__ == '__main__':
     create_app().run(host='127.0.0.1', port=int(os.environ.get('PORT', 5000)))
-
