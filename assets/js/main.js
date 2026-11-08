@@ -552,8 +552,61 @@
         });
     }
 
+    /* ------------------------------------------------- Theme Toggle (Light / Dark) */
+    function initTheme() {
+        var THEME_KEY = 'cc_theme';
+        var currentTheme = 'dark';
+        try {
+            currentTheme = localStorage.getItem(THEME_KEY) || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        } catch (e) {
+            currentTheme = 'dark';
+        }
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-bs-theme', theme);
+            try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+
+            $all('.cc-theme-toggle, #ccThemeToggle').forEach(function (btn) {
+                var icon = btn.querySelector('i');
+                if (icon) {
+                    if (theme === 'light') {
+                        icon.className = 'bi bi-moon-stars-fill text-warning';
+                        btn.setAttribute('title', 'Switch to Dark Cyber Theme');
+                    } else {
+                        icon.className = 'bi bi-sun-fill text-warning';
+                        btn.setAttribute('title', 'Switch to Light Theme');
+                    }
+                }
+            });
+        }
+
+        // Apply immediately
+        applyTheme(currentTheme);
+
+        // Auto-inject theme toggle into navbars if not already in DOM
+        var navAligner = $('.navbar .d-flex.align-items-center');
+        if (navAligner && !$('#ccThemeToggle')) {
+            var toggleBtn = document.createElement('button');
+            toggleBtn.type = 'button';
+            toggleBtn.className = 'cc-theme-toggle ms-2';
+            toggleBtn.id = 'ccThemeToggle';
+            toggleBtn.setAttribute('aria-label', 'Toggle Light/Dark Theme');
+            toggleBtn.innerHTML = '<i class="bi ' + (currentTheme === 'light' ? 'bi-moon-stars-fill text-warning' : 'bi-sun-fill text-warning') + '"></i>';
+            navAligner.appendChild(toggleBtn);
+        }
+
+        document.addEventListener('click', function (e) {
+            var target = e.target.closest('.cc-theme-toggle, #ccThemeToggle');
+            if (!target) return;
+            var newTheme = document.documentElement.getAttribute('data-bs-theme') === 'light' ? 'dark' : 'light';
+            applyTheme(newTheme);
+            CC.toast('Switched to ' + (newTheme === 'light' ? 'Light' : 'Cyber Dark') + ' mode', 'info');
+        });
+    }
+
     /* ------------------------------------------------------------ Init */
     function init() {
+        initTheme();
         renderAuthState();
         initSearch();
         initScrollEffects();

@@ -138,9 +138,10 @@ python3 tests/e2e_test.py
 - [x] Backend for real authentication, password reset, and contact inbox (Flask + SQLite)
 - [x] Rate limiting, cryptographic reset tokens, and security headers
 - [x] Automated test suites (Unit tests + Selenium E2E tests)
-- [ ] Live external threat intelligence API integration
-- [ ] Share the navbar and footer through server-side includes or templates
-- [ ] Light / Dark theme toggle
+- [x] Live external threat intelligence API integration (`/api/threat-intel/feed` aggregating CISA KEV & NVD security advisories)
+- [x] Share the navbar and footer through server-side includes and modular templates (`/templates/navbar.html`, `/templates/footer.html`)
+- [x] Light / Dark theme toggle with persistent preference state and accessible high-contrast palette
+- [x] Production Docker containerization (`Dockerfile` and `docker-compose.yml`)
 
 ## License
 

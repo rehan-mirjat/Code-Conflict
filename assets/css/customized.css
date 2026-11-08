@@ -1469,3 +1469,151 @@ img[src*="white-hat.png"] {
     transform: none;
   }
 }
+
+/* ==========================================================================
+   Light / Dark Cyber Mode Toggle System
+   ========================================================================== */
+[data-bs-theme="light"] {
+  --cyber-bg: #f1f5f9;
+  --cyber-bg-alt: #e2e8f0;
+  --cyber-card-bg: rgba(255, 255, 255, 0.88);
+  --cyber-card-border: rgba(15, 23, 42, 0.12);
+  --cyber-border-highlight: rgba(2, 132, 199, 0.4);
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+
+  --neon-cyan: #0284c7;
+  --neon-blue: #0369a1;
+  --neon-emerald: #059669;
+  --neon-crimson: #e11d48;
+  --neon-amber: #d97706;
+
+  --glow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.08), 0 0 20px -5px rgba(2, 132, 199, 0.12);
+  --glow-subtle: 0 0 15px rgba(2, 132, 199, 0.15);
+}
+
+[data-bs-theme="light"] body {
+  color: var(--text-primary);
+  background-color: var(--cyber-bg);
+}
+
+[data-bs-theme="light"] h1,
+[data-bs-theme="light"] h2,
+[data-bs-theme="light"] h3,
+[data-bs-theme="light"] h4,
+[data-bs-theme="light"] h5,
+[data-bs-theme="light"] h6,
+[data-bs-theme="light"] .h1,
+[data-bs-theme="light"] .h2,
+[data-bs-theme="light"] .h3,
+[data-bs-theme="light"] .h4,
+[data-bs-theme="light"] .h5,
+[data-bs-theme="light"] .h6 {
+  color: #0f172a !important;
+}
+
+[data-bs-theme="light"] .cyber-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(14, 165, 233, 0.12), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 90% 85%, rgba(225, 29, 72, 0.06), transparent 70%),
+    linear-gradient(180deg, #f8fafc 0%, #edf2f7 50%, #e2e8f0 100%) !important;
+}
+
+[data-bs-theme="light"] .card,
+[data-bs-theme="light"] .cyber-card {
+  background: var(--cyber-card-bg) !important;
+  border-color: var(--cyber-card-border) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-bs-theme="light"] .navbar.bg-dark {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-bottom: 1px solid rgba(2, 132, 199, 0.25) !important;
+}
+
+[data-bs-theme="light"] .nav-link {
+  color: #334155 !important;
+}
+
+[data-bs-theme="light"] .nav-link:hover,
+[data-bs-theme="light"] .nav-link.active {
+  color: #0284c7 !important;
+}
+
+[data-bs-theme="light"] .dropdown-menu {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(2, 132, 199, 0.25) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12) !important;
+}
+
+[data-bs-theme="light"] .dropdown-item {
+  color: #334155 !important;
+}
+
+[data-bs-theme="light"] .dropdown-item:hover {
+  background: rgba(2, 132, 199, 0.08) !important;
+  color: #0284c7 !important;
+}
+
+[data-bs-theme="light"] .modal-content {
+  background: rgba(255, 255, 255, 0.98) !important;
+  color: #0f172a !important;
+  border-color: rgba(2, 132, 199, 0.3) !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-bs-theme="light"] .list-group-item {
+  color: #0f172a !important;
+}
+
+[data-bs-theme="light"] .text-muted {
+  color: #64748b !important;
+}
+
+[data-bs-theme="light"] .btn-outline-light {
+  color: #334155 !important;
+  border-color: #cbd5e1 !important;
+}
+
+[data-bs-theme="light"] .btn-outline-light:hover {
+  background: #0284c7 !important;
+  border-color: #0284c7 !important;
+  color: #ffffff !important;
+}
+
+[data-bs-theme="light"] footer.bg-dark {
+  background: #e2e8f0 !important;
+  border-top-color: #cbd5e1 !important;
+}
+
+/* Theme Toggle Button */
+.cc-theme-toggle {
+  background: rgba(14, 21, 38, 0.7);
+  border: 1px solid var(--cyber-border-highlight);
+  color: var(--neon-cyan);
+  border-radius: 9999px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.cc-theme-toggle:hover {
+  background: rgba(56, 189, 248, 0.2);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+  transform: scale(1.05);
+}
+
+[data-bs-theme="light"] .cc-theme-toggle {
+  background: rgba(241, 245, 249, 0.9);
+  border-color: rgba(2, 132, 199, 0.3);
+  color: #d97706;
+}
+
