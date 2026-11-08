@@ -238,16 +238,10 @@ class RateLimiter:
 
 
 def _load_secret():
-    env = os.environ.get('SECRET_KEY')
-    if env:
-        return env
-    path = os.path.join(HERE, '.secret_key')
-    if not os.path.exists(path):
-        fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
-        with os.fdopen(fd, 'w') as f:
-            f.write(secrets.token_hex(32))
-    with open(path) as f:
-        return f.read().strip()
+    secret = os.environ.get("SECRET_KEY")
+    if not secret:
+        raise RuntimeError("SECRET_KEY must be set in the deployment environment")
+    return secret
 
 
 def _now():
