@@ -4,6 +4,10 @@
 
 **An interactive cybersecurity education website: threats, news and defense guides in one place.**
 
+[![Live Demo on Netlify](https://img.shields.io/badge/Live%20Demo-code--withconflict.netlify.app-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://code-withconflict.netlify.app/)
+
+<br>
+
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
@@ -19,6 +23,7 @@
 
 ## Table of Contents
 
+- [Live Demo](#live-demo)
 - [About](#about)
 - [Features](#features)
 - [Pages](#pages)
@@ -30,6 +35,11 @@
 - [Roadmap](#roadmap)
 - [License](#license)
 - [Author](#author)
+
+## Live Demo
+
+Experience the live deployment directly in your browser:
+🌐 **[https://code-withconflict.netlify.app/](https://code-withconflict.netlify.app/)**
 
 ## About
 
